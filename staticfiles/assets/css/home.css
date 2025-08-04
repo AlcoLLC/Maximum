@@ -1,0 +1,46 @@
+.home-header .container {
+  padding-top: 200px;
+}
+
+.header-top-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-top-content div p {
+  font-size: 56px;
+  line-height: 60px;
+  color: var(--dark);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: 4500 Medium;
+  letter-spacing: 0px;
+  font-family: 'Tusker Grotesk', sans-serif;
+  margin-bottom: 10px;
+}
+
+.header-top-content div p:last-child {
+  color: var(--main);
+}
+
+.home-header .whatsapp {
+  min-width: 220px;
+  padding: 10px 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  position: relative;
+}
+
+.home-header .whatsapp p {
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--dark);
+}
+.home-header .whatsapp img {
+  width: 55px;
+  position: absolute;
+  right: 5px;
+  top: -35px;
+}

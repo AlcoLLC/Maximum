@@ -1,0 +1,148 @@
+{% load static %} {% load i18n %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token }}" />
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/maximum-icon.webp' %}" />
+    <title>{% block title %}{% trans "Maximum - High-quality oil products" %}{% endblock %}</title>
+    <meta
+      name="description"
+      content="{% block description %}Maximum - High-quality oil products{% endblock %}"
+    />
+    <meta
+      name="keywords"
+      content="{% block keywords %}oil, maximum, automotive oil, industrial oil{% endblock %}"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="canonical" href="https://maximum.de{{ request.path }}" />
+    <link rel="alternate" hreflang="en" href="https://maximum.de/" />
+    <link rel="alternate" hreflang="de" href="https://maximum.de/de/" />
+    <link rel="alternate" hreflang="fr" href="https://maximum.de/fr/" />
+    <link rel="alternate" hreflang="it" href="https://maximum.de/it/" />
+    <link rel="alternate" hreflang="es" href="https://maximum.de/es/" />
+    <link rel="alternate" hreflang="zh-hans" href="https://maximum.de/zh-hans/" />
+    <meta property="og:title" content="Maximum" />
+    <meta property="og:description" content="Maximum - High-quality oil products" />
+    <meta property="og:image" content="https://maximum.de/static/images/maximum-logo.png" />
+    <meta property="og:url" content="https://maximum.de{{ request.path }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="{% trans ' Maximum - High-quality oil products' %}" />
+    <meta name="google-site-verification" content="_8tWduXDPsXU6p448Q8qaopDSjUjZDpbeCa1aezh_w0" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@Maximum" />
+    <meta name="twitter:title" content="Maximum" />
+    <meta name="twitter:description" content="{% trans 'AMİNOL - High-quality oil products' %}" />
+    <meta name="twitter:image" content="https://maximum.de/static/images/maximum-logo.png" />
+    <meta
+      name="ahrefs-site-verification"
+      content="9e4cf268be7fc6c2b3be9598e3c023ec7ab0e3f8a6e5ac6884bf3d6fa032897c"
+    />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <linkrel="preload"as="font"href="{% static 'assets/fonts/fa-solid-900.woff2' %}"
+      type="font/woff2"crossorigin="anonymous"/>
+    
+     <linkrel="preload"as="font"href="{% static 'assets/fonts/TuskerGrotesk-4500Medium.ttf' %}"
+      type="font/ttf"crossorigin="anonymous"/>
+     
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}" />
+
+    {% block page_css %}{% endblock %}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Maximum",
+        "image": "https://maximum.de/static/images/maximum-logo.png",
+        "url": "https://maximum.de",
+        "telephone": "",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "....",
+          "addressLocality": "...",
+          "addressRegion": "DE",
+          "postalCode": "....",
+          "addressCountry": "DE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": .........,
+          "longitude": ........
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        ],
+        "sameAs": [
+          "https://linkedin.com.....",
+          "https://www.instagram.com....",
+          "https://www.youtube.com....",
+          "https://www.facebook.com...."
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+4915207776502",
+          "contactType": "Customer Service",
+          "availableLanguage": ["English", "German", "French", "Italian", "Spanish",  "Chinese"]
+        }
+      }
+    </script>
+    {% block extra_schema %}{% endblock %}
+  </head>
+
+  <body>
+    {% include 'components/navbar.html' %} 
+    
+    {% block content %}
+    {% endblock %}
+
+    <a href="https://wa.me/4915207776502" aria-label="Whatsapp" class="fixed-whatsapp" target="_blank">
+      <img loading="lazy"  class="whatsapp-icon" src="{% static 'images/whatsapp.svg' %}" alt="Whatsapp icon" />
+    </a>
+
+    {% include 'components/footer.html' %}
+
+    <script src="{% static 'assets/js/script.js' %}" defer></script>
+    <script src="{% static 'assets/js/locale.js' %}" defer></script>
+
+    {% block page_js %} {% endblock %}
+
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="........." async></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-.........." defer></script>
+
+    <script>
+      var ahrefs_analytics_script = document.createElement('script');
+      ahrefs_analytics_script.async = true;
+      ahrefs_analytics_script.src = 'https://analytics.ahrefs.com/analytics.js';
+      ahrefs_analytics_script.setAttribute('data-key', '........');
+      document.getElementsByTagName('head')[0].appendChild(ahrefs_analytics_script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', '............', { send_page_view: false });
+    </script>
+  </body>
+</html>

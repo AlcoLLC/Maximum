@@ -1,0 +1,441 @@
+:root {
+  --main: #ffb200;
+  --dark: #1c1c1c;
+  --gray: #afafaf;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('/static/assets/fonts/TuskerGrotesk-4500Medium.ttf') format('opentype');
+  font-display: swap;
+} 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-size: 14px;
+  list-style: 16px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container {
+  width: 1200px;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+body{
+  background-color: #F2F2F3;
+}
+nav {
+  max-width: 100% !important;
+  position: relative;
+}
+.navbar {
+  position: fixed;
+  z-index: 100000;
+  padding: 20px 0;
+  width: 100%;
+  background-color: #fff !important;
+}
+.navbar .container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: start;
+}
+
+.navbar .nav-top {
+  width: 100%;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .search {
+  width: 40%;
+  background-color: var(--gray);
+  border-radius: 30px;
+  border: none;
+  padding: 4px 4px 4px 8px;
+}
+.navbar .search form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navbar .search input {
+  width: 90%;
+  background-color: var(--gray);
+  border-radius: 30px;
+  border: none;
+  padding: 5px;
+}
+.navbar .search input:focus {
+  border: none;
+  outline: none;
+}
+.navbar .search input::placeholder {
+  color: #fff;
+}
+.navbar .search .search-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2px;
+  cursor: pointer;
+  background-color: #f2f2f3;
+  transition: all 0.3s ease;
+}
+
+.navbar .search .search-button:hover {
+  background-color: #fffefe;
+}
+
+.navbar .search .search-button i {
+  font-size: 12px;
+}
+
+.navbar .nav-top > div {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navbar ul {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+nav ul li a {
+  text-transform: uppercase;
+  letter-spacing: 0px;
+  color: var(--dark);
+  font-size: 15px;
+  list-style: 16px;
+  font-weight: 500;
+}
+nav ul li a.active {
+  color: var(--main);
+}
+
+.navbar .nav-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.maximum-logo {
+  width: 200px;
+}
+.maximum-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.maximum-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.navbar .hamburger {
+  display: none;
+  background-color: transparent;
+  border: none;
+}
+
+.language-dropdown {
+  position: relative;
+}
+.language-dropdown button {
+  background-color: var(--main);
+  padding: 5px 6px;
+  border-radius: 4px;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.language-dropdown .dropdown-content {
+  display: none;
+  background-color: #fff;
+  min-width: 60px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  padding: 8px 0;
+  top: 35px;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  transition: 0.3s;
+  z-index: 1;
+}
+
+.language-dropdown::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 15px;
+  bottom: -15px;
+  left: 0;
+}
+.language-dropdown .dropdown-content button {
+  color: var(--dark);
+  padding: 8px;
+  background: 0 0;
+  border: none;
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  border-bottom: 1px solid #f1f3f9;
+  transition: color 0.3s ease;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+}
+.language-dropdown .dropdown-content button:last-child {
+  border-bottom: none;
+}
+.language-dropdown .dropdown-content:hover,
+.language-dropdown:hover .dropdown-content {
+  display: block;
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+}
+.language-dropdown .dropdown-content {
+  right: -5px;
+}
+.language-dropdown .dropdown-content button:hover {
+  color: var(--main);
+}
+
+.navbar .hamburger i {
+  font-size: 26px;
+}
+
+.mobile-menu.active {
+  right: 0;
+}
+
+.mobile-menu {
+  width: 100%;
+  position: fixed;
+  display: flex;
+  top: 65px;
+  right: -100%;
+  height: 300px;
+  z-index: 10000;
+  color: #fff;
+  flex-direction: column;
+  background-color: #f2f2f3;
+  gap: 10px;
+  align-items: start;
+  justify-content: flex-end;
+  transition: right 0.5s ease-in-out;
+}
+
+.mobile-menu ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding: 0 40px;
+}
+
+.mobile-menu ul li {
+  width: 100%;
+  padding: 7px;
+}
+
+.mobile-menu-bottom {
+  width: 100%;
+  padding: 5px 40px;
+  background-color: var(--main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.mobile-menu-bottom .whatsapp {
+  min-width: 150px;
+  padding: 5px;
+  background-color: #fff;
+  border-radius: 8px;
+  position: relative;
+}
+
+.mobile-menu-bottom .whatsapp p {
+  font-size: 11px;
+  color: var(--dark);
+}
+.whatsapp img {
+  width: 40px;
+  position: absolute;
+  right: 5px;
+  top: -25px;
+}
+.mobile-menu-bottom .location-icon {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 2px 6px;
+
+}
+.location-icon img {
+  width: 30px;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .navbar .container {
+    gap: 20px;
+  }
+  .maximum-logo {
+    width: 150px;
+  }
+  .navbar .nav-top > div {
+    gap: 20px;
+  }
+
+  .navbar ul {
+    gap: 20px;
+  }
+
+  nav ul li a {
+    font-size: 13px;
+    line-height: 14px;
+  }
+  .navbar .search {
+    width: 35%;
+    padding: 3px 3px 3px 6px;
+  }
+
+  .navbar .search input {
+    width: 80%;
+    padding: 2px 6px;
+  }
+  .navbar .search input::placeholder {
+    font-size: 12px;
+  }
+  .navbar .search .search-button {
+    width: 24px;
+    height: 24px;
+  }
+}
+@media screen and (max-width: 700px) {
+  .navbar .container {
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+  }
+  .nav-bottom {
+    display: none !important;
+  }
+  .nav-top ul {
+    display: none !important;
+  }
+  .navbar .hamburger {
+    display: block !important;
+    background-color: transparent;
+    border: none;
+  }
+  .maximum-logo {
+    width: 120px;
+  }
+
+  .navbar .search {
+    width: 50%;
+  }
+
+  .navbar .search input::placeholder {
+    font-size: 11px;
+  }
+  .navbar .search .search-button {
+    width: 24px;
+    height: 24px;
+  }
+
+  .navbar .search .search-button i {
+    font-size: 10px;
+  }
+
+  .language-dropdown button {
+    padding: 3px 4px;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .navbar .container {
+    gap: 10px;
+  }
+
+  .maximum-logo {
+    width: 100px;
+  }
+}
+
+.fixed-whatsapp {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.fixed-whatsapp .whatsapp-icon {
+  width: 35px;
+  height: 35px;
+}
+.fixed-whatsapp:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 800px) {
+  .fixed-whatsapp {
+    width: 55px;
+    height: 55px;
+  }
+  .fixed-whatsapp .whatsapp-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 500px) {
+  .fixed-whatsapp {
+    width: 50px;
+    height: 50px;
+  }
+  .fixed-whatsapp .whatsapp-icon {
+    width: 25px;
+    height: 25px;
+  }
+}

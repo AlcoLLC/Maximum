@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} 
+
+{% block title%}{% trans "meta_title_home" %}{% endblock %} 
+{% block description %}{%trans "meta_description_home" %}{%endblock %} 
+{% block keywords %}{%trans "meta_keywords_home" %}{%endblock %}
+
+
+{%block page_css %}
+    <link rel="stylesheet" href="{% static 'assets/css/home.css' %}" />
+{% endblock %} 
+
+{% block extra_schema %}
+<script>
+
+</script>
+{% endblock %} 
+
+{% block content %}
+
+<header class="home-header">
+    <div class="container">
+        <div class="header-top-content">
+            <div>
+                <p>{% blocktrans %}Find the right lubricant {% endblocktrans %}</p>
+                <p>{% blocktrans %}for your vehicle!{% endblocktrans %}</p>
+            </div>
+            <a class="whatsapp" href="#">
+                <p>{% blocktrans %} Have a question? <br> Let's chat on WhatsApp!{% endblocktrans %}</p>
+                <img loading="lazy" src="{% static '/images/whatsapp.svg' %}" alt="Whatsapp icon"/>
+            </a>
+        </div>
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                {% comment %} {% for swiper in swiper_images %} {% endcomment %}
+                <div class="swiper-slide">
+                    <img class="background-image"src="{% static 'images/swiper.jpg' %}"
+                    alt="Slider Image"
+                    fetchpriority="high"loading="eager"/> 
+
+                    <div class="slide-content">
+                        <a aria-label="Header Slide Content" href="">
+                            <p>Innovating Lubrication for Modern Engines</p>
+                            <span class="button-style">{% trans "Learn more" %}</span>
+                        </a>
+                    </div>
+                </div>
+                {% comment %} {% empty %} {% endfor %} {% endcomment %}
+            </div>
+
+           <div class="swiper-pagination">
+              <div class="active">
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+              <div>
+              </div>
+           </div>
+                
+        </div>
+
+   </div>
+</header>
+
+{% endblock %} 
+
+
+
+{%block page_js %}
+{% endblock %} 
