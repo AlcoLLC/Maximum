@@ -44,3 +44,8 @@
   right: 5px;
   top: -35px;
 }
+
+
+.home-header .swiper  img {
+  width: 100%;
+}
