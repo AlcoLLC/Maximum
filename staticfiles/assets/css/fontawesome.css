@@ -42,4 +42,5 @@
 .fa-chevron-down::before { content: "\f078"; }
 .fa-chevron-up::before { content: "\f077"; }
 .fa-angle-down::before { content: "\f107"; }
-
+.fa-circle-chevron-right::before { content: "\f138"; }
+.fa-play::before { content: "\f04b"; }

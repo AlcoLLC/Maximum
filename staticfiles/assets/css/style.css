@@ -2,13 +2,14 @@
   --main: #ffb200;
   --dark: #1c1c1c;
   --gray: #afafaf;
+  --hover-main: #e7a201;
 }
 
 @font-face {
   font-family: 'Tusker Grotesk';
   src: url('/static/assets/fonts/TuskerGrotesk-4500Medium.ttf') format('opentype');
   font-display: swap;
-} 
+}
 
 * {
   margin: 0;
@@ -29,9 +30,117 @@
   margin: 0 auto;
 }
 
-body{
-  background-color: #F2F2F3;
+body {
+  background-color: #f3f3f5;
 }
+
+.top-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 56px;
+  line-height: 64px;
+  color: var(--dark);
+  text-transform: uppercase;
+  font-weight: 500;
+  font-style: 4500 Medium;
+  letter-spacing: 0px;
+  font-family: 'Tusker Grotesk', sans-serif;
+}
+
+.section-desc {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0px;
+}
+
+.button-style {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  text-align: center;
+  background-color: var(--main);
+  box-shadow: 0 4px 15px rgba(245, 223, 27, 0.3);
+  padding: 7px 30px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.button-style i {
+  color: var(--dark);
+  transform: rotate(-45deg);
+  padding-top: 2px;
+}
+
+.button-style:hover {
+  background-color: #ffb60a;
+  transform: translateY(-1px);
+}
+@media (max-width: 1200px) {
+  .section-title {
+    font-size: 46px;
+    line-height: 50px;
+  }
+}
+@media (max-width: 1000px) {
+  .section-title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .button-style {
+    font-size: 16px;
+    line-height: 20px;
+    padding: 5px 20px;
+  }
+
+  .button-style i {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 700px) {
+  .section-title {
+    font-size: 28px;
+    line-height: 33px;
+  }
+  .section-desc {
+    font-size: 16px;
+    line-height: 19px;
+  }
+}
+@media (max-width: 550px) {
+  .section-title {
+    font-size: 22px;
+    line-height: 26px;
+  }
+  .button-style {
+    font-size: 14px;
+    line-height: 16px;
+    padding: 4px 10px;
+  }
+  .button-style i {
+    font-size: 12px;
+  }
+  .section-desc {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
 nav {
   max-width: 100% !important;
   position: relative;
@@ -296,12 +405,10 @@ nav ul li a.active {
   background-color: #fff;
   border-radius: 8px;
   padding: 2px 6px;
-
 }
 .location-icon img {
   width: 30px;
 }
-
 
 @media screen and (max-width: 1024px) {
   .navbar .container {

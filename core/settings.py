@@ -36,13 +36,14 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jazzmin',
     'django_ckeditor_5',
     'rosetta',
     'django.contrib.sites',
@@ -57,6 +58,8 @@ INSTALLED_APPS = [
     'products',
     'partnership',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
