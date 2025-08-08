@@ -163,8 +163,8 @@
        
     </div>
     <div class="industry-navigation">
-        <div class="swiper-button-prev"></div>
-         <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+         <div class="swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
     </div>
 </section>
 
@@ -254,8 +254,8 @@
             <a href="" class="button-style">{% trans "All news" %} <i class="fa-solid fa-arrow-right-long"></i></a>
         </div>
         <div class="news-navigation">
-            <div class="news-swiper-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
-            <div class="news-swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="news-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+            <div class="news-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
         </div>
     </div>
     <div class="swiper newsSwiper">
@@ -394,10 +394,10 @@
 
   <div class="product-navigation">
     <div class="product-swiper-button-prev">
-      <i class="fa-solid fa-chevron-left"></i>
+      <i class="fa-solid fa-arrow-left-long"></i>
     </div>
     <div class="product-swiper-button-next">
-      <i class="fa-solid fa-chevron-right"></i>
+      <i class="fa-solid fa-arrow-right-long"></i>
     </div>
   </div>
 </section>
@@ -409,7 +409,7 @@
             <p class="section-desc">{% blocktrans %} Remittance acts as a bridge, connecting loved ones and making the world a little smaller. We are dedicated to forging strategic partnerships which help us help you send money around the globe quickly, safely and affordably. {% endblocktrans %}</p>
         </div>  
         <div class="swiper-wrapper-container">
-            <div class="partners-swiper-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
+            <div class="partners-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
                 <div class="swiper partnersSwiper">
                     <div class="swiper-wrapper">
                         {% for partner_logo in partner_logos %}
@@ -420,37 +420,224 @@
                         {% endfor %}
                     </div>                         
                 </div>
-            <div class="partners-swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+            <div class="partners-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
         </div>
 </section>
 
 <section class="testimonials container">
     <div class="top-content">
         <h2 class="section-title">
-            <span  class="section-title">{% blocktrans %} Testimonials That Say More {% endblocktrans %}</span>
+            <span  class="section-title">{% blocktrans %} Testimonials That Say More {% endblocktrans %}</span> <br>
             {% blocktrans %}  Than Any Advertisement {% endblocktrans %} 
         </h2>
     </div>  
-    <div class="swiper-wrapper-container">
-        <div class="review-swiper-button-prev"><i class="fa-solid fa-chevron-left"></i></div>
-            <div class="swiper reviewSwiper">
+    <div class="review-container">
+        <div class="swiper reviewSwiper">
                 <div class="swiper-wrapper">
-                    
-                        <div class="swiper-slide">
-                            
-                        </div>
-                    
-                </div>                         
+                  {% for review in approved_reviews %}
+                    <div class="swiper-slide">
+                         <div class="star-rating">
+                                    {% for i in "12345" %} {% if forloop.counter <= review.rating %}
+                                    <i class="fa-solid fa-star fa-yellow"></i>
+                                    {% else %}
+                                    <i class="fa-solid fa-star fa-gray"></i>
+                                    {% endif %} {% endfor %}
+                         </div>
+
+                          <h3>{{ review.full_name }}</h3>
+             
+                         <p class="section-description">{{ review.summary }}</p>
+                         {% if review.review|length > 100 %}
+                             <p class="review-full-text" style="font-size: 0.9em; margin-top: 10px; color: #666">
+                             {{ review.review|truncatewords:20 }}
+                             </p>
+                         {% endif %}
+                    </div>
+                   {% endfor %}
+                </div>
+              </div>
+        </div>
+        <div class="review-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+        <div class="review-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+
+         <button class="button-style f" id="openReviewModal">
+            {% blocktrans %} Leave a review {% endblocktrans %} </button>
+
+             {% if messages %}
+                <div class="messages-container">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                    <button type="button" class="close-btn" onclick="this.parentElement.style.display='none'">
+                        &times;
+                    </button>
+                    </div>
+                    {% endfor %}
+                </div>
+              {% endif %}
+
+              <!-- Modal HTML -->
+            <div id="reviewModalOverlay" class="review-modal-overlay">
+                <div class="review-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">{% trans 'Your Review' %}</h2>
+                    <button class="close-btn" id="closeModal">
+                    <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <!-- Update your form in the template -->
+
+                <form
+                    id="review-form"
+                    class="modal-form"
+                    method="POST"
+                    action="{% url 'home:submit_review' %}"
+                >
+                    {% csrf_token %}
+
+                    <!-- Add hidden field to track current page -->
+                    <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}" />
+
+                    <div class="form-section">
+                    <label>{% trans 'Rating' %}</label>
+                    <div class="star-selector">
+                        <i class="fas fa-star star" data-rating="1"></i>
+                        <i class="fas fa-star star" data-rating="2"></i>
+                        <i class="fas fa-star star" data-rating="3"></i>
+                        <i class="fas fa-star star" data-rating="4"></i>
+                        <i class="fas fa-star star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" name="rating" id="rating-input" required />
+                    </div>
+
+                    <!-- Rest of your form fields remain the same -->
+                    <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">{% trans 'First name' %}</label>
+                        <input
+                        type="text"
+                        id="firstName"
+                        name="first_name"
+                        placeholder="{% trans 'Enter your name' %}"
+                        required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">{% trans 'Surname' %}</label>
+                        <input
+                        type="text"
+                        id="surname"
+                        name="surname"
+                        placeholder="{% trans 'Enter your surname' %}"
+                        required
+                        />
+                    </div>
+                    </div>
+
+                    <div class="form-section">
+                    <div class="form-group">
+                        <label for="email">{% trans 'Email address' %}</label>
+                        <input
+                        type="email"
+                        id="email"
+                        name="email_address"
+                        placeholder="{% trans 'Enter your email' %}"
+                        required
+                        />
+                    </div>
+                    </div>
+
+                    <div class="form-section">
+                    <div class="form-group">
+                        <label for="summary">{% trans 'Summary of your review' %}</label>
+                        <input
+                        type="text"
+                        id="summary"
+                        name="summary"
+                        placeholder="{% trans 'Enter your review summary' %}"
+                        required
+                        maxlength="200"
+                        />
+                    </div>
+                    </div>
+
+                    <div class="form-section">
+                    <div class="form-group">
+                        <label for="review">{% trans 'Review' %}</label>
+                        <textarea
+                        id="review"
+                        name="review"
+                        placeholder="{% trans 'Write your detailed review here...' %}"
+                        required
+                        ></textarea>
+                    </div>
+                    </div>
+
+                    <div class="checkbox-container">
+                    <input type="checkbox" id="agreement" name="agreement" required />
+                    <label for="agreement">
+                        {% trans 'I agree to the publication and the evaluation conditions'%}.
+                    </label>
+                    </div>
+                    <p id="form-error-message" style="color: red; text-align: center; margin-bottom: 15px"></p>
+
+                    <button type="submit" class="button-style" aria-label="{% trans 'SUBMIT' %}">
+                    {% trans 'SUBMIT' %}
+                    </button>
+                </form>
+                </div>
             </div>
-        <div class="review-swiper-button-next"><i class="fa-solid fa-chevron-right"></i></div>
+    </div>
+
+    <div class="top-content faq">
+        <h2 class="section-title"> {% blocktrans %}  Frequently {% endblocktrans %} 
+            <span  class="section-title">{% blocktrans %} Asked Questions {% endblocktrans %}</span>
+        </h2>
+    </div>  
+    <div class="faq-section">
+        <div class="faq-container">
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+        </div>
+
+        <a href="" class="button-style" id="openReviewModal">
+                {% blocktrans %} View more {% endblocktrans %} </a>
     </div>
 </section>
 
-    
+
+<section class="maximum-dedicated">
+    <img loading="lazy" class="bg-image" src="{% static 'images/background-end.webp' %}" alt="Coorperation background image"/>
+
+        <div class="maximum-content ">
+            <h4>{% blocktrans %}  Maximum is dedicated to manufacturing and delivering lubricants and autochemicals on par or exceeding international standards. {% endblocktrans %} </h4>
+                            <p class="section-desc">{% blocktrans %} We conduct business responsibly and in a way that places weight on following international regulations and business ethics.
+                Maximum uses state-of-the-art facilities worldwide to manufacture its lubricants and auto-chemicals. In manufacturing only supreme base stock and additives are used, allowing our engineers to formulate products that meet or exceed international standards.  {% endblocktrans %}</p>
+        
+        </div>
+</section>
+
+
+
 {% endblock %} 
 
-{%block page_js %}
+{% block page_js %}
     <script src="{% static 'assets/js/home.js' %}" defer></script>
+    <script src="{% static 'assets/js/review.js' %}" defer></script>
     <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
     <script src="{% static 'assets/js/raphael.min.js' %}" defer></script>
     <script src="{% static 'assets/js/settings.js' %}" defer></script>
@@ -459,5 +646,4 @@
     <script src="{% static 'assets/js/map-init.js' %}" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'assets/js/map3.min.js' %}" defer></script>
-{% endblock %} 
-
+{% endblock %}

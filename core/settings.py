@@ -87,6 +87,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
+                'home.context_processors.review_context',
+                'home.context_processors.page_header_context',
 
             ],
         },

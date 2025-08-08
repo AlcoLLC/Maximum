@@ -172,6 +172,23 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   });
+
+  const reviewSwiper = new Swiper('.reviewSwiper', {
+    slidesPerView: 3,
+    spaceBetween: 10,
+    loop: true,
+    centeredSlides: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false
+    },
+    navigation: {
+      nextEl: '.review-swiper-button-next',
+      prevEl: '.review-swiper-button-prev'
+    },
+    grabCursor: true
+  });
+
 });
 
 document.addEventListener('DOMContentLoaded', function () {

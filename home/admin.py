@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import  HomeSwiper, PartnerLogo, CarLogo
+from .models import  HomeSwiper, PartnerLogo, CarLogo, Review, PageHeader
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 @admin.register(HomeSwiper)
@@ -116,3 +116,66 @@ class CarLogoAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+
+
+@admin.register(Review)
+class ReviewAdmin(TranslationAdmin):
+    list_display = ('full_name', 'rating_stars', 'is_approved', 'created_at', 'email_address')
+    list_filter = ('rating', 'is_approved', 'created_at')
+    search_fields = ('first_name', 'surname', 'email_address', 'summary')
+    list_editable = ('is_approved',)
+    readonly_fields = ('created_at', 'updated_at', 'approved_at', 'ip_address', 'rating_stars')
+    date_hierarchy = 'created_at'
+    list_per_page = 20
+    
+    fieldsets = (
+        ('Review Information', {
+            'fields': ('rating', 'rating_stars', 'summary', 'review', 'is_approved')
+        }),
+        ('Reviewer Information', {
+            'fields': ('first_name', 'surname', 'email_address')
+        }),
+        ('System Information', {
+            'fields': ('ip_address', 'created_at', 'updated_at', 'approved_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def rating_stars(self, obj):
+     
+        if not obj.rating:  
+            return ""
+        stars = "★" * obj.rating + "☆" * (5 - obj.rating)
+        return format_html(f'<span style="color: #ffc107; font-size: 16px;">{stars}</span> ({obj.rating})')
+
+    rating_stars.short_description = "Rating"
+    rating_stars.admin_order_field = 'rating'
+    
+    def get_queryset(self, request):
+        """Optimization for performance"""
+        return super().get_queryset(request)
+    
+    actions = ['approve_reviews', 'disapprove_reviews']
+    
+    def approve_reviews(self, request, queryset):
+        """Approve selected reviews"""
+        updated = queryset.update(is_approved=True, approved_at=timezone.now())
+        self.message_user(request, f'{updated} reviews approved.')
+    approve_reviews.short_description = "Approve selected reviews"
+    
+    def disapprove_reviews(self, request, queryset):
+        """Disapprove selected reviews"""
+        updated = queryset.update(is_approved=False, approved_at=None)
+        self.message_user(request, f'{updated} reviews disapproved.')
+    disapprove_reviews.short_description = "Disapprove selected reviews"
+
+
+
+
+@admin.register(PageHeader)
+class PageHeaderAdmin(TranslationAdmin):  
+    list_display = ('slug', 'title')
+    search_fields = ('slug', 'title')
+
+    fields = ('slug', 'title', 'description', 'image', 'link')
