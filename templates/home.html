@@ -60,21 +60,22 @@
 
 <section  class="home-catalog container">
     <div class="catalog-grid">
+        {% for product_group in product_groups_sec1 %}
         <div class="catalog-element">
-            <img src="{% static '/images/swiper.jpg' %}" alt="Catalog Image" loading="lazy"/> 
+            <img src="{{ product_group.image.url }}" alt="{{ product_group.title }}" loading="lazy"/> 
             <div>
-                <h2>Our Products for Automotive Industry</h2>
-                <a href="">{% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i></a>
+                <h2>{{ product_group.title }}</h2>
+                <a href="{% url 'product:product' %}?product_group={{ product_group.slug }}" aria-label="{{ product_group.title }}">
+                    {% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i></a>
             </div>
         </div>
+        {% empty %}
+        <div class="catalog-element">
+                <h2>{% trans "No product_group available at the moment" %}</h2>
+        </div>
+        {% endfor %}
 
-        <div class="catalog-element">
-            <img src="{% static '/images/swiper.jpg' %}" alt="Catalog Image" loading="lazy"/> 
-            <div>
-                <h2>Our Products for Automotive Industry</h2>
-                <a href="">{% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i></a>
-            </div>
-        </div>
+
     </div>
 
     <a href="" class="button-style">{% trans "Go to catalog" %} 
@@ -123,42 +124,21 @@
    </div>
      <div class="swiper industrySwiper">
         <div class="swiper-wrapper">
-            <a href="#" class="swiper-slide">
-                <img src="{% static '/images/swiper.jpg' %}" alt="Cement Industry" loading="lazy"/>
-                <div class="slide-industry-content">
-                    <h3>Cement Industry</h3>
-                </div>
-            </a>
-            <a class="swiper-slide">
-                <img src="{% static '/images/swiper2.png' %}" alt="Automotive Industry" loading="lazy"/>
-                <div class="slide-industry-content">
-                    <h3>Automotive Industry</h3>
-                </div>
-            </a>
-            <a class="swiper-slide">
-                <img src="{% static '/images/swiper.jpg' %}" alt="Marine Industry" loading="lazy"/>
-                <div class="slide-industry-content">
-                    <h3>Marine Industry</h3>
-                </div>
-            </a>
-            <a class="swiper-slide">
-                <img src="{% static '/images/swiper2.png' %}" alt="Mining Industry" loading="lazy"/>
-                <div class="slide-industry-content">
-                    <h3>Mining Industry</h3>
-                </div>
-            </a>
-            <a class="swiper-slide">
-                <img src="{% static '/images/swiper.jpg' %}" alt="Metal Industry" loading="lazy"/>
-                <div class="slide-industry-content">
-                    <h3>Metal Industry</h3>
-                </div>
-            </a>
-            <a class="swiper-slide">
-                <img src="{% static '/images/swiper2.png' %}" alt="Mining Industry" loading="lazy"/>
-                <div class="slide-industry-content">
-                    <h3>Mining Industry</h3>
-                </div>
-            </a>
+             {% for product_group in product_groups_sec2 %}
+                <a href="{% url 'product:product' %}?product_group={{ product_group.slug }}"
+                     class="swiper-slide" aria-label="{{ product_group.title }}">
+                    <img src="{{ product_group.image.url }}" alt="{{ product_group.title }}" loading="lazy"/>
+                    <div class="slide-industry-content">
+                        <h3>{{ product_group.title }}</h3>
+                    </div>
+                </a>
+            {% empty %}
+                <a href="#" class="swiper-slide">
+                    <div class="slide-industry-content">
+                        <h3>{% trans "No product_group available at the moment" %}</h3>
+                    </div>
+                </a>
+          {% endfor %}
         </div>
        
     </div>
@@ -307,86 +287,25 @@
     <div class="products-swiper-container">
       <div class="swiper productsSwiper">
         <div class="swiper-wrapper">
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="MEGAMAX 5W-30 SP; A3/B4" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">MEGAMAX</h3>
-              <p class="product-specs">5W-30 SP; A3/B4</p>
-              <p class="product-type">Fully Synthetic</p>
-            </div>
-          </a>
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="MEGAMAX 5W-30 SP; A3/B4" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">MEGAMAX</h3>
-              <p class="product-specs">5W-30 SP; A3/B4</p>
-              <p class="product-type">Fully Synthetic</p>
-            </div>
-          </a>
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="MEGAMAX 5W-30 SP; A3/B4" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">MEGAMAX</h3>
-              <p class="product-specs">5W-30 SP; A3/B4</p>
-              <p class="product-type">Fully Synthetic</p>
-            </div>
-          </a>
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="MEGAMAX 5W-30 SP; A3/B4" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">MEGAMAX</h3>
-              <p class="product-specs">5W-30 SP; A3/B4</p>
-              <p class="product-type">Fully Synthetic</p>
-            </div>
-          </a>
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="ULTRAMAX 0W-20" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">ULTRAMAX</h3>
-              <p class="product-specs">0W-20 SP; A1/B1</p>
-              <p class="product-type">Fully Synthetic</p>
-            </div>
-          </a>
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="POWERMAX 10W-40" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">POWERMAX</h3>
-              <p class="product-specs">10W-40 SN; A3/B4</p>
-              <p class="product-type">Semi Synthetic</p>
-            </div>
-          </a>
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="ECONMAX 15W-40" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">ECONMAX</h3>
-              <p class="product-specs">15W-40 SL; A3/B3</p>
-              <p class="product-type">Mineral</p>
-            </div>
-          </a>
-          <a href="" class="swiper-slide">
-            <div class="product-image">
-              <img src="{% static '/images/product.png' %}" alt="TURBOMAX 5W-40" />
-            </div>
-            <div class="product-content">
-              <h3 class="product-name">TURBOMAX</h3>
-              <p class="product-specs">5W-40 SP; C3</p>
-              <p class="product-type">Fully Synthetic</p>
-            </div>
-          </a>
+         {% for product in products %}
+
+            <a href="{% url 'product:product_detail' slug=product.slug %}" class="swiper-slide">
+                <div class="product-image">
+                <img src="{{ product.image.url }}" alt="{{ product.title|linebreaksbr  }}" />
+                </div>
+                <div class="product-content">
+                <h3 class="product-name">{{ product.title|linebreaksbr }}</h3>
+                <p class="product-specs">{{ product.viscosity|linebreaksbr }}</p>
+                <p class="product-type">{{ product.oil_type|linebreaksbr }}</p>
+                </div>
+            </a>
+          {% empty %}
+            <a href="#" class="swiper-slide">
+                <p class="product-specs">{% trans "No products available at the moment" %}</p>
+            </a>
+          {% endfor %}
+
+
         </div>
       </div>
     </div>

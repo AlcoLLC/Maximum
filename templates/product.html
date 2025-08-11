@@ -1,0 +1,399 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} 
+
+{% block title%}{% trans "meta_title_products" %}{% endblock %} 
+{% block description %}{%trans "meta_description_products" %}{%endblock %} 
+{% block keywords %}{%trans "meta_keywords_products" %}{%endblock %}
+
+{%block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/product.css' %}" />
+{% endblock %} 
+
+{% block extra_schema %}
+<script></script>
+{% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "Products" %}</p>
+  </div>
+</div>
+
+{% include 'components/page-header.html' %}
+
+<section class="products-section container">
+  <h2 class="section-title">{% blocktrans %} Products  {% endblocktrans %} </h2>
+  <button class="filter-mobile" id="filterMobileBtn">Filter</button>
+  <div class="products-container">
+    <div class="filter-container">
+      <form method="GET" id="filterForm">
+        <div class="search-bar">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search"
+            class="search-input"
+            value="{{ search_query }}"
+          />
+          <button type="button" class="search-button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+
+        <!-- Product Group Filter -->
+        <div class="filter-section">
+          <div class="filter-header">
+            <div class="filter-title">{% trans "Product group" %}</div>
+            <div class="filter-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="filter-content">
+            {% for group in product_groups %}
+            <label class="checkbox-group">
+              <input
+                type="checkbox"
+                name="product_group"
+                value="{{ group.slug }}"
+                {% if group.slug in selected_product_groups %}checked{% endif %}
+              />
+              <span
+                class="checkbox-label {% if group.slug in selected_product_groups %}selected-item{% endif %}"
+              >
+                {{ group.title|linebreaksbr }}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Segments Filter -->
+        <div class="filter-section">
+          <div class="filter-header">
+            <div class="filter-title">{% trans "Segments" %}</div>
+            <div class="filter-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="filter-content">
+            {% for segment in segments %}
+            <label class="checkbox-group">
+              <input
+                type="checkbox"
+                name="segments"
+                value="{{ segment.slug }}"
+                {% if segment.slug in selected_segments %}checked{% endif %}
+              />
+              <span
+                class="checkbox-label {% if segment.slug in selected_segments %}selected-item{% endif %}"
+              >
+                {{ segment.title|linebreaksbr }}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Oil Type Filter -->
+        <div class="filter-section">
+          <div class="filter-header">
+            <div class="filter-title">{% trans "Oil Type" %}</div>
+            <div class="filter-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="filter-content">
+            {% for oil_type in oil_types %}
+            <label class="checkbox-group">
+              <input
+                type="checkbox"
+                name="oil_type"
+                value="{{ oil_type.slug }}"
+                {% if oil_type.slug in selected_oil_types %}checked{% endif %}
+              />
+              <span
+                class="checkbox-label {% if oil_type.slug in selected_oil_types %}selected-item{% endif %}"
+              >
+                {{ oil_type.title|linebreaksbr }}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Viscosity Filter -->
+        <div class="filter-section">
+          <div class="filter-header">
+            <div class="filter-title">{% trans "Viscosity" %}</div>
+            <div class="filter-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="filter-content">
+            {% for viscosity in viscosity_options %}
+            <label class="checkbox-group">
+              <input
+                type="checkbox"
+                name="viscosity"
+                value="{{ viscosity.slug }}"
+                {% if viscosity.slug in selected_viscosity %}checked{% endif %}
+              />
+              <span
+                class="checkbox-label {% if viscosity.slug in selected_viscosity %}selected-item{% endif %}"
+              >
+                {{ viscosity.title|linebreaksbr }}
+              </span>
+            </label>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Hidden input to maintain page number -->
+        <input type="hidden" name="page" value="1" />
+      </form>
+
+      <div class="filter-footer">
+        <button type="button" class="button-style" id="filterResultsBtn">
+          {% trans "View Result" %}
+        </button>
+      </div>
+    </div>
+    <div class="products-list" s>
+      {% for product in products %}
+      <div class="product-card">
+        <p class="product-type">{{ product.product_group }}</p>
+         <div class="product-top">
+          <div class="product-image">
+            {% if product.image %}
+            <a
+              href="{% url 'product:product_detail' slug=product.slug %}"
+              aria-label="{{ product.title }}"
+            >
+              <img loading="lazy" src="{{ product.image.url }}" alt="{{ product.title }}" />
+            </a>
+            {% else %} {% endif %}
+          </div>
+          <div class="product-name">
+              <h2 class="product-title">{{ product.title|linebreaksbr }}</h2>
+              <p class="product-id">{{ product.product_id }}</p>
+          </div>
+
+        </div>
+
+        <div class="product-info">
+              <p>{{ product.description|truncatechars:180 }}</p>
+              <a
+                href="{% url 'product:product_detail' slug=product.slug %}"
+                aria-label="{{ product.title }}"
+                class="btn-more"
+              >
+                {% trans "View" %}
+              </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Modal Overlay HTML -->
+    <div class="product-modal-overlay" id="productFilterModal">
+      <div class="product-modal-content">
+        <div class="product-modal-header">
+          <h2 class="product-modal-title">{% trans "Filtering" %}</h2>
+          <button class="product-modal-close" id="productModalClose">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="product-modal-filter-container">
+          <form method="GET" id="modalFilterForm">
+            <div class="modal-search-bar">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search"
+                class="modal-search-input"
+                value="{{ search_query }}"
+              />
+              <button type="button" class="modal-search-button">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+
+            <!-- Product Group Filter -->
+            <div class="modal-filter-section">
+              <div class="modal-filter-header">
+                <div class="modal-filter-title">{% trans "Product group" %}</div>
+                <div class="modal-filter-icon">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="modal-filter-content">
+                {% for group in product_groups %}
+                <label class="modal-checkbox-group">
+                  <input
+                    type="checkbox"
+                    name="product_group"
+                    value="{{ group.slug }}"
+                    {%  if  group.slug in selected_product_groups  %}checked{% endif %}
+                  />
+                  <span
+                    class="modal-checkbox-label {% if group.slug in selected_product_groups %}modal-selected-item{% endif %}"
+                  >
+                    {{ group.title|linebreaksbr }}
+                  </span>
+                </label>
+                {% endfor %}
+              </div>
+            </div>
+
+            <!-- Segments Filter -->
+            <div class="modal-filter-section">
+              <div class="modal-filter-header">
+                <div class="modal-filter-title">{% trans "Segments" %}</div>
+                <div class="modal-filter-icon">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="modal-filter-content">
+                {% for segment in segments %}
+                <label class="modal-checkbox-group">
+                  <input
+                    type="checkbox"
+                    name="segments"
+                    value="{{ segment.slug }}"
+                    {%  if segment.slug  in  selected_segments %}checked{% endif  %}
+                  />
+                  <span
+                    class="modal-checkbox-label {% if segment.slug in selected_segments %}modal-selected-item{% endif %}"
+                  >
+                    {{ segment.title|linebreaksbr }}
+                  </span>
+                </label>
+                {% endfor %}
+              </div>
+            </div>
+
+            <!-- Oil Type Filter -->
+            <div class="modal-filter-section">
+              <div class="modal-filter-header">
+                <div class="modal-filter-title">{% trans "Oil type" %}</div>
+                <div class="modal-filter-icon">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="modal-filter-content">
+                {% for oil_type in oil_types %}
+                <label class="modal-checkbox-group">
+                  <input
+                    type="checkbox"
+                    name="oil_type"
+                    value="{{ oil_type.slug }}"
+                    {%  if  oil_type.slug in selected_oil_types  %}checked{% endif  %}
+                  />
+                  <span
+                    class="modal-checkbox-label {% if oil_type.slug in selected_oil_types %}modal-selected-item{% endif %}"
+                  >
+                    {{ oil_type.title|linebreaksbr }}
+                  </span>
+                </label>
+                {% endfor %}
+              </div>
+            </div>
+
+            <!-- Viscosity Filter -->
+            <div class="modal-filter-section">
+              <div class="modal-filter-header">
+                <div class="modal-filter-title">{% trans "Viscosity" %}</div>
+                <div class="modal-filter-icon">
+                  <i class="fa-solid fa-chevron-down"></i>
+                </div>
+              </div>
+              <div class="modal-filter-content">
+                {% for viscosity in viscosity_options %}
+                <label class="modal-checkbox-group">
+                  <input
+                    type="checkbox"
+                    name="viscosity"
+                    value="{{ viscosity.slug }}"
+                    {%  if viscosity.slug  in selected_viscosity %}checked{% endif  %}
+                  />
+                  <span
+                    class="modal-checkbox-label {% if viscosity.slug in selected_viscosity %}modal-selected-item{% endif %}"
+                  >
+                    {{ viscosity.title|linebreaksbr }}
+                  </span>
+                </label>
+                {% endfor %}
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="product-modal-footer">
+          <button class="product-search-results-button" id="productSearchResultsBtn">
+            {% trans "View Result" %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Always show pagination for testing -->
+  <div class="pagination-container">
+        <p class="pagination-info">
+            {{ products.start_index }}–{{products.end_index}} {%trans 'of'%} {{total_results}}
+            {% trans 'results' %}
+        </p>
+        <div class="pagination">
+            <button class="pagination-arrow prev" id="prevPage"
+              {% if not page_obj.has_previous %}disabled{% endif %}>
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <div class="pagination-numbers" id="paginationNumbers">
+              {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
+                <a href="#" aria-label="Total page number" class="page-number active" data-page="{{ num }}">
+                  {{ num }}
+                </a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a href="#" aria-label="Total page number" class="page-number" data-page="{{ num }}">
+                  {{ num }}
+                </a>
+                {% elif num == 1 %}
+                <a href="#" aria-label="Total page number" class="page-number" data-page="{{ num }}">
+                  {{ num }}
+                </a>
+                {% if page_obj.number > 4 %}
+                <span class="ellipsis">...</span>
+                {% endif %}
+                {% elif num == page_obj.paginator.num_pages %} 
+                {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+                <span class="ellipsis">...</span>
+                {% endif %}
+                <a href="#"  aria-label="Total page number" class="page-number" data-page="{{ num }}">
+                  {{ num }}
+                </a>
+                {% endif %} 
+              {% endfor %}
+            </div>
+
+            <button
+              class="pagination-arrow next" id="nextPage"
+              {% if not page_obj.has_next %}disabled{% endif %} >
+              <i class="fa-solid fa-chevron-right"></i>
+            </button> 
+        </div>
+
+  </div>
+</section>
+
+{% endblock %}
+
+{%block page_js %} 
+    <script src="{% static 'assets/js/product.js' %}" defer></script>
+{% endblock %}

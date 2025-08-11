@@ -4,13 +4,9 @@
 <footer class="container">
   <div class="footer-content">
     <div>
-        <a href="{% url 'home:home' %}" aria-label="Home Page">
-           <img loading="lazy"   class="avtoil-logo" src="{% static '/images/maximum-logo.webp' %}" alt="Avtoil logo" />
+        <a href="{% url 'home:home' %}" class="maximum-logo" aria-label="Home Page">
+           <img loading="lazy"  src="{% static '/images/maximum-logo.webp' %}" alt="Maximum logo" />
         </a>
-        <p>
-            {% trans "Reliable Lubricant Manufacturer." %} <br />
-            {% trans "Engineered for Performance, Trusted for Protection." %}
-        </p>
     </div>
     <div class="footer-row">
         <ul>
@@ -20,7 +16,7 @@
                  <a href="" aria-label="Products Page">{% trans "Products" %}</a>
               </div>
                <div>
-                <a href="" aria-label="Avtoil Service Page">{% trans "Services" %}</a>
+                <a href="" aria-label="Service Page">{% trans "Services" %}</a>
                 <a href="" aria-label="Brand Portal Page">{% trans "Brand Portal" %}</a> 
                </div>
             </li>
@@ -39,7 +35,6 @@
         <button id="scrollToTop" aria-label="Scroll to top"><i class="fa-solid fa-chevron-up"></i></button>
     </div>
 </div>
-  <hr class="custom-hr" />
   <div class="footer-contact">
     <div>
       <p>{% trans "Leopoldstrasse 244, 80807 München, Germany" %}</p>
@@ -50,16 +45,16 @@
       <a href="https://wa.me/4915207776502" aria-label="Whatsapp Page">
         <img loading="lazy"   src="{% static 'images/whatsapp.webp' %}" alt="Whatsapp" />
       </a>
-      <a href="https://www.youtube.com/@avtoillubricants7877" aria-label="Youtube Page"  target="_blank" >
+      <a href="#" aria-label="Youtube Page"  target="_blank" >
         <img loading="lazy"   src="{% static 'images/youtube.webp' %}" alt="Youtube" />
       </a>
-      <a href="https://linkedin.com/company/avtoil" aria-label="Linkedin Page">
+      <a href="#" aria-label="Linkedin Page">
         <img loading="lazy"   src="{% static 'images/linkedin.webp' %}"  target="_blank" alt="Linkedn" />
       </a>
-      <a href="https://www.instagram.com/avtoil_official?igsh=MTM5bmZnejhxOWhzZw==" aria-label="Instagram Page" target="_blank">
+      <a href="#" aria-label="Instagram Page" target="_blank">
         <img loading="lazy"   src="{% static 'images/instagram.webp' %}" alt="Instagram" />
       </a>
-      <a href="https://www.facebook.com/p/avtoil-100038067895501/" aria-label="Facebook Page" target="_blank">
+      <a href="#" aria-label="Facebook Page" target="_blank">
         <img loading="lazy"   src="{% static 'images/facebook.webp' %}" alt="Facebook" class="facebook" />
       </a>
     </div>

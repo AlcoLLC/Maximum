@@ -101,10 +101,7 @@ class PageHeader(models.Model):
     unique=True,
     help_text="This must exactly match the <strong>name</strong> used in the URL pattern. For example: <code>about</code> "
     ) 
-    title = models.CharField(max_length=255)
-    description = models.TextField()
     image = models.ImageField(upload_to='page-headers/')
-    link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.slug

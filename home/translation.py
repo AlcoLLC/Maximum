@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import HomeSwiper, Review, PageHeader
+from .models import HomeSwiper, Review
 
 @register(HomeSwiper)
 class HomeSwiperTranslationOptions(TranslationOptions):
@@ -8,7 +8,3 @@ class HomeSwiperTranslationOptions(TranslationOptions):
 @register(Review)
 class ReviewTranslationOptions(TranslationOptions):
     fields = ('summary', 'review')
-
-@register(PageHeader)
-class PageHeaderTranslationOptions(TranslationOptions):
-    fields = ('title', 'description')

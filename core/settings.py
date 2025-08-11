@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'faq',
     'news',
     'brands',
-    'products',
+    'product',
     'partnership',
 ]
 

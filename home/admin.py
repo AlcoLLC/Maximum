@@ -172,10 +172,8 @@ class ReviewAdmin(TranslationAdmin):
 
 
 
-
 @admin.register(PageHeader)
-class PageHeaderAdmin(TranslationAdmin):  
-    list_display = ('slug', 'title')
-    search_fields = ('slug', 'title')
-
-    fields = ('slug', 'title', 'description', 'image', 'link')
+class PageHeaderAdmin(admin.ModelAdmin):  
+    list_display = ('slug',)
+    search_fields = ('slug',)
+    fields = ('slug', 'image')
