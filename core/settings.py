@@ -36,13 +36,14 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jazzmin',
     'django_ckeditor_5',
     'rosetta',
     'django.contrib.sites',
@@ -54,9 +55,11 @@ INSTALLED_APPS = [
     'faq',
     'news',
     'brands',
-    'products',
+    'product',
     'partnership',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,6 +87,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
+                'home.context_processors.review_context',
+                'home.context_processors.page_header_context',
 
             ],
         },

@@ -7,65 +7,562 @@
 
 {%block page_css %}
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/map.css' %}" onload="this.rel='stylesheet'"/>
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" onload="this.rel='stylesheet'" />
+    <noscript>
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/map.css' %}" />
+    </noscript>
+
 {% endblock %} 
 
 {% block extra_schema %}
 <script>
-
 </script>
 {% endblock %} 
 
 {% block content %}
 
 <header class="home-header">
-    <div class="container">
+    <div class="container f">
         <div class="header-top-content">
             <div>
-                <p>{% blocktrans %}Find the right lubricant {% endblocktrans %}</p>
-                <p>{% blocktrans %}for your vehicle!{% endblocktrans %}</p>
+                <h1 class="section-title">{% blocktrans %}Find the right lubricant {% endblocktrans %}</h1>
+                <h2 class="section-title">{% blocktrans %}for your vehicle!{% endblocktrans %}</h2>
             </div>
             <a class="whatsapp" href="#">
                 <p>{% blocktrans %} Have a question? <br> Let's chat on WhatsApp!{% endblocktrans %}</p>
                 <img loading="lazy" src="{% static '/images/whatsapp.svg' %}" alt="Whatsapp icon"/>
             </a>
         </div>
+    </div>
+    <div class="container s">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
-                {% comment %} {% for swiper in swiper_images %} {% endcomment %}
+               {% for swiper in swiper_images %}
                 <div class="swiper-slide">
-                    <img class="background-image"src="{% static 'images/swiper.jpg' %}"
-                    alt="Slider Image"
-                    fetchpriority="high"loading="eager"/> 
-
+                    <img class="background-image" src="{{ swiper.image.url }}"
+                         alt="{{ swiper.image.url }} Slider Image" fetchpriority="high" loading="eager"/> 
                     <div class="slide-content">
-                        <a aria-label="Header Slide Content" href="">
-                            <p>Innovating Lubrication for Modern Engines</p>
-                            <span class="button-style">{% trans "Learn more" %}</span>
-                        </a>
+                            <a aria-label="Header Slide Content" href="{{ swiper.link }}">
+                                <p>{{ swiper.title }}</p>
+                                <span class="button-style">{% trans "Learn more" %}</span>
+                            </a>
                     </div>
                 </div>
-                {% comment %} {% empty %} {% endfor %} {% endcomment %}
+                 {% empty %} {% endfor %}
             </div>
 
-           <div class="swiper-pagination">
-              <div class="active">
-              </div>
-              <div>
-              </div>
-              <div>
-              </div>
-              <div>
-              </div>
-           </div>
-                
         </div>
-
+         <div class="swiper-navigation"></div>
    </div>
 </header>
 
+<section  class="home-catalog container">
+    <div class="catalog-grid">
+        {% for product_group in product_groups_sec1 %}
+        <div class="catalog-element">
+            <img src="{{ product_group.image.url }}" alt="{{ product_group.title }}" loading="lazy"/> 
+            <div>
+                <h2>{{ product_group.title }}</h2>
+                <a href="{% url 'product:product' %}?product_group={{ product_group.slug }}" aria-label="{{ product_group.title }}">
+                    {% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i></a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="catalog-element">
+                <h2>{% trans "No product_group available at the moment" %}</h2>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+    <a href="" class="button-style">{% trans "Go to catalog" %} 
+        <i class="fa-solid fa-arrow-right-long"></i>
+    </a>
+
+</section>
+
+
+<section class="grow-business">
+   <div class="top-content container">
+        <h2 class="section-title">{% blocktrans %} Grow your business with maximum lubricants  {% endblocktrans %} </h2>
+        <p class="section-desc">{% blocktrans %} We empower progress with smart lubrication and fluid technologies. Our commitment to quality and responsibility fuels success for our partners and a better future for all. {% endblocktrans %}</p>
+        <a href="" class="button-style">{% trans "Discover more" %}</a>
+   </div>
+   <div class="home-services">
+    <img loading="lazy" class="bg-image" src="{% static 'images/shutterstock.webp' %}" alt="Coorperation background image"/>
+        <div class="container">   
+            <div class="service-flex">
+                <div class="item">
+                    <h2>Advanced Technology & Performance</h2>
+                    <p>Maximum delivers cutting-edge lubricant solutions, engineered with precision and innovation. Our high-performance formulations ensure ultimate engine protection and efficiency across all driving conditions.</p>
+                </div>
+                <div class="item">
+                    <h2>Advanced Technology & Performance</h2>
+                    <p>Maximum delivers cutting-edge lubricant solutions, engineered with precision and innovation. Our high-performance formulations ensure ultimate engine protection and efficiency across all driving conditions.</p>
+                </div>
+                <div class="item">
+                    <h2>Advanced Technology & Performance</h2>
+                    <p>Maximum delivers cutting-edge lubricant solutions, engineered with precision and innovation. Our high-performance formulations ensure ultimate engine protection and efficiency across all driving conditions.</p>
+                </div>                
+            </div>            
+
+            <a href="" class="button-style">{% trans "Go to services" %} 
+                <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<section class="product-ranges">
+   <div class="top-content container">
+        <h2 class="section-title">{% blocktrans %} Maximum is trusted in a wide range of industries & operating environments  {% endblocktrans %} </h2>
+        <p class="section-desc">{% blocktrans %} Our products are trusted in a wide range of industries and operating environments - from everyday passenger vehicles to heavy-duty machinery and high-performance systems. Each lubricant and fluid is carefully formulated to meet the specific technical requirements, operating conditions, and performance standards of its application area. {% endblocktrans %}</p>
+   </div>
+     <div class="swiper industrySwiper">
+        <div class="swiper-wrapper">
+             {% for product_group in product_groups_sec2 %}
+                <a href="{% url 'product:product' %}?product_group={{ product_group.slug }}"
+                     class="swiper-slide" aria-label="{{ product_group.title }}">
+                    <img src="{{ product_group.image.url }}" alt="{{ product_group.title }}" loading="lazy"/>
+                    <div class="slide-industry-content">
+                        <h3>{{ product_group.title }}</h3>
+                    </div>
+                </a>
+            {% empty %}
+                <a href="#" class="swiper-slide">
+                    <div class="slide-industry-content">
+                        <h3>{% trans "No product_group available at the moment" %}</h3>
+                    </div>
+                </a>
+          {% endfor %}
+        </div>
+       
+    </div>
+    <div class="industry-navigation">
+        <div class="swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+         <div class="swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+    </div>
+</section>
+
+
+
+<section class="home-production container">
+   <div class="top-content ">
+        <h2 class="section-title">{% blocktrans %} LEARN more {% endblocktrans %} 
+            <span  class="section-title">{% blocktrans %} about production process {% endblocktrans %}</span>
+        </h2>
+        <p class="section-desc">{% blocktrans %} Maximum Lubricants produces and packages high-quality oils using premium imported base oils and additives, formulated by expert engineers. {% endblocktrans %} </p>
+   </div>
+
+    <div class="production-section">
+        <img loading="lazy" class="bg-image" src="{% static '/images/swiper.jpg' %}"
+        alt="Production background image"/>
+
+        <div class="section-background"></div>
+        <div class="play-button" id="playButton">
+            <i class="fa-solid fa-play"></i>
+        </div>
+        <div class="video-container" id="videoContainer">
+            <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube-nocookie.com/embed/7NdBMqxDMrE?rel=0&showinfo=0&modestbranding=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            ></iframe>
+        </div>
+    </div>
+
+</section>
+
+<section class="global-presence container">
+   <div class="top-content ">
+        <h2 class="section-title">{% blocktrans %} Global presence  {% endblocktrans %} </h2>
+        <p class="section-desc">{% blocktrans %}  Maximum products are exported to more than 54 countries worldwide through our trusted network of exclusive distributors. {% endblocktrans %}</p>
+        <a href="" class="button-style">{% trans "Become our distributor" %}</a>
+   </div>
+
+   <div class="properties">
+        <div class="item">
+            <h3>{% blocktrans %} 100.000 tons  {% endblocktrans %} </h3>
+            <p class="section-desc">{% blocktrans %} Production Capacity  {% endblocktrans %}</p>
+        </div>
+        <div class="item">
+            <h3>{% blocktrans %} 82  {% endblocktrans %} </h3>
+            <p class="section-desc">{% blocktrans %} Unique Products  {% endblocktrans %}</p>
+        </div>
+        <div class="item">
+            <h3>{% blocktrans %} 1000+  {% endblocktrans %} </h3>
+            <p class="section-desc">{% blocktrans %} Products  {% endblocktrans %}</p>
+        </div>
+        <div class="item">
+            <h3>{% blocktrans %} 1.5 k  {% endblocktrans %} </h3>
+            <p class="section-desc">{% blocktrans %} Partners Worldwide {% endblocktrans %}</p>
+        </div>
+        <div class="item">
+            <h3>{% blocktrans %} 600+ tons  {% endblocktrans %} </h3>
+            <p class="section-desc">{% blocktrans %} Daily Exported Products   {% endblocktrans %}</p>
+        </div>
+   </div>
+
+   <div class="map-section">
+        <div class="page-wrapper">
+            <main class="main-content">
+            <section id="preview" class="preview section-margin-b-m">
+                <div class="preview__content">
+                <div id="map-container"></div>
+                </div>
+            </section>
+            </main>
+        </div>
+   </div>
+
+</section>
+
+<section class="home-news container">
+    <div class="news-left">
+        <div class="top-content">
+            <h2 class="section-title">{% blocktrans %}  NEWS & INSIGHT {% endblocktrans %} </h2>
+            <p class="section-desc">{% blocktrans %} Explore our blog expert advice, industry trends, and indepth articles to keep you ahead of the curve. {% endblocktrans %}</p>
+            <a href="" class="button-style">{% trans "All news" %} <i class="fa-solid fa-arrow-right-long"></i></a>
+        </div>
+        <div class="news-navigation">
+            <div class="news-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+            <div class="news-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+        </div>
+    </div>
+    <div class="swiper newsSwiper">
+        <div class="swiper-wrapper">
+            <a href="#" class="swiper-slide">
+                <div class="slide-image">
+                    <img src="{% static '/images/swiper.jpg' %}" alt="News Image" loading="lazy"/>
+                    <span  class="button-style">{% trans "read more" %}<i class="fa-solid fa-arrow-right-long"></i></span>
+                </div>
+                <div class="slide-content">
+                    <h3>Maximum to Unveil Advanced Lubricants at INA PAACE Automechanika Mexico</h3>
+                    <p>We're excited to announce our participation in Mexico's leading automotive aftermarket show, where TOMOIL will showcase new high-performance lubricants and eco-friendly greases.</p>
+                </div>
+            </a>
+            <a href="#" class="swiper-slide">
+                <div class="slide-image">
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                    <span  class="button-style">{% trans "read more" %}<i class="fa-solid fa-arrow-right-long"></i></span>
+                </div>
+                <div class="slide-content">
+                    <h3>Maximum to Unveil Advanced Lubricants at INA PAACE Automechanika Mexico</h3>
+                    <p>We're excited to announce our participation in Mexico's leading automotive aftermarket show, where TOMOIL will showcase new high-performance lubricants and eco-friendly greases.</p>
+                </div>
+            </a>         
+        </div>       
+    </div>
+</section>
+
+
+
+<section class="featured-products container">
+  <div class="top-content">
+    <h2 class="section-title">FEATURED PRODUCTS</h2>
+    <p class="section-desc">
+      Explore our extensive portfolio of over 400 premium lubricants and service fluids — engineered
+      for exceptional performance, protection, and efficiency.
+    </p>
+  </div>
+
+  <div class="products-container">
+    <div class="main-product">
+      <img src="{% static '/images/swiper.jpg' %}" alt="NOVALUBE PRO 0W-30" />
+      <a href="" class="button-style">
+        Go to catalog
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="products-swiper-container">
+      <div class="swiper productsSwiper">
+        <div class="swiper-wrapper">
+         {% for product in products %}
+
+            <a href="{% url 'product:product_detail' slug=product.slug %}" class="swiper-slide">
+                <div class="product-image">
+                <img src="{{ product.image.url }}" alt="{{ product.title|linebreaksbr  }}" />
+                </div>
+                <div class="product-content">
+                <h3 class="product-name">{{ product.title|linebreaksbr }}</h3>
+                <p class="product-specs">{{ product.viscosity|linebreaksbr }}</p>
+                <p class="product-type">{{ product.oil_type|linebreaksbr }}</p>
+                </div>
+            </a>
+          {% empty %}
+            <a href="#" class="swiper-slide">
+                <p class="product-specs">{% trans "No products available at the moment" %}</p>
+            </a>
+          {% endfor %}
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-navigation">
+    <div class="product-swiper-button-prev">
+      <i class="fa-solid fa-arrow-left-long"></i>
+    </div>
+    <div class="product-swiper-button-next">
+      <i class="fa-solid fa-arrow-right-long"></i>
+    </div>
+  </div>
+</section>
+
+
+<section class="our-partners container">
+        <div class="top-content">
+            <h2 class="section-title">{% blocktrans %}  Our Partners {% endblocktrans %} </h2>
+            <p class="section-desc">{% blocktrans %} Remittance acts as a bridge, connecting loved ones and making the world a little smaller. We are dedicated to forging strategic partnerships which help us help you send money around the globe quickly, safely and affordably. {% endblocktrans %}</p>
+        </div>  
+        <div class="swiper-wrapper-container">
+            <div class="partners-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+                <div class="swiper partnersSwiper">
+                    <div class="swiper-wrapper">
+                        {% for partner_logo in partner_logos %}
+                            <div class="swiper-slide">
+                                <img loading="lazy" src="{{ partner_logo.logo.url }}" width="155" height="70"
+                                    alt="{{ partner_logo.name }}"  />
+                            </div>
+                        {% endfor %}
+                    </div>                         
+                </div>
+            <div class="partners-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+        </div>
+</section>
+
+<section class="testimonials container">
+    <div class="top-content">
+        <h2 class="section-title">
+            <span  class="section-title">{% blocktrans %} Testimonials That Say More {% endblocktrans %}</span> <br>
+            {% blocktrans %}  Than Any Advertisement {% endblocktrans %} 
+        </h2>
+    </div>  
+    <div class="review-container">
+        <div class="swiper reviewSwiper">
+                <div class="swiper-wrapper">
+                  {% for review in approved_reviews %}
+                    <div class="swiper-slide">
+                         <div class="star-rating">
+                                    {% for i in "12345" %} {% if forloop.counter <= review.rating %}
+                                    <i class="fa-solid fa-star fa-yellow"></i>
+                                    {% else %}
+                                    <i class="fa-solid fa-star fa-gray"></i>
+                                    {% endif %} {% endfor %}
+                         </div>
+
+                          <h3>{{ review.full_name }}</h3>
+             
+                         <p class="section-description">{{ review.summary }}</p>
+                         {% if review.review|length > 100 %}
+                             <p class="review-full-text" style="font-size: 0.9em; margin-top: 10px; color: #666">
+                             {{ review.review|truncatewords:20 }}
+                             </p>
+                         {% endif %}
+                    </div>
+                   {% endfor %}
+                </div>
+              </div>
+        </div>
+        <div class="review-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+        <div class="review-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+
+         <button class="button-style f" id="openReviewModal">
+            {% blocktrans %} Leave a review {% endblocktrans %} </button>
+
+             {% if messages %}
+                <div class="messages-container">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                    <button type="button" class="close-btn" onclick="this.parentElement.style.display='none'">
+                        &times;
+                    </button>
+                    </div>
+                    {% endfor %}
+                </div>
+              {% endif %}
+
+              <!-- Modal HTML -->
+            <div id="reviewModalOverlay" class="review-modal-overlay">
+                <div class="review-modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">{% trans 'Your Review' %}</h2>
+                    <button class="close-btn" id="closeModal">
+                    <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <!-- Update your form in the template -->
+
+                <form
+                    id="review-form"
+                    class="modal-form"
+                    method="POST"
+                    action="{% url 'home:submit_review' %}"
+                >
+                    {% csrf_token %}
+
+                    <!-- Add hidden field to track current page -->
+                    <input type="hidden" name="redirect_url" value="{{ request.get_full_path }}" />
+
+                    <div class="form-section">
+                    <label>{% trans 'Rating' %}</label>
+                    <div class="star-selector">
+                        <i class="fas fa-star star" data-rating="1"></i>
+                        <i class="fas fa-star star" data-rating="2"></i>
+                        <i class="fas fa-star star" data-rating="3"></i>
+                        <i class="fas fa-star star" data-rating="4"></i>
+                        <i class="fas fa-star star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" name="rating" id="rating-input" required />
+                    </div>
+
+                    <!-- Rest of your form fields remain the same -->
+                    <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">{% trans 'First name' %}</label>
+                        <input
+                        type="text"
+                        id="firstName"
+                        name="first_name"
+                        placeholder="{% trans 'Enter your name' %}"
+                        required
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">{% trans 'Surname' %}</label>
+                        <input
+                        type="text"
+                        id="surname"
+                        name="surname"
+                        placeholder="{% trans 'Enter your surname' %}"
+                        required
+                        />
+                    </div>
+                    </div>
+
+                    <div class="form-section">
+                    <div class="form-group">
+                        <label for="email">{% trans 'Email address' %}</label>
+                        <input
+                        type="email"
+                        id="email"
+                        name="email_address"
+                        placeholder="{% trans 'Enter your email' %}"
+                        required
+                        />
+                    </div>
+                    </div>
+
+                    <div class="form-section">
+                    <div class="form-group">
+                        <label for="summary">{% trans 'Summary of your review' %}</label>
+                        <input
+                        type="text"
+                        id="summary"
+                        name="summary"
+                        placeholder="{% trans 'Enter your review summary' %}"
+                        required
+                        maxlength="200"
+                        />
+                    </div>
+                    </div>
+
+                    <div class="form-section">
+                    <div class="form-group">
+                        <label for="review">{% trans 'Review' %}</label>
+                        <textarea
+                        id="review"
+                        name="review"
+                        placeholder="{% trans 'Write your detailed review here...' %}"
+                        required
+                        ></textarea>
+                    </div>
+                    </div>
+
+                    <div class="checkbox-container">
+                    <input type="checkbox" id="agreement" name="agreement" required />
+                    <label for="agreement">
+                        {% trans 'I agree to the publication and the evaluation conditions'%}.
+                    </label>
+                    </div>
+                    <p id="form-error-message" style="color: red; text-align: center; margin-bottom: 15px"></p>
+
+                    <button type="submit" class="button-style" aria-label="{% trans 'SUBMIT' %}">
+                    {% trans 'SUBMIT' %}
+                    </button>
+                </form>
+                </div>
+            </div>
+    </div>
+
+    <div class="top-content faq">
+        <h2 class="section-title"> {% blocktrans %}  Frequently {% endblocktrans %} 
+            <span  class="section-title">{% blocktrans %} Asked Questions {% endblocktrans %}</span>
+        </h2>
+    </div>  
+    <div class="faq-section">
+        <div class="faq-container">
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+            <a href="" class="faq-item">
+                <p>How do I know which Maximum product is right for my needs?</p>
+                <div><i class="fa-solid fa-arrow-right-long"></i></div>
+            </a>
+        </div>
+
+        <a href="" class="button-style" id="openReviewModal">
+                {% blocktrans %} View more {% endblocktrans %} </a>
+    </div>
+</section>
+
+
+<section class="maximum-dedicated">
+    <img loading="lazy" class="bg-image" src="{% static 'images/background-end.webp' %}" alt="Coorperation background image"/>
+
+        <div class="maximum-content ">
+            <h4>{% blocktrans %}  Maximum is dedicated to manufacturing and delivering lubricants and autochemicals on par or exceeding international standards. {% endblocktrans %} </h4>
+                            <p class="section-desc">{% blocktrans %} We conduct business responsibly and in a way that places weight on following international regulations and business ethics.
+                Maximum uses state-of-the-art facilities worldwide to manufacture its lubricants and auto-chemicals. In manufacturing only supreme base stock and additives are used, allowing our engineers to formulate products that meet or exceed international standards.  {% endblocktrans %}</p>
+        
+        </div>
+</section>
+
+
+
 {% endblock %} 
 
-
-
-{%block page_js %}
-{% endblock %} 
+{% block page_js %}
+    <script src="{% static 'assets/js/home.js' %}" defer></script>
+    <script src="{% static 'assets/js/review.js' %}" defer></script>
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/raphael.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/settings.js' %}" defer></script>
+    <script src="{% static 'assets/js/paths.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/map.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/map-init.js' %}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'assets/js/map3.min.js' %}" defer></script>
+{% endblock %}

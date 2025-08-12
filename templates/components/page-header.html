@@ -1,0 +1,14 @@
+{% load static %}
+{% load i18n %}
+  
+{% if page_header %}
+<header class="page-header container">
+            <img class="background-image" src="{{ page_header.image.url }}"
+                 alt=" Page header -{{ page_header.slug }}" loading="lazy"/> 
+
+             <a class="whatsapp" href="#">
+                <p>{% blocktrans %} Have a question? <br> Let's chat on WhatsApp!{% endblocktrans %}</p>
+                <img loading="lazy" src="{% static '/images/whatsapp.svg' %}" alt="Whatsapp icon"/>
+             </a>
+</header>
+{% endif %}

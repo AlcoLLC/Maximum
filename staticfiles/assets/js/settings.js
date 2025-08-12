@@ -37,7 +37,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagcdn.com/w80/af.png" alt="Afghanistan Flag" width="40">  Afghanistan',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st2: {
@@ -45,7 +45,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st3: {
@@ -54,7 +54,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/al.webp" alt="Albania Flag" width="40"> Albania',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st4: {
@@ -63,7 +63,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/dz.webp" alt="Algeria Flag" width="40"> Algeria',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st5: {
@@ -71,7 +71,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st6: {
@@ -79,7 +79,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st7: {
@@ -87,7 +87,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st8: {
@@ -95,7 +95,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st9: {
@@ -103,7 +103,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st10: {
@@ -111,7 +111,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st11: {
@@ -119,7 +119,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st12: {
@@ -127,7 +127,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st13: {
@@ -135,7 +135,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st14: {
@@ -143,7 +143,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st15: {
@@ -152,7 +152,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/at.webp" alt="Austria Flag" width="40"> Austria',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st16: {
@@ -160,7 +160,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st17: {
@@ -168,7 +168,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st18: {
@@ -176,7 +176,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st19: {
@@ -184,7 +184,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st20: {
@@ -192,7 +192,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st21: {
@@ -201,7 +201,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/by.webp" alt="Belarus Flag" width="40"> Belarus',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st22: {
@@ -209,7 +209,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st23: {
@@ -217,7 +217,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st24: {
@@ -225,7 +225,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st25: {
@@ -233,7 +233,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st26: {
@@ -241,7 +241,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st27: {
@@ -249,7 +249,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st28: {
@@ -257,7 +257,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st29: {
@@ -265,7 +265,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st30: {
@@ -273,7 +273,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st31: {
@@ -282,7 +282,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/br.webp" alt="Brazil Flag" width="40"> Brazil',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st32: {
@@ -290,7 +290,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st33: {
@@ -298,7 +298,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st34: {
@@ -307,7 +307,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/bg.webp" alt="Bulgaria Flag" width="40"> Bulgaria',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st35: {
@@ -315,7 +315,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st36: {
@@ -323,7 +323,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st37: {
@@ -331,7 +331,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st38: {
@@ -339,7 +339,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st39: {
@@ -347,7 +347,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st40: {
@@ -355,7 +355,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st41: {
@@ -363,7 +363,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st42: {
@@ -371,7 +371,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st43: {
@@ -379,7 +379,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st44: {
@@ -387,7 +387,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st45: {
@@ -395,7 +395,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st46: {
@@ -403,7 +403,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st47: {
@@ -411,7 +411,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st48: {
@@ -419,7 +419,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st49: {
@@ -428,7 +428,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/co.webp" alt="Colombia Flag" width="40"> Colombia',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st50: {
@@ -436,7 +436,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st51: {
@@ -444,7 +444,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st52: {
@@ -452,7 +452,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st53: {
@@ -460,7 +460,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st54: {
@@ -468,7 +468,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st55: {
@@ -476,7 +476,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st56: {
@@ -484,7 +484,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st57: {
@@ -492,7 +492,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st58: {
@@ -500,7 +500,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st59: {
@@ -509,7 +509,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/cy.webp" alt="Cyprus Flag" width="40"> Cyprus',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st60: {
@@ -517,7 +517,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st61: {
@@ -525,7 +525,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st62: {
@@ -533,7 +533,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st63: {
@@ -541,7 +541,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st64: {
@@ -549,7 +549,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st65: {
@@ -557,7 +557,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st66: {
@@ -566,7 +566,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/eg.webp" alt="Egypt Flag" width="40"> Egypt',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st67: {
@@ -574,7 +574,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st68: {
@@ -582,7 +582,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st69: {
@@ -590,7 +590,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st70: {
@@ -599,7 +599,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ee.webp" alt="Estonia Flag" width="40"> Estonia',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st71: {
@@ -607,7 +607,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st72: {
@@ -615,7 +615,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st73: {
@@ -623,7 +623,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st74: {
@@ -631,7 +631,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st75: {
@@ -639,7 +639,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st76: {
@@ -647,7 +647,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st77: {
@@ -655,7 +655,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st78: {
@@ -663,7 +663,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st79: {
@@ -671,7 +671,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st80: {
@@ -679,7 +679,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st81: {
@@ -687,7 +687,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st82: {
@@ -695,7 +695,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st83: {
@@ -704,7 +704,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ge.webp" alt="Georgia Flag" width="40"> Georgia',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st84: {
@@ -712,7 +712,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st85: {
@@ -720,7 +720,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st86: {
@@ -728,7 +728,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st87: {
@@ -737,7 +737,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/gr.webp" alt="Greece Flag" width="40"> Greece',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st88: {
@@ -745,7 +745,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st89: {
@@ -753,7 +753,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st90: {
@@ -761,7 +761,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st91: {
@@ -769,7 +769,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st92: {
@@ -777,7 +777,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st93: {
@@ -785,7 +785,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st94: {
@@ -793,7 +793,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st95: {
@@ -801,7 +801,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st96: {
@@ -809,7 +809,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st97: {
@@ -817,7 +817,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st98: {
@@ -825,7 +825,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st99: {
@@ -833,7 +833,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st100: {
@@ -841,7 +841,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st101: {
@@ -849,7 +849,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st102: {
@@ -857,7 +857,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st103: {
@@ -865,7 +865,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st104: {
@@ -873,7 +873,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st105: {
@@ -881,7 +881,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st106: {
@@ -890,7 +890,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/iq.webp" alt="Iraq Flag" width="40"> Iraq',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st107: {
@@ -898,7 +898,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st108: {
@@ -906,7 +906,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st109: {
@@ -915,7 +915,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/il.webp" alt="Israel Flag" width="40"> Israel',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st110: {
@@ -924,7 +924,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/it.webp" alt="Italy Flag" width="40"> Italy',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st111: {
@@ -932,7 +932,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st112: {
@@ -940,7 +940,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st113: {
@@ -948,7 +948,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st114: {
@@ -957,7 +957,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/jo.webp" alt="Jordan Flag" width="40"> Jordan',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st115: {
@@ -965,7 +965,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st116: {
@@ -973,7 +973,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st117: {
@@ -981,7 +981,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st118: {
@@ -989,7 +989,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st119: {
@@ -997,7 +997,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st120: {
@@ -1005,7 +1005,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st121: {
@@ -1013,7 +1013,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st122: {
@@ -1021,7 +1021,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st123: {
@@ -1030,7 +1030,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/lb.webp" alt="Lebanon Flag" width="40"> Lebanon',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st124: {
@@ -1038,7 +1038,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st125: {
@@ -1046,7 +1046,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st126: {
@@ -1055,7 +1055,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ly.webp" alt="Libya Flag" width="40"> Libya',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st127: {
@@ -1063,7 +1063,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st128: {
@@ -1071,7 +1071,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st129: {
@@ -1079,7 +1079,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st130: {
@@ -1087,7 +1087,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st131: {
@@ -1095,7 +1095,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st132: {
@@ -1103,7 +1103,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st133: {
@@ -1111,7 +1111,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st134: {
@@ -1119,7 +1119,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st135: {
@@ -1127,7 +1127,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st136: {
@@ -1135,7 +1135,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st137: {
@@ -1143,7 +1143,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st138: {
@@ -1151,7 +1151,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st139: {
@@ -1159,7 +1159,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st140: {
@@ -1167,7 +1167,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st141: {
@@ -1175,7 +1175,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st142: {
@@ -1183,7 +1183,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st143: {
@@ -1191,7 +1191,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st144: {
@@ -1199,7 +1199,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st145: {
@@ -1207,7 +1207,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st146: {
@@ -1215,7 +1215,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st147: {
@@ -1223,7 +1223,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st148: {
@@ -1231,7 +1231,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st149: {
@@ -1239,7 +1239,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st150: {
@@ -1247,7 +1247,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st151: {
@@ -1255,7 +1255,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st152: {
@@ -1263,7 +1263,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st153: {
@@ -1271,7 +1271,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st154: {
@@ -1279,7 +1279,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st155: {
@@ -1287,7 +1287,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st156: {
@@ -1295,7 +1295,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st157: {
@@ -1303,7 +1303,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st158: {
@@ -1311,7 +1311,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st159: {
@@ -1319,7 +1319,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st160: {
@@ -1327,7 +1327,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st161: {
@@ -1335,7 +1335,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st162: {
@@ -1343,7 +1343,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st163: {
@@ -1351,7 +1351,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st164: {
@@ -1359,7 +1359,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st165: {
@@ -1367,7 +1367,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st166: {
@@ -1375,7 +1375,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st167: {
@@ -1383,7 +1383,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st168: {
@@ -1391,7 +1391,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st169: {
@@ -1399,7 +1399,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st170: {
@@ -1407,7 +1407,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st171: {
@@ -1415,7 +1415,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st172: {
@@ -1423,7 +1423,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st173: {
@@ -1431,7 +1431,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st174: {
@@ -1439,7 +1439,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st175: {
@@ -1447,7 +1447,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st176: {
@@ -1455,7 +1455,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st177: {
@@ -1463,7 +1463,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st178: {
@@ -1471,7 +1471,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st179: {
@@ -1479,7 +1479,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st180: {
@@ -1487,7 +1487,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st181: {
@@ -1496,7 +1496,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ro.webp" alt="Romania Flag" width="40"> Romania',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st182: {
@@ -1505,7 +1505,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ru.webp" alt="Russian Federation Flag" width="40"> Russian Federation',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st183: {
@@ -1513,7 +1513,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st184: {
@@ -1521,7 +1521,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st185: {
@@ -1529,7 +1529,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st186: {
@@ -1537,7 +1537,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st187: {
@@ -1545,7 +1545,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st188: {
@@ -1553,7 +1553,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st189: {
@@ -1561,7 +1561,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st190: {
@@ -1569,7 +1569,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st191: {
@@ -1577,7 +1577,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st192: {
@@ -1585,7 +1585,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st193: {
@@ -1593,7 +1593,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st194: {
@@ -1601,7 +1601,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st195: {
@@ -1609,7 +1609,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st196: {
@@ -1617,7 +1617,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st197: {
@@ -1625,7 +1625,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st198: {
@@ -1633,7 +1633,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st199: {
@@ -1641,7 +1641,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st200: {
@@ -1649,7 +1649,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st201: {
@@ -1657,7 +1657,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st202: {
@@ -1665,7 +1665,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st203: {
@@ -1673,7 +1673,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st204: {
@@ -1682,7 +1682,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/za.webp" alt="South Africa Flag" width="40"> South Africa',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st205: {
@@ -1690,7 +1690,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st206: {
@@ -1698,7 +1698,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st207: {
@@ -1707,7 +1707,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ss.webp" alt="South Sudan Flag" width="40"> South Sudan',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st208: {
@@ -1716,7 +1716,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/es.webp" alt="Spain Flag" width="40"> Spain',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st209: {
@@ -1724,7 +1724,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st210: {
@@ -1732,7 +1732,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st211: {
@@ -1740,7 +1740,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st212: {
@@ -1748,7 +1748,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st213: {
@@ -1756,7 +1756,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st214: {
@@ -1764,7 +1764,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st215: {
@@ -1772,7 +1772,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st216: {
@@ -1780,7 +1780,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st217: {
@@ -1788,7 +1788,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st218: {
@@ -1796,7 +1796,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st219: {
@@ -1805,7 +1805,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/tj.webp" alt="Tajikistan Flag" width="40"> Tajikistan',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st220: {
@@ -1813,7 +1813,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st221: {
@@ -1821,7 +1821,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st222: {
@@ -1830,7 +1830,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/nl.webp" alt="The Netherlands Flag" width="40"> The Netherlands',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st223: {
@@ -1838,7 +1838,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st224: {
@@ -1846,7 +1846,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st225: {
@@ -1854,7 +1854,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st226: {
@@ -1862,7 +1862,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st227: {
@@ -1870,7 +1870,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st228: {
@@ -1878,7 +1878,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st229: {
@@ -1887,7 +1887,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/tr.webp" alt="Turkey Flag" width="40"> Turkey',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st230: {
@@ -1896,7 +1896,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/tm.webp" alt="Turkmenistan Flag" width="40"> Turkmenistan',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st231: {
@@ -1904,7 +1904,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st232: {
@@ -1912,7 +1912,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st233: {
@@ -1920,7 +1920,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st234: {
@@ -1928,7 +1928,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st235: {
@@ -1936,7 +1936,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st236: {
@@ -1945,7 +1945,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/gb.webp" alt="United Kingdom Flag" width="40"> United Kingdom',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st237: {
@@ -1953,7 +1953,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st238: {
@@ -1961,7 +1961,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st239: {
@@ -1969,7 +1969,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st240: {
@@ -1978,7 +1978,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/uz.webp" alt="Uzbekistan Flag" width="40"> Uzbekistan',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st241: {
@@ -1986,7 +1986,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st242: {
@@ -1994,7 +1994,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st243: {
@@ -2003,7 +2003,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ve.webp" alt="Venezuela Flag" width="40"> Venezuela',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st244: {
@@ -2011,7 +2011,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st245: {
@@ -2019,7 +2019,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st246: {
@@ -2027,7 +2027,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st247: {
@@ -2035,7 +2035,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st248: {
@@ -2043,7 +2043,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st249: {
@@ -2052,7 +2052,7 @@ var map_cfg = {
       comment:
         '<img loading="lazy"    class="flag-img" src="https://flagpedia.net/data/flags/w580/ye.webp" alt="Yemen Flag" width="40"> Yemen',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st250: {
@@ -2060,7 +2060,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     },
     st251: {
@@ -2068,7 +2068,7 @@ var map_cfg = {
       shortname: '',
       comment: '',
       link: '',
-      color: '#BDBDBD',
+      color: '#afafaf',
       colorOver: '#9E9E9E'
     }
   },
