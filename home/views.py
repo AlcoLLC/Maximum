@@ -14,17 +14,14 @@ from datetime import timedelta
 
 def home_view(request): 
     swiper_images = HomeSwiper.objects.filter(is_active=True).order_by('order')
-    partner_logos = PartnerLogo.objects.all()
     product_groups_sec1 = Product_group.objects.filter(in_home_sec1=True).order_by('order')  
     product_groups_sec2 = Product_group.objects.filter(in_home_sec2=True).order_by('order')  
-    products = Product.objects.filter(in_home=True).order_by('order') 
+    
 
     context = { 
         'swiper_images': swiper_images,
-        'partner_logos': partner_logos,
         'product_groups_sec1': product_groups_sec1,
         'product_groups_sec2': product_groups_sec2,
-        'products': products,
     } 
      
     return render(request, 'home.html', context)

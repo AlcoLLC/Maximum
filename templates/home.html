@@ -65,7 +65,7 @@
             <img src="{{ product_group.image.url }}" alt="{{ product_group.title }}" loading="lazy"/> 
             <div>
                 <h2>{{ product_group.title }}</h2>
-                <a href="{% url 'product:product' %}?product_group={{ product_group.slug }}" aria-label="{{ product_group.title }}">
+                <a href="{% url 'product:products' %}?product_group={{ product_group.slug }}" aria-label="{{ product_group.title }}">
                     {% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i></a>
             </div>
         </div>
@@ -125,7 +125,7 @@
      <div class="swiper industrySwiper">
         <div class="swiper-wrapper">
              {% for product_group in product_groups_sec2 %}
-                <a href="{% url 'product:product' %}?product_group={{ product_group.slug }}"
+                <a href="{% url 'product:products' %}?product_group={{ product_group.slug }}"
                      class="swiper-slide" aria-label="{{ product_group.title }}">
                     <img src="{{ product_group.image.url }}" alt="{{ product_group.title }}" loading="lazy"/>
                     <div class="slide-industry-content">
@@ -264,84 +264,8 @@
     </div>
 </section>
 
-
-
-<section class="featured-products container">
-  <div class="top-content">
-    <h2 class="section-title">FEATURED PRODUCTS</h2>
-    <p class="section-desc">
-      Explore our extensive portfolio of over 400 premium lubricants and service fluids — engineered
-      for exceptional performance, protection, and efficiency.
-    </p>
-  </div>
-
-  <div class="products-container">
-    <div class="main-product">
-      <img src="{% static '/images/swiper.jpg' %}" alt="NOVALUBE PRO 0W-30" />
-      <a href="" class="button-style">
-        Go to catalog
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-    </div>
-
-    <div class="products-swiper-container">
-      <div class="swiper productsSwiper">
-        <div class="swiper-wrapper">
-         {% for product in products %}
-
-            <a href="{% url 'product:product_detail' slug=product.slug %}" class="swiper-slide">
-                <div class="product-image">
-                <img src="{{ product.image.url }}" alt="{{ product.title|linebreaksbr  }}" />
-                </div>
-                <div class="product-content">
-                <h3 class="product-name">{{ product.title|linebreaksbr }}</h3>
-                <p class="product-specs">{{ product.viscosity|linebreaksbr }}</p>
-                <p class="product-type">{{ product.oil_type|linebreaksbr }}</p>
-                </div>
-            </a>
-          {% empty %}
-            <a href="#" class="swiper-slide">
-                <p class="product-specs">{% trans "No products available at the moment" %}</p>
-            </a>
-          {% endfor %}
-
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="product-navigation">
-    <div class="product-swiper-button-prev">
-      <i class="fa-solid fa-arrow-left-long"></i>
-    </div>
-    <div class="product-swiper-button-next">
-      <i class="fa-solid fa-arrow-right-long"></i>
-    </div>
-  </div>
-</section>
-
-
-<section class="our-partners container">
-        <div class="top-content">
-            <h2 class="section-title">{% blocktrans %}  Our Partners {% endblocktrans %} </h2>
-            <p class="section-desc">{% blocktrans %} Remittance acts as a bridge, connecting loved ones and making the world a little smaller. We are dedicated to forging strategic partnerships which help us help you send money around the globe quickly, safely and affordably. {% endblocktrans %}</p>
-        </div>  
-        <div class="swiper-wrapper-container">
-            <div class="partners-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
-                <div class="swiper partnersSwiper">
-                    <div class="swiper-wrapper">
-                        {% for partner_logo in partner_logos %}
-                            <div class="swiper-slide">
-                                <img loading="lazy" src="{{ partner_logo.logo.url }}" width="155" height="70"
-                                    alt="{{ partner_logo.name }}"  />
-                            </div>
-                        {% endfor %}
-                    </div>                         
-                </div>
-            <div class="partners-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
-        </div>
-</section>
+{% include 'components/featured_products.html' %} 
+{% include 'components/partners.html' %} 
 
 <section class="testimonials container">
     <div class="top-content">

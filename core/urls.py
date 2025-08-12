@@ -47,8 +47,8 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('', include('home.urls')),
     path('', include('product.urls')),
+    path('', include('services.urls')),
     # path('', include('about.urls')),
-    # path('', include('services.urls')),
     # path('', include('contact.urls')),
     # path('', include('faq.urls')),
     # path('', include('news.urls')),

@@ -1,0 +1,23 @@
+{% load static %}
+{% load i18n %}
+
+<section class="our-partners container">
+        <div class="top-content">
+            <h2 class="section-title">{% blocktrans %}  Our Partners {% endblocktrans %} </h2>
+            <p class="section-desc">{% blocktrans %} Remittance acts as a bridge, connecting loved ones and making the world a little smaller. We are dedicated to forging strategic partnerships which help us help you send money around the globe quickly, safely and affordably. {% endblocktrans %}</p>
+        </div>  
+        <div class="swiper-wrapper-container">
+            <div class="partners-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
+                <div class="swiper partnersSwiper">
+                    <div class="swiper-wrapper">
+                        {% for partner_logo in partner_logos %}
+                            <div class="swiper-slide">
+                                <img loading="lazy" src="{{ partner_logo.logo.url }}" width="155" height="70"
+                                    alt="{{ partner_logo.name }}"  />
+                            </div>
+                        {% endfor %}
+                    </div>                         
+                </div>
+            <div class="partners-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
+        </div>
+</section>

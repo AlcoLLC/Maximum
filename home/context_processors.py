@@ -1,4 +1,5 @@
-from .models import Review, PageHeader
+from .models import Review, PageHeader, PartnerLogo
+from product.models import Product
 from django.urls import resolve
 
 def page_header_context(request):
@@ -12,11 +13,21 @@ def page_header_context(request):
 
 
 def review_context(request):
-    """
-    Global context processor for reviews
-    This will be available in all templates
-    """
+
     return {
         'approved_reviews': Review.objects.filter(is_approved=True).order_by('-approved_at')[:10],
         'review_count': Review.objects.filter(is_approved=True).count(),
+    }
+
+
+def featured_products_context(request):
+
+    return {
+        'featured_products': Product.objects.filter(in_home=True).order_by('order'),
+    }
+
+def partners_context(request):
+
+    return {
+        'partner_logos':  PartnerLogo.objects.all(),
     }

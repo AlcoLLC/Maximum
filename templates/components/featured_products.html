@@ -1,0 +1,59 @@
+
+{% load static %}
+{% load i18n %}
+
+
+<section class="featured-products container">
+  <div class="top-content">
+    <h2 class="section-title">FEATURED PRODUCTS</h2>
+    <p class="section-desc">
+      Explore our extensive portfolio of over 400 premium lubricants and service fluids — engineered
+      for exceptional performance, protection, and efficiency.
+    </p>
+  </div>
+
+  <div class="products-container">
+    <div class="main-product">
+      <img src="{% static '/images/swiper.jpg' %}" alt="NOVALUBE PRO 0W-30" />
+      <a href="" class="button-style">
+        Go to catalog
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="products-swiper-container">
+      <div class="swiper productsSwiper">
+        <div class="swiper-wrapper">
+         {% for product in featured_products %}
+            <a href="{% url 'product:product_detail' slug=product.slug %}" class="swiper-slide">
+                <div class="product-image">
+                <img src="{{ product.image.url }}" alt="{{ product.title|linebreaksbr  }}" />
+                </div>
+                <div class="product-content">
+                <h3 class="product-name">{{ product.title|linebreaksbr }}</h3>
+                <p class="product-specs">{{ product.viscosity|linebreaksbr }}</p>
+                <p class="product-type">{{ product.oil_type|linebreaksbr }}</p>
+                </div>
+            </a>
+          {% empty %}
+            <a href="#" class="swiper-slide">
+                <p class="product-specs">{% trans "No products available at the moment" %}</p>
+            </a>
+          {% endfor %}
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-navigation">
+    <div class="product-swiper-button-prev">
+      <i class="fa-solid fa-arrow-left-long"></i>
+    </div>
+    <div class="product-swiper-button-next">
+      <i class="fa-solid fa-arrow-right-long"></i>
+    </div>
+  </div>
+</section>
+

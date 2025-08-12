@@ -6,15 +6,90 @@
 
 
 {%block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/service.css' %}" />
 {% endblock %} 
 
 {% block extra_schema %}
 <script>
-
 </script>
 {% endblock %} 
 
 {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "Services" %}</p>
+  </div>
+</div>
+
+{% include 'components/page-header.html' %}
+<section class="services container">
+    <div class="top-content">
+        <h2 class="section-title">
+            <span  class="section-title">{% blocktrans %} Full-cycle support {% endblocktrans %}</span>
+            {% blocktrans %} to drive your business forward {% endblocktrans %} 
+        </h2>
+        <p class="section-desc">{% blocktrans %} Maximum Lubricants produces and packages high-quality oils using premium imported base oils and additives, formulated by expert engineers. {% endblocktrans %} </p>
+    </div>
+
+    <div class="service-contents">
+        <div>
+            <img src="{% static '/images/swiper.jpg' %}" alt="">
+            <h3>Certified Laboratory Testing</h3>
+            <p>Our in-house lab conducts thousands of annual tests to ensure that every product meets OEM standards and delivers top-tier performance.</p>
+        </div>
+         <div>
+            <img src="{% static '/images/swiper.jpg' %}" alt="">
+            <h3>Certified Laboratory Testing</h3>
+            <p>Our in-house lab conducts thousands of annual tests to ensure that every product meets OEM standards and delivers top-tier performance.</p>
+        </div>
+         <div>
+            <img src="{% static '/images/swiper.jpg' %}" alt="">
+            <h3>Certified Laboratory Testing</h3>
+            <p>Our in-house lab conducts thousands of annual tests to ensure that every product meets OEM standards and delivers top-tier performance.</p>
+        </div>
+    </div>
+
+    <div class="service-main-contents">
+        <div class="item">
+             <img src="{% static '/images/swiper.jpg' %}" alt="">
+             <div>
+                <span>LogistIcs & SHIPMENT</span>
+                <h3>Integrated Logistics Network</h3>
+                <p>With over 100,000 tons of annual product flow, MAXIMUM's logistics infrastructure is designed for speed, accuracy, and global reach. Operating in more than 54 countries through 40+ logistics partners, we ensure seamless and transparent delivery for every order.
+
+Our logistics service includes:
+Centralized warehouse network (15,000 m² capacity)
+Real-time inventory and stock management
+Full truckload (FTL) and less-than-truckload (LTL) shipping
+Automated order tracking with live status updates
+
+We offer 48-hour delivery to regional markets and 7–10 day shipping to international destinations, maintaining full control over every link of the supply chain to meet customer expectations with precision.</p>
+             </div>
+        </div>
+        <div class="item">
+             <img src="{% static '/images/swiper.jpg' %}" alt="">
+             <div>
+                <span>LogistIcs & SHIPMENT</span>
+                <h3>Integrated Logistics Network</h3>
+                <p>desc</p>
+             </div>
+        </div>
+        <div class="item">
+             <img src="{% static '/images/swiper.jpg' %}" alt="">
+             <div>
+                <span>LogistIcs & SHIPMENT</span>
+                <h3>Integrated Logistics Network</h3>
+                <p>desc</p>
+             </div>
+        </div>
+    </div>
+</section>
+
+
 
 {% endblock %} 
 

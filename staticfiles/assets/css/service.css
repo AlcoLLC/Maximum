@@ -1,0 +1,79 @@
+.services {
+  margin: 50px auto;
+}
+.services .service-contents {
+  margin: 80px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.services .service-contents div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: center;
+  color: var(--dark);
+}
+
+.services .service-contents div img {
+  width: 100px;
+  object-fit: contain;
+}
+.services .service-contents h3 {
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 28px;
+  width: 85%;
+}
+.services .service-contents p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.service-main-contents {
+  margin: 50px auto;
+}
+.service-main-contents .item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 430px;
+}
+
+.service-main-contents .item:nth-child(2n) {
+  flex-direction: row-reverse;
+}
+
+.service-main-contents .item img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-main-contents .item div {
+  width: 50%;
+  padding: 30px 60px;
+}
+.service-main-contents .item span,
+.service-main-contents .item p {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.service-main-contents .item span {
+  color: var(--main);
+  text-transform: uppercase;
+}
+
+.service-main-contents .item h3 {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 30px;
+  text-transform: uppercase;
+  margin: 15px 0;
+}

@@ -64,6 +64,12 @@ def product_detail(request, slug):
         properties = ProductProperty.objects.filter(product=product).order_by('order', 'id')
         available_liters = product.liters.all().order_by('volume')
 
+        related_products = Product.objects.filter(
+            product_group=product.product_group
+        ).exclude(
+            id=product.id
+        ).order_by('-id')[:3] 
+
         title = product.title or ""
         full_title = title
         if title and len(title) < 60:
@@ -79,6 +85,8 @@ def product_detail(request, slug):
             'properties': properties,
             'meta_title': full_title[:60],
             'meta_description': description[:160],
+            'related_products': related_products,  # Yeni əlavə edildi
+
         }
 
         return render(request, 'product_detail.html', context)
@@ -117,6 +125,7 @@ def product_properties_ajax(request, product_id):
 
         pds_url = check_url(product.pds_url)
         sds_url = check_url(product.sds_url)
+        tds_url = check_url(product.tds_url)
 
         return JsonResponse({
             'success': True,
@@ -124,6 +133,7 @@ def product_properties_ajax(request, product_id):
             'product_title': product.title,
             'pds_url': pds_url,
             'sds_url': sds_url,
+            'tds_url': tds_url,
         })
 
     return JsonResponse({'success': False, 'error': 'Invalid request'})

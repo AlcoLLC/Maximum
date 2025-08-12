@@ -113,7 +113,7 @@ class ProductPropertyAdmin(TranslationAdmin):
 
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
-    list_display = ['title', 'product_id', 'product_group', 'oil_type', 'has_pds', 'has_sds', 'in_home']
+    list_display = ['title', 'product_id', 'product_group', 'oil_type', 'has_pds', 'has_sds', 'has_tds', 'in_home']
     list_filter = ['product_group', 'segments', 'oil_type', 'viscosity']
     search_fields = ['title', 'product_id', 'description']
     prepopulated_fields = {'slug': ('title',)}
@@ -132,7 +132,7 @@ class ProductAdmin(TranslationAdmin):
             'fields': ('product_group', 'segments', 'oil_type', 'viscosity', 'liters')
         }),
         ('Documents', {
-            'fields': ('pds_url', 'sds_url'),
+            'fields': ('pds_url', 'sds_url', 'tds_url'),
             'classes': ('collapse',),
         }),
     )
@@ -154,6 +154,15 @@ class ProductAdmin(TranslationAdmin):
             )
         return '❌'
     has_sds.short_description = 'SDS'
+
+    def has_tds(self, obj):
+        if obj.tds_url:
+            return format_html(
+                '<a href="{}" target="_blank" class="button">View TDS</a>',
+                obj.tds_url
+            )
+        return '❌'
+    has_tds.short_description = 'TDS'
     
     class Media:
         js = (
