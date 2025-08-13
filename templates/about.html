@@ -1,24 +1,207 @@
-{% extends 'base.html' %} {% load static %} {% load i18n %} 
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%}{%
+trans "meta_title_about" %}{% endblock %} {% block description %}{%trans
+"meta_description_about" %}{%endblock %} {% block keywords %}{%trans
+"meta_keywords_about" %}{%endblock %} {%block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/home.css' %}" />
+<link rel="stylesheet" href="{% static 'assets/css/about.css' %}" />
 
-{% block title%}{% trans "meta_title_about" %}{% endblock %} 
-{% block description %}{%trans "meta_description_about" %}{%endblock %} 
-{% block keywords %}{%trans "meta_keywords_about" %}{%endblock %}
+<link
+  rel="stylesheet"
+  href="{% static 'assets/css/map.css' %}"
+  onload="this.rel='stylesheet'"
+/>
+<link
+  rel="stylesheet"
+  href="{% static 'assets/css/swiper-bundle.min.css' %}"
+  onload="this.rel='stylesheet'"
+/>
+<noscript>
+  <link
+    rel="stylesheet"
+    href="{% static 'assets/css/swiper-bundle.min.css' %}"
+  />
+  <link rel="stylesheet" href="{% static 'assets/css/map.css' %}" />
+</noscript>
+{% endblock %} {% block extra_schema %}
+<script></script>
+{% endblock %} {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img
+        loading="lazy"
+        src="{% static '/images/home-page.svg' %}"
+        alt="Home page icon"
+      />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "About us" %}</p>
+  </div>
+</div>
+
+{% include 'components/page-header.html' %}
+
+<section>
+  <div class="top-content container">
+    <h1 class="section-title">
+      {{ about.title }}
+    </h1>
+    <p class="section-desc">
+      {{ about.content }}
+    </p>
+  </div>
+  <div class="bg-white">
+    <div class="container about-content">
+       {% for about_content in about_contents %}
+        <div>
+        <img src="{{ about_content.image.url }}" alt="Car" />
+        <div>
+          <h2>{{ about_content.section_title }}</h2>
+          <p>
+            {{ about_content.section_content }}
+          </p>
+        </div>
+      </div>
+          {% empty %}
+        
+          {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="container about-section-technology">
+  <div class="about-section-technology-content-bgcolor">
+    <div class="about-section-technology-content">
+      <span>{{ about_section.category }}</span>
+      <h2>{{ about_section.section_title }}</h2>
+      <p>
+       {{ about_section.section_description }}
+      </p>
+    </div>
+  </div>
+  <img src="{{ about_section.image.url }}" alt="{{ about_section.section_title }}" />
+</section>
+
+<section class="global-presence container about-section-global-presence">
+  <div class="top-content">
+    <h2 class="section-title">
+      {{ global_presence.title }}
+    </h2>
+    <p class="section-desc">
+      {{ global_presence.description_one }}
+    </p>
+  </div>
+
+  <div class="properties">
+    <div class="item">
+      <h3>{% blocktrans %} 100.000 tons {% endblocktrans %}</h3>
+      <p class="section-desc">
+        {% blocktrans %} Production Capacity {% endblocktrans %}
+      </p>
+    </div>
+    <div class="item">
+      <h3>{% blocktrans %} 82 {% endblocktrans %}</h3>
+      <p class="section-desc">
+        {% blocktrans %} Unique Products {% endblocktrans %}
+      </p>
+    </div>
+    <div class="item">
+      <h3>{% blocktrans %} 1000+ {% endblocktrans %}</h3>
+      <p class="section-desc">{% blocktrans %} Products {% endblocktrans %}</p>
+    </div>
+    <div class="item">
+      <h3>{% blocktrans %} 1.5 k {% endblocktrans %}</h3>
+      <p class="section-desc">
+        {% blocktrans %} Partners Worldwide {% endblocktrans %}
+      </p>
+    </div>
+    <div class="item">
+      <h3>{% blocktrans %} 600+ tons {% endblocktrans %}</h3>
+      <p class="section-desc">
+        {% blocktrans %} Daily Exported Products {% endblocktrans %}
+      </p>
+    </div>
+  </div>
+
+  <div class="map-section">
+    <div class="page-wrapper">
+      <main class="main-content">
+        <section id="preview" class="preview section-margin-b-m">
+          <div class="preview__content">
+            <div id="map-container"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="top-content">
+    <p class="section-desc">
+      {{ global_presence.description_two }}
+    </p>
+  </div>
+  <div class="our-partners container">
+    <div class="swiper-wrapper-container">
+      <div class="partners-swiper-button-prev">
+        <i class="fa-solid fa-arrow-left-long"></i>
+      </div>
+      <div class="swiper partnersSwiper">
+        <div class="swiper-wrapper">
+          {% for car_logo in car_logos %}
+          <div class="swiper-slide">
+            <img
+              loading="lazy"
+              src="{{ car_logo.logo.url }}"
+              width="155"
+              height="70"
+              alt="{{ car_logo.name }}"
+            />
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="partners-swiper-button-next">
+        <i class="fa-solid fa-arrow-right-long"></i>
+      </div>
+    </div>
+  </div>
+  {{ global_presence.description_three }}
+</section>
+
+<section
+  style="background-image: url('{{ sustainability.image.url }}');"
+  class="container about-section-sustainability"
+>
+  <div class="top-content about-section-sustainability-content">
+    <h2 class="section-title">{{ sustainability.title }}</h2>
+    <p class="section-desc">{{ sustainability.description }}</p>
+  </div>
+</section>
+
+<section
+  style="background-image: url('{{ partnership_content.image.url }}');"
+  class="container about-section-partnership"
+>
+  <div class="top-content about-section-partnership-content">
+    <h2 class="section-title">{{ partnership_content.title }}</h2>
+    <p class="section-desc">
+      <span>{{ partnership_content.title_content }}</span>
+      {{ partnership_content.description }}
+    </p>
+  </div>
+</section>
+
+{% include 'components/contact_section.html' %} 
 
 
-{%block page_css %}
-{% endblock %} 
-
-{% block extra_schema %}
-<script>
-
-</script>
-{% endblock %} 
-
-{% block content %}
-
-{% endblock %} 
-
-
-
-{%block page_js %}
-{% endblock %} 
+{% endblock %} {% block page_js %}
+<script src="{% static 'assets/js/home.js' %}" defer></script>
+<!-- <script src="{% static 'assets/js/review.js' %}" defer></script> -->
+<script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
+<script src="{% static 'assets/js/raphael.min.js' %}" defer></script>
+<script src="{% static 'assets/js/settings.js' %}" defer></script>
+<script src="{% static 'assets/js/paths.min.js' %}" defer></script>
+<script src="{% static 'assets/js/map.min.js' %}" defer></script>
+<script src="{% static 'assets/js/map-init.js' %}" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'assets/js/map3.min.js' %}" defer></script>
+{% endblock %}

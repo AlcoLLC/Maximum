@@ -51,7 +51,6 @@ class CarLogo(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-
 class Review(models.Model):    
     first_name = models.CharField(max_length=50, verbose_name="First Name")
     surname = models.CharField(max_length=50, verbose_name="Surname")
