@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+.section-title {
+  line-height: 80px;
+}
+
+.bg-white {
+  background-color: #ffffff;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-content > div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.about-content img {
+  width: 50%;
+  height: 350px;
+}
+
+.about-section-technology img {
+  width: 50%;
+  height: 415px;
+}
+
+.about-content div div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 38%;
+}
+
+.about-section-technology-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.about-content div div h2,
+.about-section-technology-content h2 {
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 32px;
+  leading-trim: NONE;
+  line-height: 40px;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.about-content div div p,
+.about-section-technology-content p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  leading-trim: NONE;
+  line-height: 20px;
+  letter-spacing: 0px;
+}
+
+.about-section-technology {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+
+.about-section-technology-content h2 {
+  margin-top: 10px;
+}
+
+.about-section-technology-content {
+}
+
+.about-section-technology-content-bgcolor {
+  width: 50%;
+  height: 415px;
+  background-color: #ffb200;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  angle: 0 deg;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-section-global-presence .section-desc {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.about-section-sustainability,
+.about-section-partnership {
+  height: 600px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.about-section-sustainability {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-section-partnership {
+  padding: 30px;
+}
+
+.about-section-sustainability-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  width: 85%;
+  background: #152c00cc;
+  padding: 30px;
+}
+
+.about-section-partnership-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  width: 60%;
+  background: #1c1c1ccc;
+  padding: 30px;
+  margin: 30px 0 0 30px;
+}
+
+.about-section-partnership {
+  margin-top: 60px;
+}
+
+.about-section-sustainability-content h2,
+.about-section-partnership-content h2 {
+  color: #ffffff;
+}
+
+.about-section-partnership-content h2 {
+  color: #ffb200;
+  text-align: left;
+}
+
+.about-section-sustainability-content p,
+.about-section-partnership-content p {
+  margin-top: 20px;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 26px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-section-partnership-content p span {
+  font-weight: 600;
+  color: #ffffff !important;
+}
+
