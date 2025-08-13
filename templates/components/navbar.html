@@ -57,9 +57,9 @@
         </div>
         <div class="nav-bottom">
             <ul>
-                <li><a class="active" href="{% url 'product:product' %}" aria-label="Products Page">{% trans "Products" %}</a></li>
+                <li><a class="active" href="{% url 'product:products' %}" aria-label="Products Page">{% trans "Products" %}</a></li>
                 <li><a href="" aria-label="About Page">{% trans "About us" %}</a></li>
-                <li><a href="" aria-label="Services Page">{% trans "Services" %}</a></li>
+                <li><a href="{% url 'services:services' %}" aria-label="Services Page">{% trans "Services" %}</a></li>
                 <li><a href="" aria-label="Partnership Page">{% trans "Partnership" %}</a></li> 
                 <li><a href="" aria-label="Contact Page">{% trans "Contact" %}</a></li>
             </ul>
@@ -76,9 +76,9 @@
 
 <div class="mobile-menu" id="mobile-menu">
   <ul>
-    <li><a href="{% url 'product:product' %}" aria-label="Products Page">{% trans "Products" %}</a></li>
+    <li><a href="{% url 'product:products' %}" aria-label="Products Page">{% trans "Products" %}</a></li>
     <li><a href="" aria-label="About Page">{% trans "About us" %}</a></li>
-    <li><a href="" aria-label="Services Page">{% trans "Services" %}</a></li>
+    <li><a href="{% url 'services:services' %}" aria-label="Services Page">{% trans "Services" %}</a></li>
     <li><a href="" aria-label="Partnership Page">{% trans "Partnership" %}</a></li>
     <li><a href="" aria-label="Contact Page">{% trans "Contact" %}</a> </li>
     <li><a href="" aria-label="Brand Portal Page">{% trans "Brand Portal" %}</a></li>

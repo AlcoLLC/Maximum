@@ -1,11 +1,12 @@
 {% extends 'base.html' %} {% load static %} {% load i18n %} 
 
-{% block title%}{% trans "meta_title_product_detail" %}{% endblock %} 
-{% block description %}{%trans "meta_description_product_detail" %}{%endblock %} 
+{% block title %}{{ meta_title }}{% endblock %}
+{% block description %}{{ meta_description }}{% endblock %}
 {% block keywords %}{%trans "meta_keywords_products" %}{%endblock %}
 
 
 {%block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/product.css' %}" />
 {% endblock %} 
 
 {% block extra_schema %}
@@ -16,8 +17,127 @@
 
 {% block content %}
 
-{% endblock %} 
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <a href="{% url 'product:products' %}" aria-label="product Page">{% trans "Products" %}</a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{{ product.title }}</p>
+  </div>
+</div>
 
+<section class="product-details container">
+    <div class="detail-content">
+        <div class = 'product-image'>
+            <img loading="lazy" src="{{ product.image.url }}" alt="{{ product.title }}">
+        </div>
+        <div class="detail-info">
+            <h1 class="section-title">{{ product.title|linebreaksbr }}</h1>
+            <p class="product-id">{% trans "Product" %} {{ product.product_id|linebreaksbr }}</p>
+
+            {% if available_liters %}
+            <div class="quantity">
+                <span>{%trans "Quantity" %}</span>
+                {% for liter in available_liters %}
+                <div>
+                    {% if liter.volume|floatformat:1|slice:"-2:" == ".0" %}
+                        {{ liter.volume|floatformat:"0" }}L
+                    {% else %}
+                        {{ liter.volume|floatformat:1 }}L
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="product-properties">
+                <div>
+                    <span>{% trans "Application" %}</span>
+                    <p>{{ product.application }}</p>
+                </div>
+                <div>
+                    <span>{% trans "Product type" %}</span>
+                    <p>{{ product.product_group }}</p>
+                </div>
+                <div>
+                    <span>{% trans "Viscosity" %}</span>
+                    <p>{{ product.viscosity }}</p>
+                </div>
+                {% if product.api %}
+                <div>
+                    <span>{% trans "API Standart" %}</span>
+                    <p>{{ product.api }}</p>
+                </div>
+                {% endif %}
+            </div>
+
+            <div>
+                <p class="product-desc">{% trans "Description" %}</p>
+                <p class="product-desc">{{ product.description }}</p>
+            </div>
+
+            <div>
+                <h3 class="product-desc">{%trans "Specifications & Approvals" %}</h3>
+                <p  class="product-desc">
+                    {% if product.api %}
+                    API <span>{{ product.api }}</span>
+                    {% endif %}
+                    {% if product.ilsac %}
+                    ILSAC <span>{{ product.ilsac }}</span>
+                    {% endif %}
+                    {% if product.acea %}
+                    ACEA <span>{{ product.acea }}</span>
+                    {% endif %}
+                    {% if product.jaso %}
+                    JASO <span>{{ product.jaso }}</span>
+                    {% endif %}
+                    {% if product.oem_sertification %}
+                    <span>{{ product.oem_sertification|linebreaksbr }}</span>
+                    {% endif %}
+                </p>
+            </div>
+
+            <div class="pdfs">
+                <button>
+                    <img loading="lazy" src="{% static 'images/pdf-icon.svg' %}" alt="PDF icon">
+                    <span>{% trans "TDS" %}</span>
+                </button>
+                <button>
+                    <img loading="lazy" src="{% static 'images/pdf-icon.svg' %}" alt="PDF icon">
+                    <span>{% trans "SDS" %}</span>
+                </button>
+                <button>
+                    <img loading="lazy" src="{% static 'images/pdf-icon.svg' %}" alt="PDF icon">
+                    <span>{% trans "PDS" %}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="see-more">
+        <div class="see-more-header">
+             <h2 class="section-title">{% trans "See more" %} {{ product.product_group }}</h2>
+             <a class="button-style" href="{% url 'product:products' %}?product_group={{ product.product_group.slug }}"
+             aria-label="{{ product.product_group.title }}"> {% trans "View all" %}</a>
+        </div>
+        <div class="see-more-group">
+            {% for related_product in related_products %}
+            <a class="item" href="{% url 'product:product_detail' related_product.slug %}">
+                <img loading="lazy" src="{{ related_product.image.url }}" alt="{{ related_product.title}}">
+                <p>{{ related_product.title}}</p>
+                <div class="button-style">{% trans "View details" %}</div>
+            </a>
+            {% empty %}
+            <p>{% trans "No related products found" %}</p>
+            {% endfor %}      
+        </div>
+    </div>
+</section>
+
+{% endblock %} 
 
 
 {%block page_js %}

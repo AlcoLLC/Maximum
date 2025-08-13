@@ -89,6 +89,8 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'home.context_processors.review_context',
                 'home.context_processors.page_header_context',
+                'home.context_processors.featured_products_context',
+                'home.context_processors.partners_context',
 
             ],
         },

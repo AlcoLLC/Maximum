@@ -60,6 +60,7 @@ class Product(models.Model):
     viscosity = models.ForeignKey('Viscosity', on_delete=models.CASCADE, related_name='products', null=True, blank=True)
     pds_url = models.URLField(blank=True, null=True, verbose_name="PDS Link")
     sds_url = models.URLField(blank=True, null=True, verbose_name="SDS Link")
+    tds_url = models.URLField(blank=True, null=True, verbose_name="TDS Link")
     created_at = models.DateTimeField(auto_now_add=True)
     order = models.IntegerField(default=0)
     in_home = models.BooleanField(default=False, verbose_name="In Home")

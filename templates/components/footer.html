@@ -1,67 +1,69 @@
 {% load static %}
 {% load i18n %}
 
-<footer class="container">
-  <div class="footer-content">
-    <div>
-        <a href="{% url 'home:home' %}" class="maximum-logo" aria-label="Home Page">
-           <img loading="lazy"  src="{% static '/images/maximum-logo.webp' %}" alt="Maximum logo" />
-        </a>
-    </div>
-    <div class="footer-row">
-        <ul>
-            <li>
-              <div>
-                 <a href="" aria-label="About Page">{% trans "About Us" %}</a>
-                 <a href="" aria-label="Products Page">{% trans "Products" %}</a>
-              </div>
-               <div>
-                <a href="" aria-label="Service Page">{% trans "Services" %}</a>
-                <a href="" aria-label="Brand Portal Page">{% trans "Brand Portal" %}</a> 
-               </div>
-            </li>
-            <li>
-              <div>
-                <a href="" aria-label="News Page">{% trans "News" %}</a>
-                <a href="" aria-label="Faq Page">{% trans "FAQ" %}</a>
-              </div>          
-              <div>
-                <a href="" aria-label="Partnership Page">{% trans "Partnership" %}</a>
-                <a href="" aria-label="Contact Page">{% trans "Contact" %}</a>
-              </div>
-            </li>
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div>
+          <a href="{% url 'home:home' %}" class="maximum-logo" aria-label="Home Page">
+            <img loading="lazy"  src="{% static '/images/maximum-logo.webp' %}" alt="Maximum logo" />
+          </a>
+      </div>
+      <div class="footer-row">
+          <ul>
+              <li>
+                <div>
+                  <a href="" aria-label="About Page">{% trans "About Us" %}</a>
+                  <a href="{% url 'product:products' %}" aria-label="Products Page">{% trans "Products" %}</a>
+                </div>
+                <div>
+                  <a href="" aria-label="Service Page">{% trans "Services" %}</a>
+                  <a href="" aria-label="Brand Portal Page">{% trans "Brand Portal" %}</a> 
+                </div>
+              </li>
+              <li>
+                <div>
+                  <a href="" aria-label="News Page">{% trans "News" %}</a>
+                  <a href="" aria-label="Faq Page">{% trans "FAQ" %}</a>
+                </div>          
+                <div>
+                  <a href="" aria-label="Partnership Page">{% trans "Partnership" %}</a>
+                  <a href="" aria-label="Contact Page">{% trans "Contact" %}</a>
+                </div>
+              </li>
 
-        </ul>
-        <button id="scrollToTop" aria-label="Scroll to top"><i class="fa-solid fa-chevron-up"></i></button>
+          </ul>
+          <button id="scrollToTop" aria-label="Scroll to top"><i class="fa-solid fa-chevron-up"></i></button>
+      </div>
     </div>
-</div>
-  <div class="footer-contact">
-    <div>
-      <p>{% trans "Leopoldstrasse 244, 80807 München, Germany" %}</p>
-      <div class="phone-number">(+49) 711 490 66 222</div>
-      <p>info@maximumlube.de</p>
+    <div class="footer-contact">
+      <div>
+        <p>{% trans "Leopoldstrasse 244, 80807 München, Germany" %}</p>
+        <div class="phone-number">(+49) 711 490 66 222</div>
+        <p>info@maximumlube.de</p>
+      </div>
+      <div class="">
+        <a href="https://wa.me/4915207776502" aria-label="Whatsapp Page">
+          <img loading="lazy"   src="{% static 'images/whatsapp.webp' %}" alt="Whatsapp" />
+        </a>
+        <a href="#" aria-label="Youtube Page"  target="_blank" >
+          <img loading="lazy"   src="{% static 'images/youtube.webp' %}" alt="Youtube" />
+        </a>
+        <a href="#" aria-label="Linkedin Page">
+          <img loading="lazy"   src="{% static 'images/linkedin.webp' %}"  target="_blank" alt="Linkedn" />
+        </a>
+        <a href="#" aria-label="Instagram Page" target="_blank">
+          <img loading="lazy"   src="{% static 'images/instagram.webp' %}" alt="Instagram" />
+        </a>
+        <a href="#" aria-label="Facebook Page" target="_blank">
+          <img loading="lazy"   src="{% static 'images/facebook.webp' %}" alt="Facebook" class="facebook" />
+        </a>
+      </div>
     </div>
-    <div class="">
-      <a href="https://wa.me/4915207776502" aria-label="Whatsapp Page">
-        <img loading="lazy"   src="{% static 'images/whatsapp.webp' %}" alt="Whatsapp" />
-      </a>
-      <a href="#" aria-label="Youtube Page"  target="_blank" >
-        <img loading="lazy"   src="{% static 'images/youtube.webp' %}" alt="Youtube" />
-      </a>
-      <a href="#" aria-label="Linkedin Page">
-        <img loading="lazy"   src="{% static 'images/linkedin.webp' %}"  target="_blank" alt="Linkedn" />
-      </a>
-      <a href="#" aria-label="Instagram Page" target="_blank">
-        <img loading="lazy"   src="{% static 'images/instagram.webp' %}" alt="Instagram" />
-      </a>
-      <a href="#" aria-label="Facebook Page" target="_blank">
-        <img loading="lazy"   src="{% static 'images/facebook.webp' %}" alt="Facebook" class="facebook" />
-      </a>
+    <hr class="custom-hr" />
+    <div class="alco-privacy">
+      <p>{% trans "© 2025 ALCO LLC. All right reserved." %}</p>
+      <p>{% trans "Terms and Condition" %} - {% trans "Privacy Policy" %}</p>
     </div>
-  </div>
-  <hr class="custom-hr" />
-  <div class="alco-privacy">
-    <p>{% trans "© 2025 ALCO LLC. All right reserved." %}</p>
-    <p>{% trans "Terms and Condition" %} - {% trans "Privacy Policy" %}</p>
   </div>
 </footer>
