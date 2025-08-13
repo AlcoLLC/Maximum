@@ -42,3 +42,64 @@
   width: 26vh;
   white-space: nowrap;
 }
+
+@media (max-width: 925px) {
+  .about-section-contact p {
+    font-size: 50px;
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 810px) {
+  .about-section-contact p br {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .about-section-contact p {
+    font-size: 40px;
+    line-height: 46px;
+  }
+}
+
+@media (max-width: 500px) {
+  .about-section-contact {
+    background-image: url("../../images/oil.svg");
+    flex-direction: column;
+    height: auto;
+    min-height: 400px;
+    justify-content: flex-start;
+    align-items: stretch;
+    background-size: contain;
+    background-position: bottom center;
+    padding-top: 40px;
+    padding-bottom: 350px; /* Space for the image */
+  }
+
+  .about-section-contact .contact-text {
+    padding: 0 20px;
+    text-align: center;
+    width: 100%;
+    order: 1; /* Text appears first */
+  }
+
+  .about-section-contact div {
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+    height: auto;
+  }
+
+  .about-section-contact p {
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 20px;
+  }
+
+  .about-section-contact a {
+    align-self: center;
+    width: auto;
+    min-width: 150px;
+  }
+}

@@ -30,6 +30,7 @@
 .about-section-technology img {
   width: 50%;
   height: 415px;
+  object-fit: cover;
 }
 
 .about-content div div {
@@ -81,9 +82,6 @@
 
 .about-section-technology-content h2 {
   margin-top: 10px;
-}
-
-.about-section-technology-content {
 }
 
 .about-section-technology-content-bgcolor {
@@ -175,3 +173,21 @@
   color: #ffffff !important;
 }
 
+@media (max-width: 1000px) {
+  .section-title {
+    line-height: 60px;
+  }
+}
+
+@media (max-width: 850px) {
+  .about-section-technology-content h2 {
+    font-size: 25px;
+    line-height: 35px;
+  }
+}
+
+@media (max-width: 700px) {
+  .section-title {
+    line-height: 45px;
+  }
+}

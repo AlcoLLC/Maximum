@@ -41,7 +41,7 @@ trans "meta_title_about" %}{% endblock %} {% block description %}{%trans
 
 {% include 'components/page-header.html' %}
 
-<section>
+<section class="about container">
   <div class="top-content container">
     <h1 class="section-title">
       {{ about.title }}
@@ -164,7 +164,11 @@ trans "meta_title_about" %}{% endblock %} {% block description %}{%trans
       </div>
     </div>
   </div>
-  {{ global_presence.description_three }}
+  <div class="top-content">
+    <p class="section-desc">
+      {{ global_presence.description_three }}
+    </p>
+  </div>
 </section>
 
 <section
@@ -191,6 +195,11 @@ trans "meta_title_about" %}{% endblock %} {% block description %}{%trans
 </section>
 
 {% include 'components/contact_section.html' %} 
+
+{% include 'components/featured_products.html' %} 
+
+{% include 'components/partners.html' %} 
+
 
 
 {% endblock %} {% block page_js %}
