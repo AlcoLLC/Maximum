@@ -1,0 +1,108 @@
+.faq-section {
+  background-color: #fff;
+}
+.faq-section .container {
+  padding: 70px 0;
+}
+
+.faq-section .top-content {
+  align-items: start;
+  width: 60%;
+  text-align: left;
+}
+
+.faq-section .top-content p:first-of-type {
+  font-weight: 700 !important;
+}
+
+.faq-section .section-grid {
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 15px;
+}
+.faq-section .section-grid .grid-item {
+  color: var(--dark);
+  width: 100%;
+  height: auto;
+  background-color: var(--light-gray);
+  padding: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.faq-section .section-grid .grid-item.open {
+  background-color: var(--main);
+}
+
+.faq-section .section-grid .question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.faq-section .section-grid .answer {
+  width: 100%;
+  padding: 15px 20px 5px;
+  display: none;
+}
+.faq-section .section-grid .question h2 {
+  width: 80%;
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 700;
+  padding: 5px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.faq-section .section-grid .answer p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+.faq-section .section-grid .question i {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.faq-section .section-grid .question .plus-icon {
+  color: var(--main);
+  display: block;
+}
+.faq-section .section-grid .question .minus-icon {
+  display: none;
+}
+
+.faq-section .btn-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .faq-section .container {
+    padding: 40px 0;
+  }
+  .faq-section .section-grid .question h2 {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .faq-section .section-grid .grid-item {
+    width: 100%;
+  }
+
+  .faq-section .top-content {
+    width: 90%;
+  }
+}

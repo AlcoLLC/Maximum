@@ -30,64 +30,47 @@
 </div>
 
 {% include 'components/page-header.html' %}
+
 <section class="services container">
     <div class="top-content">
         <h2 class="section-title">
             <span  class="section-title">{% blocktrans %} Full-cycle support {% endblocktrans %}</span>
             {% blocktrans %} to drive your business forward {% endblocktrans %} 
         </h2>
-        <p class="section-desc">{% blocktrans %} Maximum Lubricants produces and packages high-quality oils using premium imported base oils and additives, formulated by expert engineers. {% endblocktrans %} </p>
+        <p class="section-desc">{% blocktrans %} We go beyond delivering premium lubricants — we provide complete support to optimize your operations, build customer trust, and grow your brand. From lab-tested quality to logistics and marketing, we’ve got you covered.  {% endblocktrans %} </p>
     </div>
 
     <div class="service-contents">
+        {% for service in services %}
         <div>
-            <img src="{% static '/images/swiper.jpg' %}" alt="">
-            <h3>Certified Laboratory Testing</h3>
-            <p>Our in-house lab conducts thousands of annual tests to ensure that every product meets OEM standards and delivers top-tier performance.</p>
+            <img loading="lazy" src="{{ service.image.url }}" alt="{{ service.title }}">
+            <h3>{{ service.title|linebreaksbr }}</h3>
+            <p>{{ service.description|linebreaksbr }}</p>
         </div>
-         <div>
-            <img src="{% static '/images/swiper.jpg' %}" alt="">
-            <h3>Certified Laboratory Testing</h3>
-            <p>Our in-house lab conducts thousands of annual tests to ensure that every product meets OEM standards and delivers top-tier performance.</p>
-        </div>
-         <div>
-            <img src="{% static '/images/swiper.jpg' %}" alt="">
-            <h3>Certified Laboratory Testing</h3>
-            <p>Our in-house lab conducts thousands of annual tests to ensure that every product meets OEM standards and delivers top-tier performance.</p>
-        </div>
+        {% endfor %}
     </div>
 
     <div class="service-main-contents">
+        {% for service in service_contents %}
         <div class="item">
-             <img src="{% static '/images/swiper.jpg' %}" alt="">
+             <img loading="lazy" src="{{ service.image.url }}" alt="{{ service.title }}">
              <div>
-                <span>LogistIcs & SHIPMENT</span>
-                <h3>Integrated Logistics Network</h3>
-                <p>desc</p>
+                <span>{{ service.subtitle|linebreaksbr }}</span>
+                <h3>{{ service.title|linebreaksbr }}</h3>
+                <p>{{ service.description|linebreaksbr }}</p>
              </div>
         </div>
-        <div class="item">
-             <img src="{% static '/images/swiper.jpg' %}" alt="">
-             <div>
-                <span>LogistIcs & SHIPMENT</span>
-                <h3>Integrated Logistics Network</h3>
-                <p>desc</p>
-             </div>
-        </div>
-        <div class="item">
-             <img src="{% static '/images/swiper.jpg' %}" alt="">
-             <div>
-                <span>LogistIcs & SHIPMENT</span>
-                <h3>Integrated Logistics Network</h3>
-                <p>desc</p>
-             </div>
-        </div>
+        {% endfor %}
+
     </div>
 </section>
 
+{% include 'components/contact_section.html' %} 
 {% include 'components/featured_products.html' %} 
 
+
 {% endblock %} 
+
 
 {%block page_js %}
     <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>

@@ -6,6 +6,7 @@
 
 
 {%block page_css %}
+    <link rel="stylesheet" href="{% static 'assets/css/faq.css' %}" />
 {% endblock %} 
 
 {% block extra_schema %}
@@ -15,10 +16,58 @@
 {% endblock %} 
 
 {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "FAQ" %}</p>
+  </div>
+</div>
+
+<section class="faq-section ">
+    <div class="container">
+        <div class="top-content">
+            <h2 class="section-title">
+                {% blocktrans %} Frequently Asked Questions {% endblocktrans %} 
+            </h2>
+            <p class="section-desc">{% blocktrans %} Got questions? We’ve got clear and quick answers for you! {% endblocktrans %} </p>
+            <p class="section-desc">{% blocktrans %} If you can't find the answer you're looking for, feel free to contact us and our team will be happy to assist you! {% endblocktrans %} </p>
+        </div>
+
+        <div class="section-grid">
+            {% for faq in faqs %}
+            <div class="grid-item">
+                <div class="question">
+                    <h2>{{ faq.question|linebreaksbr }}</h2>
+
+                    <i class="fa-solid fa-chevron-down plus-icon"></i>
+                    <i class="fa-solid fa-chevron-up minus-icon"></i>
+                    
+                </div>
+                <div class="answer">
+                    <p>{{ faq.answer|linebreaksbr }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-faq">
+            <p>{% trans "No FAQs available at the moment." %}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="btn-div">
+             <button class="button-style">
+              {% trans "See more" %}
+             </button>
+        </div>
+    </div>
+</section>
 
 {% endblock %} 
 
 
 
 {%block page_js %}
+    <script src="{% static 'assets/js/faq.js' %}" defer></script>
 {% endblock %} 

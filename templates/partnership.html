@@ -6,7 +6,9 @@
 
 
 {%block page_css %}
+    <link rel="stylesheet" href="{% static 'assets/css/service.css' %}" />
 {% endblock %} 
+
 
 {% block extra_schema %}
 <script>
@@ -15,6 +17,41 @@
 {% endblock %} 
 
 {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "Partnership" %}</p>
+  </div>
+</div>
+
+{% include 'components/page-header.html' %}
+
+<section class="services container">
+    <div class="top-content">
+        <h2 class="section-title">
+            {% blocktrans %} Strengthen Your Business {% endblocktrans %} 
+            <span  class="section-title">{% blocktrans %} with MAXIMUM {% endblocktrans %}</span>
+        </h2>
+        <p class="section-desc">{% blocktrans %} At MAXIMUM, we don’t just look for clients — we invest in long-term partnerships. Our goal is to create real value for every distributor, retailer, and workshop owner in our network. With a presence in over 20+ countries, a product portfolio of 1000+ SKUs, and continuous marketing and technical support, we’re here to help you expand your business — and win in your market. {% endblocktrans %} </p>
+    </div>
+
+    <div class="service-main-contents">
+        {% for partnership in partnership_contents %}
+        <div class="item">
+             <img loading="lazy" src="{{ partnership.image.url }}" alt="{{ partnership.title }}">
+             <div>
+                <span>{{ partnership.subtitle|linebreaksbr }}</span>
+                <h3>{{ partnership.title|linebreaksbr }}</h3>
+                <p>{{ partnership.description|linebreaksbr }}</p>
+             </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
 
 {% endblock %} 
 
