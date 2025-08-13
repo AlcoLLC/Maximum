@@ -6,7 +6,11 @@
 
 
 {%block page_css %}
-<link rel="stylesheet" href="{% static 'assets/css/service.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/service.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" onload="this.rel='stylesheet'" />
+    <noscript>
+    <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" />
+    </noscript>
 {% endblock %} 
 
 {% block extra_schema %}
@@ -59,15 +63,7 @@
              <div>
                 <span>LogistIcs & SHIPMENT</span>
                 <h3>Integrated Logistics Network</h3>
-                <p>With over 100,000 tons of annual product flow, MAXIMUM's logistics infrastructure is designed for speed, accuracy, and global reach. Operating in more than 54 countries through 40+ logistics partners, we ensure seamless and transparent delivery for every order.
-
-Our logistics service includes:
-Centralized warehouse network (15,000 m² capacity)
-Real-time inventory and stock management
-Full truckload (FTL) and less-than-truckload (LTL) shipping
-Automated order tracking with live status updates
-
-We offer 48-hour delivery to regional markets and 7–10 day shipping to international destinations, maintaining full control over every link of the supply chain to meet customer expectations with precision.</p>
+                <p>desc</p>
              </div>
         </div>
         <div class="item">
@@ -89,11 +85,10 @@ We offer 48-hour delivery to regional markets and 7–10 day shipping to interna
     </div>
 </section>
 
-
+{% include 'components/featured_products.html' %} 
 
 {% endblock %} 
 
-
-
 {%block page_js %}
+    <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
 {% endblock %} 
