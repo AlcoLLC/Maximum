@@ -1,12 +1,20 @@
 .services {
   margin: 50px auto;
 }
+
+.services .top-content .section-title {
+  width: 50%;
+}
+
+.services .top-content .section-desc {
+  width: 80%;
+}
 .services .service-contents {
   margin: 80px auto;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
-  align-items: start;
+  align-items: center;
 }
 .services .service-contents div {
   display: flex;
@@ -19,7 +27,7 @@
 }
 
 .services .service-contents div img {
-  width: 100px;
+ height: 100px;
   object-fit: contain;
 }
 .services .service-contents h3 {
@@ -57,6 +65,9 @@
 .service-main-contents .item div {
   width: 50%;
   padding: 30px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 .service-main-contents .item span,
 .service-main-contents .item p {
@@ -75,5 +86,100 @@
   font-size: 28px;
   line-height: 30px;
   text-transform: uppercase;
-  margin: 15px 0;
+}
+
+@media (max-width: 1000px) {
+  .services .service-contents div {
+    gap: 10px;
+  }
+
+  .services .service-contents div img {
+    height: 80px;
+  }
+  .services .service-contents h3 {
+    font-size: 18px;
+    line-height: 20px;
+  }
+  .services .service-contents p {
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  .service-main-contents .item {
+    height: 380px;
+  }
+
+  .service-main-contents .item div {
+    padding: 20px;
+    gap: 10px;
+  }
+  .service-main-contents .item h3 {
+    font-size: 22px;
+    line-height: 24px;
+  }
+
+  .service-main-contents .item span,
+  .service-main-contents .item p {
+    font-size: 13px;
+    line-height: 15px;
+  }
+}
+
+@media (max-width: 800px) {
+  .services .service-contents div img {
+    height: 60px;
+  }
+  .services .service-contents h3 {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .services .service-contents p {
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .service-main-contents .item {
+    flex-direction: column !important;
+    height: auto;
+  }
+
+  .service-main-contents .item img {
+    width: 100%;
+    height: 250px;
+  }
+
+  .service-main-contents .item div {
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .service-main-contents .item h3 {
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 550px) {
+  .services .service-contents {
+    grid-template-columns: 1fr;
+  }
+
+  .services .service-contents div img {
+    height: 90px;
+  }
+  .service-main-contents .item span,
+  .service-main-contents .item p {
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .service-main-contents .item h3 {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .service-main-contents .item img {
+    height: 200px;
+  }
 }
