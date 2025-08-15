@@ -61,7 +61,7 @@
                 <li><a href="{% url 'about:about' %}" aria-label="About Page">{% trans "About us" %}</a></li>
                 <li><a href="{% url 'services:services' %}" aria-label="Services Page">{% trans "Services" %}</a></li>
                 <li><a href="{% url 'partnership:partnership' %}" aria-label="Partnership Page">{% trans "Partnership" %}</a></li> 
-                <li><a href="" aria-label="Contact Page">{% trans "Contact" %}</a></li>
+                <li><a href="{% url 'contact:contact' %}" aria-label="Contact Page">{% trans "Contact" %}</a></li>
             </ul>
           <a href="" class="location-icon">
               <img loading="lazy" class="icon" src="{% static '/images/location.svg' %}" alt="Location icon"/>
@@ -80,7 +80,7 @@
     <li><a href="{% url 'about:about' %}" aria-label="About Page">{% trans "About us" %}</a></li>
     <li><a href="{% url 'services:services' %}" aria-label="Services Page">{% trans "Services" %}</a></li>
     <li><a href="{% url 'partnership:partnership' %}" aria-label="Partnership Page">{% trans "Partnership" %}</a></li>
-    <li><a href="" aria-label="Contact Page">{% trans "Contact" %}</a> </li>
+    <li><a href="{% url 'contact:contact' %}" aria-label="Contact Page">{% trans "Contact" %}</a> </li>
     <li><a href="{% url 'brands:brands' %}" aria-label="Brand Portal Page">{% trans "Brand Portal" %}</a></li>
     <li><a href="{% url 'news:news' %}" aria-label="News Page">{% trans "News" %}</a></li>
   </ul>

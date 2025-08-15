@@ -30,7 +30,7 @@
                 <h1 class="section-title">{% blocktrans %}Find the right lubricant {% endblocktrans %}</h1>
                 <h2 class="section-title">{% blocktrans %}for your vehicle!{% endblocktrans %}</h2>
             </div>
-            <a class="whatsapp" href="#">
+            <a class="whatsapp" href="https://wa.me/4915207776502">
                 <p>{% blocktrans %} Have a question? <br> Let's chat on WhatsApp!{% endblocktrans %}</p>
                 <img loading="lazy" src="{% static '/images/whatsapp.svg' %}" alt="Whatsapp icon"/>
             </a>
@@ -78,7 +78,7 @@
 
     </div>
 
-    <a href="" class="button-style">{% trans "Go to catalog" %} 
+    <a href="{% url 'product:products' %}" class="button-style">{% trans "Go to catalog" %} 
         <i class="fa-solid fa-arrow-right-long"></i>
     </a>
 
@@ -89,27 +89,21 @@
    <div class="top-content container">
         <h2 class="section-title">{% blocktrans %} Grow your business with maximum lubricants  {% endblocktrans %} </h2>
         <p class="section-desc">{% blocktrans %} We empower progress with smart lubrication and fluid technologies. Our commitment to quality and responsibility fuels success for our partners and a better future for all. {% endblocktrans %}</p>
-        <a href="" class="button-style">{% trans "Discover more" %}</a>
+        <a href="{% url 'product:products' %}" class="button-style">{% trans "Discover more" %}</a>
    </div>
    <div class="home-services">
     <img loading="lazy" class="bg-image" src="{% static 'images/shutterstock.webp' %}" alt="Coorperation background image"/>
         <div class="container">   
             <div class="service-flex">
+                {% for service  in services  %}
                 <div class="item">
-                    <h2>Advanced Technology & Performance</h2>
-                    <p>Maximum delivers cutting-edge lubricant solutions, engineered with precision and innovation. Our high-performance formulations ensure ultimate engine protection and efficiency across all driving conditions.</p>
-                </div>
-                <div class="item">
-                    <h2>Advanced Technology & Performance</h2>
-                    <p>Maximum delivers cutting-edge lubricant solutions, engineered with precision and innovation. Our high-performance formulations ensure ultimate engine protection and efficiency across all driving conditions.</p>
-                </div>
-                <div class="item">
-                    <h2>Advanced Technology & Performance</h2>
-                    <p>Maximum delivers cutting-edge lubricant solutions, engineered with precision and innovation. Our high-performance formulations ensure ultimate engine protection and efficiency across all driving conditions.</p>
-                </div>                
+                    <h2>{{ service.title|linebreaksbr }}</h2>
+                    <p>{{ service.description|truncatechars:200}}</p>
+                </div>    
+                {% endfor %}          
             </div>            
 
-            <a href="" class="button-style">{% trans "Go to services" %} 
+            <a href="{% url 'services:services' %}" class="button-style">{% trans "Go to services" %} 
                 <i class="fa-solid fa-arrow-right-long"></i>
             </a>
         </div>
@@ -133,11 +127,11 @@
                     </div>
                 </a>
             {% empty %}
-                <a href="#" class="swiper-slide">
+                <div class="swiper-slide">
                     <div class="slide-industry-content">
                         <h3>{% trans "No product_group available at the moment" %}</h3>
                     </div>
-                </a>
+                </div>
           {% endfor %}
         </div>
        
@@ -184,7 +178,7 @@
    <div class="top-content ">
         <h2 class="section-title">{% blocktrans %} Global presence  {% endblocktrans %} </h2>
         <p class="section-desc">{% blocktrans %}  Maximum products are exported to more than 54 countries worldwide through our trusted network of exclusive distributors. {% endblocktrans %}</p>
-        <a href="" class="button-style">{% trans "Become our distributor" %}</a>
+        <a href="{% url 'contact:contact' %}" class="button-style">{% trans "Become our distributor" %}</a>
    </div>
 
    <div class="properties">
@@ -229,7 +223,7 @@
         <div class="top-content">
             <h2 class="section-title">{% blocktrans %}  NEWS & INSIGHT {% endblocktrans %} </h2>
             <p class="section-desc">{% blocktrans %} Explore our blog expert advice, industry trends, and indepth articles to keep you ahead of the curve. {% endblocktrans %}</p>
-            <a href="" class="button-style">{% trans "All news" %} <i class="fa-solid fa-arrow-right-long"></i></a>
+            <a href="{% url 'news:news' %}" class="button-style">{% trans "All news" %} <i class="fa-solid fa-arrow-right-long"></i></a>
         </div>
         <div class="news-navigation">
             <div class="news-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
@@ -238,26 +232,18 @@
     </div>
     <div class="swiper newsSwiper">
         <div class="swiper-wrapper">
-            <a href="#" class="swiper-slide">
+            {% for news  in latest_news %}
+            <a href="{% url 'news:news_detail' slug=news.slug %}" class="swiper-slide">
                 <div class="slide-image">
-                    <img src="{% static '/images/swiper.jpg' %}" alt="News Image" loading="lazy"/>
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}" loading="lazy"/>
                     <span  class="button-style">{% trans "read more" %}<i class="fa-solid fa-arrow-right-long"></i></span>
                 </div>
                 <div class="slide-content">
-                    <h3>Maximum to Unveil Advanced Lubricants at INA PAACE Automechanika Mexico</h3>
-                    <p>We're excited to announce our participation in Mexico's leading automotive aftermarket show, where TOMOIL will showcase new high-performance lubricants and eco-friendly greases.</p>
+                    <h3>{{ news.title|linebreaksbr }}</h3>
+                    <p>{{ news.content|linebreaksbr }}</p>
                 </div>
             </a>
-            <a href="#" class="swiper-slide">
-                <div class="slide-image">
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
-                    <span  class="button-style">{% trans "read more" %}<i class="fa-solid fa-arrow-right-long"></i></span>
-                </div>
-                <div class="slide-content">
-                    <h3>Maximum to Unveil Advanced Lubricants at INA PAACE Automechanika Mexico</h3>
-                    <p>We're excited to announce our participation in Mexico's leading automotive aftermarket show, where TOMOIL will showcase new high-performance lubricants and eco-friendly greases.</p>
-                </div>
-            </a>         
+            {% endfor %}        
         </div>       
     </div>
 </section>
@@ -437,25 +423,15 @@
     </div>  
     <div class="faq-section">
         <div class="faq-container">
-            <a href="" class="faq-item">
-                <p>How do I know which Maximum product is right for my needs?</p>
+            {% for faq  in  home_faqs%}
+            <a href="{% url 'faq:faq' %}" class="faq-item">
+                <p>{{ faq.question}}</p>
                 <div><i class="fa-solid fa-arrow-right-long"></i></div>
             </a>
-            <a href="" class="faq-item">
-                <p>How do I know which Maximum product is right for my needs?</p>
-                <div><i class="fa-solid fa-arrow-right-long"></i></div>
-            </a>
-            <a href="" class="faq-item">
-                <p>How do I know which Maximum product is right for my needs?</p>
-                <div><i class="fa-solid fa-arrow-right-long"></i></div>
-            </a>
-            <a href="" class="faq-item">
-                <p>How do I know which Maximum product is right for my needs?</p>
-                <div><i class="fa-solid fa-arrow-right-long"></i></div>
-            </a>
+            {% endfor %}
         </div>
 
-        <a href="" class="button-style" id="openReviewModal">
+        <a href="{% url 'faq:faq' %}" class="button-style" id="openReviewModal">
                 {% blocktrans %} View more {% endblocktrans %} </a>
     </div>
 </section>
