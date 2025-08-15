@@ -1,19 +1,19 @@
 from django.contrib import admin
 from .models import FAQ
-from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
+from modeltranslation.admin import TranslationAdmin
 
 @admin.register(FAQ)
 class FAQAdmin(TranslationAdmin):
-    list_display = ('question', 'order', 'is_active', 'created_at', 'updated_at')
-    list_filter = ('is_active',)
+    list_display = ('question', 'order', 'is_active','in_home', 'created_at', 'updated_at')
+    list_filter = ('is_active','in_home',)
     search_fields = ('question', 'answer')
-    list_editable = ('order', 'is_active')
+    list_editable = ('order', 'is_active','in_home')
     fieldsets = (
         (None, {
             'fields': ('question', 'answer')
         }),
         ('Settings', {
-            'fields': ('order', 'is_active')
+            'fields': ('order', 'is_active','in_home')
         }),
     )
 

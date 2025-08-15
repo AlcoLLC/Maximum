@@ -1,23 +1,29 @@
 .brand-portal {
-  margin: 50px auto;
+  margin: 70px auto;
 }
 
 .brand-portal .brand-tab-components {
   margin: 50px auto;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   align-items: stretch;
   justify-content: left;
   gap: 20px;
 }
 
 .brand-portal .brand-tab-components .tab {
+  width: 100%;
   background-color: var(--main);
-  padding: 10px 30px;
+  padding: 10px;
   border-radius: 4px;
   font-weight: 500;
   font-size: 20px;
-  line-height: 25px;
+  line-height: 23px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   transition: all 0.3s ease;
 }
 .brand-portal .brand-tab-components .tab:hover {
@@ -46,11 +52,8 @@
   justify-content: center;
 }
 
-.brand-portal .section-desc {
-  margin: 50px auto;
-}
 .brand-portal .button-style.last {
-  margin-top: 150px;
+  margin-top: 120px;
 }
 
 .brand-portal .brand-components .item h2,
@@ -123,6 +126,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  margin: 50px auto;
 }
 
 .brand-portal .tab-image-library .item {
@@ -149,7 +153,262 @@
   position: absolute;
   top: 5px;
   right: 5px;
+  transition: all 0.3s ease;
 }
 .brand-portal .tab-image-library .item:hover {
   box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1);
+}
+.brand-portal .tab-image-library .item:hover div {
+  background-color: #ffffff86;
+}
+.tab-videos {
+  margin: 50px auto;
+}
+.brand-portal .brand-video-gallery {
+  margin: 50px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+.brand-portal .video-modal {
+  display: none;
+  position: fixed;
+  z-index: 99999999999999999999999999999999;
+  left: 0;
+  top: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+.brand-portal .brand-video-gallery .video-thumbnail {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+.brand-portal .brand-video-gallery .video-thumbnail img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+.brand-portal .brand-video-gallery .play-icon img,
+.video-container iframe,
+.video-modal {
+  width: 100%;
+  height: 100%;
+}
+.brand-portal .brand-video-gallery .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.5;
+}
+.brand-portal .brand-video-gallery .video-thumbnail:hover .play-icon {
+  opacity: 1;
+}
+.brand-portal .brand-video-gallery .video-thumbnail:hover .play-icon img {
+  transform: scale(1.2);
+}
+
+.modal-content {
+  position: relative;
+  margin: 15% auto;
+  width: 65%;
+  max-width: 900px;
+}
+.close-modal {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: #fff;
+  font-size: 35px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.brand-portal .modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.brand-portal .modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 900px;
+  position: relative;
+}
+.brand-portal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.brand-portal .tab-content {
+  display: none;
+}
+.brand-portal .tab-content.active {
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .brand-portal .brand-tab-components,
+  .brand-portal .brand-components,
+  .brand-portal .tab-brand-guideline,
+  .brand-portal .tab-image-library,
+  .brand-portal .brand-video-gallery {
+    margin: 40px auto;
+  }
+
+  .brand-portal .brand-tab-components .tab {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .brand-portal .tab-promo-materials div {
+    padding: 20px;
+  }
+
+  .brand-portal .tab-promo-materials div p {
+    padding-top: 15px;
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+@media (max-width: 1000px) {
+  .brand-portal .brand-tab-components .tab {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  .brand-portal .brand-components .item {
+    gap: 15px;
+  }
+  .brand-portal .brand-components .item h2,
+  .brand-portal .tab-brand-guideline div h2 {
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  .brand-portal .button-style.last {
+    margin-top: 100px;
+  }
+
+  .brand-portal .tab-brand-guideline img {
+    height: 280px;
+  }
+
+  .brand-portal .tab-promo-materials div p {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .brand-portal .tab-promo-materials div img {
+    height: 170px;
+  }
+
+  .brand-portal .tab-image-library .item img,
+  .brand-portal .brand-video-gallery .video-thumbnail img {
+    height: 220px;
+  }
+}
+@media (max-width: 800px) {
+  .brand-portal .brand-tab-components .tab {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .brand-portal .brand-tab-components,
+  .brand-portal .tab-promo-materials,
+  .brand-portal .tab-image-library {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 30px auto;
+  }
+
+  .brand-portal .tab-brand-guideline {
+    margin: 30px auto;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .brand-portal .brand-video-gallery {
+    margin: 30px auto;
+    grid-template-columns: 1fr;
+  }
+
+  .brand-portal .tab-brand-guideline img {
+    width: 100%;
+    height: 250px;
+  }
+
+  .brand-portal .tab-brand-guideline div {
+    width: 100%;
+    padding: 0;
+  }
+  .brand-portal .brand-components .item h2,
+  .brand-portal .tab-brand-guideline div h2 {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .brand-portal .button-style.last {
+    margin-top: 70px;
+  }
+}
+@media (max-width: 600px) {
+  .brand-portal .brand-components {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+    margin: 30px auto;
+  }
+  .brand-portal .brand-tab-components {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 30px auto;
+  }
+
+  .brand-portal .brand-components .item h2,
+  .brand-portal .tab-brand-guideline div h2 {
+    font-size: 20px;
+    line-height: 22px;
+  }
+
+  .brand-portal .button-style.last {
+    margin-top: 50px;
+  }
+
+  .brand-portal .tab-promo-materials div img {
+    height: 150px;
+  }
+
+  .brand-portal .tab-image-library .item img,
+  .brand-portal .brand-video-gallery .video-thumbnail img  {
+    height: 200px;
+  }
 }

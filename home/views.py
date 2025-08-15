@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import HomeSwiper, PartnerLogo, Review
-from product.models import Product_group, Product
+from .models import HomeSwiper, Review
+from product.models import Product_group
 from news.models import News
+from faq.models import FAQ
+from services.models import Services
 from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
@@ -17,13 +19,19 @@ def home_view(request):
     swiper_images = HomeSwiper.objects.filter(is_active=True).order_by('order')
     product_groups_sec1 = Product_group.objects.filter(in_home_sec1=True).order_by('order')  
     product_groups_sec2 = Product_group.objects.filter(in_home_sec2=True).order_by('order')  
-    latest_news = News.objects.filter(in_home=True)[:3]
+    latest_news = News.objects.filter(in_home=True)
+    home_faqs = FAQ.objects.filter(in_home=True)[:4]
+    services = Services.objects.all()
+
 
     context = { 
         'swiper_images': swiper_images,
         'product_groups_sec1': product_groups_sec1,
         'product_groups_sec2': product_groups_sec2,
         'latest_news': latest_news,
+        'home_faqs': home_faqs,
+        'services': services,
+
     } 
      
     return render(request, 'home.html', context)

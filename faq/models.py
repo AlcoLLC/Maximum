@@ -5,6 +5,7 @@ class FAQ(models.Model):
     answer = models.TextField()
     order = models.IntegerField(default=0, help_text="Order in which the FAQ should be displayed")
     is_active = models.BooleanField(default=True)
+    in_home = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

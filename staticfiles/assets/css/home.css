@@ -425,8 +425,8 @@
 
 .home-services .service-flex h2 {
   font-weight: 400;
-  font-size: 30px;
-  line-height: 34px;
+  font-size: 28px;
+  line-height: 30px;
   letter-spacing: 0px;
   margin-bottom: 15px;
 }
@@ -1225,13 +1225,13 @@
   justify-content: space-between;
   gap: 10px;
   transform: translateX(-4%);
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .testimonials .faq-container .faq-item {
   width: 25%;
   background-color: #fff;
-  padding: 22px;
+  padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -1319,7 +1319,7 @@
 
   .testimonials {
     padding: 50px 0;
-    height: 800px;
+    height: 850px;
   }
 
   .testimonials .faq-container {
@@ -1364,7 +1364,7 @@
   }
 
   .testimonials {
-    height: 700px;
+    height: 750px;
   }
 
   .testimonials .top-content.faq {
@@ -1382,9 +1382,6 @@
     transform: translateX(-12%);
   }
 
-  .testimonials {
-    height: 650px;
-  }
 }
 
 .review-modal-overlay {

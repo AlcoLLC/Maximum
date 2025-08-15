@@ -43,98 +43,104 @@
 
       <div class="brand-content">
             <div class="tab-content active">
-              <p class="section-desc">desc</p>
+              <p class="section-desc"> 
+                {% blocktrans %} We are building a strong international brand, and consistent application is essential: the proper use of the Maximum logo, fonts, and colors. On the Maximum Brand Portal, you will find our brand identity guidelines and relevant information for the correct and consistent application of our brand materials. There, you will also find downloads of various assets, including logos, photos, brochures. 
+                {% endblocktrans %}
+              </p>
               <div class="brand-components">
                 <div class="item">
                   <h2>{% trans 'Brand Guideline' %}</h2>
-                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <p>{{  guideline.short_content }}</p>
                   <button data-id="brand-guideline" class="button-style">{% trans 'Learn more' %}</button>
                 </div>
                 <div class="item">
                   <h2>{% trans 'Promo materials' %}</h2>
-                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <p>{{  promo_material.short_content }}</p>
                   <button data-id="promo-materials" class="button-style">{% trans 'Learn more' %}</button>
                 </div>
                 <div class="item">
                   <h2>{% trans 'Image library' %}</h2>
-                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <p>{{   image_library.short_content }}</p>
                   <button data-id="image-library" class="button-style">{% trans 'Learn more' %}</button>
                 </div>
                 <div class="item">
                   <h2>{% trans 'Videos' %}</h2>
-                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <p>{{  video_library.short_content }}</p>
                   <button data-id="videos" class="button-style">{% trans 'Learn more' %}</button>
                 </div>
               </div>
             </div>
             <!-- Brand Guideline Tab -->
             <div class="tab-content {% if active_tab == 'brand-guideline' %}active{% endif %}" id="brand-guideline">
-              <p class="section-desc">desc</p>
               <div class="tab-brand-guideline">
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>            
+                    <img src="{{ guideline.preview_image.url }}" 
+                        alt="{{ guideline.title }}" 
+                        loading="lazy"
+                        data-pdf-url="{{ guideline.document.url }}"/>            
                     <div>
-                      <h2>{% trans 'Brand Guideline' %}</h2>
-                      <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                      <h2>{{ guideline.title|linebreaksbr }}</h2>
+                      <p>{{ guideline.description|linebreaksbr }}</p>
                       <button class="button-style">{% trans 'Open PDF' %}</button>
                     </div>
               </div>
-           </div>
+            </div>
             <!-- Promo materialse Tab -->
             <div class="tab-content {% if active_tab == 'promo-materials' %}active{% endif %}" id="promo-materials">
-              <p class="section-desc">desc</p>
+              <p class="section-desc">{{promo_material.description}}</p>
               <div class="tab-promo-materials">
-                  <div>
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>  
+                {% for promo_material in promo_material.promo_materials.all %}
+                  <div data-pdf-url="{{ promo_material.document.url }}">
+                    <img src="{{ promo_material.preview_image.url}}" 
+                        alt="{{ promo_material.title }}" 
+                        loading="lazy"/>  
                     <button class="button-style">{% trans 'Open PDF' %}</button>
-                    <p>Automotive brochures</p>
+                    <p>{{promo_material.title|linebreaksbr}}</p>
                   </div>
-                  <div>
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
-                      <button class="button-style">{% trans 'Open PDF' %}</button>            
-                    <p>Automotive brochures</p>
-                  </div>
-                  <div>
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
-                      <button class="button-style">{% trans 'Open PDF' %}</button>            
-                    <p>Automotive brochures</p>
-                  </div>
-                  <div>
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
-                      <button class="button-style">{% trans 'Open PDF' %}</button>            
-                    <p>Automotive brochures</p>
-                  </div>
+                {% endfor %}
               </div>
-           </div>
-           <!-- Image Library Tab -->
+            </div>             
+            <!-- Image Library Tab -->
             <div class="tab-content {% if active_tab == 'image-library' %}active{% endif %}" id="image-library">
-              <p class="section-desc">desc</p>
+              <p class="section-desc">{{ image_library.description|linebreaksbr}}</p>
               <div class="tab-image-library">
-                  <div  class="item">
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>  
-                    <div>
-                      <i class="fa-solid fa-arrow-down-long"></i>
-                    </div>
-                  </div>
-                  <div  class="item">
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
-                    <div>
-                      <i class="fa-solid fa-arrow-down-long"></i>
-                    </div>
-                  </div>
-                  <div  class="item">
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
-                    <div>
-                      <i class="fa-solid fa-arrow-down-long"></i>
-                    </div>
-                  </div>
+                {% for  image_library in  image_library.images.all %}
                   <div class="item"> 
-                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                    <img src="{{ image_library.image.url }}" alt="{{image_library.short_content|truncatechars:20}}" loading="lazy"/>
                     <div>
                       <i class="fa-solid fa-arrow-down-long"></i>
                     </div>
                   </div>
+                {% endfor %} 
               </div>
            </div>
+
+            <div class="tab-content {% if active_tab == 'videos' %}active{% endif %}" id="videos">
+               <div class="tab-videos">
+                  <p class="section-desc">{{ video_library.description|linebreaksbr }}</p>
+                  <div class="brand-video-gallery">
+                      {% for video in video_library.videos.all %}
+                      <div class="video-thumbnail" data-video-url="{{ video.video_url }}">
+                          {% comment %} {% if video.thumbnail %} {% endcomment %}
+                          <img loading="lazy" src="{{ video.thumbnail.url }}" 
+                          alt="Video title ">
+                          {% comment %} {% endif %} {% endcomment %}
+                          <div class="play-icon">
+                            <i class="fa-solid fa-play"></i>
+                          </div>
+                      </div>
+                      {% endfor %}
+                  </div>
+
+                  <div id="videoModal" class="video-modal">
+                      <div class="modal-content">
+                          <span class="close-modal">&times;</span>
+                          <div class="video-container">
+                              <iframe id="videoFrame" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+                          </div>
+                      </div>
+                  </div>
+               </div>
+            </div>
 
       </div>
       <a href="" class="button-style last">{% trans "Any questions? Please contact us." %}</a>
@@ -143,4 +149,5 @@
 {% endblock %} 
 
 {%block page_js %}
+    <script src="{% static 'assets/js/brand.js' %}" defer></script>
 {% endblock %} 
