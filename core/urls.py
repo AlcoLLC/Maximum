@@ -51,9 +51,9 @@ urlpatterns += i18n_patterns(
     path('', include('about.urls')),
     path('', include('partnership.urls')),
     path('', include('faq.urls')),
+    path('', include('news.urls')),
+    path('', include('brands.urls')),
     path('', include('contact.urls')),
-    # path('', include('news.urls')),
-    # path('', include('brands.urls')),
     # path('', include('search.urls')),
     prefix_default_language=False
     )

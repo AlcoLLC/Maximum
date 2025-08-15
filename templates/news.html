@@ -6,6 +6,7 @@
 
 
 {%block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/news.css' %}" />
 {% endblock %} 
 
 {% block extra_schema %}
@@ -15,10 +16,58 @@
 {% endblock %} 
 
 {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "News" %}</p>
+  </div>
+</div>
+
+<section class="top-news container">
+    <img loading="lazy" src="{{ top_news.image.url }}" alt="{{ top_news.title }}">
+    <div>
+        <span>{{ top_news.published_date|date:"d M Y" }}</span>
+        <h1>{{ top_news.title|linebreaksbr }}</h1>
+        <p>{{ top_news.content|truncatechars:200 }}</p>
+        <a href="{% url 'news:news_detail' slug=top_news.slug %}" class="button-style" aria-label="{{ news.title }}">{% trans "Learn more" %}</a>
+    </div>
+</section>
+
+<section class="all-news container" id="news-container">
+  {% for news in all_news  %}
+    <a href="{% url 'news:news_detail' slug=news.slug %}" aria-label="{{ news.title }}" 
+       class="news-item {% if forloop.counter0 >= 9 %}hidden-item{% endif %}"
+       data-index="{{ forloop.counter0 }}">
+          <img loading="lazy" src="{{ news.image.url }}" alt="{{ news.title }}">
+          <div class="content">
+            <h2>{{ news.title|linebreaksbr }}</h2>
+            <p>{{ news.content|truncatechars:130 }}</p>
+            <div>
+                <span>{{ news.published_date|date:"d M Y" }}</span>
+                <p >{% trans "Learn more" %}</p>
+            </div>
+          </div>
+    </a>
+   {% endfor  %}
+</section>
+
+<div class="pagination container">
+    <p id="pagination-info">
+      <span id="shown-count">9</span> {% trans 'of' %} 
+      <span id="total-count">{{ all_news|length }}</span>
+      {% trans 'results' %}
+    </p>
+    <button class="button-style" id="load-more-btn">
+         {% trans 'Load more' %}
+    </button>
+</div>
 
 {% endblock %} 
 
 
-
 {%block page_js %}
+    <script src="{% static 'assets/js/news.js' %}" defer></script>
 {% endblock %} 

@@ -96,7 +96,7 @@ body {
 }
 
 .button-style:hover {
-  background-color: #ffb60a;
+  background-color: #ffb60ad3;
   transform: translateY(-1px);
 }
 @media (max-width: 1200px) {
