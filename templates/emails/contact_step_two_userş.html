@@ -1,0 +1,272 @@
+<!-- emails/contact_step_two_admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Contact Form Submission</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px 8px 0 0;
+      }
+      .content {
+        background: white;
+        padding: 20px;
+        border: 1px solid #ddd;
+      }
+      .footer {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 0 0 8px 8px;
+      }
+      .field-group {
+        margin-bottom: 15px;
+      }
+      .field-label {
+        font-weight: bold;
+        color: #555;
+      }
+      .field-value {
+        margin-top: 5px;
+        padding: 8px;
+        background: #f8f9fa;
+        border-radius: 4px;
+      }
+      .highlight {
+        background: #e3f2fd;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 style="color: #1976d2; margin: 0">New Contact Form Submission</h1>
+        <p style="margin: 10px 0 0 0; color: #666">
+          Received on {{ contact.created_at|date:"F j, Y \a\t g:i A" }}
+        </p>
+      </div>
+
+      <div class="content">
+        <div class="highlight">
+          <strong>{{ contact.first_name }} {{ contact.last_name }}</strong>
+          submitted a contact form.
+        </div>
+
+        <div class="field-group">
+          <div class="field-label">Contact Information:</div>
+          <div class="field-value">
+            <strong>Name:</strong> {{ contact.first_name }} {{ contact.last_name
+            }}<br />
+            <strong>Email:</strong>
+            <a href="mailto:{{ contact.email }}">{{ contact.email }}</a><br />
+            {% if contact.phone %}
+            <strong>Phone:</strong>
+            <a href="tel:{{ contact.phone }}">{{ contact.phone }}</a><br />
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label">Business Information:</div>
+          <div class="field-value">
+            {% if contact.company %}
+            <strong>Company:</strong> {{ contact.company }}<br />
+            {% endif %} {% if contact.region %}
+            <strong>Region:</strong> {{ contact.region }}<br />
+            {% endif %} {% if contact.country %}
+            <strong>Country:</strong> {{ contact.country }}<br />
+            {% endif %} {% if contact.role %}
+            <strong>Role:</strong> {{ role_display }}<br />
+            {% endif %} {% if contact.annual_volume %}
+            <strong>Annual Volume:</strong> {{ contact.annual_volume }}<br />
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label">Inquiry Details:</div>
+          <div class="field-value">
+            {% if contact.question_type %}
+            <strong>Question Type:</strong> {{ question_type_display }}<br />
+            {% endif %} {% if contact.message %}
+            <strong>Message:</strong><br />
+            <div
+              style="
+                margin-top: 10px;
+                padding: 10px;
+                background: white;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+              "
+            >
+              {{ contact.message|linebreaks }}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label">Technical Information:</div>
+          <div class="field-value">
+            <strong>IP Address:</strong> {{ contact.ip_address }}<br />
+            <strong>Privacy Consent:</strong> {{
+            contact.privacy_consent|yesno:"Yes,No" }}<br />
+            <strong>Submission Time:</strong> {{ contact.created_at|date:"F j, Y
+            \a\t g:i A T" }}
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p style="margin: 0; color: #666; font-size: 14px">
+          This email was automatically generated from the Tomoil contact form.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- emails/contact_step_two_user.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thank You for Contacting Tomoil</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .header {
+        background: #1976d2;
+        color: white;
+        padding: 30px;
+        border-radius: 8px 8px 0 0;
+        text-align: center;
+      }
+      .content {
+        background: white;
+        padding: 30px;
+        border: 1px solid #ddd;
+      }
+      .footer {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 0 0 8px 8px;
+        text-align: center;
+      }
+      .logo {
+        max-width: 200px;
+        margin-bottom: 20px;
+      }
+      .highlight {
+        background: #e8f5e8;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 20px 0;
+        border-left: 4px solid #4caf50;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 style="margin: 0">Thank You!</h1>
+        <p style="margin: 10px 0 0 0; opacity: 0.9">
+          We've received your message
+        </p>
+      </div>
+
+      <div class="content">
+        <p>Dear {{ contact.first_name }} {{ contact.last_name }},</p>
+
+        <p>
+          Thank you for contacting Tomoil. We have successfully received your
+          inquiry and appreciate you taking the time to reach out to us.
+        </p>
+
+        <div class="highlight">
+          <strong>What happens next?</strong><br />
+          Our team will review your message and get back to you within 1-2
+          business days. We'll contact you using the information you provided.
+        </div>
+
+        <p><strong>Your submission details:</strong></p>
+        <ul>
+          <li>
+            <strong>Name:</strong> {{ contact.first_name }} {{ contact.last_name
+            }}
+          </li>
+          <li><strong>Email:</strong> {{ contact.email }}</li>
+          {% if contact.company %}
+          <li><strong>Company:</strong> {{ contact.company }}</li>
+          {% endif %} {% if contact.question_type %}
+          <li>
+            <strong>Question Type:</strong> {{ contact.get_question_type_display
+            }}
+          </li>
+          {% endif %}
+          <li>
+            <strong>Submitted:</strong> {{ contact.created_at|date:"F j, Y \a\t
+            g:i A" }}
+          </li>
+        </ul>
+
+        {% if contact.message %}
+        <p><strong>Your Message:</strong></p>
+        <div
+          style="
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #1976d2;
+          "
+        >
+          {{ contact.message|linebreaks }}
+        </div>
+        {% endif %}
+
+        <p>
+          If you have any urgent questions or need immediate assistance, please
+          don't hesitate to contact us directly.
+        </p>
+
+        <p>
+          Best regards,<br />
+          <strong>The Tomoil Team</strong>
+        </p>
+      </div>
+
+      <div class="footer">
+        <p style="margin: 0; color: #666; font-size: 14px">
+          <strong>Tomoil</strong><br />
+          Email: info@tomoil.de<br />
+          Website:
+          <a href="https://tomoil.de" style="color: #1976d2">tomoil.de</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,24 +1,160 @@
-{% extends 'base.html' %} {% load static %} {% load i18n %} 
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%}{%
+trans "meta_title_contact" %}{% endblock %} {% block description %}{%trans
+"meta_description_contact" %}{%endblock %} {% block keywords %}{%trans
+"meta_keywords_contact" %}{%endblock %} {%block page_css %}
 
-{% block title%}{% trans "meta_title_contact" %}{% endblock %} 
-{% block description %}{%trans "meta_description_contact" %}{%endblock %} 
-{% block keywords %}{%trans "meta_keywords_contact" %}{%endblock %}
+<link rel="stylesheet" href="{% static 'assets/css/contact.css' %}" />
 
+{% endblock %} {% block extra_schema %}
+<script></script>
+{% endblock %} {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img
+        loading="lazy"
+        src="{% static '/images/home-page.svg' %}"
+        alt="Home page icon"
+      />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "Contact us" %}</p>
+  </div>
+</div>
 
-{%block page_css %}
-{% endblock %} 
+<header class="page-header container">
+  <div class="customer-types">
+    <div class="customer-card">
+      <h1>I'm a consumer or garagist</h1>
+      <p>
+        Your local distributor will be happy to help with any questions you
+        might have.
+      </p>
+      <div class="button-group">
+        <a href="#" class="card-button-style">Find a sales point</a>
+        <a href="#" class="card-button-style-black">Contact us</a>
+      </div>
+    </div>
 
-{% block extra_schema %}
-<script>
+    <div class="bgwhite"></div>
 
-</script>
-{% endblock %} 
+    <div class="customer-card-bgwhite">
+      <h1>Are you a retailer?</h1>
+      <p>
+        We would love to understand your needs! Get in touch with us and our
+        team will get back to you!
+      </p>
+      <div class="button-group">
+        <a href="#" class="card-button-style">Contact us</a>
+      </div>
+    </div>
+  </div>
+</header>
 
-{% block content %}
+<div class="bg-white contact-page">
+  <div class="container">
+    <div class="find-us-section">
+      <div class="top-content">
+        <h2 class="section-title">Where to Find Us</h2>
+      </div>
+      <div class="locations-grid">
+        <div class="location-card">
+          <h3>Maximum Oil Corporation</h3>
+          <div class="location-info">
+            <p>Headquarters Leopoldstrasse 244, 80807 München, Deutschland</p>
+          </div>
+          <div class="contact-info">
+            <i class="fa-solid fa-location-arrow"></i>
+            <div>
+              <a href="#" class="underline">Get directions</a>
+              <a href="tel:+494971146616222">Call: (+49) 771 146 66 - 222</a>
+            </div>
+          </div>
+          <div class="contact-info">
+            <i class="fa-solid fa-location-arrow"></i>
+            <div>
+              <a href="mailto:info@maximumoiltube.com">
+                Send email to:
+                <span class="underline">info@maximumoiltube.com</span></a
+              >
+            </div>
+          </div>
+        </div>
 
-{% endblock %} 
+        <div class="location-card">
+          <h3>Sinova Group AG</h3>
+          <div class="location-info">
+            <p>Headquarters Rue du Grand-Pré 11, 1003 Lausanne, Switzerland</p>
+          </div>
+          <div class="contact-info">
+            <i class="fa-solid fa-location-arrow"></i>
+            <div>
+              <a href="#" class="underline"> Get directions</a>
+              <a href="tel:+41214431028">Call: (+41) 21 443 10 28</a>
+            </div>
+          </div>
+          <div class="contact-info">
+            <i class="fa-solid fa-location-arrow"></i>
+            <div>
+              <a href="mailto:info@sinovagroup.ch"
+                >Send email to:
+                <span class="underline">info@sinovagroup.ch</span></a
+              >
+            </div>
+          </div>
+        </div>
 
+        <div class="location-card">
+          <h3>Technical Contact</h3>
+          <div class="location-info">
+            <p>
+              Reach out to us for any technical or product-related questions you
+              have.
+            </p>
+          </div>
+          <div class="contact-info-last">
+            <i class="fa-solid fa-location-arrow"></i>
+            <div>
+              <a href="tel:+499612348769">Call: (+99) 12 345 67 89</a>
+              <a href="mailto:info@yagli.com">
+                Send email to: <span class="underline">info@yagli.com</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="container contact-map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194249.92554199768!2d49.62926563758869!3d40.47183390709246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40307d277a2e85cd%3A0xd89a5cf24b320ca7!2sALCO%20LLC!5e0!3m2!1sen!2saz!4v1755161287199!5m2!1sen!2saz"
+      width="100%"
+      height="500"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
 
-{%block page_js %}
-{% endblock %} 
+  <div class="container">
+    <div class="social-section">
+      <h2 class="section-title">Follow Us On Social Media</h2>
+      <div class="social-icons">
+        <a href="#" class="social-icon"
+          ><img src="{% static 'images/youtube.svg' %}" alt="YouTube"
+        /></a>
+        <a href="#" class="social-icon"
+          ><img src="{% static 'images/linkedin.svg' %}" alt="YouTube"
+        /></a>
+        <a href="#" class="social-icon"
+          ><img src="{% static 'images/instagram.svg' %}" alt="YouTube"
+        /></a>
+      </div>
+    </div>
+  </div>
+  {% include 'components/contact_section.html' %}
+</div>
+
+{% endblock %} {%block page_js %} {% endblock %}

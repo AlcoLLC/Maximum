@@ -1,0 +1,200 @@
+.contact-step-two {
+  background-color: white;
+  padding: 30px;
+  box-shadow: 0px 4px 8.7px 0px #00000014;
+  margin: 40px 0 80px 0;
+}
+
+.breadcrumb.bg-gray {
+  background-color: #f3f3f5;
+}
+
+.contact-two-step-section {
+  padding: 40px 0;
+}
+
+.contact-step-two h1 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 20px;
+  leading-trim: NONE;
+  line-height: 30.04px;
+  letter-spacing: 0px;
+  color: #1c1c1c;
+}
+
+.contact-step-two .subtitle {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 18px;
+  leading-trim: NONE;
+  line-height: 30.04px;
+  letter-spacing: 0px;
+  color: #1c1c1c;
+  margin: 12px 0;
+}
+
+.contact-step-two .form-group {
+  margin-bottom: 20px;
+}
+
+.contact-step-two label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 17px;
+  leading-trim: NONE;
+  line-height: 30.04px;
+  letter-spacing: 0px;
+  text-transform: uppercase;
+}
+
+.contact-step-two input[type="text"],
+.contact-step-two input[type="email"],
+.contact-step-two input[type="tel"],
+.contact-step-two select,
+.contact-step-two textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #f2f2f3;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #f2f2f3;
+  transition: border-color 0.3s, background-color 0.3s;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 17px;
+}
+
+.contact-step-two input[type="text"]:focus,
+.contact-step-two input[type="email"]:focus,
+.contact-step-two input[type="tel"]:focus,
+.contact-step-two select:focus,
+.contact-step-two textarea:focus {
+  outline: none;
+  border: 1px solid #6b6b6e;
+}
+
+.contact-step-two select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.contact-step-two textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 17px;
+}
+
+.contact-step-two .checkbox-container {
+  margin: 30px 0;
+}
+.contact-step-two select option {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 17px;
+}
+
+.contact-step-two .checkbox-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.contact-step-two input[type="checkbox"] {
+  margin-bottom: 5px;
+  background: #d9d9d9;
+  color: #d9d9d9;
+}
+
+.contact-step-two input[type="checkbox"]:checked {
+  background: #d9d9d9;
+  color: #d9d9d9;
+}
+
+.contact-step-two .checkbox-label {
+  color: #666;
+  text-transform: none;
+  font-weight: normal;
+  letter-spacing: normal;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 16px;
+  leading-trim: NONE;
+  line-height: 26px;
+  letter-spacing: 0px;
+  color: #000000;
+  margin: 0 !important;
+}
+
+.contact-step-two .checkbox-label a {
+  text-decoration: none;
+  color: #000;
+}
+
+.contact-step-two .checkbox-label a:hover {
+  text-decoration: underline;
+}
+
+.contact-step-two .submit-btn {
+  text-transform: capitalize;
+  text-align: center;
+  background-color: var(--main);
+  padding: 5px 30px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 16px;
+  white-space: nowrap;
+  leading-trim: NONE;
+  letter-spacing: 0px;
+  text-align: center;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  line-height: 30px;
+}
+
+.contact-step-two .submit-btn:hover {
+  background-color: #e9a403;
+}
+
+.contact-step-two .required {
+  color: #e74c3c;
+}
+
+@media (max-width: 768px) {
+  .contact-step-two .form-container {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .contact-step-two h2 {
+    font-size: 18px;
+  }
+}
