@@ -15,6 +15,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from decouple import config
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
@@ -64,6 +65,7 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware', 
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -237,44 +239,72 @@ CKEDITOR_5_CONFIGS = {
 
 CKEDITOR5_UPLOAD_PATH = "uploads/ckeditor5/"
 
+import logging
+
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
-EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
-RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY')
-RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')
+CONTACT_EMAIL = config('CONTACT_EMAIL', default=EMAIL_HOST_USER)
+SERVER_EMAIL = 'aytacmehdizade08@gmail.com'
+
+EMAIL_TIMEOUT = 30
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'debug.log',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'contact.views': {  # Your app logger
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
+
+# RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY')
+# RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')
 
 
 CONTACT_FORM_SETTINGS = {
     'IP_SUBMISSION_LIMIT': 1,  
     'IP_BLOCK_THRESHOLD': 3,   
     'RESET_PERIOD_HOURS': 24,  
-}
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': 'contact_form.log',
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'yourapp.views': { 
-            'handlers': ['file', 'console'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
 }
