@@ -1,0 +1,130 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%}{%
+trans "meta_title_contact" %}{% endblock %} {% block description %}{%trans
+"meta_description_contact" %}{%endblock %} {% block keywords %}{%trans
+"meta_keywords_contact" %}{%endblock %} {%block page_css %}
+
+<link rel="stylesheet" href="{% static 'assets/css/contact_step_two.css' %}" />
+
+{% endblock %} {% block extra_schema %}
+<script></script>
+{% endblock %} {% block content %}
+
+<div class="breadcrumb bg-gray">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img
+        loading="lazy"
+        src="{% static '/images/home-page.svg' %}"
+        alt="Home page icon"
+      />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "Contact us" %}</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="contact-step-two">
+    <h1>How can we help you?</h1>
+    <p class="subtitle">
+      Please fill in the form below so we can help you in the most efficient
+      way.
+    </p>
+
+    <form id="contactForm">
+      <div class="form-group">
+        <label for="firstName">FIRST NAME</label>
+        <input type="text" id="firstName" name="firstName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">LAST NAME</label>
+        <input type="text" id="lastName" name="lastName" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">EMAIL</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">MOBILE PHONE</label>
+        <input type="tel" id="phone" name="phone" />
+      </div>
+
+      <div class="form-group">
+        <label for="company">COMPANY</label>
+        <input type="text" id="company" name="company" />
+      </div>
+
+      <div class="form-group">
+        <label for="region">REGION</label>
+        <input type="text" id="region" name="region" />
+      </div>
+
+      <div class="form-group">
+        <label for="country">COUNTRY</label>
+        <input type="text" id="country" name="country" />
+      </div>
+
+      <div class="form-group">
+        <label for="role">I AM</label>
+        <select id="role" name="role">
+          <option value="">Please select...</option>
+          <option value="business-buyer">
+            Business Buyer / Company Representative
+          </option>
+          <option value="distributor">Distributor / Dealer</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="volume">ANNUAL VOLUME</label>
+        <input type="text" id="volume" name="volume" />
+      </div>
+
+      <div class="form-group">
+        <label for="questionType">TYPE OF QUESTION</label>
+        <select id="questionType" name="questionType">
+          <option value="">Please select...</option>
+          <option value="product-info">
+            Product Information / Technical Support
+          </option>
+          <option value="support">Technical Support</option>
+          <option value="pricing">Pricing & Orders</option>
+          <option value="partnership">Partnership Inquiry</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">HOW CAN WE HELP YOU?</label>
+        <textarea
+          id="message"
+          name="message"
+          placeholder="Please describe your question or request..."
+        ></textarea>
+      </div>
+
+      <div class="checkbox-container">
+        <div class="checkbox-wrapper">
+          <input type="checkbox" id="privacy" name="privacy" required />
+          <label for="privacy" class="checkbox-label">
+            Privacy Policy <span class="required">*</span><br />
+            By checking this box, I agree to
+            <a href="#" target="_blank">privacy policy</a>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+  </div>
+</div>
+
+<div class="bg-white contact-two-step-section">
+  {% include 'components/contact_section.html' %}
+</div>
+
+{% endblock %} {%block page_js %} {% endblock %}

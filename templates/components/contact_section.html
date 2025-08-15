@@ -1,5 +1,4 @@
-{% load static %}
-{% load i18n %}
+{% load static %} {% load i18n %}
 
 <section class="container about-section-contact">
   <div class="contact-text">
@@ -7,6 +6,8 @@
       Interested in <br />
       working with us?
     </p>
-    <a href="" class="button-style">{% trans "Contact us" %}</a>
+    <a href="{% url 'contact:contact_step_two'%}" class="button-style"
+      >{% trans "Contact us" %}</a
+    >
   </div>
 </section>

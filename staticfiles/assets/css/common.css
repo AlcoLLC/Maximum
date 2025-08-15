@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 .about-section-contact {
   background-image: url("../../images/contact.svg");
   background-position: center;
@@ -74,14 +76,14 @@
     background-size: contain;
     background-position: bottom center;
     padding-top: 40px;
-    padding-bottom: 350px; /* Space for the image */
+    padding-bottom: 350px;
   }
 
   .about-section-contact .contact-text {
     padding: 0 20px;
     text-align: center;
     width: 100%;
-    order: 1; /* Text appears first */
+    order: 1;
   }
 
   .about-section-contact div {
@@ -93,13 +95,27 @@
 
   .about-section-contact p {
     font-size: 32px;
-    line-height: 38px;
+    line-height: 36px;
     margin-bottom: 20px;
   }
 
   .about-section-contact a {
     align-self: center;
-    width: auto;
+    width: 26vh;
+    height: 7vh;
     min-width: 150px;
+    margin-top: 5px;
   }
+}
+
+@media (max-width: 410px) {
+  .about-section-contact {
+    padding-bottom: 315px;
+  }
+}
+
+.bg-white {
+  background-color: #ffffff;
+  width: 100%;
+  margin-top: 50px;
 }
