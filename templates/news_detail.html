@@ -1,11 +1,12 @@
 {% extends 'base.html' %} {% load static %} {% load i18n %} 
 
-{% block title%}{% trans "meta_title_news_detail" %}{% endblock %} 
-{% block description %}{%trans "meta_description_news_detail" %}{%endblock %} 
+{% block title%}{{ news.title }}{% endblock %} 
+{% block description %}{{ news.content|truncatechars:155 }}{%endblock %} 
 {% block keywords %}{%trans "meta_keywords_news" %}{%endblock %}
 
 
 {%block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/news.css' %}" />
 {% endblock %} 
 
 {% block extra_schema %}
@@ -15,6 +16,38 @@
 {% endblock %} 
 
 {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <a href="{% url 'news:news' %}" aria-label="News Page">
+        {% trans "News" %}
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{{ news.title }}</p>
+  </div>
+</div>
+
+<section class="news-detail container">
+    <h1 >{{ news.title|linebreaksbr }}</h1>
+    <p>{{ news.content|linebreaksbr }}</p>
+    <span>{{ news.published_date|date:"d M Y" }}</span>
+    <img loading="lazy" src="{{ news.image.url }}" alt="{{ news.title }}">
+
+    {% for content in contents  %}
+        <div>
+            {% if content.description  %}
+                <p>{{ content.description|linebreaksbr }}</p>
+            {% endif %}
+            {% if content.image %}
+                <img loading="lazy" src="{{ content.image.url }}" alt="{{ news.title }}">
+            {% endif %}
+        </div>
+    {% endfor %} 
+  
+</section>
 
 {% endblock %} 
 

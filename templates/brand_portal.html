@@ -6,6 +6,7 @@
 
 
 {%block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/brand.css' %}" />
 {% endblock %} 
 
 {% block extra_schema %}
@@ -15,10 +16,131 @@
 {% endblock %} 
 
 {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p> {% trans "Brand portal" %}</p>
+  </div>
+</div>
+
+
+<section class="brand-portal container">
+    <h1 class="section-title">{% trans "ALL TOOLS FOR THE MAXIMUM BRAND" %}</h1>
+    <div class="brand-tab-components">
+         <div class="tab {% if active_tab == 'brand-guideline' %}active{% endif %}" data-tab="brand-guideline">
+             {% trans 'Brand Guideline' %}</div>
+         <div class="tab {% if active_tab == 'promo-materials' %}active{% endif %}" data-tab="promo-materials">
+             {% trans 'Promo materials' %}</div>
+         <div class="tab {% if active_tab == 'image-library' %}active{% endif %}" data-tab="image-library">
+             {% trans 'Image library' %}</div>
+         <div class="tab {% if active_tab == 'videos' %}active{% endif %}" data-tab="videos">
+            {% trans 'Videos' %}
+         </div>
+    </div>
+
+      <div class="brand-content">
+            <div class="tab-content active">
+              <p class="section-desc">desc</p>
+              <div class="brand-components">
+                <div class="item">
+                  <h2>{% trans 'Brand Guideline' %}</h2>
+                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <button data-id="brand-guideline" class="button-style">{% trans 'Learn more' %}</button>
+                </div>
+                <div class="item">
+                  <h2>{% trans 'Promo materials' %}</h2>
+                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <button data-id="promo-materials" class="button-style">{% trans 'Learn more' %}</button>
+                </div>
+                <div class="item">
+                  <h2>{% trans 'Image library' %}</h2>
+                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <button data-id="image-library" class="button-style">{% trans 'Learn more' %}</button>
+                </div>
+                <div class="item">
+                  <h2>{% trans 'Videos' %}</h2>
+                  <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                  <button data-id="videos" class="button-style">{% trans 'Learn more' %}</button>
+                </div>
+              </div>
+            </div>
+            <!-- Brand Guideline Tab -->
+            <div class="tab-content {% if active_tab == 'brand-guideline' %}active{% endif %}" id="brand-guideline">
+              <p class="section-desc">desc</p>
+              <div class="tab-brand-guideline">
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>            
+                    <div>
+                      <h2>{% trans 'Brand Guideline' %}</h2>
+                      <p>Our brand identity including downloads of all Maximum logo variations and guidelines</p>
+                      <button class="button-style">{% trans 'Open PDF' %}</button>
+                    </div>
+              </div>
+           </div>
+            <!-- Promo materialse Tab -->
+            <div class="tab-content {% if active_tab == 'promo-materials' %}active{% endif %}" id="promo-materials">
+              <p class="section-desc">desc</p>
+              <div class="tab-promo-materials">
+                  <div>
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>  
+                    <button class="button-style">{% trans 'Open PDF' %}</button>
+                    <p>Automotive brochures</p>
+                  </div>
+                  <div>
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                      <button class="button-style">{% trans 'Open PDF' %}</button>            
+                    <p>Automotive brochures</p>
+                  </div>
+                  <div>
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                      <button class="button-style">{% trans 'Open PDF' %}</button>            
+                    <p>Automotive brochures</p>
+                  </div>
+                  <div>
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                      <button class="button-style">{% trans 'Open PDF' %}</button>            
+                    <p>Automotive brochures</p>
+                  </div>
+              </div>
+           </div>
+           <!-- Image Library Tab -->
+            <div class="tab-content {% if active_tab == 'image-library' %}active{% endif %}" id="image-library">
+              <p class="section-desc">desc</p>
+              <div class="tab-image-library">
+                  <div  class="item">
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>  
+                    <div>
+                      <i class="fa-solid fa-arrow-down-long"></i>
+                    </div>
+                  </div>
+                  <div  class="item">
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                    <div>
+                      <i class="fa-solid fa-arrow-down-long"></i>
+                    </div>
+                  </div>
+                  <div  class="item">
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                    <div>
+                      <i class="fa-solid fa-arrow-down-long"></i>
+                    </div>
+                  </div>
+                  <div class="item"> 
+                    <img src="{% static '/images/swiper2.png' %}" alt="News Image" loading="lazy"/>
+                    <div>
+                      <i class="fa-solid fa-arrow-down-long"></i>
+                    </div>
+                  </div>
+              </div>
+           </div>
+
+      </div>
+      <a href="" class="button-style last">{% trans "Any questions? Please contact us." %}</a>
+</section>
 
 {% endblock %} 
-
-
 
 {%block page_js %}
 {% endblock %} 

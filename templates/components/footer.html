@@ -13,7 +13,7 @@
           <ul>
               <li>
                 <div>
-                  <a href="" aria-label="About Page">{% trans "About Us" %}</a>
+                  <a href="{% url 'about:about' %}" aria-label="About Page">{% trans "About Us" %}</a>
                   <a href="{% url 'product:products' %}" aria-label="Products Page">{% trans "Products" %}</a>
                 </div>
                 <div>
@@ -23,19 +23,19 @@
               </li>
               <li>
                 <div>
-                  <a href="" aria-label="News Page">{% trans "News" %}</a>
-                  <a href="" aria-label="Faq Page">{% trans "FAQ" %}</a>
+                  <a href="{% url 'news:news' %}" aria-label="News Page">{% trans "News" %}</a>
+                  <a href="{% url 'faq:faq' %}" aria-label="Faq Page">{% trans "FAQ" %}</a>
                 </div>          
                 <div>
-                  <a href="" aria-label="Partnership Page">{% trans "Partnership" %}</a>
+                  <a href="{% url 'partnership:partnership' %}" aria-label="Partnership Page">{% trans "Partnership" %}</a>
                   <a href="" aria-label="Contact Page">{% trans "Contact" %}</a>
                 </div>
               </li>
-
           </ul>
           <button id="scrollToTop" aria-label="Scroll to top"><i class="fa-solid fa-chevron-up"></i></button>
       </div>
     </div>
+
     <div class="footer-contact">
       <div>
         <p>{% trans "Leopoldstrasse 244, 80807 München, Germany" %}</p>
