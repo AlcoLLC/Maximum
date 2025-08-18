@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from .models import ContactStepTwo
+from .models import ContactStepTwo, ContactInfo
 
 
 @admin.register(ContactStepTwo)
@@ -93,3 +93,16 @@ class ContactStepTwoAdmin(admin.ModelAdmin):
         css = {
             'all': ('admin/css/contact_admin.css',)
         }
+
+from modeltranslation.admin import TranslationAdmin
+
+class ContactInfoAdmin(TranslationAdmin):
+    list_display = ('title', 'phone', 'email')
+    search_fields = ('title', 'description', 'phone', 'email')
+
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= 3:
+            return False
+        return super().has_add_permission(request)
+
+admin.site.register(ContactInfo, ContactInfoAdmin)

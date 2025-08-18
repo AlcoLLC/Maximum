@@ -1,14 +1,15 @@
 from django.contrib import admin
+from modeltranslation.admin import TranslationAdmin
 from .models import About, AboutContent, AboutSection, GlobalPresence, Sustainability, PartnershipContent
 
-class SingleInstanceAdmin(admin.ModelAdmin):
+class SingleInstanceAdmin(TranslationAdmin):
     def has_add_permission(self, request):
         if self.model.objects.exists():
             return False
         return True
 
 
-class AboutContentAdmin(admin.ModelAdmin):
+class AboutContentAdmin(TranslationAdmin):
     list_display = ('section_title', 'about')
     search_fields = ('section_title', 'section_content')
     list_filter = ('about',)

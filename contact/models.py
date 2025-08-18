@@ -34,7 +34,6 @@ class ContactStepTwo(models.Model):
     privacy_consent = models.BooleanField(default=False, verbose_name=_('Privacy Policy Consent'))
     ip_address = models.GenericIPAddressField(verbose_name=_('IP Address'), null=True, blank=True)
     
-    # DƏYİŞİKLİK: auto_now_add=True istifadə etmək daha doğrudur.
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Created At'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Updated At'))
 
@@ -50,3 +49,17 @@ class ContactStepTwo(models.Model):
             models.Index(fields=['created_at']),
             models.Index(fields=['email']),
         ]
+
+class ContactInfo(models.Model):
+    title = models.CharField(max_length=200, verbose_name=_('Title'))
+    description = models.TextField(verbose_name=_('Description'), blank=True, null=True)
+    phone = models.CharField(max_length=20, verbose_name=_('Phone'))
+    email = models.EmailField(verbose_name=_('Email'))
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _('Contact Information')
+        verbose_name_plural = _('Contact Information Entries')
+        ordering = ['title']
