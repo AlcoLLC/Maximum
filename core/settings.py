@@ -31,8 +31,19 @@ SECRET_KEY = 'django-insecure-jk1k4j+@9z4e(o8+n*gddg4b5ft4$!_tm%b6wtcag7%*%pa+7c
 DEBUG = os.getenv('DEBUG', 'true').strip().lower() in ['true', '1', 'yes']
 if DEBUG:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    CORS_ALLOWED_ORIGINS = [
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+    ]
+    CSRF_TRUSTED_ORIGINS = [
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+    ]
 else:
-    ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+    ALLOWED_HOSTS = [x.strip() for x in os.getenv('ALLOWED_HOSTS', '').split(',')]
+    CORS_ALLOWED_ORIGINS = [x.strip() for x in os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')]
+    CSRF_TRUSTED_ORIGINS = [x.strip() for x in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')]
+
 
 # Application definition
 
@@ -124,19 +135,6 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-
-if DEBUG:
-    CORS_ALLOWED_ORIGINS = [
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-    ]
-    CSRF_TRUSTED_ORIGINS = [
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-    ]
-else:
-    CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')
-    CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
 
 
 
