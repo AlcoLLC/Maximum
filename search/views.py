@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.urls import reverse
+from django.utils.translation import get_language
 from home.models import Review
 from product.models import Product, Product_group, ProductProperty, Segments, Oil_Types, Viscosity
 from brands.models import BrandGuidelineDocument, BrandImageLibrary, BrandVideoLibrary, PromoMaterial, PromoMaterialsLibrary
@@ -38,6 +40,32 @@ def build_search_q(query, fields):
     
     return q_objects
 
+def get_localized_url(url_name, args=None, kwargs=None):
+    """
+    Get URL with current language prefix
+    """
+    current_language = get_language()
+    
+    try:
+        if args:
+            url = reverse(url_name, args=args)
+        elif kwargs:
+            url = reverse(url_name, kwargs=kwargs)
+        else:
+            url = reverse(url_name)
+    except:
+        # Fallback to manual URL construction if reverse fails
+        if args:
+            url = f"/{'/'.join(str(arg) for arg in args)}/"
+        else:
+            url = "/"
+    
+    # If current language is not default (en) and URL doesn't start with language prefix
+    if current_language != 'en' and not url.startswith(f'/{current_language}/'):
+        url = f'/{current_language}{url}'
+    
+    return url
+
 
 def search_view(request):
     query = request.GET.get('search', '').strip()
@@ -58,7 +86,7 @@ def search_view(request):
             results.append({
                 'title': product.title,
                 'description': product.description[:200] + '...' if product.description and len(product.description) > 200 else product.description or '',
-                'url': f'/product/{product.slug}/',
+                'url': get_localized_url('product:product_detail', kwargs={'slug': product.slug}),
                 'type': 'Product',
                 'image': product.image.url if product.image else None
             })
@@ -73,7 +101,7 @@ def search_view(request):
             results.append({
                 'title': group.title,
                 'description': group.description[:200] + '...' if group.description and len(group.description) > 200 else group.description or '',
-                'url': f'/product-group/{group.slug}/',
+                'url': get_localized_url('product:product_group_detail', kwargs={'slug': group.slug}),
                 'type': 'Product Group',
                 'image': group.image.url if group.image else None
             })
@@ -87,7 +115,7 @@ def search_view(request):
             results.append({
                 'title': segment.title,
                 'description': f'Segment: {segment.title}',
-                'url': f'/segment/{segment.slug}/',
+                'url': get_localized_url('product:segment_detail', kwargs={'slug': segment.slug}),
                 'type': 'Segment',
                 'image': None
             })
@@ -101,7 +129,7 @@ def search_view(request):
             results.append({
                 'title': oil_type.title,
                 'description': f'Oil Type: {oil_type.title}',
-                'url': f'/oil-type/{oil_type.slug}/',
+                'url': get_localized_url('product:oil_type_detail', kwargs={'slug': oil_type.slug}),
                 'type': 'Oil Type',
                 'image': None
             })
@@ -115,7 +143,7 @@ def search_view(request):
             results.append({
                 'title': viscosity.title,
                 'description': f'Viscosity: {viscosity.title}',
-                'url': f'/viscosity/{viscosity.slug}/',
+                'url': get_localized_url('product:viscosity_detail', kwargs={'slug': viscosity.slug}),
                 'type': 'Viscosity',
                 'image': None
             })
@@ -129,7 +157,7 @@ def search_view(request):
             results.append({
                 'title': f'{prop.product.title} - {prop.property_name}',
                 'description': f'Property: {prop.property_name}, Test Method: {prop.test_method}, Value: {prop.typical_value}',
-                'url': f'/product/{prop.product.slug}/',
+                'url': get_localized_url('product:product_detail', kwargs={'slug': prop.product.slug}),
                 'type': 'Product Property',
                 'image': prop.product.image.url if prop.product.image else None
             })
@@ -145,7 +173,7 @@ def search_view(request):
             results.append({
                 'title': f'Review by {review.full_name} - {review.rating}★',
                 'description': review.summary if review.summary else review.review[:200] + '...' if len(review.review) > 200 else review.review,
-                'url': '/#reviews',
+                'url': get_localized_url('home:home') + '#reviews',
                 'type': 'Review',
                 'image': None
             })
@@ -160,7 +188,7 @@ def search_view(request):
             results.append({
                 'title': about.title,
                 'description': about.content[:200] + '...' if about.content and len(about.content) > 200 else about.content or '',
-                'url': f'/about/{about.id}/',
+                'url': get_localized_url('about:about_detail', kwargs={'pk': about.id}),
                 'type': 'About',
                 'image': None
             })
@@ -175,7 +203,7 @@ def search_view(request):
             results.append({
                 'title': content.section_title,
                 'description': content.section_content[:200] + '...' if content.section_content and len(content.section_content) > 200 else content.section_content or '',
-                'url': f'/about/{content.about.id}/',
+                'url': get_localized_url('about:about_detail', kwargs={'pk': content.about.id}),
                 'type': 'About Section',
                 'image': content.image.url if content.image else None
             })
@@ -190,7 +218,7 @@ def search_view(request):
             results.append({
                 'title': section.section_title,
                 'description': section.section_description[:200] + '...' if section.section_description and len(section.section_description) > 200 else section.section_description or '',
-                'url': f'/about/{section.about.id}/',
+                'url': get_localized_url('about:about_detail', kwargs={'pk': section.about.id}),
                 'type': 'About Section',
                 'image': section.image.url if section.image else None
             })
@@ -205,7 +233,7 @@ def search_view(request):
             results.append({
                 'title': presence.title,
                 'description': presence.description_one[:200] + '...' if presence.description_one and len(presence.description_one) > 200 else presence.description_one or '',
-                'url': f'/global-presence/{presence.id}/',
+                'url': get_localized_url('about:global_presence_detail', kwargs={'pk': presence.id}),
                 'type': 'Global Presence',
                 'image': None
             })
@@ -220,7 +248,7 @@ def search_view(request):
             results.append({
                 'title': sustainability.title,
                 'description': sustainability.description[:200] + '...' if sustainability.description and len(sustainability.description) > 200 else sustainability.description or '',
-                'url': f'/sustainability/{sustainability.id}/',
+                'url': get_localized_url('about:sustainability_detail', kwargs={'pk': sustainability.id}),
                 'type': 'Sustainability',
                 'image': sustainability.image.url if sustainability.image else None
             })
@@ -235,7 +263,7 @@ def search_view(request):
             results.append({
                 'title': partnership.title,
                 'description': partnership.description[:200] + '...' if partnership.description and len(partnership.description) > 200 else partnership.description or '',
-                'url': f'/partnership/{partnership.id}/',
+                'url': get_localized_url('partnership:partnership_detail', kwargs={'pk': partnership.id}),
                 'type': 'Partnership',
                 'image': partnership.image.url if partnership.image else None
             })
@@ -250,7 +278,7 @@ def search_view(request):
             results.append({
                 'title': content.title,
                 'description': content.description[:200] + '...' if content.description and len(content.description) > 200 else content.description or '',
-                'url': f'/partnership/{content.id}/',
+                'url': get_localized_url('partnership:partnership_content_detail', kwargs={'pk': content.id}),
                 'type': 'Partnership Content',
                 'image': content.image.url if content.image else None
             })
@@ -265,7 +293,7 @@ def search_view(request):
             results.append({
                 'title': guideline.title,
                 'description': guideline.short_content,
-                'url': f'/brand/guideline/{guideline.id}/',
+                'url': get_localized_url('brands:guideline_detail', kwargs={'pk': guideline.id}),
                 'type': 'Brand Guideline',
                 'image': guideline.preview_image.url if guideline.preview_image else None
             })
@@ -280,7 +308,7 @@ def search_view(request):
             results.append({
                 'title': library.short_content,
                 'description': library.description[:200] + '...' if library.description and len(library.description) > 200 else library.description or '',
-                'url': f'/brand/promo-library/{library.id}/',
+                'url': get_localized_url('brands:promo_library_detail', kwargs={'pk': library.id}),
                 'type': 'Promo Materials Library',
                 'image': None
             })
@@ -295,7 +323,7 @@ def search_view(request):
             results.append({
                 'title': material.title,
                 'description': material.library.short_content,
-                'url': f'/brand/promo-material/{material.id}/',
+                'url': get_localized_url('brands:promo_material_detail', kwargs={'pk': material.id}),
                 'type': 'Promo Material',
                 'image': material.preview_image.url if material.preview_image else None
             })
@@ -310,7 +338,7 @@ def search_view(request):
             results.append({
                 'title': library.short_content,
                 'description': library.description[:200] + '...' if library.description and len(library.description) > 200 else library.description or '',
-                'url': f'/brand/image-library/{library.id}/',
+                'url': get_localized_url('brands:image_library_detail', kwargs={'pk': library.id}),
                 'type': 'Brand Image Library',
                 'image': None
             })
@@ -325,7 +353,7 @@ def search_view(request):
             results.append({
                 'title': library.short_content,
                 'description': library.description[:200] + '...' if library.description and len(library.description) > 200 else library.description or '',
-                'url': f'/brand/video-library/{library.id}/',
+                'url': get_localized_url('brands:video_library_detail', kwargs={'pk': library.id}),
                 'type': 'Brand Video Library',
                 'image': None
             })
@@ -341,7 +369,7 @@ def search_view(request):
             results.append({
                 'title': news.title,
                 'description': news.content[:200] + '...' if news.content and len(news.content) > 200 else news.content or '',
-                'url': f'/news/{news.slug}/',
+                'url': get_localized_url('news:news_detail', kwargs={'slug': news.slug}),
                 'type': 'News',
                 'image': news.image.url if news.image else None
             })
@@ -357,7 +385,7 @@ def search_view(request):
                 results.append({
                     'title': content.news.title,
                     'description': content.description[:200] + '...' if content.description and len(content.description) > 200 else content.description or '',
-                    'url': f'/news/{content.news.slug}/',
+                    'url': get_localized_url('news:news_detail', kwargs={'slug': content.news.slug}),
                     'type': 'News Content',
                     'image': content.image.url if content.image else content.news.image.url if content.news.image else None
                 })
@@ -372,7 +400,7 @@ def search_view(request):
             results.append({
                 'title': service.title,
                 'description': service.description[:200] + '...' if service.description and len(service.description) > 200 else service.description or '',
-                'url': f'/services/{service.id}/',
+                'url': get_localized_url('services:service_detail', kwargs={'pk': service.id}),
                 'type': 'Service',
                 'image': service.image.url if service.image else None
             })
@@ -387,12 +415,12 @@ def search_view(request):
             results.append({
                 'title': content.title,
                 'description': content.description[:200] + '...' if content.description and len(content.description) > 200 else content.description or '',
-                'url': f'/service-content/{content.id}/',
+                'url': get_localized_url('services:service_content_detail', kwargs={'pk': content.id}),
                 'type': 'Service Content',
                 'image': content.image.url if content.image else None
             })
 
-        # FAQ search
+        # FA Qsearch
         faq_fields = ['question', 'answer']
         faqs = FAQ.objects.filter(
             build_search_q(query, faq_fields),
@@ -403,7 +431,7 @@ def search_view(request):
             results.append({
                 'title': faq.question,
                 'description': faq.answer[:200] + '...' if faq.answer and len(faq.answer) > 200 else faq.answer or '',
-                'url': '/faq/',
+                'url': get_localized_url('faq:faq'),
                 'type': 'FAQ',
                 'image': None
             })

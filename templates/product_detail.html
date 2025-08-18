@@ -43,11 +43,7 @@
                 <span>{%trans "Quantity" %}</span>
                 {% for liter in available_liters %}
                 <div>
-                    {% if liter.volume|floatformat:1|slice:"-2:" == ".0" %}
-                        {{ liter.volume|floatformat:"0" }}L
-                    {% else %}
-                        {{ liter.volume|floatformat:1 }}L
-                    {% endif %}
+                    {{ liter.volume|floatformat:"-1" }}L
                 </div>
                 {% endfor %}
             </div>

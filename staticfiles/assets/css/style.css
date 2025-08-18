@@ -281,9 +281,16 @@ nav ul li a.active {
   color: var(--dark);
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 2px;
   border: none;
   cursor: pointer;
   transition: color 0.3s ease;
+}
+
+.language-dropdown button i {
+  padding-top: 3px;
+  font-size: 14px;
 }
 
 .language-dropdown .dropdown-content {
@@ -488,8 +495,12 @@ nav ul li a.active {
   }
 
   .language-dropdown button {
-    padding: 3px 4px;
+    padding: 3px 5px;
     font-size: 14px;
+  }
+
+    .language-dropdown button i {
+    font-size: 12px;
   }
 }
 
