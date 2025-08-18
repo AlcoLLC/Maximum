@@ -1,101 +1,65 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const cancelBtn = document.querySelector(".page-header .cancel-button");
-  const searchInput = document.querySelector(".search-input");
-  const searchForm = document.querySelector(".search-form");
-  if (cancelBtn) {
-    cancelBtn.addEventListener("click", function () {
-      searchInput.value = "";
-      searchInput.focus();
-      const url = new URL(window.location);
-      url.searchParams.delete("search");
-      url.searchParams.delete("page");
-      window.location.href = url.toString();
-    });
-  }
-  if (searchInput) {
-    let searchTimeout;
-    searchInput.addEventListener("input", function () {
-      clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(function () {
-        if (
-          searchInput.value.trim().length > 2 ||
-          searchInput.value.trim().length === 0
-        ) {
-          searchForm.submit();
+// Search functionality - Updated for multilingual support
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.querySelector('.search-form');
+    const searchButton = document.querySelector('.search-button');
+    const searchInput = document.querySelector('.search-form input[name="search"]');
+
+    // Function to get current language from URL
+    function getCurrentLanguage() {
+        const path = window.location.pathname;
+        const supportedLangs = ['en', 'de', 'es', 'fr', 'it', 'zh-hans'];
+        
+        for (let lang of supportedLangs) {
+            if (path.startsWith(`/${lang}/`) || path === `/${lang}`) {
+                return lang;
+            }
         }
-      }, 500);
-    });
-  }
-  const paginationNumbers = document.querySelectorAll(".page-number");
-  const prevBtn = document.getElementById("prevPage");
-  const nextBtn = document.getElementById("nextPage");
-  paginationNumbers.forEach(function (pageLink) {
-    pageLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      const pageNum = this.getAttribute("data-page");
-      goToPage(pageNum);
-    });
-  });
-  if (prevBtn && !prevBtn.disabled) {
-    prevBtn.addEventListener("click", function () {
-      const pageNum = this.getAttribute("data-page");
-      if (pageNum) {
-        goToPage(pageNum);
-      }
-    });
-  }
-  if (nextBtn && !nextBtn.disabled) {
-    nextBtn.addEventListener("click", function () {
-      const pageNum = this.getAttribute("data-page");
-      if (pageNum) {
-        goToPage(pageNum);
-      }
-    });
-  }
-  function goToPage(pageNum) {
-    const url = new URL(window.location);
-    url.searchParams.set("page", pageNum);
-    window.location.href = url.toString();
-  }
-  if (searchInput) {
-    searchInput.addEventListener("keydown", function (e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        if (searchInput.value.trim().length > 0) {
-          searchForm.submit();
+        return 'en'; // Default to English
+    }
+
+    // Function to build search URL with proper language prefix
+    function buildSearchUrl(query) {
+        const currentLang = getCurrentLanguage();
+        const encodedQuery = encodeURIComponent(query);
+        
+        if (currentLang === 'en') {
+            return `/search/?search=${encodedQuery}`;
+        } else {
+            return `/${currentLang}/search/?search=${encodedQuery}`;
         }
-      }
-      if (e.key === "Escape") {
-        searchInput.value = "";
-        searchInput.blur();
-      }
-    });
-  }
-  if (searchInput && !searchInput.value) {
-    searchInput.focus();
-  }
-  const queryElement = document.querySelector("[data-search-query]");
-  const query = queryElement
-    ? queryElement.getAttribute("data-search-query")
-    : "";
-  if (query && query.trim()) {
-    highlightSearchTerms(query.trim());
-  }
-  function highlightSearchTerms(searchQuery) {
-    const resultContents = document.querySelectorAll(
-      ".result-text h2, .result-text .result-description"
-    );
-    const regex = new RegExp(
-      `(${searchQuery.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-      "gi"
-    );
-    resultContents.forEach(function (element) {
-      if (element.innerHTML && !element.querySelector(".highlight")) {
-        element.innerHTML = element.innerHTML.replace(
-          regex,
-          '<mark class="highlight">$1</mark>'
-        );
-      }
-    });
-  }
+    }
+
+    // Handle search form submission
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            performSearch();
+        });
+    }
+
+    // Handle search button click
+    if (searchButton) {
+        searchButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            performSearch();
+        });
+    }
+
+    // Handle enter key press in search input
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performSearch();
+            }
+        });
+    }
+
+    function performSearch() {
+        const query = searchInput.value.trim();
+        if (query) {
+            // Redirect to search page with query and proper language
+            window.location.href = buildSearchUrl(query);
+        }
+    }
 });

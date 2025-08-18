@@ -11,7 +11,7 @@
           </a>
 
           <div class="search">
-              <form method="GET" class="search-form">
+              <form method="GET" class="search-form" action="{% url 'search:search' %}">
                   <input type="text" name="search" value="{{ query }}" placeholder="{% trans 'Search...' %}" />
                   <button type="button" class="search-button">
                       <i class="fa-solid fa-magnifying-glass"></i>
@@ -35,6 +35,7 @@
                 {% elif CURRENT_LANGUAGE == 'zh-hans' %}汉语 
                 {% else %}EN
                 {% endif %}
+                <i class="fa-solid fa-angle-down"></i>
               </button>
               <div class="dropdown-content" id="languageDropdown">
                 {% get_available_languages as LANGUAGES %} 

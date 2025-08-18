@@ -6,6 +6,7 @@
 
 
 {%block page_css %}
+    <link rel="stylesheet" href="{% static 'assets/css/search.css' %}" />
 {% endblock %} 
 
 {% block extra_schema %}
@@ -15,10 +16,176 @@
 {% endblock %} 
 
 {% block content %}
+<div class="breadcrumb">
+  <div class="container">
+    <a href="{% url 'home:home' %}" aria-label="Home Page">
+      <img loading="lazy" src="{% static '/images/home-page.svg' %}" alt="Home page icon" />
+    </a>
+    <i class="fa-solid fa-chevron-right"></i>
+    <p>{% trans "Search" %}</p>
+  </div>
+</div>
+
+{% include 'components/page-header.html' %}
+
+
+<section class="search-section container">
+  {% if query %}
+  <span class="search-results-count">
+    {% blocktrans count counter=total_results %} {{ counter }} result found {% plural %} 
+    {{ counter }} results found {% endblocktrans %}
+  </span>
+
+  {% if results %} {% for result in results %}
+  <div class="search-result">
+    <div class="result-content">
+      {% if result.image %}
+      <div class="result-image">
+        <img loading="lazy" src="{{ result.image }}" alt="{{ result.title }}" />
+      </div>
+      {% endif %}
+      <div class="result-text">
+        <a href="{{ result.url }}" class="result-type">{{ result.type }} ></a>
+        <h2>{{ result.title }}</h2>
+        {% if result.description %}
+        <p class="result-description">{{ result.description|safe }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="search-result-btn">
+    <button class="result-btn">
+      <a href="{{ result.url }}"><i class="fa-solid fa-arrow-right"></i></a>
+    </button>
+    </div>
+  </div>
+  {% endfor %}
+
+<!-- Search results pagination - add this to your search.html template -->
+<!-- Search results pagination -->
+{% if results.has_other_pages %}
+<div class="pagination-container">
+  <p class="pagination-info">
+    {{ results.start_index }}–{{ results.end_index }} {% trans 'of' %} {{ total_results }} {% trans 'results' %}
+  </p>
+  
+  <div class="pagination">
+    <button class="pagination-arrow prev" id="prevPage" {% if not results.has_previous %}disabled{% endif %}>
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="pagination-numbers">
+      {% for num in results.paginator.page_range %}
+        {% if results.number == num %}
+          <a href="#" class="page-number active" data-page="{{ num }}">{{ num }}</a>
+        {% elif num == results.number|add:'-1' or num == results.number|add:'1' %}
+          <a href="#" class="page-number" data-page="{{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <button class="pagination-arrow next" id="nextPage" {% if not results.has_next %}disabled{% endif %}>
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+{% endif %}
+
+  {% endif %}
+  {% else %}
+  <div class="search-placeholder">
+    <p>{% trans "Enter keywords to search..." %}</p>
+  </div>
+  {% endif %}
+</section>
 
 {% endblock %} 
-
 
 
 {%block page_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+  // Pagination functionality for search page
+  const prevButton = document.getElementById("prevPage");
+  const nextButton = document.getElementById("nextPage");
+  const pageNumbers = document.querySelectorAll(".page-number");
+
+  // Previous page button
+  if (prevButton) {
+    prevButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (!this.disabled) {
+        const currentPageSpan = document.querySelector(".page-number.active");
+        if (currentPageSpan) {
+          const currentPage = parseInt(currentPageSpan.getAttribute("data-page"));
+          if (currentPage > 1) {
+            navigateToSearchPage(currentPage - 1);
+          }
+        }
+      }
+    });
+  }
+
+  // Next page button
+  if (nextButton) {
+    nextButton.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (!this.disabled) {
+        const currentPageSpan = document.querySelector(".page-number.active");
+        if (currentPageSpan) {
+          const currentPage = parseInt(currentPageSpan.getAttribute("data-page"));
+          navigateToSearchPage(currentPage + 1);
+        }
+      }
+    });
+  }
+
+  // Page number clicks
+  pageNumbers.forEach((number) => {
+    number.addEventListener("click", function (e) {
+      e.preventDefault();
+      const pageNum = parseInt(this.getAttribute("data-page"));
+      if (pageNum && !this.classList.contains("active")) {
+        navigateToSearchPage(pageNum);
+      }
+    });
+  });
+
+  // Function to navigate to specific page
+  function navigateToSearchPage(pageNum) {
+    const currentUrl = new URL(window.location);
+    currentUrl.searchParams.set('page', pageNum);
+    
+    // Preserve the search query
+    const searchQuery = currentUrl.searchParams.get('search');
+    if (searchQuery) {
+      currentUrl.searchParams.set('search', searchQuery);
+    }
+    
+    // Navigate to new URL
+    window.location.href = currentUrl.toString();
+  }
+
+  // Optional: Add keyboard navigation (Arrow keys)
+  document.addEventListener("keydown", function (e) {
+    const currentPageSpan = document.querySelector(".page-number.active");
+    if (currentPageSpan) {
+      const currentPage = parseInt(currentPageSpan.getAttribute("data-page"));
+      
+      if (e.key === "ArrowLeft" && currentPage > 1) {
+        e.preventDefault();
+        navigateToSearchPage(currentPage - 1);
+      } else if (e.key === "ArrowRight") {
+        const nextBtn = document.getElementById("nextPage");
+        if (nextBtn && !nextBtn.disabled) {
+          e.preventDefault();
+          navigateToSearchPage(currentPage + 1);
+        }
+      }
+    }
+  });
+});
+</script>
 {% endblock %} 
+
+
+
