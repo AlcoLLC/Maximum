@@ -40,9 +40,18 @@ if DEBUG:
         'http://127.0.0.1:8000',
     ]
 else:
-    ALLOWED_HOSTS = [x.strip() for x in os.getenv('ALLOWED_HOSTS', '').split(',')]
-    CORS_ALLOWED_ORIGINS = [x.strip() for x in os.getenv('CORS_ALLOWED_ORIGINS', '').split(',')]
-    CSRF_TRUSTED_ORIGINS = [x.strip() for x in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')]
+    ALLOWED_HOSTS = ['*']
+    CORS_ALLOWED_ORIGINS = [
+        'http://162.55.55.226',
+        "https://162.55.55.226",
+        'http://162.55.55.226:100',
+        "https://162.55.55.226:100",
+    ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        'http://162.55.55.226',
+        "https://162.55.55.226"
+    ]
 
 
 # Application definition
@@ -202,6 +211,7 @@ SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_SECURE = not DEBUG
 SESSION_COOKIE_HTTPONLY = True
+
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
