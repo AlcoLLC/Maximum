@@ -63,6 +63,10 @@
     font-size: 40px;
     line-height: 46px;
   }
+  .about-section-contact a {
+    width: 16vh;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -101,10 +105,10 @@
 
   .about-section-contact a {
     align-self: center;
-    width: 26vh;
-    height: 7vh;
+    height: 5vh;
     min-width: 150px;
     margin-top: 5px;
+    font-size: 15px;
   }
 }
 

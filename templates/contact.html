@@ -33,10 +33,7 @@ trans "meta_title_contact" %}{% endblock %} {% block description %}{%trans
         {% endblocktrans %}
         
       </p>
-      <div class="button-group">
-        <a href="#" class="card-button-style">{% trans 'Find a sales point' %}</a>
-        <a href="#" class="card-button-style-black">{% trans 'Contact us' %}</a>
-      </div>
+     
     </div>
 
     <div class="bgwhite"></div>
@@ -51,7 +48,7 @@ trans "meta_title_contact" %}{% endblock %} {% block description %}{%trans
         
       </p>
       <div class="button-group">
-        <a href="#" class="card-button-style">{% trans 'Contact us' %}</a>
+        <a href="{% url 'contact:contact_step_two'%}" class="card-button-style">{% trans 'Contact us' %}</a>
       </div>
     </div>
   </div>

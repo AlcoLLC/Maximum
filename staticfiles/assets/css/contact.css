@@ -43,7 +43,7 @@
 .customer-card {
   position: absolute;
   left: 100px;
-  top: 46px;
+  top: 60px;
   height: 280px;
   width: 36%;
   padding: 35px;
@@ -184,7 +184,7 @@
 
 .social-section {
   text-align: center;
-  padding: 40px;
+  padding: 40px 40px 10px 40px;
 }
 
 .social-icon img {
@@ -287,4 +287,200 @@
 
 .contact-map {
   margin: 30px auto;
+}
+
+@media screen and (max-width: 1060px) {
+  .customer-card-bgwhite {
+    right: 120px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .customer-card-bgwhite {
+    top: -15px;
+  }
+  .customer-card {
+    top: 0px;
+  }
+  .bgwhite {
+    width: 33%;
+    height: 248px;
+    left: 25%;
+    top: 40px;
+  }
+  .customer-card-bgwhite p,
+  .customer-card p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .customer-card-bgwhite h1,
+  .customer-card h1 {
+    font-size: 28px;
+    line-height: 34px;
+  }
+  .card-button-style {
+    padding: 3px 30px;
+    font-size: 15px;
+  }
+  .social-section .section-title {
+    margin-bottom: 36px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .location-card h3 {
+    font-size: 24px;
+    line-height: 35px;
+  }
+  .locations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .locations-grid {
+    gap: 15px;
+  }
+  .contact-info a,
+  .contact-info-last a,
+  .contact-info a span,
+  .contact-info-last a span {
+    font-size: 17px;
+    line-height: 28px;
+  }
+  .customer-card-bgwhite {
+    right: 75px;
+    width: 40%;
+  }
+  .customer-card {
+    left: 60px;
+  }
+  .bgwhite {
+    left: 23%;
+    width: 37%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .customer-card-bgwhite h1,
+  .customer-card h1 {
+    font-size: 25px;
+    line-height: 32px;
+  }
+
+  .customer-card-bgwhite p,
+  .customer-card p {
+    line-height: 23px;
+  }
+  .card-button-style {
+    padding: 2px 25px;
+    font-size: 14px;
+  }
+  .page-header {
+    height: 60vh;
+  }
+  .customer-card-bgwhite {
+    top: 249px;
+    width: 70%;
+    height: 220px;
+  }
+  .bgwhite {
+    left: 18%;
+    width: 70%;
+    height: 220px;
+    top: 7px;
+    padding: 35px;
+  }
+  .customer-card {
+    left: 126px;
+    width: 63%;
+    top: -17px;
+  }
+  .social-icon img {
+    width: 46px;
+  }
+  .social-icons {
+    gap: 15px;
+  }
+  .social-section {
+    padding: 20px 40px 10px 40px;
+  }
+  .social-icons {
+    gap: 10px;
+  }
+  .social-section .section-title {
+    margin-bottom: 24px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .locations-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .location-card h3 {
+    font-size: 22px;
+    line-height: 31px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .customer-card {
+    left: 117px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .bgwhite {
+    left: 16%;
+  }
+  .customer-card {
+    left: 94px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .social-icon img {
+    width: 38px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .location-card h3 {
+    font-size: 20px;
+    line-height: 29px;
+  }
+  .contact-info a,
+  .contact-info-last a,
+  .contact-info a span,
+  .contact-info-last a span {
+    font-size: 16px;
+  }
+  .location-info p {
+    font-size: 15px;
+    margin-bottom: 0px;
+  }
+  .location-card h3 {
+    margin-bottom: 10px;
+  }
+  .bgwhite {
+    left: 10%;
+    width: 83%;
+  }
+  .customer-card-bgwhite {
+    width: 83%;
+    right: 31px;
+  }
+  .customer-card {
+    left: 60px;
+    width: 76%;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .customer-card-bgwhite {
+    right: 26px;
+  }
+  .customer-card {
+    left: 56px;
+  }
 }

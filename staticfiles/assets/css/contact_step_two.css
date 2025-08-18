@@ -198,3 +198,53 @@
     font-size: 18px;
   }
 }
+
+@media screen and (max-width: 650px) {
+  .contact-step-two input[type="text"],
+  .contact-step-two input[type="email"],
+  .contact-step-two input[type="tel"],
+  .contact-step-two select,
+  .contact-step-two textarea {
+    padding: 9px 15px;
+  }
+  .contact-step-two label,
+  .contact-step-two select option {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .contact-step-two .subtitle {
+    font-size: 17px;
+    line-height: 27.04px;
+  }
+  .contact-step-two label,
+  .contact-step-two select option,
+  .contact-step-two textarea {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .contact-step-two .subtitle {
+    font-size: 15px;
+    line-height: 24.04px;
+  }
+  .contact-step-two label,
+  .contact-step-two select option,
+  .contact-step-two textarea {
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+  .contact-step-two input[type="text"],
+  .contact-step-two input[type="email"],
+  .contact-step-two input[type="tel"],
+  .contact-step-two select,
+  .contact-step-two textarea {
+    padding: 6px 15px;
+  }
+  .contact-step-two .checkbox-label {
+    font-size: 15px;
+    line-height: 24px;
+  }
+}
