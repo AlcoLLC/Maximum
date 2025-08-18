@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
   let isMobileMenuInitialized = false;
 
   function initializeMobileMenu() {
-
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerIcon = hamburger.querySelector('i');
@@ -49,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
     });
-
   }
 
   // Desktop language dropdown elements
@@ -204,7 +202,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function submitLanguageForm(langCode, nextUrl, csrfToken) {
-
     const form = document.createElement('form');
     form.method = 'POST';
     form.action = '/i18n/setlang/';
@@ -359,5 +356,4 @@ document.addEventListener('DOMContentLoaded', function () {
   window.testLanguageSwitch = function (lang) {
     switchLanguage(lang);
   };
-
 });

@@ -195,6 +195,7 @@ nav {
   border-radius: 30px;
   border: none;
   padding: 5px;
+  color: #fff;
 }
 .navbar .search input:focus {
   border: none;
@@ -843,8 +844,6 @@ footer .alco-privacy p {
   }
 }
 
-
-
 .featured-products {
   margin: 100px auto;
 }
@@ -1084,8 +1083,6 @@ footer .alco-privacy p {
   }
 }
 
-
-
 .our-partners {
   margin: 50px auto;
 }
@@ -1211,7 +1208,6 @@ footer .alco-privacy p {
     padding: 0 35px;
   }
 }
-
 
 .breadcrumb {
   padding-top: 175px;
@@ -1358,5 +1354,109 @@ footer .alco-privacy p {
   to {
     opacity: 0;
     transform: translateX(100%);
+  }
+}
+
+
+
+
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 50px 0;
+}
+
+.pagination-info {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  color: var(--dark);
+}
+
+.pagination {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  user-select: none;
+}
+
+.pagination-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: var(--main);
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.pagination-arrow:hover {
+  background-color: var(--hover-main);
+}
+.pagination-arrow:disabled {
+  background-color: #ffb30083;
+  cursor: not-allowed;
+}
+.pagination-numbers {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  margin: 0 8px;
+}
+.page-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  border-radius: 4px;
+  color: var(--dark) 80;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.page-number:hover {
+  background-color: #e6ecf7;
+}
+.page-number.active {
+  background-color: #fff;
+  color: var(--main);
+  font-weight: 600;
+}
+
+@media (max-width: 700px) {
+  .pagination-arrow {
+    width: 35px;
+    height: 35px;
+  }
+  .page-number {
+    width: 35px;
+    height: 35px;
+  }
+  .pagination-info {
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+@media (max-width: 500px) {
+  .pagination-arrow {
+    width: 20px;
+    height: 20px;
+  }
+  .page-number {
+    width: 20px;
+    height: 20px;
+  }
+  .pagination-info {
+    font-size: 14px;
+    line-height: 16px;
   }
 }

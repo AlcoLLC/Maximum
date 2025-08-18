@@ -344,52 +344,38 @@
   </div>
 
   <!-- Always show pagination for testing -->
-  <div class="pagination-container">
-        <p class="pagination-info">
-            {{ products.start_index }}–{{products.end_index}} {%trans 'of'%} {{total_results}}
-            {% trans 'results' %}
-        </p>
-        <div class="pagination">
-            <button class="pagination-arrow prev" id="prevPage"
-              {% if not page_obj.has_previous %}disabled{% endif %}>
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
+<div class="pagination-container">
+    <p class="pagination-info">
+        {{ products.start_index }}–{{products.end_index}} {%trans 'of'%} {{total_results}}
+        {% trans 'results' %}
+    </p>
+    <div class="pagination">
+        <button class="pagination-arrow prev" id="prevPage"
+          {% if not page_obj.has_previous %}disabled{% endif %}>
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
 
-            <div class="pagination-numbers" id="paginationNumbers">
-              {% for num in page_obj.paginator.page_range %} {% if page_obj.number == num %}
-                <a href="#" aria-label="Total page number" class="page-number active" data-page="{{ num }}">
-                  {{ num }}
-                </a>
-                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                <a href="#" aria-label="Total page number" class="page-number" data-page="{{ num }}">
-                  {{ num }}
-                </a>
-                {% elif num == 1 %}
-                <a href="#" aria-label="Total page number" class="page-number" data-page="{{ num }}">
-                  {{ num }}
-                </a>
-                {% if page_obj.number > 4 %}
-                <span class="ellipsis">...</span>
-                {% endif %}
-                {% elif num == page_obj.paginator.num_pages %} 
-                {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
-                <span class="ellipsis">...</span>
-                {% endif %}
-                <a href="#"  aria-label="Total page number" class="page-number" data-page="{{ num }}">
-                  {{ num }}
-                </a>
-                {% endif %} 
-              {% endfor %}
-            </div>
-
-            <button
-              class="pagination-arrow next" id="nextPage"
-              {% if not page_obj.has_next %}disabled{% endif %} >
-              <i class="fa-solid fa-chevron-right"></i>
-            </button> 
+        <div class="pagination-numbers" id="paginationNumbers">
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+            <a href="#" aria-label="Total page number" class="page-number active" data-page="{{ num }}">
+              {{ num }}
+            </a>
+            {% elif num == page_obj.number|add:'-1' or num == page_obj.number|add:'1' %}
+            <a href="#" aria-label="Total page number" class="page-number" data-page="{{ num }}">
+              {{ num }}
+            </a>
+            {% endif %}
+          {% endfor %}
         </div>
 
-  </div>
+        <button
+          class="pagination-arrow next" id="nextPage"
+          {% if not page_obj.has_next %}disabled{% endif %} >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button> 
+    </div>
+</div>
 </section>
 
 {% endblock %}

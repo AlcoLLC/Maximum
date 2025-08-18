@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'brands',
     'product',
     'partnership',
+    'search',
 ]
 
 SITE_ID = 1
