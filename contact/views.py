@@ -1,5 +1,3 @@
-# contact/views.py
-
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.core.mail import send_mail
@@ -8,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
-from .models import ContactStepTwo
+from .models import ContactStepTwo, ContactInfo
 from .forms import ContactStepTwoForm 
 import logging
 import json
@@ -90,8 +88,11 @@ def contact_step_two_view(request):
     context = {'form': form}
     return render(request, 'contact_step_two.html', context)
 
+
 def contact_view(request):
-    return render(request, 'contact.html')
+    contact_infos = ContactInfo.objects.all()
+    return render(request, 'contact.html', {'contact_infos': contact_infos})
+
 
 def send_contact_emails(contact):
     """Send both admin notification and user confirmation emails"""
