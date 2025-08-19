@@ -1,6 +1,7 @@
+from django.utils.html import mark_safe
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import  HomeSwiper, PartnerLogo, CarLogo, Review, PageHeader
+from .models import  HomeSwiper, PartnerLogo, CarLogo, Review, PageHeader, General
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 
 @admin.register(HomeSwiper)
@@ -177,3 +178,32 @@ class PageHeaderAdmin(admin.ModelAdmin):
     list_display = ('slug',)
     search_fields = ('slug',)
     fields = ('slug', 'image')
+
+
+
+@admin.register(General)
+class GeneralAdmin(TranslationAdmin):
+    list_display = ('grow_description', 'production_background','products_background')
+    search_fields = ('grow_description',)
+
+    def production_image(self, obj):
+        if obj.production_background:
+            return mark_safe(f'<img src="{obj.production_background.url}" width="100" height="60" style="object-fit:cover;"/>')
+        return "-"
+    production_image.short_description = "Production Background"
+
+    def products_image(self, obj):
+        if obj.products_background:
+            return mark_safe(f'<img src="{obj.products_background.url}" width="100" height="60" style="object-fit:cover;"/>')
+        return "-"
+    products_image.short_description = "Products Background"
+
+    class Media:
+        js = (
+            'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }

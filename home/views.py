@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import HomeSwiper, Review
+from .models import HomeSwiper, Review, General
 from product.models import Product_group
 from news.models import News
 from faq.models import FAQ
@@ -22,7 +22,7 @@ def home_view(request):
     latest_news = News.objects.filter(in_home=True)
     home_faqs = FAQ.objects.filter(in_home=True)[:4]
     services = Services.objects.all()
-
+    general = General.objects.last()
 
     context = { 
         'swiper_images': swiper_images,
@@ -31,11 +31,10 @@ def home_view(request):
         'latest_news': latest_news,
         'home_faqs': home_faqs,
         'services': services,
-
+        'general': general,
     } 
      
     return render(request, 'home.html', context)
-
 
 def get_client_ip(request):
     """Get client IP address"""
@@ -126,17 +125,16 @@ def submit_review(request):
         messages.error(request, _('An error occurred while submitting your review. Please try again.'))
         return redirect(redirect_url)
 
-
-
 # Error handlers
 def handler404(request, exception):
     return render(request, '404.html', status=404)
 
-def handler500(request):
-    return render(request, '500.html', status=500)
 
 def handler403(request, exception):
     return render(request, '403.html', status=403)
 
-def handler400(request, exception):
-    return render(request, '400.html', status=400)
+def handler500(request):
+    return render(request, '500.html', status=500)
+
+def handler503(request, exception):
+    return render(request, '503.html', status=503)

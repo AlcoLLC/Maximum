@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/error.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+<div class="error-page">
+    <img loading="lazy" class="bg-image" src="{% static 'images/background-end.webp' %}" alt="Tomoil Image" />
+    <div class="error-content ">
+        <h2 class="title">{% blocktrans %}500 Internal Server Error {% endblocktrans %}</h2>
+        <p class="description"> {% blocktrans %} Our team has been notified and is working to resolve this quickly.
+            {%endblocktrans%}
+        </p>
+
+        <a href="{% url 'home:home' %}" class="error-btn">{% blocktrans %}Go Home{%endblocktrans%}</a>
+    </div>
+</div>
+{% endblock %}

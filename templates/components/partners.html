@@ -4,7 +4,11 @@
 <section class="our-partners container">
         <div class="top-content">
             <h2 class="section-title">{% blocktrans %}  Our Partners {% endblocktrans %} </h2>
+             {% if partners_description %}
+            <p class="section-desc">{{  partners_description|linebreaksbr }}</p>
+            {% else %}
             <p class="section-desc">{% blocktrans %} Remittance acts as a bridge, connecting loved ones and making the world a little smaller. We are dedicated to forging strategic partnerships which help us help you send money around the globe quickly, safely and affordably. {% endblocktrans %}</p>
+            {% endif %}
         </div>  
         <div class="swiper-wrapper-container">
             <div class="partners-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
