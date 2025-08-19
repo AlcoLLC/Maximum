@@ -39,7 +39,7 @@ class BrandImageLibrary(models.Model):
     description = models.TextField() 
     
     def __str__(self):
-        return self. short_content[:50]
+        return self.short_content[:50]
 
 
 class BrandImage(models.Model):
@@ -59,7 +59,7 @@ class BrandVideoLibrary(models.Model):
     description = models.TextField() 
     
     def __str__(self):
-        return self. short_content[:50]
+        return self.short_content[:50]
 
 
 class BrandVideo(models.Model):

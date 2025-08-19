@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'assets/css/error.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+
+<div class="error-page">
+    <img loading="lazy" class="bg-image" src="{% static 'images/background-end.webp' %}" alt="Tomoil Image" />
+    <div class="error-content ">
+        <h2 class="title">{% blocktrans %}404 - Page Not Found{% endblocktrans %}</h2>
+        <p class="description"> {% blocktrans %}The page you are looking for doesn’t exist or has been moved. {%endblocktrans%}
+        </p>
+
+        <a href="{% url 'home:home' %}" class="error-btn">{% blocktrans %}Go Home{%endblocktrans%}</a>
+
+    </div>
+</div>
+{% endblock %}

@@ -67,6 +67,6 @@ if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0] if settings.STATICFILES_DIRS else settings.STATIC_ROOT)
 
 handler404 = 'home.views.handler404'
-handler500 = 'home.views.handler500'
 handler403 = 'home.views.handler403'
-handler400 = 'home.views.handler400'
+handler500 = 'home.views.handler500'
+handler503 = 'home.views.handler503'

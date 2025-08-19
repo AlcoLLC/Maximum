@@ -104,3 +104,18 @@ class PageHeader(models.Model):
 
     def __str__(self):
         return self.slug
+
+class General(models.Model):
+    production_background = models.ImageField(upload_to='general/')
+    products_background = models.ImageField(upload_to='general/')
+    grow_description = models.TextField(null=True, blank=True)
+    range_description = models.TextField(null=True, blank=True)
+    production_description = models.TextField(null=True, blank=True)
+    presence_description = models.TextField(null=True, blank=True)
+    news_description = models.TextField(null=True, blank=True)
+    products_description = models.TextField(null=True, blank=True)
+    partners_description = models.TextField(null=True, blank=True)
+
+
+    def __str__(self):
+        return self.grow_description[:40]

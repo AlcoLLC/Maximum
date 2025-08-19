@@ -88,7 +88,11 @@
 <section class="grow-business">
    <div class="top-content container">
         <h2 class="section-title">{% blocktrans %} Grow your business with maximum lubricants  {% endblocktrans %} </h2>
+         {% if general.grow_description %}
+         <p class="section-desc">{{  general.grow_description|linebreaksbr }}</p>
+         {% else %}
         <p class="section-desc">{% blocktrans %} We empower progress with smart lubrication and fluid technologies. Our commitment to quality and responsibility fuels success for our partners and a better future for all. {% endblocktrans %}</p>
+        {% endif %} 
         <a href="{% url 'product:products' %}" class="button-style">{% trans "Discover more" %}</a>
    </div>
    <div class="home-services">
@@ -114,8 +118,12 @@
 <section class="product-ranges">
    <div class="top-content container">
         <h2 class="section-title">{% blocktrans %} Maximum is trusted in a wide range of industries & operating environments  {% endblocktrans %} </h2>
+         {% if general.range_description %}
+         <p class="section-desc">{{  general.range_description|linebreaksbr }}</p>
+         {% else %}
         <p class="section-desc">{% blocktrans %} Our products are trusted in a wide range of industries and operating environments - from everyday passenger vehicles to heavy-duty machinery and high-performance systems. Each lubricant and fluid is carefully formulated to meet the specific technical requirements, operating conditions, and performance standards of its application area. {% endblocktrans %}</p>
-   </div>
+         {% endif %}
+    </div>
      <div class="swiper industrySwiper">
         <div class="swiper-wrapper">
              {% for product_group in product_groups_sec2 %}
@@ -147,11 +155,15 @@
         <h2 class="section-title">{% blocktrans %} LEARN more {% endblocktrans %} 
             <span  class="section-title">{% blocktrans %} about production process {% endblocktrans %}</span>
         </h2>
+        {% if general.production_description %}
+         <p class="section-desc">{{  general.production_description|linebreaksbr }}</p>
+         {% else %}
         <p class="section-desc">{% blocktrans %} Maximum Lubricants produces and packages high-quality oils using premium imported base oils and additives, formulated by expert engineers. {% endblocktrans %} </p>
-   </div>
+         {% endif %}
+    </div>
 
     <div class="production-section">
-        <img loading="lazy" class="bg-image" src="{% static '/images/swiper.jpg' %}"
+        <img loading="lazy" class="bg-image" src="{{ general.production_background.url }}"
         alt="Production background image"/>
 
         <div class="section-background"></div>
@@ -171,13 +183,16 @@
             ></iframe>
         </div>
     </div>
-
 </section>
 
 <section class="global-presence container">
    <div class="top-content ">
         <h2 class="section-title">{% blocktrans %} Global presence  {% endblocktrans %} </h2>
+        {% if general.presence_description %}
+         <p class="section-desc">{{  general.presence_description|linebreaksbr }}</p>
+         {% else %}
         <p class="section-desc">{% blocktrans %}  Maximum products are exported to more than 54 countries worldwide through our trusted network of exclusive distributors. {% endblocktrans %}</p>
+        {% endif %}
         <a href="{% url 'contact:contact' %}" class="button-style">{% trans "Become our distributor" %}</a>
    </div>
 
@@ -222,7 +237,11 @@
     <div class="news-left">
         <div class="top-content">
             <h2 class="section-title">{% blocktrans %}  NEWS & INSIGHT {% endblocktrans %} </h2>
+             {% if general.news_description %}
+            <p class="section-desc">{{  general.news_description|linebreaksbr }}</p>
+             {% else %}
             <p class="section-desc">{% blocktrans %} Explore our blog expert advice, industry trends, and indepth articles to keep you ahead of the curve. {% endblocktrans %}</p>
+            {% endif %}
             <a href="{% url 'news:news' %}" class="button-style">{% trans "All news" %} <i class="fa-solid fa-arrow-right-long"></i></a>
         </div>
         <div class="news-navigation">
@@ -239,8 +258,8 @@
                     <span  class="button-style">{% trans "read more" %}<i class="fa-solid fa-arrow-right-long"></i></span>
                 </div>
                 <div class="slide-content">
-                    <h3>{{ news.title|linebreaksbr }}</h3>
-                    <p>{{ news.content|linebreaksbr }}</p>
+                    <h3>{{ news.title|truncatechars:100 }}</h3>
+                    <p>{{ news.content|truncatechars:150 }}</p>
                 </div>
             </a>
             {% endfor %}        

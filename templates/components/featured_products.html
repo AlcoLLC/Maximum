@@ -6,15 +6,19 @@
 <section class="featured-products container">
   <div class="top-content">
     <h2 class="section-title">FEATURED PRODUCTS</h2>
+     {% if products_description %}
+      <p class="section-desc">{{  products_description|linebreaksbr }}</p>
+      {% else %}
     <p class="section-desc">
       Explore our extensive portfolio of over 400 premium lubricants and service fluids — engineered
       for exceptional performance, protection, and efficiency.
     </p>
+    {% endif %}
   </div>
 
   <div class="products-container">
     <div class="main-product">
-      <img src="{% static '/images/swiper.jpg' %}" alt="NOVALUBE PRO 0W-30" />
+      <img src="{{ products_background }}" alt="NOVALUBE PRO 0W-30" />
       <a href="" class="button-style">
         Go to catalog
         <i class="fa-solid fa-arrow-right"></i>

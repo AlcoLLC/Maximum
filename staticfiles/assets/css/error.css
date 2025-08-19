@@ -1,0 +1,128 @@
+.error-page {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  overflow: hidden;
+}
+.error-page .bg-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  object-fit: cover;
+  object-position: bottom;
+}
+.error-page .error-content {
+  width: 38%;
+  margin-right: 8%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.error-page .title {
+  color: #e22131;
+  font-weight: 600px;
+  font-size: 50px;
+}
+.error-page .description {
+  font-size: 20px;
+  color: #fff;
+}
+.error-page::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  z-index: -3;
+  background-color: #22316060;
+}
+.error-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: 1px solid #ffffff79;
+  border-radius: 6px;
+  width: 180px;
+  transition: all 0.4s ease-in-out;
+  position: relative;
+  font-size: 18px;
+}
+
+.error-btn:hover {
+  background-color: #ffb20086;
+}
+
+@media (max-width: 1250px) {
+  .error-page .error-content {
+    width: 55%;
+  }
+  .error-page {
+    height: 80vh;
+  }
+}
+@media (max-width: 1000px) {
+  .error-page .error-content {
+    width: 65%;
+  }
+}
+
+@media (max-width: 850px) {
+  .error-page .error-content {
+    width: 85%;
+    margin-right: 8%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .error-page {
+    height: 55vh;
+  }
+
+  .error-btn {
+    padding: 6px 10px;
+    width: 150px;
+    font-size: 16px;
+  }
+
+  .error-page .title {
+    font-size: 30px;
+  }
+
+  .error-page .description {
+    font-size: 14px;
+  }
+
+  .error-page .bg-image {
+    width: 130%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -25%;
+    z-index: -5;
+    object-fit: cover;
+  }
+
+  .error-page::before {
+    width: 100%;
+    clip-path: none;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+@media (max-width: 550px) {
+  .error-page .title {
+    font-size: 24px;
+  }
+}
