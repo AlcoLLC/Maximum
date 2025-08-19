@@ -1,7 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%}{%
-trans "meta_title_about" %}{% endblock %} {% block description %}{%trans
-"meta_description_about" %}{%endblock %} {% block keywords %}{%trans
-"meta_keywords_about" %}{%endblock %} {%block page_css %}
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%}
+{% trans "meta_title_about" %}{% endblock %} {% block description %}
+{% trans "meta_description_about" %} {%endblock %} {% block keywords %}{%trans "meta_keywords_about" %}
+
+{% endblock %}
+
+{% block page_css %}
+
 <link rel="stylesheet" href="{% static 'assets/css/home.css' %}" />
 <link rel="stylesheet" href="{% static 'assets/css/about.css' %}" />
 
@@ -22,9 +26,10 @@ trans "meta_title_about" %}{% endblock %} {% block description %}{%trans
   />
   <link rel="stylesheet" href="{% static 'assets/css/map.css' %}" />
 </noscript>
-{% endblock %} {% block extra_schema %}
-<script></script>
-{% endblock %} {% block content %}
+
+{% endblock %} 
+
+{% block content %}
 <div class="breadcrumb">
   <div class="container">
     <a href="{% url 'home:home' %}" aria-label="Home Page">
@@ -204,7 +209,6 @@ trans "meta_title_about" %}{% endblock %} {% block description %}{%trans
 
 {% endblock %} {% block page_js %}
 <script src="{% static 'assets/js/home.js' %}" defer></script>
-<!-- <script src="{% static 'assets/js/review.js' %}" defer></script> -->
 <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
 <script src="{% static 'assets/js/raphael.min.js' %}" defer></script>
 <script src="{% static 'assets/js/settings.js' %}" defer></script>

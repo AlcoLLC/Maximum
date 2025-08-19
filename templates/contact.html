@@ -1,13 +1,15 @@
-{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%}{%
-trans "meta_title_contact" %}{% endblock %} {% block description %}{%trans
-"meta_description_contact" %}{%endblock %} {% block keywords %}{%trans
-"meta_keywords_contact" %}{%endblock %} {%block page_css %}
+{% extends 'base.html' %} {% load static %} {% load i18n %} 
+{% block title%}{% trans "meta_title_contact" %} {% endblock %} {% block description %}
+{% trans "meta_description_contact" %} {%endblock %} {% block keywords %}
+{% trans "meta_keywords_contact" %} {% endblock %}
+
+{% block page_css %}
 
 <link rel="stylesheet" href="{% static 'assets/css/contact.css' %}" />
 
-{% endblock %} {% block extra_schema %}
-<script></script>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="breadcrumb">
   <div class="container">
     <a href="{% url 'home:home' %}" aria-label="Home Page">

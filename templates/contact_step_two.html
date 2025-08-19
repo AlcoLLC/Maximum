@@ -1,12 +1,11 @@
-{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%}{%
-trans "meta_title_contact" %}{% endblock %} {% block description %}{%trans
-"meta_description_contact" %}{%endblock %} {% block keywords %}{%trans
-"meta_keywords_contact" %}{%endblock %} {%block page_css %}
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block title%} {% trans "meta_title_contact_step_two" %} {% endblock %} 
+{% block description %} {% trans "meta_description_contact" %} {%endblock %} 
+{% block keywords %} {% trans "meta_keywords_contact" %} {% endblock %} 
+
+{% block page_css %}
 
 <link rel="stylesheet" href="{% static 'assets/css/contact_step_two.css' %}" />
 
-{% endblock %} {% block extra_schema %}
-<script></script>
 {% endblock %} {% block content %}
 
 <div class="breadcrumb bg-gray">
