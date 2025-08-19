@@ -24,13 +24,13 @@ def featured_products_context(request):
     general = General.objects.last()
     return {
         'featured_products': Product.objects.filter(in_home=True).order_by('order'),
-        'products_description':  general.products_description,
-        'products_background': general.products_background.url,
+        'products_description':  general.products_description if general else "",
+        'products_background': general.products_background.url if general else "",
     }
 
 def partners_context(request):
     general = General.objects.last()
     return {
         'partner_logos':  PartnerLogo.objects.all(),
-         'partners_description':  general.partners_description,
+         'partners_description':  general.partners_description if general else "",
     }
