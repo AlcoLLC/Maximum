@@ -5,8 +5,7 @@ class Product_group(models.Model):
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='product_group/')
     slug = models.SlugField(max_length=255, unique=True)
-    in_home_sec1 = models.BooleanField(default=False, verbose_name="In Home Sec1")
-    in_home_sec2 = models.BooleanField(default=False, verbose_name="In Home Sec2")
+    in_home = models.BooleanField(default=False, verbose_name="In Home")
     order = models.IntegerField(default=0)
     
     def __str__(self):
@@ -15,6 +14,9 @@ class Product_group(models.Model):
 class Segments(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
+    image = models.ImageField(upload_to='segments/', blank=True, null=True)
+    in_home = models.BooleanField(default=False, verbose_name="In Home")
+    order = models.IntegerField(default=0)
     
     def __str__(self):
         return self.title
