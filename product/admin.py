@@ -5,28 +5,11 @@ from django.utils.html import format_html
 
 @admin.register(Product_group)
 class ProductGroupAdmin(TranslationAdmin):
-    list_display = ('title', 'slug', 'image', 'in_home_sec1','in_home_sec2')
+    list_display = ('title', 'slug', 'image', 'in_home')
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('title',)
-    list_editable = ['in_home_sec1','in_home_sec2']
+    list_editable = ['in_home',]
 
-    
-    def save_model(self, request, obj, form, change):
-        if obj.in_home_sec1:
-            current_home_count = Product_group.objects.filter(in_home_sec1=True).count()
-            if not change:
-                if current_home_count >= 2:
-                    from django.contrib import messages
-                    messages.error(request, "A maximum of 2 product groups can be displayed on the home page section 1")
-                    obj.in_home_sec1 = False
-            elif change:
-                if current_home_count >= 2 and not Product_group.objects.get(pk=obj.pk).in_home_sec1:
-                    from django.contrib import messages
-                    messages.error(request, "A maximum of 2 product groups can be displayed on the home page section 1")
-                    obj.in_home_sec1 = False
-        
-        super().save_model(request, obj, form, change)
-    
     class Media:
         js = (
             'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
@@ -40,9 +23,25 @@ class ProductGroupAdmin(TranslationAdmin):
 
 @admin.register(Segments)
 class SegmentsAdmin(TranslationAdmin):
-    list_display = ('title', 'slug')
+    list_display = ('title', 'slug', 'image', 'in_home')
     prepopulated_fields = {'slug': ('title',)}
     search_fields = ('title',)
+
+    def save_model(self, request, obj, form, change):
+        if obj.in_home:
+            current_home_count = Product_group.objects.filter(in_home=True).count()
+            if not change:
+                if current_home_count >= 2:
+                    from django.contrib import messages
+                    messages.error(request, "A maximum of 2 product groups can be displayed on the home page section 1")
+                    obj.in_home = False
+            elif change:
+                if current_home_count >= 2 and not Product_group.objects.get(pk=obj.pk).in_home:
+                    from django.contrib import messages
+                    messages.error(request, "A maximum of 2 product groups can be displayed on the home page section 1")
+                    obj.in_home = False
+        
+        super().save_model(request, obj, form, change)
     
     class Media:
         js = (

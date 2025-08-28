@@ -60,18 +60,18 @@
 
 <section  class="home-catalog container">
     <div class="catalog-grid">
-        {% for product_group in product_groups_sec1 %}
+        {% for segment in segments %}
         <div class="catalog-element">
-            <img src="{{ product_group.image.url }}" alt="{{ product_group.title }}" loading="lazy"/> 
+            <img src="{{ segment.image.url }}" alt="{{ segment.title }}" loading="lazy"/> 
             <div>
-                <h2>{{ product_group.title }}</h2>
-                <a href="{% url 'product:products' %}?product_group={{ product_group.slug }}" aria-label="{{ product_group.title }}">
+                <h2>{{ segment.title }}</h2>
+                <a href="{% url 'product:products' %}?search=&segments={{ segment.slug }}" aria-label="{{ segment.title }}">
                     {% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i></a>
             </div>
         </div>
         {% empty %}
         <div class="catalog-element">
-                <h2>{% trans "No product_group available at the moment" %}</h2>
+                <h2>{% trans "No segment available at the moment" %}</h2>
         </div>
         {% endfor %}
 
