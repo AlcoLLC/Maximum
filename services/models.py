@@ -10,8 +10,8 @@ class Services(models.Model):
     order = models.PositiveIntegerField(default=0)
 
     def clean(self):
-        if not self.pk and Services.objects.count() >= 3:
-            raise ValidationError("Only up to 3 services can be added.")
+        if not self.pk and Services.objects.count() >= 6:
+            raise ValidationError("Only up to 6 services can be added.")
 
     def __str__(self):
         return f"{self.title}"
