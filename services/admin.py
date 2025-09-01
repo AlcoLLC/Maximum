@@ -7,11 +7,11 @@ from .models import (
 
 @admin.register(Services)
 class ServicesAdmin(TranslationAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'in_home', 'in_service_page', 'order')
     search_fields = ('title',)
 
     fields = (
-        'title', 'description', 'image'
+        'title', 'description', 'image', 'in_home', 'in_service_page', 'order'
     )
     
     class Media:
