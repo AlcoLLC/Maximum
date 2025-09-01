@@ -5,7 +5,7 @@ from .models import (
 )
 
 def service_view(request):
-    services = Services.objects.all()
+    services = Services.objects.filter(in_service_page=True).order_by('order')
     service_contents = Service_Content.objects.all() 
     context = {
         'services': services,
