@@ -21,7 +21,7 @@ def home_view(request):
     product_groups_sec2 = Product_group.objects.filter(in_home=True).order_by('order')  
     latest_news = News.objects.filter(in_home=True)
     home_faqs = FAQ.objects.filter(in_home=True)[:4]
-    services = Services.objects.all()
+    services = Services.objects.filter(in_home=True).order_by('order')
     general = General.objects.last()
 
     context = { 

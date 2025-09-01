@@ -5,6 +5,9 @@ class Services(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     image = models.ImageField(upload_to='services/')
+    in_home = models.BooleanField(default=False)
+    in_service_page = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
 
     def clean(self):
         if not self.pk and Services.objects.count() >= 3:
