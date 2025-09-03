@@ -50,22 +50,33 @@
             {% endif %}
 
             <div class="product-properties">
-                <div>
-                    <span>{% trans "Application" %}</span>
-                    <p>{{ product.application }}</p>
-                </div>
-                <div>
+
+                {% if product.product_group %}
+                <div class="application">
                     <span>{% trans "Product type" %}</span>
                     <p>{{ product.product_group }}</p>
                 </div>
-                <div>
+                {% endif %}
+                {% if product.viscosity %}
+                <div class="application">
                     <span>{% trans "Viscosity" %}</span>
                     <p>{{ product.viscosity }}</p>
                 </div>
+                 {% endif %}
                 {% if product.api and product.api != 'Not available' %}
-                <div>
+                <div class="application">
                     <span>{% trans "API Standart" %}</span>
                     <p>{{ product.api }}</p>
+                </div>
+                {% endif %}
+                                {% if product.segments.all %}
+                <div class="application">
+                    <span>{% trans "Segments" %}</span>
+                    <div>
+                    {% for segment in product.segments.all  %}
+                    <p>{{ segment.title }}</p>
+                    {% endfor %}
+                    </div>
                 </div>
                 {% endif %}
             </div>

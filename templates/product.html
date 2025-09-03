@@ -178,10 +178,11 @@
             </a>
             {% else %} {% endif %}
           </div>
-          <div class="product-name">
+          <a  href="{% url 'product:product_detail' slug=product.slug %}"
+              aria-label="{{ product.title }}" class="product-name">
               <h2 class="product-title">{{ product.title|linebreaksbr }}</h2>
               <p class="product-id">{{ product.product_id }}</p>
-          </div>
+          </a>
 
         </div>
 
