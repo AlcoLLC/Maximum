@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% load static %} {% load i18n %} 
 
-{% block title%}{% trans "meta_title_home" %}{% endblock %} 
-{% block description %}{%trans "meta_description_home" %}{%endblock %} 
-{% block keywords %}{%trans "meta_keywords_home" %}{%endblock %}
+{% block title %} {% trans "meta_title_home" %} {% endblock %} 
+{% block description %} {% trans "meta_description_home" %} {% endblock %} 
+{% block keywords %} {% trans "meta_keywords_home" %} {% endblock %}
 
 
-{%block page_css %}
+{% block page_css %}
     <link rel="stylesheet" href="{% static 'assets/css/home.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/map.css' %}" onload="this.rel='stylesheet'"/>
     <link rel="stylesheet" href="{% static 'assets/css/swiper-bundle.min.css' %}" onload="this.rel='stylesheet'" />

@@ -10,6 +10,7 @@ class ContactStepTwo(models.Model):
         ('business-buyer', _('Business Buyer / Company Representative')),
         ('distributor', _('Distributor / Dealer')),
         ('other', _('Other')),
+        
     ]
 
     QUESTION_TYPE_CHOICES = [
