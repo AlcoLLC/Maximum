@@ -62,7 +62,7 @@
                     <span>{% trans "Viscosity" %}</span>
                     <p>{{ product.viscosity }}</p>
                 </div>
-                {% if product.api %}
+                {% if product.api and product.api != 'Not available' %}
                 <div>
                     <span>{% trans "API Standart" %}</span>
                     <p>{{ product.api }}</p>
@@ -72,26 +72,26 @@
 
             <div>
                 <p class="product-desc">{% trans "Description" %}</p>
-                <p class="product-desc">{{ product.description }}</p>
+                <p class="product-desc">{{ product.description|linebreaksbr }}</p>
             </div>
 
             <div>
                 <h3 class="product-desc">{%trans "Specifications & Approvals" %}</h3>
                 <p  class="product-desc">
-                    {% if product.api %}
-                    API <span>{{ product.api }}</span>
+                    {% if product.api and product.api != 'Not available' %}
+                    API <span>{{ product.api }}</span> <br>
                     {% endif %}
-                    {% if product.ilsac %}
-                    ILSAC <span>{{ product.ilsac }}</span>
+                    {% if product.ilsac and product.ilsac != 'Not available' %}
+                    ILSAC <span>{{ product.ilsac }}</span> <br>
                     {% endif %}
-                    {% if product.acea %}
-                    ACEA <span>{{ product.acea }}</span>
+                    {% if product.acea and product.acea != 'Not available' %}
+                    ACEA <span>{{ product.acea }}</span> <br>
                     {% endif %}
-                    {% if product.jaso %}
-                    JASO <span>{{ product.jaso }}</span>
+                    {% if product.jaso and product.jaso != 'Not available' %}
+                    JASO <span>{{ product.jaso }}</span> <br>
                     {% endif %}
-                    {% if product.oem_sertification %}
-                    <span>{{ product.oem_sertification|linebreaksbr }}</span>
+                    {% if product.oem_sertification and product.oem_sertification != 'Not available' %}
+                    <span>{{ product.oem_sertification }}</span>
                     {% endif %}
                 </p>
             </div>
