@@ -116,6 +116,3 @@ class General(models.Model):
     products_description = models.TextField(null=True, blank=True)
     partners_description = models.TextField(null=True, blank=True)
 
-
-    def __str__(self):
-        return self.grow_description[:40]
