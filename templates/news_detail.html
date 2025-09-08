@@ -32,14 +32,14 @@
 
 <section class="news-detail container">
     <h1 >{{ news.title|linebreaksbr }}</h1>
-    <p>{{ news.content|linebreaksbr }}</p>
+    <p>{{ news.content|linebreaksbr|safe }}</p>
     <span>{{ news.published_date|date:"d M Y" }}</span>
     <img loading="lazy" src="{{ news.image.url }}" alt="{{ news.title }}">
 
     {% for content in contents  %}
         <div>
             {% if content.description  %}
-                <p>{{ content.description|linebreaksbr }}</p>
+                <p>{{ content.description|linebreaksbr|safe }}</p>
             {% endif %}
             {% if content.image %}
                 <img loading="lazy" src="{{ content.image.url }}" alt="{{ news.title }}">
