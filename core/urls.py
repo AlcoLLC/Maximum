@@ -36,7 +36,6 @@ def robots_txt(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ckeditor5/', include('django_ckeditor_5.urls')),
     path('i18n/', include('django.conf.urls.i18n')),  
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', robots_txt),
