@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_ckeditor_5',
+    'ckeditor',
+    'ckeditor_uploader',
     'rosetta',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -95,6 +97,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+
 
 TEMPLATES = [
     {
