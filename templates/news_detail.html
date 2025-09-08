@@ -32,7 +32,7 @@
 
 <section class="news-detail container">
     <h1 >{{ news.title|linebreaksbr }}</h1>
-    <p>{{ news.content|linebreaksbr|safe }}</p>
+    <p>{{ news.content|safe }}</p>
     <span>{{ news.published_date|date:"d M Y" }}</span>
     <img loading="lazy" src="{{ news.image.url }}" alt="{{ news.title }}">
 
