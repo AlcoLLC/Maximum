@@ -39,7 +39,7 @@
     {% for content in contents  %}
         <div>
             {% if content.description  %}
-                <p>{{ content.description|linebreaksbr|safe }}</p>
+                <p>{{ content.description|safe }}</p>
             {% endif %}
             {% if content.image %}
                 <img loading="lazy" src="{{ content.image.url }}" alt="{{ news.title }}">
