@@ -40,7 +40,6 @@ urlpatterns = [
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', robots_txt),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-
 ]
 
 urlpatterns += i18n_patterns(
@@ -62,8 +61,10 @@ urlpatterns += [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0] if settings.STATICFILES_DIRS else settings.STATIC_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 handler404 = 'home.views.handler404'
 handler403 = 'home.views.handler403'
