@@ -379,6 +379,17 @@
 </div>
 </section>
 
+ {% if selected_product_groups|length == 1 and product_group_categories %}
+<section class="container">   
+  <div class="product-group-content">
+    {% for category in product_group_categories %}
+      <h2>{{ category.title|safe }}</h2>
+      <p>{{ category.description|safe }}</p>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
 {% endblock %}
 
 {%block page_js %} 
