@@ -59,15 +59,14 @@ else:
 INSTALLED_APPS = [
     'jazzmin',
     'modeltranslation',
+    'ckeditor',
+    'ckeditor_uploader',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_ckeditor_5',
-    'ckeditor',
-    'ckeditor_uploader',
     'rosetta',
     'django.contrib.sites',
     'django.contrib.sitemaps',
@@ -242,17 +241,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
-
-CKEDITOR_5_CONFIGS = {
-    'default': {
-        'toolbar': ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
-        'language': 'en',
-    },
-}
-
-CKEDITOR5_UPLOAD_PATH = "uploads/ckeditor5/"
 
 import logging
 
