@@ -31,7 +31,7 @@
     <div>
         <span>{{ top_news.published_date|date:"d M Y" }}</span>
         <h1>{{ top_news.title|linebreaksbr }}</h1>
-        <p>{{ top_news.content|truncatechars:200 }}</p>
+        <p>{{ top_news.content|truncatechars:200|safe }}</p>
         <a href="{% url 'news:news_detail' slug=top_news.slug %}" class="button-style" aria-label="{{ news.title }}">{% trans "Learn more" %}</a>
     </div>
 </section>
@@ -44,7 +44,7 @@
           <img loading="lazy" src="{{ news.image.url }}" alt="{{ news.title }}">
           <div class="content">
             <h2>{{ news.title|linebreaksbr }}</h2>
-            <p>{{ news.content|truncatechars:130 }}</p>
+            <p>{{ news.content|truncatechars:130|safe }}</p>
             <div>
                 <span>{{ news.published_date|date:"d M Y" }}</span>
                 <p >{% trans "Learn more" %}</p>
