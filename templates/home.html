@@ -260,7 +260,7 @@
                 </div>
                 <div class="slide-content">
                     <h3>{{ news.title|truncatechars:100 }}</h3>
-                    <p>{{ news.content|truncatechars:150 }}</p>
+                    <p>{{ news.content|safe|truncatechars:150 }}</p>
                 </div>
             </a>
             {% endfor %}        
