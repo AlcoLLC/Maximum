@@ -67,12 +67,23 @@ def contact_step_two_view(request):
     }
 
     if request.method == 'POST':
+        # Check if this is an AJAX request
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        
         # Verify reCAPTCHA
         recaptcha_response = request.POST.get('g-recaptcha-response')
         if not recaptcha_response or not verify_recaptcha(recaptcha_response):
-            messages.error(request, _("reCAPTCHA verification failed. Please try again."))
+            error_message = _("reCAPTCHA verification failed. Please try again.")
             logger.warning("Form submission with invalid or missing reCAPTCHA.")
-            return redirect('contact:contact_step_two')
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': False, 
+                    'message': error_message
+                }, status=400)
+            else:
+                messages.error(request, error_message)
+                return redirect('contact:contact_step_two')
 
         client_ip = get_client_ip(request)
         
@@ -80,41 +91,86 @@ def contact_step_two_view(request):
         if client_ip:
             existing_submissions = ContactStepTwo.objects.filter(ip_address=client_ip).count()
             if existing_submissions >= 5:
-                messages.error(request, _("Maximum number of submissions reached from this IP address. Please contact us directly."))
+                error_message = _("Maximum number of submissions reached from this IP address. Please contact us directly.")
                 logger.warning(f"IP address {client_ip} exceeded submission limit (5).")
-                return redirect('contact:contact_step_two')
+                
+                if is_ajax:
+                    return JsonResponse({
+                        'success': False, 
+                        'message': error_message
+                    }, status=429)
+                else:
+                    messages.error(request, error_message)
+                    return redirect('contact:contact_step_two')
 
         # Prepare form data
         form_data = {
-            'first_name': request.POST.get('firstName'),
-            'last_name': request.POST.get('lastName'),
-            'email': request.POST.get('email'),
-            'phone': request.POST.get('phone'),
-            'company': request.POST.get('company'),
-            'region': request.POST.get('region'),
-            'country': request.POST.get('country'),
-            'role': request.POST.get('role'),
-            'annual_volume': request.POST.get('annualVolume'),
-            'question_type': request.POST.get('questionType'),
-            'message': request.POST.get('message'),
+            'first_name': request.POST.get('firstName', '').strip(),
+            'last_name': request.POST.get('lastName', '').strip(),
+            'email': request.POST.get('email', '').strip(),
+            'phone': request.POST.get('phone', '').strip(),
+            'company': request.POST.get('company', '').strip(),
+            'region': request.POST.get('region', '').strip(),
+            'country': request.POST.get('country', '').strip(),
+            'role': request.POST.get('role', '').strip(),
+            'annual_volume': request.POST.get('annualVolume', '').strip(),
+            'question_type': request.POST.get('questionType', '').strip(),
+            'message': request.POST.get('message', '').strip(),
             'privacy_consent': request.POST.get('privacyConsent') == 'on'
         }
 
         # Validate required fields
         required_fields = ['first_name', 'last_name', 'email']
         missing_fields = []
+        field_errors = {}
         
         for field in required_fields:
             if not form_data.get(field):
                 missing_fields.append(form_labels.get(field, field))
+                field_errors[field] = [_("This field is required.")]
         
         if missing_fields:
-            messages.error(request, _("Please fill in all required fields: {}").format(', '.join(missing_fields)))
-            return redirect('contact:contact_step_two')
+            error_message = _("Please fill in all required fields: {}").format(', '.join(missing_fields))
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': False,
+                    'message': error_message,
+                    'errors': field_errors
+                }, status=400)
+            else:
+                messages.error(request, error_message)
+                return redirect('contact:contact_step_two')
 
         if not form_data['privacy_consent']:
-            messages.error(request, _("You must accept the privacy policy to continue."))
-            return redirect('contact:contact_step_two')
+            error_message = _("You must accept the privacy policy to continue.")
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': False,
+                    'message': error_message,
+                    'errors': {'privacy_consent': [error_message]}
+                }, status=400)
+            else:
+                messages.error(request, error_message)
+                return redirect('contact:contact_step_two')
+
+        # Validate email format
+        from django.core.validators import validate_email, ValidationError
+        try:
+            validate_email(form_data['email'])
+        except ValidationError:
+            error_message = _("Please enter a valid email address.")
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': False,
+                    'message': error_message,
+                    'errors': {'email': [error_message]}
+                }, status=400)
+            else:
+                messages.error(request, error_message)
+                return redirect('contact:contact_step_two')
 
         try:
             # Create contact instance
@@ -143,13 +199,29 @@ def contact_step_two_view(request):
                 logger.error(f"Error sending contact emails for {contact.email}: {str(e)}", exc_info=True)
                 # Don't fail the form submission if email fails
                 
-            messages.success(request, _("Your message has been sent successfully. Thank you for contacting us!"))
-            return redirect('/')
+            success_message = _("Your message has been sent successfully. Thank you for contacting us!")
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': True,
+                    'message': success_message
+                })
+            else:
+                messages.success(request, success_message)
+                return redirect('/')
             
         except Exception as e:
             logger.error(f"Error creating contact: {str(e)}", exc_info=True)
-            messages.error(request, _("An error occurred while sending your message. Please try again or contact us directly."))
-            return redirect('contact:contact_step_two')
+            error_message = _("An error occurred while sending your message. Please try again or contact us directly.")
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': False,
+                    'message': error_message
+                }, status=500)
+            else:
+                messages.error(request, error_message)
+                return redirect('contact:contact_step_two')
 
     # GET request - display form
     contact_info = ContactInfo.objects.last()
