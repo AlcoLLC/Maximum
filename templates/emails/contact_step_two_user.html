@@ -1,9 +1,10 @@
+<!-- contact_step_two_user.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Contact Form Submission</title>
+    <title>Thank you for contacting Maximum</title>
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -21,7 +22,7 @@
         overflow: hidden;
       }
       .header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
         color: white;
         padding: 30px 20px;
         text-align: center;
@@ -39,22 +40,27 @@
       .content {
         padding: 30px 20px;
       }
+      .greeting {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 20px;
+      }
       .info-section {
         background-color: #f8f9fa;
-        border-left: 4px solid #667eea;
+        border-left: 4px solid #4CAF50;
         padding: 20px;
         margin: 20px 0;
         border-radius: 0 8px 8px 0;
       }
       .info-section h2 {
-        color: #667eea;
+        color: #4CAF50;
         margin: 0 0 15px 0;
         font-size: 18px;
         display: flex;
         align-items: center;
       }
       .info-section h2::before {
-        content: "👤";
+        content: "📋";
         margin-right: 10px;
         font-size: 20px;
       }
@@ -87,7 +93,7 @@
         margin: 20px 0;
       }
       .message-section h2 {
-        color: #667eea;
+        color: #4CAF50;
         margin: 0 0 15px 0;
         font-size: 18px;
         display: flex;
@@ -102,30 +108,29 @@
         background-color: #f8f9fa;
         padding: 15px;
         border-radius: 6px;
-        border-left: 3px solid #667eea;
+        border-left: 3px solid #4CAF50;
         font-style: italic;
         line-height: 1.7;
       }
-      .priority-badge {
-        display: inline-block;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+      .next-steps {
+        background-color: #e8f5e8;
+        border: 1px solid #4CAF50;
+        border-radius: 6px;
+        padding: 20px;
+        margin: 20px 0;
       }
-      .priority-high {
-        background-color: #ff4757;
-        color: white;
+      .next-steps h3 {
+        color: #2E7D32;
+        margin: 0 0 15px 0;
+        font-size: 16px;
       }
-      .priority-medium {
-        background-color: #ffa726;
-        color: white;
+      .next-steps ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #2E7D32;
       }
-      .priority-low {
-        background-color: #66bb6a;
-        color: white;
+      .next-steps li {
+        margin-bottom: 8px;
       }
       .footer {
         background-color: #f8f9fa;
@@ -161,92 +166,108 @@
   <body>
     <div class="email-container">
       <div class="header">
-        <h1>🆕 New Contact Form Submission</h1>
-        <p>Maximum Contact Form - Admin Notification</p>
+        <h1>✅ Thank You for Contacting Us!</h1>
+        <p>We've received your inquiry and will respond shortly</p>
       </div>
 
       <div class="content">
+        <div class="greeting">
+          Dear {{ contact.first_name }},
+        </div>
+
+        <p>
+          Thank you for reaching out to Maximum! We have successfully received your inquiry and our team will review it promptly. We typically respond to all inquiries within 24 hours during business days.
+        </p>
+
         <div class="timestamp">
-          📅 Received on {{ "now"|date:"F j, Y \at g:i A" }}
+          📅 Submitted on {{ contact.created_at|date:"F j, Y \at g:i A" }}
         </div>
 
         <div class="info-section">
-          <h2>Contact Information</h2>
+          <h2>Your Submission Summary</h2>
           <div class="info-row">
             <span class="info-label">Full Name:</span>
-            <span class="info-value"
-              ><strong>{{ first_name }} {{ last_name }}</strong></span
-            >
-          </div>
-          <div class="info-row">
-            <span class="info-label">Email:</span>
-            <span class="info-value"
-              ><a
-                href="mailto:{{ email }}"
-                style="color: #667eea; text-decoration: none"
-                >{{ email }}</a
-              ></span
-            >
-          </div>
-          <div class="info-row">
-            <span class="info-label">Phone:</span>
-            <span class="info-value"
-              >{{ phone_number|default:"Not provided" }}</span
-            >
-          </div>
-          <div class="info-row">
-            <span class="info-label">Company:</span>
-            <span class="info-value">{{ company|default:"Not provided" }}</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">Help Type:</span>
             <span class="info-value">
-              <span
-                class="priority-badge {% if help_type == 'I would like to buy Maximum products.' %}priority-high{% elif help_type == 'I am interested in becoming a distributor.' %}priority-medium{% else %}priority-low{% endif %}"
-              >
-                {{ help_type }}
-              </span>
+              <strong>{{ contact.first_name }} {{ contact.last_name }}</strong>
             </span>
           </div>
           <div class="info-row">
-            <span class="info-label">IP Address:</span>
-            <span class="info-value">{{ ip_address|default:"Unknown" }}</span>
+            <span class="info-label">Email:</span>
+            <span class="info-value">{{ contact.email }}</span>
           </div>
+          {% if contact.phone %}
+          <div class="info-row">
+            <span class="info-label">Phone:</span>
+            <span class="info-value">{{ contact.phone }}</span>
+          </div>
+          {% endif %}
+          {% if contact.company %}
+          <div class="info-row">
+            <span class="info-label">Company:</span>
+            <span class="info-value">{{ contact.company }}</span>
+          </div>
+          {% endif %}
+          {% if contact.region %}
+          <div class="info-row">
+            <span class="info-label">Region:</span>
+            <span class="info-value">{{ contact.region }}</span>
+          </div>
+          {% endif %}
+          {% if contact.country %}
+          <div class="info-row">
+            <span class="info-label">Country:</span>
+            <span class="info-value">{{ contact.country }}</span>
+          </div>
+          {% endif %}
+          {% if role_display %}
+          <div class="info-row">
+            <span class="info-label">Role:</span>
+            <span class="info-value">{{ role_display }}</span>
+          </div>
+          {% endif %}
+          {% if contact.annual_volume %}
+          <div class="info-row">
+            <span class="info-label">Annual Volume:</span>
+            <span class="info-value">{{ contact.annual_volume }}</span>
+          </div>
+          {% endif %}
+          {% if question_type_display %}
+          <div class="info-row">
+            <span class="info-label">Question Type:</span>
+            <span class="info-value">{{ question_type_display }}</span>
+          </div>
+          {% endif %}
         </div>
 
+        {% if contact.message %}
         <div class="message-section">
-          <h2>Customer Message</h2>
+          <h2>Your Message</h2>
           <div class="message-content">
-            {{ message|linebreaks|default:"No message provided." }}
+            {{ contact.message|linebreaks }}
           </div>
         </div>
+        {% endif %}
 
-        <div
-          style="
-            background-color: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 6px;
-            padding: 15px;
-            margin: 20px 0;
-          "
-        >
-          <p style="margin: 0; font-weight: 600; color: #856404">
-            ⚡ <strong>Action Required:</strong> Please respond to this inquiry
-            within 24 hours to maintain our quality service standards.
-          </p>
+        <div class="next-steps">
+          <h3>🚀 What happens next?</h3>
+          <ul>
+            <li>Our team will review your inquiry within 24 hours</li>
+            <li>You'll receive a personalized response via email</li>
+            <li>If urgent, feel free to call us directly</li>
+            <li>We'll match you with the right specialist for your needs</li>
+          </ul>
         </div>
+
+        <p style="color: #666; font-size: 14px; margin-top: 30px;">
+          If you have any immediate questions or need to update your inquiry, please don't hesitate to contact us directly.
+        </p>
       </div>
 
       <div class="footer">
-        <p>
-          This email was automatically generated by the Maximum website contact
-          form.
-        </p>
-        <p>
-          Please do not reply to this email. Contact the customer directly using
-          the information provided above.
-        </p>
-        <p style="margin-top: 15px; font-size: 11px; color: #999">
+        <p><strong>Maximum Support Team</strong></p>
+        <p>This is an automated confirmation email. Please do not reply to this message.</p>
+        <p>If you need immediate assistance, please contact us through our official channels.</p>
+        <p style="margin-top: 15px; font-size: 11px; color: #999;">
           © {{ "now"|date:"Y" }} Maximum. All rights reserved.
         </p>
       </div>
