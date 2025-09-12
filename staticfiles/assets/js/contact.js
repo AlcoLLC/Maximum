@@ -8,14 +8,14 @@ document.addEventListener("DOMContentLoaded", function () {
       required: true,
       minLength: 2,
       maxLength: 100,
-      pattern: /^[a-zA-Z\s\-'\.]+$/,
+      pattern: /^[a-zA-ZÀ-ÿĀ-žА-я\s\-'\.]+$/u,
       message: "First name is required (minimum 2 characters, letters only)",
     },
     lastName: {
       required: true,
       minLength: 2,
       maxLength: 100,
-      pattern: /^[a-zA-Z\s\-'\.]+$/,
+      pattern: /^[a-zA-ZÀ-ÿĀ-žА-я\s\-'\.]+$/u,
       message: "Last name is required (minimum 2 characters, letters only)",
     },
     email: {
@@ -171,7 +171,8 @@ document.addEventListener("DOMContentLoaded", function () {
       emailField.style.backgroundPosition = "right 12px center";
       emailField.style.backgroundSize = "16px";
       emailField.style.paddingRight = "40px";
-      fetch("/validate-email/", {
+      
+      fetch("/contact/validate-email/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -375,6 +376,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    
     if (!validateForm(true)) {
       showErrorMessage("Please correct the errors above before submitting.");
       const firstErrorField = form.querySelector(".error");
@@ -384,80 +386,125 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       return;
     }
+    
     showLoadingState();
+    
     try {
-      const formData = {
-        first_name: document.getElementById("firstName")?.value?.trim() || "",
-        last_name: document.getElementById("lastName")?.value?.trim() || "",
-        email: document.getElementById("email")?.value?.trim() || "",
-        phone: document.getElementById("phone")?.value?.trim() || "",
-        company: document.getElementById("company")?.value?.trim() || "",
-        region: document.getElementById("region")?.value?.trim() || "",
-        country: document.getElementById("country")?.value?.trim() || "",
-        role: document.getElementById("role")?.value?.trim() || "",
-        annual_volume: document.getElementById("volume")?.value?.trim() || "",
-        question_type:
-          document.getElementById("questionType")?.value?.trim() || "",
-        message: document.getElementById("message")?.value?.trim() || "",
-        privacy_consent: document.getElementById("privacy")?.checked || false,
-      };
+      // Prepare form data for backend
+      const formData = new FormData();
+      formData.append('firstName', document.getElementById("firstName")?.value?.trim() || "");
+      formData.append('lastName', document.getElementById("lastName")?.value?.trim() || "");
+      formData.append('email', document.getElementById("email")?.value?.trim() || "");
+      formData.append('phone', document.getElementById("phone")?.value?.trim() || "");
+      formData.append('company', document.getElementById("company")?.value?.trim() || "");
+      formData.append('region', document.getElementById("region")?.value?.trim() || "");
+      formData.append('country', document.getElementById("country")?.value?.trim() || "");
+      formData.append('role', document.getElementById("role")?.value?.trim() || "");
+      formData.append('annualVolume', document.getElementById("volume")?.value?.trim() || "");
+      formData.append('questionType', document.getElementById("questionType")?.value?.trim() || "");
+      formData.append('message', document.getElementById("message")?.value?.trim() || "");
+      formData.append('privacyConsent', document.getElementById("privacy")?.checked || false);
+      formData.append('csrfmiddlewaretoken', getCSRFToken());
 
-      const response = await fetch("/contact-step-2/", {
+      const response = await fetch(window.location.href, {
         method: "POST",
+        body: formData,
         headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": getCSRFToken(),
           "X-Requested-With": "XMLHttpRequest",
         },
-        body: JSON.stringify(formData),
       });
-      const result = await response.json();
-      if (response.ok && result.success) {
-        showSuccessMessage(
-          result.message ||
-            "Thank you for contacting us! We will get back to you soon."
-        );
-        form.reset();
-        hasAttemptedSubmit = false;
-        Object.keys(validationRules).forEach((fieldId) => {
-          const field = document.getElementById(fieldId);
-          if (field) {
-            clearFieldError(field);
-          }
-        });
-        validateForm(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        if (result.errors && typeof result.errors === "object") {
-          Object.keys(result.errors).forEach((fieldKey) => {
-            const fieldMapping = {
-              first_name: "firstName",
-              last_name: "lastName",
-              email: "email",
-              phone: "phone",
-              company: "company",
-              region: "region",
-              country: "country",
-              role: "role",
-              annual_volume: "volume",
-              question_type: "questionType",
-              message: "message",
-              privacy_consent: "privacy",
-            };
-            const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
-            const field = document.getElementById(frontendFieldId);
-            if (
-              field &&
-              result.errors[fieldKey] &&
-              result.errors[fieldKey].length > 0
-            ) {
-              showFieldError(field, result.errors[fieldKey][0]);
+
+      // Handle different response types
+      let result;
+      const contentType = response.headers.get("content-type");
+      
+      if (contentType && contentType.includes("application/json")) {
+        result = await response.json();
+        
+        if (response.ok && result.success) {
+          showSuccessMessage(
+            result.message ||
+              "Thank you for contacting us! We will get back to you soon."
+          );
+          form.reset();
+          hasAttemptedSubmit = false;
+          Object.keys(validationRules).forEach((fieldId) => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+              clearFieldError(field);
             }
           });
+          validateForm(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          // Handle field-specific errors
+          if (result.errors && typeof result.errors === "object") {
+            Object.keys(result.errors).forEach((fieldKey) => {
+              const fieldMapping = {
+                first_name: "firstName",
+                last_name: "lastName",
+                email: "email",
+                phone: "phone",
+                company: "company",
+                region: "region",
+                country: "country",
+                role: "role",
+                annual_volume: "volume",
+                question_type: "questionType",
+                message: "message",
+                privacy_consent: "privacy",
+              };
+              const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
+              const field = document.getElementById(frontendFieldId);
+              if (
+                field &&
+                result.errors[fieldKey] &&
+                result.errors[fieldKey].length > 0
+              ) {
+                showFieldError(field, result.errors[fieldKey][0]);
+              }
+            });
+          }
+          const errorMessage =
+            result.message || "An error occurred. Please try again.";
+          showErrorMessage(errorMessage);
         }
-        const errorMessage =
-          result.message || "An error occurred. Please try again.";
-        showErrorMessage(errorMessage);
+      } else {
+        // Handle HTML response (traditional form submission with messages)
+        if (response.ok) {
+          // Check if we were redirected (successful submission)
+          if (response.redirected || response.url !== window.location.href) {
+            showSuccessMessage("Thank you for contacting us! We will get back to you soon.");
+            form.reset();
+            hasAttemptedSubmit = false;
+            Object.keys(validationRules).forEach((fieldId) => {
+              const field = document.getElementById(fieldId);
+              if (field) {
+                clearFieldError(field);
+              }
+            });
+            validateForm(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            // Parse HTML for Django messages
+            const text = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
+            const messages = doc.querySelectorAll('.messages .error, .messages .warning');
+            
+            if (messages.length > 0) {
+              let errorMessage = '';
+              messages.forEach(msg => {
+                errorMessage += msg.textContent.trim() + ' ';
+              });
+              showErrorMessage(errorMessage.trim());
+            } else {
+              showErrorMessage("An error occurred. Please try again.");
+            }
+          }
+        } else {
+          showErrorMessage("An error occurred. Please try again.");
+        }
       }
     } catch (error) {
       console.error("Form submission error:", error);

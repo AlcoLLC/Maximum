@@ -6,16 +6,19 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_http_methods
-from .models import ContactStepTwo, ContactInfo
-from .forms import ContactStepTwoForm 
-import logging
-import json
 from django.utils import timezone
 from datetime import timedelta
+from .models import ContactStepTwo, ContactInfo
+import logging
+import json
+import requests
 
+RECAPTCHA_SITE_KEY = getattr(settings, 'RECAPTCHA_SITE_KEY', '')
+RECAPTCHA_SECRET_KEY = getattr(settings, 'RECAPTCHA_SECRET_KEY', '')
 logger = logging.getLogger(__name__)
 
 def get_client_ip(request):
+    """Get client IP address from request"""
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
         ip = x_forwarded_for.split(',')[0].strip()
@@ -23,113 +26,173 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+def verify_recaptcha(recaptcha_response):
+    """Verify reCAPTCHA response"""
+    data = {
+        'secret': RECAPTCHA_SECRET_KEY,
+        'response': recaptcha_response
+    }
+    try:
+        response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data, timeout=5)
+        response.raise_for_status()
+        result = response.json()
+        logger.debug(f"reCAPTCHA verification result: {result}")
+        return result.get('success', False)
+    except requests.RequestException as e:
+        logger.error(f"reCAPTCHA verification error: {str(e)}")
+        return False
+
 def contact_step_two_view(request):
-    is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+    """Contact form view with rate limiting (5 submissions per IP)"""
+    
+    # Prepare form choices and labels for template
+    role_choices = ContactStepTwo.ROLE_CHOICES
+    question_type_choices = ContactStepTwo.QUESTION_TYPE_CHOICES
+    
+    form_labels = {
+        'first_name': _('First Name'),
+        'last_name': _('Last Name'),
+        'email': _('Email'),
+        'phone': _('Mobile Phone'),
+        'company': _('Company'),
+        'region': _('Region'),
+        'country': _('Country'),
+        'role': _('Role'),
+        'annual_volume': _('Annual Volume'),
+        'question_type': _('Type of Question'),
+        'message': _('Message'),
+        'privacy_consent': _('Privacy Policy Consent'),
+        'required': '*',
+        'send_button': _('Send')
+    }
 
     if request.method == 'POST':
+        # Verify reCAPTCHA
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        if not recaptcha_response or not verify_recaptcha(recaptcha_response):
+            messages.error(request, _("reCAPTCHA verification failed. Please try again."))
+            logger.warning("Form submission with invalid or missing reCAPTCHA.")
+            return redirect('contact:contact_step_two')
+
         client_ip = get_client_ip(request)
-        time_threshold = timezone.now() - timedelta(hours=1)
-        recent_submissions_count = ContactStepTwo.objects.filter(
-            ip_address=client_ip,
-            created_at__gte=time_threshold
-        ).count()
         
-        SUBMISSION_LIMIT = 3 
-        if recent_submissions_count >= SUBMISSION_LIMIT:
-            logger.warning(f"Rate limit exceeded for IP: {client_ip}")
-            message = _('You have made too many submissions recently. Please try again later.')
-            return JsonResponse({'success': False, 'message': message}, status=429)
+        # Check IP submission limit (5 submissions allowed)
+        if client_ip:
+            existing_submissions = ContactStepTwo.objects.filter(ip_address=client_ip).count()
+            if existing_submissions >= 5:
+                messages.error(request, _("Maximum number of submissions reached from this IP address. Please contact us directly."))
+                logger.warning(f"IP address {client_ip} exceeded submission limit (5).")
+                return redirect('contact:contact_step_two')
+
+        # Prepare form data
+        form_data = {
+            'first_name': request.POST.get('firstName'),
+            'last_name': request.POST.get('lastName'),
+            'email': request.POST.get('email'),
+            'phone': request.POST.get('phone'),
+            'company': request.POST.get('company'),
+            'region': request.POST.get('region'),
+            'country': request.POST.get('country'),
+            'role': request.POST.get('role'),
+            'annual_volume': request.POST.get('annualVolume'),
+            'question_type': request.POST.get('questionType'),
+            'message': request.POST.get('message'),
+            'privacy_consent': request.POST.get('privacyConsent') == 'on'
+        }
+
+        # Validate required fields
+        required_fields = ['first_name', 'last_name', 'email']
+        missing_fields = []
+        
+        for field in required_fields:
+            if not form_data.get(field):
+                missing_fields.append(form_labels.get(field, field))
+        
+        if missing_fields:
+            messages.error(request, _("Please fill in all required fields: {}").format(', '.join(missing_fields)))
+            return redirect('contact:contact_step_two')
+
+        if not form_data['privacy_consent']:
+            messages.error(request, _("You must accept the privacy policy to continue."))
+            return redirect('contact:contact_step_two')
 
         try:
-            if is_ajax and request.content_type == 'application/json':
-                data = json.loads(request.body)
-            else:
-                data = request.POST
-        except json.JSONDecodeError:
-            return JsonResponse({'success': False, 'message': _('Invalid JSON data.')}, status=400)
-
-        form = ContactStepTwoForm(data)
-        
-        if form.is_valid():
-            contact = form.save(commit=False)
-            contact.ip_address = client_ip
-            contact.save()
+            # Create contact instance
+            contact = ContactStepTwo.objects.create(
+                first_name=form_data['first_name'],
+                last_name=form_data['last_name'],
+                email=form_data['email'],
+                phone=form_data['phone'] or None,
+                company=form_data['company'] or None,
+                region=form_data['region'] or None,
+                country=form_data['country'] or None,
+                role=form_data['role'] or None,
+                annual_volume=form_data['annual_volume'] or None,
+                question_type=form_data['question_type'] or None,
+                message=form_data['message'] or None,
+                privacy_consent=form_data['privacy_consent'],
+                ip_address=client_ip
+            )
             
+            # Send notification emails
             try:
                 send_contact_emails(contact)
                 logger.info(f"Contact form submitted and emails sent successfully for {contact.email}")
-                message = _('Thank you for contacting us! We will get back to you soon.')
-                if not is_ajax:
-                    messages.success(request, message)
-                    return redirect('contact:contact_step_two')
-                return JsonResponse({'success': True, 'message': str(message)})
-            
+                
             except Exception as e:
                 logger.error(f"Error sending contact emails for {contact.email}: {str(e)}", exc_info=True)
-                message = _('Your message was saved, but we encountered an error sending emails. We will still get back to you.')
-                if not is_ajax:
-                    messages.warning(request, message)
-                    return redirect('contact:contact_step_two')
-                return JsonResponse({'success': True, 'message': str(message)})
-
-        else:  
-            logger.warning(f"Form validation failed: {form.errors}")
-            if not is_ajax:
-                context = {'form': form}
-                return render(request, 'contact_step_two.html', context, status=400)
+                # Don't fail the form submission if email fails
+                
+            messages.success(request, _("Your message has been sent successfully. Thank you for contacting us!"))
+            return redirect('/')
             
-            return JsonResponse({
-                'success': False,
-                'errors': form.errors,
-                'message': _('Please correct the errors below.')
-            }, status=400)
+        except Exception as e:
+            logger.error(f"Error creating contact: {str(e)}", exc_info=True)
+            messages.error(request, _("An error occurred while sending your message. Please try again or contact us directly."))
+            return redirect('contact:contact_step_two')
 
-    form = ContactStepTwoForm()
-    context = {'form': form}
+    # GET request - display form
+    contact_info = ContactInfo.objects.last()
+    context = {
+        'role_choices': role_choices,
+        'question_type_choices': question_type_choices,
+        'contact_info': contact_info,
+        'form_labels': form_labels,
+        'recaptcha_site_key': RECAPTCHA_SITE_KEY,
+    }
+    
     return render(request, 'contact_step_two.html', context)
-
-
-def contact_view(request):
-    contact_infos = ContactInfo.objects.all()
-    return render(request, 'contact.html', {'contact_infos': contact_infos})
-
 
 def send_contact_emails(contact):
     """Send both admin notification and user confirmation emails"""
     
-    # Debug logging
     logger.info(f"Starting email send process for contact: {contact.email}")
-    logger.info(f"Email settings - HOST: {settings.EMAIL_HOST}, PORT: {settings.EMAIL_PORT}")
-    logger.info(f"EMAIL_HOST_USER: {settings.EMAIL_HOST_USER}")
-    logger.info(f"CONTACT_EMAIL setting: {getattr(settings, 'CONTACT_EMAIL', 'Not set')}")
+    
+    # Get display values for choices
+    role_display = contact.get_role_display() if contact.role else _('Not specified')
+    question_type_display = contact.get_question_type_display() if contact.question_type else _('Not specified')
     
     # 1. Admin notification email
     try:
         admin_subject = f"New Contact Form Submission - {contact.first_name} {contact.last_name}"
         admin_context = {
             'contact': contact,
-            'role_display': contact.get_role_display() if contact.role else 'Not specified',
-            'question_type_display': contact.get_question_type_display() if contact.question_type else 'Not specified',
+            'role_display': role_display,
+            'question_type_display': question_type_display,
         }
         
-        logger.info(f"Rendering admin email template with context: {admin_context}")
         admin_html_message = render_to_string('emails/contact_step_two_admin.html', admin_context)
         
-        # FIXED: Remove list brackets around from_email
-        # FIXED: Handle CONTACT_EMAIL properly
-        admin_email = getattr(settings, 'CONTACT_EMAIL', 'aytacmehdizade08@gmail.com')
-        if isinstance(admin_email, list):
-            admin_email_list = admin_email
-        else:
-            admin_email_list = [admin_email]
-            
-        logger.info(f"Sending admin email to: {admin_email_list}")
+        # Get admin email from settings
+        admin_emails = getattr(settings, 'CONTACT_EMAIL', ['info@aminol.az'])
+        if isinstance(admin_emails, str):
+            admin_emails = [admin_emails]
         
         send_mail(
             subject=admin_subject,
             message='',  # Plain text fallback
-            from_email=settings.EMAIL_HOST_USER,  # FIXED: Use settings directly
-            recipient_list=admin_email_list,  # FIXED: Proper list format
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=admin_emails,
             html_message=admin_html_message,
             fail_silently=False,
         )
@@ -141,22 +204,29 @@ def send_contact_emails(contact):
     
     # 2. User confirmation email
     try:
-        user_subject = _("Thank you for contacting us - Tomoil")
+        user_subject = _("Thank you for contacting Aminol")
         user_context = {
             'contact': contact,
-            'role_display': contact.get_role_display() if contact.role else 'Not specified',
-            'question_type_display': contact.get_question_type_display() if contact.question_type else 'Not specified',
+            'role_display': role_display,
+            'question_type_display': question_type_display,
         }
         
-        logger.info(f"Rendering user email template with context: {user_context}")
         user_html_message = render_to_string('emails/contact_step_two_user.html', user_context)
         
-        logger.info(f"Sending user confirmation email to: {contact.email}")
+        # Simple plain text message as fallback
+        user_plain_message = f"""
+Dear {contact.first_name},
+
+Thank you for contacting Aminol. We have received your inquiry and our team will get back to you shortly.
+
+Best regards,
+Aminol Support Team
+"""
         
         send_mail(
             subject=user_subject,
-            message='',  # Plain text fallback
-            from_email=settings.EMAIL_HOST_USER,  # FIXED: Use settings directly
+            message=user_plain_message,
+            from_email=settings.EMAIL_HOST_USER,
             recipient_list=[contact.email],
             html_message=user_html_message,
             fail_silently=False,
@@ -171,6 +241,7 @@ def send_contact_emails(contact):
 
 @require_http_methods(["POST"])
 def validate_email_ajax(request):
+    """AJAX endpoint for email validation"""
     try:
         data = json.loads(request.body)
         email = data.get('email', '').strip().lower()
@@ -183,8 +254,22 @@ def validate_email_ajax(request):
     from django.core.validators import validate_email, ValidationError
     try:
         validate_email(email)
+        # Check if email was used before (optional warning)
         if ContactStepTwo.objects.filter(email=email).exists():
-            return JsonResponse({'valid': True, 'warning': True, 'message': _('This email has been used before.')})
+            return JsonResponse({
+                'valid': True, 
+                'warning': True, 
+                'message': _('This email has been used before.')
+            })
         return JsonResponse({'valid': True, 'message': _('Email is valid.')})
     except ValidationError:
-        return JsonResponse({'valid': False, 'message': _('Please enter a valid email address.')})
+        return JsonResponse({
+            'valid': False, 
+            'message': _('Please enter a valid email address.')
+        })
+
+def contact_info_view(request):
+    """Simple view to display contact information"""
+    contact_info = ContactInfo.objects.last()
+    context = {'contact_info': contact_info}
+    return render(request, 'contact.html', context)
