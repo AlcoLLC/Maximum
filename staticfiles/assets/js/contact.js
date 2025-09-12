@@ -374,59 +374,141 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    
-    if (!validateForm(true)) {
-      showErrorMessage("Please correct the errors above before submitting.");
-      const firstErrorField = form.querySelector(".error");
-      if (firstErrorField) {
-        firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-        firstErrorField.focus();
-      }
+ // Replace the form submission section in your JavaScript with this:
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
+  
+  if (!validateForm(true)) {
+    showErrorMessage("Please correct the errors above before submitting.");
+    const firstErrorField = form.querySelector(".error");
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+      firstErrorField.focus();
+    }
+    return;
+  }
+  
+  // Get reCAPTCHA response
+  let recaptchaResponse = '';
+  if (typeof grecaptcha !== 'undefined') {
+    recaptchaResponse = grecaptcha.getResponse();
+    if (!recaptchaResponse) {
+      showErrorMessage("Please complete the reCAPTCHA verification.");
       return;
     }
-    
-    showLoadingState();
-    
-    try {
-      // Prepare form data for backend
-      const formData = new FormData();
-      formData.append('firstName', document.getElementById("firstName")?.value?.trim() || "");
-      formData.append('lastName', document.getElementById("lastName")?.value?.trim() || "");
-      formData.append('email', document.getElementById("email")?.value?.trim() || "");
-      formData.append('phone', document.getElementById("phone")?.value?.trim() || "");
-      formData.append('company', document.getElementById("company")?.value?.trim() || "");
-      formData.append('region', document.getElementById("region")?.value?.trim() || "");
-      formData.append('country', document.getElementById("country")?.value?.trim() || "");
-      formData.append('role', document.getElementById("role")?.value?.trim() || "");
-      formData.append('annualVolume', document.getElementById("volume")?.value?.trim() || "");
-      formData.append('questionType', document.getElementById("questionType")?.value?.trim() || "");
-      formData.append('message', document.getElementById("message")?.value?.trim() || "");
-      formData.append('privacyConsent', document.getElementById("privacy")?.checked || false);
-      formData.append('csrfmiddlewaretoken', getCSRFToken());
+  } else {
+    console.warn("reCAPTCHA not loaded");
+    showErrorMessage("reCAPTCHA verification unavailable. Please refresh the page.");
+    return;
+  }
+  
+  showLoadingState();
+  
+  try {
+    // Prepare form data for backend
+    const formData = new FormData();
+    formData.append('firstName', document.getElementById("firstName")?.value?.trim() || "");
+    formData.append('lastName', document.getElementById("lastName")?.value?.trim() || "");
+    formData.append('email', document.getElementById("email")?.value?.trim() || "");
+    formData.append('phone', document.getElementById("phone")?.value?.trim() || "");
+    formData.append('company', document.getElementById("company")?.value?.trim() || "");
+    formData.append('region', document.getElementById("region")?.value?.trim() || "");
+    formData.append('country', document.getElementById("country")?.value?.trim() || "");
+    formData.append('role', document.getElementById("role")?.value?.trim() || "");
+    formData.append('annualVolume', document.getElementById("volume")?.value?.trim() || "");
+    formData.append('questionType', document.getElementById("questionType")?.value?.trim() || "");
+    formData.append('message', document.getElementById("message")?.value?.trim() || "");
+    formData.append('privacyConsent', document.getElementById("privacy")?.checked ? 'on' : '');
+    formData.append('g-recaptcha-response', recaptchaResponse); // Add reCAPTCHA response
+    formData.append('csrfmiddlewaretoken', getCSRFToken());
 
-      const response = await fetch(window.location.href, {
-        method: "POST",
-        body: formData,
-        headers: {
-          "X-Requested-With": "XMLHttpRequest",
-        },
-      });
+    const response = await fetch(window.location.href, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "X-Requested-With": "XMLHttpRequest",
+      },
+    });
 
-      // Handle different response types
-      let result;
-      const contentType = response.headers.get("content-type");
+    // Handle response
+    let result;
+    const contentType = response.headers.get("content-type");
+    
+    if (contentType && contentType.includes("application/json")) {
+      result = await response.json();
       
-      if (contentType && contentType.includes("application/json")) {
-        result = await response.json();
+      if (response.ok && result.success) {
+        showSuccessMessage(
+          result.message ||
+            "Thank you for contacting us! We will get back to you soon."
+        );
+        form.reset();
         
-        if (response.ok && result.success) {
-          showSuccessMessage(
-            result.message ||
-              "Thank you for contacting us! We will get back to you soon."
-          );
+        // Reset reCAPTCHA
+        if (typeof grecaptcha !== 'undefined') {
+          grecaptcha.reset();
+        }
+        
+        hasAttemptedSubmit = false;
+        Object.keys(validationRules).forEach((fieldId) => {
+          const field = document.getElementById(fieldId);
+          if (field) {
+            clearFieldError(field);
+          }
+        });
+        validateForm(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        // Handle field-specific errors
+        if (result.errors && typeof result.errors === "object") {
+          Object.keys(result.errors).forEach((fieldKey) => {
+            const fieldMapping = {
+              first_name: "firstName",
+              last_name: "lastName",
+              email: "email",
+              phone: "phone",
+              company: "company",
+              region: "region",
+              country: "country",
+              role: "role",
+              annual_volume: "volume",
+              question_type: "questionType",
+              message: "message",
+              privacy_consent: "privacy",
+            };
+            const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
+            const field = document.getElementById(frontendFieldId);
+            if (
+              field &&
+              result.errors[fieldKey] &&
+              result.errors[fieldKey].length > 0
+            ) {
+              showFieldError(field, result.errors[fieldKey][0]);
+            }
+          });
+        }
+        
+        // Reset reCAPTCHA on error
+        if (typeof grecaptcha !== 'undefined') {
+          grecaptcha.reset();
+        }
+        
+        const errorMessage =
+          result.message || "An error occurred. Please try again.";
+        showErrorMessage(errorMessage);
+      }
+    } else {
+      // Handle HTML response (fallback)
+      if (response.ok) {
+        if (response.redirected || response.url !== window.location.href) {
+          showSuccessMessage("Thank you for contacting us! We will get back to you soon.");
           form.reset();
+          
+          // Reset reCAPTCHA
+          if (typeof grecaptcha !== 'undefined') {
+            grecaptcha.reset();
+          }
+          
           hasAttemptedSubmit = false;
           Object.keys(validationRules).forEach((fieldId) => {
             const field = document.getElementById(fieldId);
@@ -437,84 +519,48 @@ document.addEventListener("DOMContentLoaded", function () {
           validateForm(false);
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-          // Handle field-specific errors
-          if (result.errors && typeof result.errors === "object") {
-            Object.keys(result.errors).forEach((fieldKey) => {
-              const fieldMapping = {
-                first_name: "firstName",
-                last_name: "lastName",
-                email: "email",
-                phone: "phone",
-                company: "company",
-                region: "region",
-                country: "country",
-                role: "role",
-                annual_volume: "volume",
-                question_type: "questionType",
-                message: "message",
-                privacy_consent: "privacy",
-              };
-              const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
-              const field = document.getElementById(frontendFieldId);
-              if (
-                field &&
-                result.errors[fieldKey] &&
-                result.errors[fieldKey].length > 0
-              ) {
-                showFieldError(field, result.errors[fieldKey][0]);
-              }
+          // Parse HTML for Django messages
+          const text = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, 'text/html');
+          const messages = doc.querySelectorAll('.messages .error, .messages .warning');
+          
+          if (messages.length > 0) {
+            let errorMessage = '';
+            messages.forEach(msg => {
+              errorMessage += msg.textContent.trim() + ' ';
             });
+            showErrorMessage(errorMessage.trim());
+          } else {
+            showErrorMessage("An error occurred. Please try again.");
           }
-          const errorMessage =
-            result.message || "An error occurred. Please try again.";
-          showErrorMessage(errorMessage);
+          
+          // Reset reCAPTCHA on error
+          if (typeof grecaptcha !== 'undefined') {
+            grecaptcha.reset();
+          }
         }
       } else {
-        // Handle HTML response (traditional form submission with messages)
-        if (response.ok) {
-          // Check if we were redirected (successful submission)
-          if (response.redirected || response.url !== window.location.href) {
-            showSuccessMessage("Thank you for contacting us! We will get back to you soon.");
-            form.reset();
-            hasAttemptedSubmit = false;
-            Object.keys(validationRules).forEach((fieldId) => {
-              const field = document.getElementById(fieldId);
-              if (field) {
-                clearFieldError(field);
-              }
-            });
-            validateForm(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          } else {
-            // Parse HTML for Django messages
-            const text = await response.text();
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(text, 'text/html');
-            const messages = doc.querySelectorAll('.messages .error, .messages .warning');
-            
-            if (messages.length > 0) {
-              let errorMessage = '';
-              messages.forEach(msg => {
-                errorMessage += msg.textContent.trim() + ' ';
-              });
-              showErrorMessage(errorMessage.trim());
-            } else {
-              showErrorMessage("An error occurred. Please try again.");
-            }
-          }
-        } else {
-          showErrorMessage("An error occurred. Please try again.");
+        showErrorMessage("An error occurred. Please try again.");
+        // Reset reCAPTCHA on error
+        if (typeof grecaptcha !== 'undefined') {
+          grecaptcha.reset();
         }
       }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      showErrorMessage(
-        "A network error occurred. Please check your connection and try again."
-      );
-    } finally {
-      hideLoadingState();
     }
-  });
+  } catch (error) {
+    console.error("Form submission error:", error);
+    showErrorMessage(
+      "A network error occurred. Please check your connection and try again."
+    );
+    // Reset reCAPTCHA on error
+    if (typeof grecaptcha !== 'undefined') {
+      grecaptcha.reset();
+    }
+  } finally {
+    hideLoadingState();
+  }
+});
 
   function initializeForm() {
     setupFieldListeners();
