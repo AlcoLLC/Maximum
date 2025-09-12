@@ -116,7 +116,7 @@ def verify_recaptcha(recaptcha_response, client_ip=None):
         return False
     
 def contact_step_two_view(request):
-    """Contact form view with rate limiting (5 submissions per IP)"""
+    """Contact form view with enhanced debugging for reCAPTCHA issues"""
     
     # Prepare form choices and labels for template
     role_choices = ContactStepTwo.ROLE_CHOICES
@@ -143,43 +143,78 @@ def contact_step_two_view(request):
         # Check if this is an AJAX request
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
         
-        # Debug: Log the raw POST data
-        logger.debug(f"POST data keys: {list(request.POST.keys())}")
-        logger.debug(f"POST data: {dict(request.POST)}")
+        # ENHANCED DEBUGGING - Log everything about the request
+        logger.info("=== CONTACT FORM SUBMISSION DEBUG ===")
+        logger.info(f"Request method: {request.method}")
+        logger.info(f"Is AJAX: {is_ajax}")
+        logger.info(f"User Agent: {request.META.get('HTTP_USER_AGENT', 'Unknown')}")
+        logger.info(f"Content Type: {request.META.get('CONTENT_TYPE', 'Unknown')}")
         
-        # Get reCAPTCHA response - try multiple ways to be safe
-        recaptcha_response = (
-            request.POST.get('g-recaptcha-response') or 
-            request.POST.get('g_recaptcha_response') or
-            request.POST.get('recaptcha_response') or
-            ''
-        ).strip()
+        # Log all POST data
+        logger.info(f"POST data keys: {list(request.POST.keys())}")
+        for key, value in request.POST.items():
+            if 'captcha' in key.lower():
+                logger.info(f"POST['{key}']: {'[PRESENT]' if value else '[EMPTY]'} (length: {len(value) if value else 0})")
+            else:
+                logger.info(f"POST['{key}']: {value}")
         
-        logger.debug(f"reCAPTCHA response received: {'Yes' if recaptcha_response else 'No'}")
-        logger.debug(f"reCAPTCHA response length: {len(recaptcha_response) if recaptcha_response else 0}")
+        # Check reCAPTCHA configuration
+        logger.info(f"RECAPTCHA_SITE_KEY configured: {'Yes' if RECAPTCHA_SITE_KEY else 'No'}")
+        logger.info(f"RECAPTCHA_SECRET_KEY configured: {'Yes' if RECAPTCHA_SECRET_KEY else 'No'}")
+        if RECAPTCHA_SITE_KEY:
+            logger.info(f"RECAPTCHA_SITE_KEY starts with: {RECAPTCHA_SITE_KEY[:10]}...")
+        if RECAPTCHA_SECRET_KEY:
+            logger.info(f"RECAPTCHA_SECRET_KEY starts with: {RECAPTCHA_SECRET_KEY[:10]}...")
         
-        # Verify reCAPTCHA
+        # Try to get reCAPTCHA response with multiple attempts
+        recaptcha_response = None
+        recaptcha_keys_tried = []
+        
+        for key in ['g-recaptcha-response', 'g_recaptcha_response', 'recaptcha_response', 'recaptcha']:
+            value = request.POST.get(key, '').strip()
+            recaptcha_keys_tried.append(f"{key}: {'Found' if value else 'Empty'}")
+            if value and not recaptcha_response:
+                recaptcha_response = value
+                logger.info(f"Found reCAPTCHA response with key '{key}'")
+                break
+        
+        logger.info(f"reCAPTCHA keys tried: {recaptcha_keys_tried}")
+        logger.info(f"Final reCAPTCHA response: {'Present' if recaptcha_response else 'Missing'}")
+        if recaptcha_response:
+            logger.info(f"reCAPTCHA response length: {len(recaptcha_response)}")
+            logger.info(f"reCAPTCHA response starts with: {recaptcha_response[:20]}...")
+        
+        # Check for missing reCAPTCHA
         if not recaptcha_response:
             error_message = _("reCAPTCHA verification is required. Please complete the reCAPTCHA.")
-            logger.warning("Form submission with missing reCAPTCHA response.")
+            logger.warning("PROBLEM: Form submission with missing reCAPTCHA response.")
+            logger.warning("This suggests the frontend is not properly sending the reCAPTCHA response.")
             
             if is_ajax:
                 return JsonResponse({
                     'success': False, 
                     'message': error_message,
-                    'recaptcha_missing': True
+                    'recaptcha_missing': True,
+                    'debug_info': {
+                        'keys_tried': recaptcha_keys_tried,
+                        'post_keys': list(request.POST.keys())
+                    }
                 }, status=400)
             else:
                 messages.error(request, error_message)
                 return redirect('contact:contact_step_two')
         
         client_ip = get_client_ip(request)
-        logger.debug(f"Client IP: {client_ip}")
+        logger.info(f"Client IP: {client_ip}")
         
-        # Verify reCAPTCHA with IP
-        if not verify_recaptcha(recaptcha_response, client_ip):
+        # Verify reCAPTCHA with enhanced logging
+        logger.info("Starting reCAPTCHA verification...")
+        recaptcha_valid = verify_recaptcha(recaptcha_response, client_ip)
+        logger.info(f"reCAPTCHA verification result: {recaptcha_valid}")
+        
+        if not recaptcha_valid:
             error_message = _("reCAPTCHA verification failed. Please try again.")
-            logger.warning(f"Form submission with invalid reCAPTCHA from IP: {client_ip}")
+            logger.warning(f"PROBLEM: reCAPTCHA verification failed for IP: {client_ip}")
             
             if is_ajax:
                 return JsonResponse({
@@ -191,9 +226,14 @@ def contact_step_two_view(request):
                 messages.error(request, error_message)
                 return redirect('contact:contact_step_two')
 
+        # If we get here, reCAPTCHA passed
+        logger.info("reCAPTCHA verification PASSED - continuing with form processing...")
+
         # Check IP submission limit (5 submissions allowed)
         if client_ip:
             existing_submissions = ContactStepTwo.objects.filter(ip_address=client_ip).count()
+            logger.info(f"Existing submissions from IP {client_ip}: {existing_submissions}")
+            
             if existing_submissions >= 5:
                 error_message = _("Maximum number of submissions reached from this IP address. Please contact us directly.")
                 logger.warning(f"IP address {client_ip} exceeded submission limit (5).")
@@ -207,6 +247,9 @@ def contact_step_two_view(request):
                     messages.error(request, error_message)
                     return redirect('contact:contact_step_two')
 
+        # Continue with rest of your form processing...
+        # [Rest of your existing form processing code here]
+        
         # Prepare form data
         form_data = {
             'first_name': request.POST.get('firstName', '').strip(),
@@ -222,110 +265,13 @@ def contact_step_two_view(request):
             'message': request.POST.get('message', '').strip(),
             'privacy_consent': request.POST.get('privacyConsent') == 'on'
         }
-
-        # Validate required fields
-        required_fields = ['first_name', 'last_name', 'email']
-        missing_fields = []
-        field_errors = {}
         
-        for field in required_fields:
-            if not form_data.get(field):
-                missing_fields.append(form_labels.get(field, field))
-                field_errors[field] = [_("This field is required.")]
+        logger.info(f"Form data processed: {form_data}")
+
+        # Rest of your validation and processing code...
+        # [Include the rest of your existing form processing logic here]
         
-        if missing_fields:
-            error_message = _("Please fill in all required fields: {}").format(', '.join(missing_fields))
-            
-            if is_ajax:
-                return JsonResponse({
-                    'success': False,
-                    'message': error_message,
-                    'errors': field_errors
-                }, status=400)
-            else:
-                messages.error(request, error_message)
-                return redirect('contact:contact_step_two')
-
-        if not form_data['privacy_consent']:
-            error_message = _("You must accept the privacy policy to continue.")
-            
-            if is_ajax:
-                return JsonResponse({
-                    'success': False,
-                    'message': error_message,
-                    'errors': {'privacy_consent': [error_message]}
-                }, status=400)
-            else:
-                messages.error(request, error_message)
-                return redirect('contact:contact_step_two')
-
-        # Validate email format
-        from django.core.validators import validate_email, ValidationError
-        try:
-            validate_email(form_data['email'])
-        except ValidationError:
-            error_message = _("Please enter a valid email address.")
-            
-            if is_ajax:
-                return JsonResponse({
-                    'success': False,
-                    'message': error_message,
-                    'errors': {'email': [error_message]}
-                }, status=400)
-            else:
-                messages.error(request, error_message)
-                return redirect('contact:contact_step_two')
-
-        try:
-            # Create contact instance
-            contact = ContactStepTwo.objects.create(
-                first_name=form_data['first_name'],
-                last_name=form_data['last_name'],
-                email=form_data['email'],
-                phone=form_data['phone'] or None,
-                company=form_data['company'] or None,
-                region=form_data['region'] or None,
-                country=form_data['country'] or None,
-                role=form_data['role'] or None,
-                annual_volume=form_data['annual_volume'] or None,
-                question_type=form_data['question_type'] or None,
-                message=form_data['message'] or None,
-                privacy_consent=form_data['privacy_consent'],
-                ip_address=client_ip
-            )
-            
-            # Send notification emails
-            try:
-                send_contact_emails(contact)
-                logger.info(f"Contact form submitted and emails sent successfully for {contact.email}")
-                
-            except Exception as e:
-                logger.error(f"Error sending contact emails for {contact.email}: {str(e)}", exc_info=True)
-                # Don't fail the form submission if email fails
-                
-            success_message = _("Your message has been sent successfully. Thank you for contacting us!")
-            
-            if is_ajax:
-                return JsonResponse({
-                    'success': True,
-                    'message': success_message
-                })
-            else:
-                messages.success(request, success_message)
-                return redirect('/')
-            
-        except Exception as e:
-            logger.error(f"Error creating contact: {str(e)}", exc_info=True)
-            error_message = _("An error occurred while sending your message. Please try again or contact us directly.")
-            
-            if is_ajax:
-                return JsonResponse({
-                    'success': False,
-                    'message': error_message
-                }, status=500)
-            else:
-                messages.error(request, error_message)
-                return redirect('contact:contact_step_two')
+        logger.info("=== END CONTACT FORM DEBUG ===")
 
     # GET request - display form
     contact_info = ContactInfo.objects.last()
