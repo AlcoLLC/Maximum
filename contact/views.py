@@ -13,8 +13,8 @@ import logging
 import json
 import requests
 
-RECAPTCHA_SITE_KEY = getattr(settings, 'RECAPTCHA_SITE_KEY', '')
-RECAPTCHA_SECRET_KEY = getattr(settings, 'RECAPTCHA_SECRET_KEY', '')
+RECAPTCHA_SITE_KEY = settings.RECAPTCHA_SITE_KEY
+RECAPTCHA_SECRET_KEY = settings.RECAPTCHA_SECRET_KEY
 logger = logging.getLogger(__name__)
 
 def get_client_ip(request):
