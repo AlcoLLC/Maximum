@@ -26,93 +26,19 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
-def verify_recaptcha(recaptcha_response, client_ip=None):
-    """Verify reCAPTCHA response with better error handling and debugging"""
-    
-    if not recaptcha_response:
-        logger.warning("Empty reCAPTCHA response received")
-        return False
-    
-    if not RECAPTCHA_SECRET_KEY:
-        logger.error("RECAPTCHA_SECRET_KEY not configured")
-        return False
-    
-    # Clean the response
-    recaptcha_response = recaptcha_response.strip()
-    
-    if len(recaptcha_response) < 20:  # reCAPTCHA responses are usually much longer
-        logger.warning(f"reCAPTCHA response seems too short: {len(recaptcha_response)} characters")
-        return False
-    
+def verify_recaptcha(recaptcha_response):
     data = {
         'secret': RECAPTCHA_SECRET_KEY,
         'response': recaptcha_response
     }
-    
-    # Add IP address if available (optional but recommended)
-    if client_ip:
-        data['remoteip'] = client_ip
-    
-    logger.debug(f"Sending reCAPTCHA verification request with IP: {client_ip}")
-    
     try:
-        response = requests.post(
-            'https://www.google.com/recaptcha/api/siteverify', 
-            data=data, 
-            timeout=15  # Increased timeout
-        )
-        
-        logger.debug(f"reCAPTCHA verification HTTP status: {response.status_code}")
+        response = requests.post('https://www.google.com/recaptcha/api/siteverify', data=data, timeout=5)
         response.raise_for_status()
-        
         result = response.json()
         logger.debug(f"reCAPTCHA verification result: {result}")
-        
-        # Check for specific error codes
-        if not result.get('success', False):
-            error_codes = result.get('error-codes', [])
-            logger.warning(f"reCAPTCHA verification failed with error codes: {error_codes}")
-            
-            # Log specific error meanings for debugging
-            error_meanings = {
-                'missing-input-secret': 'The secret parameter is missing',
-                'invalid-input-secret': 'The secret parameter is invalid or malformed',
-                'missing-input-response': 'The response parameter is missing',
-                'invalid-input-response': 'The response parameter is invalid or malformed',
-                'bad-request': 'The request is invalid or malformed',
-                'timeout-or-duplicate': 'The response is no longer valid (timeout or duplicate)',
-            }
-            
-            for code in error_codes:
-                meaning = error_meanings.get(code, f'Unknown error: {code}')
-                logger.warning(f"reCAPTCHA error {code}: {meaning}")
-            
-            return False
-        
-        # Additional validation - check score if using v3
-        score = result.get('score', 1.0)  # v2 doesn't have score, default to 1.0
-        if score < 0.5:  # Adjust threshold as needed
-            logger.warning(f"reCAPTCHA score too low: {score}")
-            # You might want to return True here depending on your security requirements
-            # For now, we'll accept it but log the low score
-        
-        logger.info(f"reCAPTCHA verification successful. Score: {score}")
-        return True
-        
-    except requests.Timeout:
-        logger.error("reCAPTCHA verification timeout")
-        return False
-    except requests.HTTPError as e:
-        logger.error(f"reCAPTCHA verification HTTP error: {e.response.status_code} - {e.response.text}")
-        return False
+        return result.get('success', False)
     except requests.RequestException as e:
-        logger.error(f"reCAPTCHA verification network error: {str(e)}")
-        return False
-    except ValueError as e:
-        logger.error(f"reCAPTCHA verification JSON decode error: {str(e)}")
-        return False
-    except Exception as e:
-        logger.error(f"reCAPTCHA verification unexpected error: {str(e)}", exc_info=True)
+        logger.error(f"reCAPTCHA verification error: {str(e)}")
         return False
     
 def contact_step_two_view(request):
