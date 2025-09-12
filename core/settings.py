@@ -24,34 +24,44 @@ load_dotenv(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-jk1k4j+@9z4e(o8+n*gddg4b5ft4$!_tm%b6wtcag7%*%pa+7c'
-# SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-jk1k4j+@9z4e(o8+n*gddg4b5ft4$!_tm%b6wtcag7%*%pa+7c')
-
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = os.getenv('SECRET_KEY', 'dummy-secret')
 DEBUG = os.getenv('DEBUG', 'true').strip().lower() in ['true', '1', 'yes']
-if DEBUG:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-    CORS_ALLOWED_ORIGINS = [
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-    ]
-    CSRF_TRUSTED_ORIGINS = [
-        'http://localhost:8000',
-        'http://127.0.0.1:8000',
-    ]
-else:
-    ALLOWED_HOSTS = ['*']
-    CORS_ALLOWED_ORIGINS = [
-        'http://65.108.93.160',
-        "https://65.108.93.160",
-        'http://65.108.93.160:100',
-        "https://65.108.93.160:100",
-    ]
+ALLOWED_HOSTS = ['*']
 
-    CSRF_TRUSTED_ORIGINS = [
-        'http://65.108.93.160',
-        "https://65.108.93.160"
-    ]
+USE_POSTGRES = os.getenv('USE_POSTGRES', 'false').lower() == 'true'
+
+if USE_POSTGRES:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('POSTGRES_DB'),
+            'USER': os.getenv('POSTGRES_USER'),
+            'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+            'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+            'PORT': os.getenv('POSTGRES_PORT', '5432'),
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://65.108.93.160',
+    "https://65.108.93.160",
+    'http://65.108.93.160:100',,
+    "https://65.108.93.160:100",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://65.108.93.160',
+    "https://65.108.93.160"
+]
+    
 
 
 # Application definition
