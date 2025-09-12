@@ -374,7 +374,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
- // Replace the form submission section in your JavaScript with this:
+ // Replace the form submission section in your JavaScript with this improved version:
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
   
@@ -388,25 +388,52 @@ form.addEventListener("submit", async function (e) {
     return;
   }
   
-  // Get reCAPTCHA response
+  // Get reCAPTCHA response with better error handling
   let recaptchaResponse = '';
-  if (typeof grecaptcha !== 'undefined') {
+  
+  // Check if reCAPTCHA is loaded
+  if (typeof grecaptcha === 'undefined') {
+    console.error("reCAPTCHA not loaded");
+    showErrorMessage("reCAPTCHA is not loaded. Please refresh the page and try again.");
+    return;
+  }
+  
+  try {
     recaptchaResponse = grecaptcha.getResponse();
-    if (!recaptchaResponse) {
-      showErrorMessage("Please complete the reCAPTCHA verification.");
+    console.log("reCAPTCHA response length:", recaptchaResponse ? recaptchaResponse.length : 0);
+    
+    if (!recaptchaResponse || recaptchaResponse.length === 0) {
+      showErrorMessage("Please complete the reCAPTCHA verification before submitting.");
+      
+      // Scroll to reCAPTCHA
+      const recaptchaElement = document.querySelector('.g-recaptcha');
+      if (recaptchaElement) {
+        recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        
+        // Add visual indication
+        recaptchaElement.style.border = "2px solid #e74c3c";
+        recaptchaElement.style.borderRadius = "4px";
+        setTimeout(() => {
+          recaptchaElement.style.border = "";
+          recaptchaElement.style.borderRadius = "";
+        }, 3000);
+      }
+      
       return;
     }
-  } else {
-    console.warn("reCAPTCHA not loaded");
-    showErrorMessage("reCAPTCHA verification unavailable. Please refresh the page.");
+  } catch (error) {
+    console.error("Error getting reCAPTCHA response:", error);
+    showErrorMessage("reCAPTCHA verification failed. Please refresh the page and try again.");
     return;
   }
   
   showLoadingState();
   
   try {
-    // Prepare form data for backend
+    // Prepare form data for backend - make sure field names match exactly
     const formData = new FormData();
+    
+    // Add form fields
     formData.append('firstName', document.getElementById("firstName")?.value?.trim() || "");
     formData.append('lastName', document.getElementById("lastName")?.value?.trim() || "");
     formData.append('email', document.getElementById("email")?.value?.trim() || "");
@@ -419,9 +446,17 @@ form.addEventListener("submit", async function (e) {
     formData.append('questionType', document.getElementById("questionType")?.value?.trim() || "");
     formData.append('message', document.getElementById("message")?.value?.trim() || "");
     formData.append('privacyConsent', document.getElementById("privacy")?.checked ? 'on' : '');
-    formData.append('g-recaptcha-response', recaptchaResponse); // Add reCAPTCHA response
+    
+    // Add reCAPTCHA response - try multiple field names to be safe
+    formData.append('g-recaptcha-response', recaptchaResponse);
+    formData.append('g_recaptcha_response', recaptchaResponse);
+    formData.append('recaptcha_response', recaptchaResponse);
+    
+    // Add CSRF token
     formData.append('csrfmiddlewaretoken', getCSRFToken());
-
+    
+    console.log("Submitting form with reCAPTCHA response:", recaptchaResponse.substring(0, 20) + "...");
+    
     const response = await fetch(window.location.href, {
       method: "POST",
       body: formData,
@@ -436,6 +471,7 @@ form.addEventListener("submit", async function (e) {
     
     if (contentType && contentType.includes("application/json")) {
       result = await response.json();
+      console.log("Server response:", result);
       
       if (response.ok && result.success) {
         showSuccessMessage(
@@ -445,8 +481,10 @@ form.addEventListener("submit", async function (e) {
         form.reset();
         
         // Reset reCAPTCHA
-        if (typeof grecaptcha !== 'undefined') {
+        try {
           grecaptcha.reset();
+        } catch (e) {
+          console.warn("Could not reset reCAPTCHA:", e);
         }
         
         hasAttemptedSubmit = false;
@@ -458,44 +496,86 @@ form.addEventListener("submit", async function (e) {
         });
         validateForm(false);
         window.scrollTo({ top: 0, behavior: "smooth" });
+        
       } else {
-        // Handle field-specific errors
-        if (result.errors && typeof result.errors === "object") {
-          Object.keys(result.errors).forEach((fieldKey) => {
-            const fieldMapping = {
-              first_name: "firstName",
-              last_name: "lastName",
-              email: "email",
-              phone: "phone",
-              company: "company",
-              region: "region",
-              country: "country",
-              role: "role",
-              annual_volume: "volume",
-              question_type: "questionType",
-              message: "message",
-              privacy_consent: "privacy",
-            };
-            const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
-            const field = document.getElementById(frontendFieldId);
-            if (
-              field &&
-              result.errors[fieldKey] &&
-              result.errors[fieldKey].length > 0
-            ) {
-              showFieldError(field, result.errors[fieldKey][0]);
-            }
-          });
+        // Handle specific error types
+        if (result.recaptcha_missing) {
+          showErrorMessage("reCAPTCHA verification is missing. Please complete the reCAPTCHA.");
+          
+          // Highlight reCAPTCHA
+          const recaptchaElement = document.querySelector('.g-recaptcha');
+          if (recaptchaElement) {
+            recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
+            recaptchaElement.style.border = "2px solid #e74c3c";
+            recaptchaElement.style.borderRadius = "4px";
+            setTimeout(() => {
+              recaptchaElement.style.border = "";
+              recaptchaElement.style.borderRadius = "";
+            }, 5000);
+          }
+          
+        } else if (result.recaptcha_failed) {
+          showErrorMessage("reCAPTCHA verification failed. Please try again.");
+          
+          // Reset and highlight reCAPTCHA
+          try {
+            grecaptcha.reset();
+          } catch (e) {
+            console.warn("Could not reset reCAPTCHA:", e);
+          }
+          
+          const recaptchaElement = document.querySelector('.g-recaptcha');
+          if (recaptchaElement) {
+            recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
+            recaptchaElement.style.border = "2px solid #e74c3c";
+            recaptchaElement.style.borderRadius = "4px";
+            setTimeout(() => {
+              recaptchaElement.style.border = "";
+              recaptchaElement.style.borderRadius = "";
+            }, 5000);
+          }
+          
+        } else {
+          // Handle field-specific errors
+          if (result.errors && typeof result.errors === "object") {
+            Object.keys(result.errors).forEach((fieldKey) => {
+              const fieldMapping = {
+                first_name: "firstName",
+                last_name: "lastName",
+                email: "email",
+                phone: "phone",
+                company: "company",
+                region: "region",
+                country: "country",
+                role: "role",
+                annual_volume: "volume",
+                question_type: "questionType",
+                message: "message",
+                privacy_consent: "privacy",
+              };
+              const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
+              const field = document.getElementById(frontendFieldId);
+              if (
+                field &&
+                result.errors[fieldKey] &&
+                result.errors[fieldKey].length > 0
+              ) {
+                showFieldError(field, result.errors[fieldKey][0]);
+              }
+            });
+          }
+          
+          // Reset reCAPTCHA on any error
+          try {
+            grecaptcha.reset();
+          } catch (e) {
+            console.warn("Could not reset reCAPTCHA:", e);
+          }
+          
+          const errorMessage =
+            result.message || "An error occurred. Please try again.";
+          showErrorMessage(errorMessage);
         }
-        
-        // Reset reCAPTCHA on error
-        if (typeof grecaptcha !== 'undefined') {
-          grecaptcha.reset();
-        }
-        
-        const errorMessage =
-          result.message || "An error occurred. Please try again.";
-        showErrorMessage(errorMessage);
       }
     } else {
       // Handle HTML response (fallback)
@@ -505,8 +585,10 @@ form.addEventListener("submit", async function (e) {
           form.reset();
           
           // Reset reCAPTCHA
-          if (typeof grecaptcha !== 'undefined') {
+          try {
             grecaptcha.reset();
+          } catch (e) {
+            console.warn("Could not reset reCAPTCHA:", e);
           }
           
           hasAttemptedSubmit = false;
@@ -536,15 +618,21 @@ form.addEventListener("submit", async function (e) {
           }
           
           // Reset reCAPTCHA on error
-          if (typeof grecaptcha !== 'undefined') {
+          try {
             grecaptcha.reset();
+          } catch (e) {
+            console.warn("Could not reset reCAPTCHA:", e);
           }
         }
       } else {
-        showErrorMessage("An error occurred. Please try again.");
+        console.error("HTTP Error:", response.status, response.statusText);
+        showErrorMessage(`Server error (${response.status}). Please try again.`);
+        
         // Reset reCAPTCHA on error
-        if (typeof grecaptcha !== 'undefined') {
+        try {
           grecaptcha.reset();
+        } catch (e) {
+          console.warn("Could not reset reCAPTCHA:", e);
         }
       }
     }
@@ -553,9 +641,12 @@ form.addEventListener("submit", async function (e) {
     showErrorMessage(
       "A network error occurred. Please check your connection and try again."
     );
+    
     // Reset reCAPTCHA on error
-    if (typeof grecaptcha !== 'undefined') {
+    try {
       grecaptcha.reset();
+    } catch (e) {
+      console.warn("Could not reset reCAPTCHA:", e);
     }
   } finally {
     hideLoadingState();
