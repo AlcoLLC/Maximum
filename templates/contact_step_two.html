@@ -30,7 +30,7 @@
       way.
     </p>
 
-    <form  action="{% url 'contact:contact_step_two' %}" method="POST" id="contactForm">
+    <form method="POST" id="contactForm">
       {% csrf_token %}
       <div class="form-group">
         <label for="firstName">FIRST NAME</label>

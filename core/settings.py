@@ -278,8 +278,6 @@ EMAIL_TIMEOUT = 30
 RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY')
 RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')
 
-if not RECAPTCHA_SITE_KEY or not RECAPTCHA_SECRET_KEY:
-    print("WARNING: reCAPTCHA keys are not properly configured!")
 
 LOGGING = {
     'version': 1,
