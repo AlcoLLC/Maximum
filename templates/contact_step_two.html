@@ -5,7 +5,6 @@
 {% block page_css %}
 
 <link rel="stylesheet" href="{% static 'assets/css/contact_step_two.css' %}" />
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 {% endblock %} {% block content %}
 
@@ -32,6 +31,7 @@
     </p>
 
     <form id="contactForm">
+      {% csrf_token %}
       <div class="form-group">
         <label for="firstName">FIRST NAME</label>
         <input type="text" id="firstName" name="firstName" required />
