@@ -250,13 +250,21 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = config('EMAIL_PORT', cast=int)
 EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 CONTACT_EMAIL = config('CONTACT_EMAIL', default=EMAIL_HOST_USER)
-SERVER_EMAIL = 'aytacmehdizade08@gmail.com'
+SERVER_EMAIL = config('SERVER_EMAIL', default=EMAIL_HOST_USER)
 
 EMAIL_TIMEOUT = 30
+
+RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY', default='')
+RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY', default='')
+
+if not RECAPTCHA_SITE_KEY or not RECAPTCHA_SECRET_KEY:
+    print("WARNING: reCAPTCHA keys are not properly configured!")
 
 LOGGING = {
     'version': 1,
@@ -273,20 +281,20 @@ LOGGING = {
     },
     'handlers': {
         'file': {
-            'level': 'INFO',
+            'level': 'DEBUG',  # Changed to DEBUG for better troubleshooting
             'class': 'logging.FileHandler',
             'filename': BASE_DIR / 'debug.log',
             'formatter': 'verbose',
         },
         'console': {
-            'level': 'INFO',
+            'level': 'DEBUG' if DEBUG else 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'simple',
         },
     },
     'root': {
         'handlers': ['console', 'file'],
-        'level': 'INFO',
+        'level': 'DEBUG' if DEBUG else 'INFO',
     },
     'loggers': {
         'django': {
@@ -294,16 +302,18 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-        'contact.views': {  # Your app logger
+        'contact.views': {  # Your contact app logger
             'handlers': ['console', 'file'],
-            'level': 'INFO',
+            'level': 'DEBUG',  # Detailed logging for contact views
+            'propagate': True,
+        },
+        'requests': {  # For reCAPTCHA API calls
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
             'propagate': True,
         },
     },
 }
-
-RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY')
-RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY')
 
 
 CONTACT_FORM_SETTINGS = {
