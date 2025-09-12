@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
       emailField.style.backgroundSize = "16px";
       emailField.style.paddingRight = "40px";
       
-      fetch("/contact/validate-email/", {
+      fetch("/validate-email/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
