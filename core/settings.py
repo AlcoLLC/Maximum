@@ -53,13 +53,17 @@ else:
 CORS_ALLOWED_ORIGINS = [
     'http://65.108.93.160',
     "https://65.108.93.160",
-    'http://65.108.93.160:100',,
+    'http://65.108.93.160:100',
     "https://65.108.93.160:100",
+    'https://maximumlube.com',
+    'http://maximumlube.com'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://65.108.93.160',
-    "https://65.108.93.160"
+    "https://65.108.93.160",
+    'https://maximumlube.com',
+    'http://maximumlube.com'
 ]
     
 
