@@ -5,6 +5,7 @@
 {% block page_css %}
 
 <link rel="stylesheet" href="{% static 'assets/css/contact_step_two.css' %}" />
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 {% endblock %} {% block content %}
 
@@ -116,7 +117,9 @@
           </label>
         </div>
       </div>
-
+<div class="form-group">
+    <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+</div>
       <button type="submit" class="submit-btn">Submit</button>
     </form>
   </div>
@@ -128,4 +131,6 @@
 
 {% endblock %} {%block page_js %}
 <script src="{% static 'assets/js/contact.js' %}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 {% endblock %}
