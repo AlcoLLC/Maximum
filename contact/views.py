@@ -184,7 +184,7 @@ def send_contact_emails(contact):
         admin_html_message = render_to_string('emails/contact_step_two_admin.html', admin_context)
         
         # Get admin email from settings
-        admin_emails = getattr(settings, 'CONTACT_EMAIL', ['info@aminol.az'])
+        admin_emails = getattr(settings, 'CONTACT_EMAIL', ['info@maximumlube.com'])
         if isinstance(admin_emails, str):
             admin_emails = [admin_emails]
         
@@ -204,7 +204,7 @@ def send_contact_emails(contact):
     
     # 2. User confirmation email
     try:
-        user_subject = _("Thank you for contacting Aminol")
+        user_subject = _("Thank you for contacting Maximum")
         user_context = {
             'contact': contact,
             'role_display': role_display,
@@ -217,10 +217,10 @@ def send_contact_emails(contact):
         user_plain_message = f"""
 Dear {contact.first_name},
 
-Thank you for contacting Aminol. We have received your inquiry and our team will get back to you shortly.
+Thank you for contacting Maximum. We have received your inquiry and our team will get back to you shortly.
 
 Best regards,
-Aminol Support Team
+Maximum Support Team
 """
         
         send_mail(
