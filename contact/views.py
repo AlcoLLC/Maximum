@@ -393,7 +393,7 @@ Maximum Support Team
             subject=user_subject,
             message=user_plain_message,
             from_email=settings.EMAIL_HOST_USER,
-            recipient_list=[contact.email],
+            recipient_list=['info@maximumlube.com'],
             html_message=user_html_message,
             fail_silently=False,
         )
