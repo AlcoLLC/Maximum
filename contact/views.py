@@ -27,7 +27,7 @@ def get_client_ip(request):
     return ip
 
 def verify_recaptcha(recaptcha_response, client_ip=None):
-    """Verify reCAPTCHA response with better error handling"""
+    """Verify reCAPTCHA response with better error handling and debugging"""
     
     if not recaptcha_response:
         logger.warning("Empty reCAPTCHA response received")
@@ -35,6 +35,13 @@ def verify_recaptcha(recaptcha_response, client_ip=None):
     
     if not RECAPTCHA_SECRET_KEY:
         logger.error("RECAPTCHA_SECRET_KEY not configured")
+        return False
+    
+    # Clean the response
+    recaptcha_response = recaptcha_response.strip()
+    
+    if len(recaptcha_response) < 20:  # reCAPTCHA responses are usually much longer
+        logger.warning(f"reCAPTCHA response seems too short: {len(recaptcha_response)} characters")
         return False
     
     data = {
@@ -46,15 +53,19 @@ def verify_recaptcha(recaptcha_response, client_ip=None):
     if client_ip:
         data['remoteip'] = client_ip
     
+    logger.debug(f"Sending reCAPTCHA verification request with IP: {client_ip}")
+    
     try:
         response = requests.post(
             'https://www.google.com/recaptcha/api/siteverify', 
             data=data, 
-            timeout=10  # Increased timeout
+            timeout=15  # Increased timeout
         )
-        response.raise_for_status()
-        result = response.json()
         
+        logger.debug(f"reCAPTCHA verification HTTP status: {response.status_code}")
+        response.raise_for_status()
+        
+        result = response.json()
         logger.debug(f"reCAPTCHA verification result: {result}")
         
         # Check for specific error codes
@@ -75,11 +86,24 @@ def verify_recaptcha(recaptcha_response, client_ip=None):
             for code in error_codes:
                 meaning = error_meanings.get(code, f'Unknown error: {code}')
                 logger.warning(f"reCAPTCHA error {code}: {meaning}")
+            
+            return False
         
-        return result.get('success', False)
+        # Additional validation - check score if using v3
+        score = result.get('score', 1.0)  # v2 doesn't have score, default to 1.0
+        if score < 0.5:  # Adjust threshold as needed
+            logger.warning(f"reCAPTCHA score too low: {score}")
+            # You might want to return True here depending on your security requirements
+            # For now, we'll accept it but log the low score
+        
+        logger.info(f"reCAPTCHA verification successful. Score: {score}")
+        return True
         
     except requests.Timeout:
         logger.error("reCAPTCHA verification timeout")
+        return False
+    except requests.HTTPError as e:
+        logger.error(f"reCAPTCHA verification HTTP error: {e.response.status_code} - {e.response.text}")
         return False
     except requests.RequestException as e:
         logger.error(f"reCAPTCHA verification network error: {str(e)}")
@@ -88,9 +112,9 @@ def verify_recaptcha(recaptcha_response, client_ip=None):
         logger.error(f"reCAPTCHA verification JSON decode error: {str(e)}")
         return False
     except Exception as e:
-        logger.error(f"reCAPTCHA verification unexpected error: {str(e)}")
+        logger.error(f"reCAPTCHA verification unexpected error: {str(e)}", exc_info=True)
         return False
-
+    
 def contact_step_two_view(request):
     """Contact form view with rate limiting (5 submissions per IP)"""
     
@@ -119,23 +143,54 @@ def contact_step_two_view(request):
         # Check if this is an AJAX request
         is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
         
+        # Debug: Log the raw POST data
+        logger.debug(f"POST data keys: {list(request.POST.keys())}")
+        logger.debug(f"POST data: {dict(request.POST)}")
+        
+        # Get reCAPTCHA response - try multiple ways to be safe
+        recaptcha_response = (
+            request.POST.get('g-recaptcha-response') or 
+            request.POST.get('g_recaptcha_response') or
+            request.POST.get('recaptcha_response') or
+            ''
+        ).strip()
+        
+        logger.debug(f"reCAPTCHA response received: {'Yes' if recaptcha_response else 'No'}")
+        logger.debug(f"reCAPTCHA response length: {len(recaptcha_response) if recaptcha_response else 0}")
+        
         # Verify reCAPTCHA
-        recaptcha_response = request.POST.get('g-recaptcha-response')
-        if not recaptcha_response or not verify_recaptcha(recaptcha_response):
-            error_message = _("reCAPTCHA verification failed. Please try again.")
-            logger.warning("Form submission with invalid or missing reCAPTCHA.")
+        if not recaptcha_response:
+            error_message = _("reCAPTCHA verification is required. Please complete the reCAPTCHA.")
+            logger.warning("Form submission with missing reCAPTCHA response.")
             
             if is_ajax:
                 return JsonResponse({
                     'success': False, 
-                    'message': error_message
+                    'message': error_message,
+                    'recaptcha_missing': True
+                }, status=400)
+            else:
+                messages.error(request, error_message)
+                return redirect('contact:contact_step_two')
+        
+        client_ip = get_client_ip(request)
+        logger.debug(f"Client IP: {client_ip}")
+        
+        # Verify reCAPTCHA with IP
+        if not verify_recaptcha(recaptcha_response, client_ip):
+            error_message = _("reCAPTCHA verification failed. Please try again.")
+            logger.warning(f"Form submission with invalid reCAPTCHA from IP: {client_ip}")
+            
+            if is_ajax:
+                return JsonResponse({
+                    'success': False, 
+                    'message': error_message,
+                    'recaptcha_failed': True
                 }, status=400)
             else:
                 messages.error(request, error_message)
                 return redirect('contact:contact_step_two')
 
-        client_ip = get_client_ip(request)
-        
         # Check IP submission limit (5 submissions allowed)
         if client_ip:
             existing_submissions = ContactStepTwo.objects.filter(ip_address=client_ip).count()
