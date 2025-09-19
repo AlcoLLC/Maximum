@@ -26,8 +26,10 @@ load_dotenv(BASE_DIR / ".env")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'dummy-secret')
 DEBUG = os.getenv('DEBUG', 'true').strip().lower() in ['true', '1', 'yes']
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['maximumlube.com', 'www.maximumlube.com', '65.108.93.160']
+if DEBUG:
+    ALLOWED_HOSTS.extend(['127.0.0.1', 'localhost'])
+    
 USE_POSTGRES = os.getenv('USE_POSTGRES', 'false').lower() == 'true'
 
 if USE_POSTGRES:
@@ -100,7 +102,6 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware', 
     'django.middleware.common.CommonMiddleware',
