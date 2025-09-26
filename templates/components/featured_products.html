@@ -19,7 +19,7 @@
   <div class="products-container">
     <div class="main-product">
       <img src="{{ products_background }}" alt="NOVALUBE PRO 0W-30" />
-      <a href="" class="button-style">
+      <a href="{% url 'product:products' %}" class="button-style">
         Go to catalog
         <i class="fa-solid fa-arrow-right"></i>
       </a>
@@ -39,7 +39,7 @@
                 </div>
             </a>
           {% empty %}
-            <a href="#" class="swiper-slide">
+            <a href="{% url 'product:products' %}" class="swiper-slide">
                 <p class="product-specs">{% trans "No products available at the moment" %}</p>
             </a>
           {% endfor %}
