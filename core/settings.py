@@ -138,7 +138,13 @@ TEMPLATES = [
                 'home.context_processors.featured_products_context',
                 'home.context_processors.partners_context',
 
+
             ],
+        
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+           ],
         },
     },
 ]
