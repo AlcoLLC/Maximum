@@ -1,5 +1,5 @@
 from .models import Review, PageHeader, PartnerLogo, General
-from product.models import Product
+from product.models import Product, Segments
 from django.urls import resolve
 
 def page_header_context(request):
@@ -33,4 +33,16 @@ def partners_context(request):
     return {
         'partner_logos':  PartnerLogo.objects.all(),
          'partners_description':  general.partners_description if general else "",
+    }
+
+def navbar_context(request):
+    """
+    Navbar-da göstərmək üçün bütün segmentləri və onlara aid 
+    məhsul qruplarını context-ə əlavə edir.
+    """
+    all_segments = Segments.objects.filter(show_in_navbar=True).prefetch_related('product_groups').order_by('order')
+
+    
+    return {
+        'navbar_segments': all_segments,
     }

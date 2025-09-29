@@ -1,7 +1,19 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-
+    
+class Segments(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True)
+    image = models.ImageField(upload_to='segments/', blank=True, null=True)
+    in_home = models.BooleanField(default=False, verbose_name="In Home")
+    show_in_navbar = models.BooleanField(default=True, verbose_name="Show in Navbar Dropdown")
+    order = models.IntegerField(default=0)
+    
+    def __str__(self):
+        return self.title
+    
 class Product_group(models.Model):
+    segments = models.ManyToManyField(Segments, related_name='product_groups', blank=True)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='product_group/')
@@ -20,16 +32,6 @@ class Product_Group_Category(models.Model):
 
     def __str__(self):
         return f"{self.product_group.title}"
-    
-class Segments(models.Model):
-    title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True)
-    image = models.ImageField(upload_to='segments/', blank=True, null=True)
-    in_home = models.BooleanField(default=False, verbose_name="In Home")
-    order = models.IntegerField(default=0)
-    
-    def __str__(self):
-        return self.title
     
 class Oil_Types(models.Model):
     title = models.CharField(max_length=255)

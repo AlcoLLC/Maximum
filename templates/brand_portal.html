@@ -29,6 +29,10 @@
 
 <section class="brand-portal container">
     <h1 class="section-title">{% trans "ALL TOOLS FOR THE MAXIMUM BRAND" %}</h1>
+    <p class="section-desc top-text"> 
+       {% blocktrans %} We are building a strong international brand, and consistent application is essential: the proper use of the Maximum logo, fonts, and colors. On the Maximum Brand Portal, you will find our brand identity guidelines and relevant information for the correct and consistent application of our brand materials. There, you will also find downloads of various assets, including logos, photos, brochures. 
+       {% endblocktrans %}
+     </p>
     <div class="brand-tab-components">
          <div class="tab {% if active_tab == 'brand-guideline' %}active{% endif %}" data-tab="brand-guideline">
              {% trans 'Brand Guideline' %}</div>
@@ -42,34 +46,6 @@
     </div>
 
       <div class="brand-content">
-            <div class="tab-content active">
-              <p class="section-desc"> 
-                {% blocktrans %} We are building a strong international brand, and consistent application is essential: the proper use of the Maximum logo, fonts, and colors. On the Maximum Brand Portal, you will find our brand identity guidelines and relevant information for the correct and consistent application of our brand materials. There, you will also find downloads of various assets, including logos, photos, brochures. 
-                {% endblocktrans %}
-              </p>
-              <div class="brand-components">
-                <div class="item">
-                  <h2>{% trans 'Brand Guideline' %}</h2>
-                  <p>{{  guideline.short_content }}</p>
-                  <button data-id="brand-guideline" class="button-style">{% trans 'Learn more' %}</button>
-                </div>
-                <div class="item">
-                  <h2>{% trans 'Promo materials' %}</h2>
-                  <p>{{  promo_material.short_content }}</p>
-                  <button data-id="promo-materials" class="button-style">{% trans 'Learn more' %}</button>
-                </div>
-                <div class="item">
-                  <h2>{% trans 'Image library' %}</h2>
-                  <p>{{   image_library.short_content }}</p>
-                  <button data-id="image-library" class="button-style">{% trans 'Learn more' %}</button>
-                </div>
-                <div class="item">
-                  <h2>{% trans 'Videos' %}</h2>
-                  <p>{{  video_library.short_content }}</p>
-                  <button data-id="videos" class="button-style">{% trans 'Learn more' %}</button>
-                </div>
-              </div>
-            </div>
             <!-- Brand Guideline Tab -->
             <div class="tab-content {% if active_tab == 'brand-guideline' %}active{% endif %}" id="brand-guideline">
               <div class="tab-brand-guideline">
@@ -143,7 +119,7 @@
             </div>
 
       </div>
-      <a href="" class="button-style last">{% trans "Any questions? Please contact us." %}</a>
+      <a href="{% url 'contact:contact' %}" class="button-style last">{% trans "Any questions? Please contact us." %}</a>
 </section>
 
 {% endblock %} 

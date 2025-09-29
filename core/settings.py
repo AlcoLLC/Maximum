@@ -137,6 +137,7 @@ TEMPLATES = [
                 'home.context_processors.page_header_context',
                 'home.context_processors.featured_products_context',
                 'home.context_processors.partners_context',
+                'home.context_processors.navbar_context',
 
 
             ],
