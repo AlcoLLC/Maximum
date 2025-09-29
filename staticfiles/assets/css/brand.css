@@ -2,6 +2,10 @@
   margin: 70px auto;
 }
 
+.brand-portal .top-text {
+  margin-top: 40px;
+}
+
 .brand-portal .brand-tab-components {
   margin: 50px auto;
   display: grid;

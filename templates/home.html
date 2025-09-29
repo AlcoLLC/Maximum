@@ -61,14 +61,15 @@
 <section  class="home-catalog container">
     <div class="catalog-grid">
         {% for segment in segments %}
-        <div class="catalog-element">
+        <a href="{% url 'product:products' %}?search=&segments={{ segment.slug }}" aria-label="{{ segment.title }}" class="catalog-element">
             <img src="{{ segment.image.url }}" alt="{{ segment.title }}" loading="lazy"/> 
             <div>
                 <h2>{{ segment.title }}</h2>
-                <a href="{% url 'product:products' %}?search=&segments={{ segment.slug }}" aria-label="{{ segment.title }}">
-                    {% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i></a>
+                <span>
+                    {% trans "Learn more" %} <i class="fa-solid fa-circle-chevron-right"></i>
+                </span>
             </div>
-        </div>
+        </a>
         {% empty %}
         <div class="catalog-element">
                 <h2>{% trans "No segment available at the moment" %}</h2>
@@ -96,7 +97,7 @@
         <a href="{% url 'product:products' %}" class="button-style">{% trans "Discover more" %}</a>
    </div>
    <div class="home-services">
-    <img loading="lazy" class="bg-image" src="{% static 'images/shutterstock.webp' %}" alt="Coorperation background image"/>
+    <img loading="lazy" class="bg-image" src="{% static 'images/shutterstock1.webp' %}" alt="Coorperation background image"/>
         <div class="container">   
             <div class="service-flex">
                 {% for service  in services  %}

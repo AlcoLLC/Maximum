@@ -139,14 +139,18 @@ document.addEventListener('DOMContentLoaded', function () {
   // =================
   // LANGUAGE SWITCHING FUNCTIONS
   // =================
+
   function switchLanguage(langCode) {
     let csrfValue = getCsrfToken();
     const newPath = calculateNewPath(langCode);
 
+    const currentQueryString = window.location.search;
+    const nextUrl = newPath + currentQueryString;
+
     if (csrfValue) {
-      submitLanguageForm(langCode, newPath, csrfValue);
+      submitLanguageForm(langCode, nextUrl, csrfValue);
     } else {
-      window.location.href = newPath;
+      window.location.href = nextUrl;
     }
   }
 
@@ -356,4 +360,41 @@ document.addEventListener('DOMContentLoaded', function () {
   window.testLanguageSwitch = function (lang) {
     switchLanguage(lang);
   };
+});
+
+
+// Product Dropdown Functionality
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    const dropdownContainer = document.querySelector('.products-dropdown-container');
+    if (dropdownContainer) {
+        const segmentLinks = dropdownContainer.querySelectorAll('.segment-link[data-segment]');
+        const productGroupLists = dropdownContainer.querySelectorAll('.product-group-list[data-segment]');
+        dropdownContainer.addEventListener('mouseenter', function() {
+            segmentLinks.forEach(link => link.classList.remove('active'));
+            productGroupLists.forEach(list => list.classList.remove('active'));
+            if (segmentLinks.length > 0 && productGroupLists.length > 0) {
+                segmentLinks[0].classList.add('active');
+                productGroupLists[0].classList.add('active');
+            }
+        });
+        segmentLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                segmentLinks.forEach(l => l.classList.remove('active'));
+                productGroupLists.forEach(list => list.classList.remove('active'));
+
+                this.classList.add('active');
+
+                const segmentTarget = this.dataset.segment;
+                const targetList = dropdownContainer.querySelector(`.product-group-list[data-segment="${segmentTarget}"]`);
+
+                if (targetList) {
+                    targetList.classList.add('active');
+                }
+            });
+        });
+    }
 });

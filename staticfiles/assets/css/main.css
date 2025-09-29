@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
   --main: #ffb200;
   --dark: #1c1c1c;
@@ -23,8 +25,7 @@
   font-size: 14px;
   list-style: 16px;
   font-weight: 500;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -52,7 +53,7 @@ body {
 
 .section-title {
   font-size: 56px;
-  line-height: 64px;
+  line-height: 75px;
   color: var(--dark);
   text-transform: uppercase;
   font-weight: 500;
@@ -73,7 +74,6 @@ body {
   font-size: 20px;
   line-height: 26px;
   letter-spacing: 0px;
-  text-transform: capitalize;
   text-align: center;
   background-color: var(--main);
   box-shadow: 0 4px 15px rgba(245, 223, 27, 0.3);
@@ -244,11 +244,14 @@ nav ul li a {
   font-size: 15px;
   list-style: 16px;
   font-weight: 500;
+  transition: color 0.4s ease;
 }
 nav ul li a.active {
   color: var(--main);
 }
-
+nav ul li a:hover {
+  color: var(--main);
+}
 .navbar .nav-bottom {
   width: 100%;
   display: flex;
@@ -417,8 +420,14 @@ nav ul li a.active {
   border-radius: 8px;
   padding: 2px 6px;
 }
+
 .location-icon img {
   width: 30px;
+  transition: all 0.4s ease;
+}
+
+.location-icon img:hover {
+  filter: grayscale(100%) brightness(0.1);
 }
 
 @media screen and (max-width: 1024px) {
@@ -499,7 +508,7 @@ nav ul li a.active {
     font-size: 14px;
   }
 
-    .language-dropdown button i {
+  .language-dropdown button i {
     font-size: 12px;
   }
 }
@@ -919,19 +928,21 @@ footer .alco-privacy p {
 
 .featured-products .swiper-slide .product-image {
   width: 100%;
-  height: 65%;
+  height: 70%;
   padding: 10px;
 }
 
 .featured-products .swiper-slide .product-image img {
   width: 100%;
-  max-height: 130px;
+  max-height: 150px;
   object-fit: contain;
 }
 
 .featured-products .swiper-slide .product-content {
   width: 100%;
-  padding: 10px 15px;
+  padding: 10px;
+  padding-left: 20px;
+  text-align: left !important;
 }
 
 .featured-products .swiper-slide .product-name {
@@ -941,6 +952,7 @@ footer .alco-privacy p {
   color: var(--main);
   text-transform: uppercase;
   margin-bottom: 5px;
+  align-items: left !important;
 }
 
 .featured-products .swiper-slide .product-specs {
@@ -949,6 +961,7 @@ footer .alco-privacy p {
   line-height: 18px;
   color: var(--dark);
   margin-bottom: 3px;
+  align-items: left !important;
 }
 
 .featured-products .swiper-slide .product-type {
@@ -994,6 +1007,12 @@ footer .alco-privacy p {
 }
 
 @media (max-width: 1200px) {
+  .featured-products .swiper-slide .product-image {
+    height: 60%;
+  }
+  .featured-products .swiper-slide .product-image img {
+    max-height: 135px;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -1062,18 +1081,18 @@ footer .alco-privacy p {
     width: 40%;
   }
   .featured-products .swiper-slide .product-image {
-    height: 70%;
+    height: 60%;
     padding: 10px;
-    padding-top: 30px;
+    padding-top: 15px;
   }
 
   .featured-products .swiper-slide .product-content {
-    height: 30%;
+    height: 40%;
     padding: 10px;
   }
   .featured-products .swiper-slide .product-image img {
     max-width: 80%;
-    max-height: 160px;
+    max-height: 200px;
   }
 }
 
@@ -1096,6 +1115,7 @@ footer .alco-privacy p {
 
 .our-partners {
   margin: 50px auto;
+  margin-bottom: 70px;
 }
 
 .our-partners .swiper-wrapper-container {
@@ -1235,6 +1255,11 @@ footer .alco-privacy p {
 
 .breadcrumb .container img {
   width: 27px;
+  transition: all 0.4s ease;
+}
+
+.breadcrumb .container img:hover {
+  filter: brightness(0.6);
 }
 
 .breadcrumb .container i {
@@ -1368,10 +1393,6 @@ footer .alco-privacy p {
   }
 }
 
-
-
-
-
 .pagination-container {
   display: flex;
   justify-content: space-between;
@@ -1470,4 +1491,114 @@ footer .alco-privacy p {
     font-size: 14px;
     line-height: 16px;
   }
+}
+
+/* Navbar Dropdown stilləri */
+.products-dropdown-container {
+  position: relative;
+}
+
+.nav-link-products {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link-products i {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.products-dropdown-container:hover .nav-link-products i {
+  transform: rotate(180deg);
+}
+
+.products-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 15px;
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  min-width: 600px;
+  z-index: 10001;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.products-dropdown-container:hover .products-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-segments {
+  width: 200px;
+  background-color: #f2f2f3;
+  border-right: 1px solid #e9ecef;
+}
+
+.segment-link {
+  display: block;
+  padding: 12px 20px;
+  font-size: 14px;
+  line-height: 16px;
+  color: var(--dark);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border: none;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  text-transform: none;
+}
+
+.segment-link:not(:last-child) {
+  border-bottom: 1px solid #88888891;
+}
+
+.segment-link:hover {
+  background-color: #e9ecef;
+  color: var(--dark);
+}
+
+.segment-link.active {
+  background-color: var(--main);
+  color: var(--dark);
+}
+
+.dropdown-product-groups {
+  padding: 10px 20px;
+  width: 400px;
+}
+
+.product-group-list {
+  display: none;
+}
+
+.product-group-list.active {
+  display: block;
+}
+
+.product-group-list a {
+  display: block;
+  padding: 10px 15px;
+  color: var(--dark);
+  font-size: 14px;
+  line-height: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.4s ease;
+  text-transform: none;
+  text-decoration: underline;
+}
+
+.product-group-list a:hover {
+  background-color: #f8f9fa;
+  color: var(--main);
 }

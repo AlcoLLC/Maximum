@@ -7,34 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
       
       const tabId = this.getAttribute("data-tab");
       
-      // Update URL without page reload
       const newUrl = `/brands/${tabId}/`;
       window.history.pushState({ tab: tabId }, '', newUrl);
       
-      // Update active tab
       activateTab(tabId);
     });
   });
 
-  // Learn more buttons functionality
-  const learnMoreButtons = document.querySelectorAll(".brand-components .button-style");
-  
-  learnMoreButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-      
-      const tabId = this.getAttribute("data-id");
-      
-      // Update URL without page reload
-      const newUrl = `/brands/${tabId}/`;
-      window.history.pushState({ tab: tabId }, '', newUrl);
-      
-      // Update active tab
-      activateTab(tabId);
-    });
-  });
-
-  // Handle browser back/forward buttons
   window.addEventListener("popstate", function (event) {
     const currentPath = window.location.pathname;
     const tabMatch = currentPath.match(/\/brands\/([^\/]+)\//);
@@ -43,32 +22,31 @@ document.addEventListener("DOMContentLoaded", function () {
       const tabId = tabMatch[1];
       activateTab(tabId);
     } else {
-      // Show overview/default content
-      activateTab(null);
+      activateTab('brand-guideline'); // Geri düyməsi ilə əsas səhifəyə qayıtdıqda da ilk tab aktiv olsun
     }
   });
 
   function activateTab(tabId) {
-    // Remove active class from all tabs and tab contents
     tabs.forEach((t) => t.classList.remove("active"));
     document.querySelectorAll(".tab-content").forEach((content) => {
       content.classList.remove("active");
     });
     
     if (tabId) {
-      // Activate the corresponding tab
       const targetTab = document.querySelector(`[data-tab="${tabId}"]`);
       if (targetTab) {
         targetTab.classList.add("active");
       }
       
-      // Activate the corresponding tab content
       const targetContent = document.getElementById(tabId);
       if (targetContent) {
         targetContent.classList.add("active");
       }
     } else {
-      // Show the first tab-content (overview) when no specific tab is selected
+      const firstTab = document.querySelector(".tab");
+      if(firstTab) {
+        firstTab.classList.add("active");
+      }
       const firstTabContent = document.querySelector(".tab-content");
       if (firstTabContent) {
         firstTabContent.classList.add("active");
@@ -128,27 +106,20 @@ document.addEventListener("DOMContentLoaded", function () {
   pdfButtons.forEach((button) => {
     button.addEventListener("click", function(e) {
       e.preventDefault();
-      
       let pdfUrl = null;
-      
-      // Check if it's brand guideline button
       if (this.closest('.tab-brand-guideline')) {
         const guidelineData = this.closest('.tab-brand-guideline').querySelector('img');
         if (guidelineData && guidelineData.dataset.pdfUrl) {
           pdfUrl = guidelineData.dataset.pdfUrl;
         }
       }
-      
-      // Check if it's promo material button
       if (this.closest('.tab-promo-materials div')) {
         const promoItem = this.closest('div');
         if (promoItem.dataset.pdfUrl) {
           pdfUrl = promoItem.dataset.pdfUrl;
         }
       }
-      
       if (pdfUrl) {
-        // Only open PDF in new tab
         window.open(pdfUrl, '_blank');
       }
     });
@@ -160,13 +131,9 @@ document.addEventListener("DOMContentLoaded", function () {
   imageItems.forEach((item) => {
     item.addEventListener("click", function(e) {
       e.preventDefault();
-      
       const img = this.querySelector('img');
       if (img && img.src) {
-        // Open image in new tab first
         window.open(img.src, '_blank');
-        
-        // Then trigger download after a short delay
         setTimeout(() => {
           const downloadLink = document.createElement('a');
           downloadLink.href = img.src;
@@ -179,4 +146,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  // Səhifə ilk dəfə yüklənəndə həmişə "brand-guideline" tabını aktiv et
+  activateTab('brand-guideline');
+
 });
