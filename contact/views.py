@@ -420,7 +420,6 @@ def validate_email_ajax(request):
     from django.core.validators import validate_email, ValidationError
     try:
         validate_email(email)
-        # Check if email was used before (optional warning)
         if ContactStepTwo.objects.filter(email=email).exists():
             return JsonResponse({
                 'valid': True, 
@@ -436,6 +435,6 @@ def validate_email_ajax(request):
 
 def contact_info_view(request):
     """Simple view to display contact information"""
-    contact_info = ContactInfo.objects.last()
+    contact_info = ContactInfo.objects.all()
     context = {'contact_info': contact_info}
     return render(request, 'contact.html', context)
