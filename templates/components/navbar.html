@@ -98,25 +98,74 @@
 
 
 <div class="mobile-menu" id="mobile-menu">
-  <ul>
-    <li><a href="{% url 'product:products' %}" aria-label="Products Page">{% trans "Products" %}</a></li>
-    <li><a href="{% url 'about:about' %}" aria-label="About Page">{% trans "About us" %}</a></li>
-    <li><a href="{% url 'services:services' %}" aria-label="Services Page">{% trans "Services" %}</a></li>
-    <li><a href="{% url 'partnership:partnership' %}" aria-label="Partnership Page">{% trans "Partnership" %}</a></li>
-    <li><a href="{% url 'contact:contact' %}" aria-label="Contact Page">{% trans "Contact" %}</a> </li>
-    <li><a href="{% url 'brands:brands' %}" aria-label="Brand Portal Page">{% trans "Brand Portal" %}</a></li>
-    <li><a href="{% url 'news:news' %}" aria-label="News Page">{% trans "News" %}</a></li>
-  </ul>
-  <div class="mobile-menu-bottom">
-    <a href="" class="location-icon">
-        <img loading="lazy" src="{% static '/images/location.svg' %}" alt="Location icon"/>
-    </a>  
+    <div class="mobile-menu-panels-wrapper">
+        <div class="mobile-menu-panel active" id="main-panel">
+            <ul>
+                <li>
+                        <a href="{% url 'product:products' %}">{% trans "Products" %}</a>
+                        <button class="panel-trigger" data-target="segments-panel">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                </li>
+                <li><a href="{% url 'about:about' %}">{% trans "About us" %}</a></li>
+                <li><a href="{% url 'services:services' %}">{% trans "Services" %}</a></li>
+                <li><a href="{% url 'partnership:partnership' %}">{% trans "Partnership" %}</a></li>
+                <li><a href="{% url 'contact:contact' %}">{% trans "Contact" %}</a></li>
+                <li><a href="{% url 'brands:brands' %}">{% trans "Brand Portal" %}</a></li>
+                <li><a href="{% url 'news:news' %}">{% trans "News" %}</a></li>
+            </ul>
+        </div>
 
-    <a class="whatsapp" href="https://wa.me/4915207776502">
-      <p>{% blocktrans %} Have a question? <br> Let's chat on WhatsApp!{% endblocktrans %}</p>
-      <img loading="lazy" src="{% static '/images/whatsapp.svg' %}" alt="Whatsapp icon"/>
-    </a>
+        <div class="mobile-menu-panel" id="segments-panel">
+            <div class="panel-content">
+                <ul>
+                  <button class="panel-back-button"><i class="fa-solid fa-arrow-left-long"></i> BACK</button>
+                </ul>
+                <ul>
+                    <li class="has-submenu">
+                        <div class="menu-item-content">
+                            <a href="{% url 'product:products' %}">{% trans "Products" %}</a>
+                        </div>
+                    </li>
+                    {% for segment in navbar_segments %}
+                    <li class="has-submenu">
+                        <div class="menu-item-content">
+                            <a href="{% url 'product:products' %}?segments={{ segment.slug }}">{{ segment.title }}</a>
+                            <button class="panel-trigger" data-target="groups-panel" data-segment="{{ segment.slug }}">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
 
-  </div>
+        <div class="mobile-menu-panel" id="groups-panel">
+               <ul>
+                  <button class="panel-back-button"><i class="fa-solid fa-arrow-left-long"></i> BACK</button>
+                </ul>
+                <ul>
+                    <li  id="groups-panel-title"></li>
+                </ul>
+               <div class="panel-content" id="groups-panel-content">
+               </div>
+        </div>
+
+    </div>
+
+    <script id="mobile-menu-data" type="application/json">
+        {{ mobile_menu_data_json|safe }}
+    </script>
+
+     <div class="mobile-menu-bottom">
+        <a href="" class="location-icon">
+            <img loading="lazy" src="{% static '/images/location.svg' %}" alt="Location icon"/>
+        </a>
+        <a class="whatsapp" href="https://wa.me/4915207776502">
+            <p>{% blocktrans %} Have a question? <br> Let's chat on WhatsApp!{% endblocktrans %}</p>
+            <img loading="lazy" src="{% static '/images/whatsapp.svg' %}" alt="Whatsapp icon"/>
+        </a>
+    </div>
 </div> 
 </nav>

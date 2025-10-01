@@ -362,39 +362,105 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 });
 
-
 // Product Dropdown Functionality
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+  const dropdownContainer = document.querySelector('.products-dropdown-container');
+  if (dropdownContainer) {
+    const segmentLinks = dropdownContainer.querySelectorAll('.segment-link[data-segment]');
+    const productGroupLists = dropdownContainer.querySelectorAll(
+      '.product-group-list[data-segment]'
+    );
+    dropdownContainer.addEventListener('mouseenter', function () {
+      segmentLinks.forEach((link) => link.classList.remove('active'));
+      productGroupLists.forEach((list) => list.classList.remove('active'));
+      if (segmentLinks.length > 0 && productGroupLists.length > 0) {
+        segmentLinks[0].classList.add('active');
+        productGroupLists[0].classList.add('active');
+      }
+    });
+    segmentLinks.forEach((link) => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
 
-    const dropdownContainer = document.querySelector('.products-dropdown-container');
-    if (dropdownContainer) {
-        const segmentLinks = dropdownContainer.querySelectorAll('.segment-link[data-segment]');
-        const productGroupLists = dropdownContainer.querySelectorAll('.product-group-list[data-segment]');
-        dropdownContainer.addEventListener('mouseenter', function() {
-            segmentLinks.forEach(link => link.classList.remove('active'));
-            productGroupLists.forEach(list => list.classList.remove('active'));
-            if (segmentLinks.length > 0 && productGroupLists.length > 0) {
-                segmentLinks[0].classList.add('active');
-                productGroupLists[0].classList.add('active');
-            }
+        segmentLinks.forEach((l) => l.classList.remove('active'));
+        productGroupLists.forEach((list) => list.classList.remove('active'));
+
+        this.classList.add('active');
+
+        const segmentTarget = this.dataset.segment;
+        const targetList = dropdownContainer.querySelector(
+          `.product-group-list[data-segment="${segmentTarget}"]`
+        );
+
+        if (targetList) {
+          targetList.classList.add('active');
+        }
+      });
+    });
+  }
+
+  const menu = document.getElementById('mobile-menu');
+  if (!menu) return;
+
+  const panelsWrapper = menu.querySelector('.mobile-menu-panels-wrapper');
+  const triggers = menu.querySelectorAll('.panel-trigger');
+  const backButtons = menu.querySelectorAll('.panel-back-button');
+  const menuDataEl = document.getElementById('mobile-menu-data');
+  const menuData = JSON.parse(menuDataEl.textContent);
+
+  let currentLevel = 0;
+
+  const moveMenu = (level) => {
+    const percentage = -33.333 * level;
+    panelsWrapper.style.transform = `translateX(${percentage}%)`;
+    currentLevel = level;
+  };
+
+  // İrəli düymələri ( > )
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const targetPanelId = trigger.dataset.target;
+
+      if (targetPanelId === 'groups-panel') {
+        const segmentSlug = trigger.dataset.segment;
+        const segmentData = menuData[segmentSlug];
+
+        // Panel 3-ü dinamik olaraq doldururuq
+        const titleEl = document.getElementById('groups-panel-title');
+        const contentEl = document.getElementById('groups-panel-content');
+
+        titleEl.textContent = segmentData.title;
+
+        let contentHTML = '<ul>';
+        // Sonra qruplara linklər
+        segmentData.groups.forEach((group) => {
+          contentHTML += `<li><a href="${group.url}">${group.title}</a></li>`;
         });
-        segmentLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
+        contentHTML += '</ul>';
 
-                segmentLinks.forEach(l => l.classList.remove('active'));
-                productGroupLists.forEach(list => list.classList.remove('active'));
+        contentEl.innerHTML = contentHTML;
+      }
 
-                this.classList.add('active');
+      moveMenu(currentLevel + 1);
+    });
+  });
 
-                const segmentTarget = this.dataset.segment;
-                const targetList = dropdownContainer.querySelector(`.product-group-list[data-segment="${segmentTarget}"]`);
+  // Geri düymələri ( < BACK )
+  backButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      if (currentLevel > 0) {
+        moveMenu(currentLevel - 1);
+      }
+    });
+  });
 
-                if (targetList) {
-                    targetList.classList.add('active');
-                }
-            });
-        });
+  // Hamburger menyu açılanda paneli sıfırlamaq
+  const hamburger = document.getElementById('hamburger');
+  hamburger.addEventListener('click', function () {
+    if (!menu.classList.contains('active')) {
+      // Menyu bağlanırsa, paneli başlanğıca qaytar
+      setTimeout(() => moveMenu(0), 400); // animasiyanın bitməsini gözlə
     }
+  });
 });
