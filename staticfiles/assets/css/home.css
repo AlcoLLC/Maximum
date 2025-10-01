@@ -1693,9 +1693,9 @@
 }
 @media screen and (max-width: 600px) {
   .maximum-content {
-    max-width: 90%;
+    max-width: 85%;
     gap: 20px;
-    top: 10%;
+    top: 5%;
   }
 
   .maximum-content h4 {

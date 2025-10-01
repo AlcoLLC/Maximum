@@ -1,3 +1,4 @@
+import json
 from .models import Review, PageHeader, PartnerLogo, General
 from product.models import Product, Segments
 from django.urls import resolve
@@ -36,13 +37,26 @@ def partners_context(request):
     }
 
 def navbar_context(request):
-    """
-    Navbar-da göstərmək üçün bütün segmentləri və onlara aid 
-    məhsul qruplarını context-ə əlavə edir.
-    """
+
     all_segments = Segments.objects.filter(show_in_navbar=True).prefetch_related('product_groups').order_by('order')
 
-    
+    mobile_menu_data = {}
+    for segment in all_segments:
+        mobile_menu_data[segment.slug] = {
+            'title': segment.title,
+            # URL-ləri f-string ilə dinamik yaradırıq
+            'url': f"/products?segments={segment.slug}",
+            'groups': [
+                {
+                    'title': group.title,
+                    'url': f"/products?segments={segment.slug}&product_group={group.slug}"
+                }
+                for group in segment.product_groups.all()
+            ]
+        }
+
+
     return {
         'navbar_segments': all_segments,
+        'mobile_menu_data_json': json.dumps(mobile_menu_data)
     }
