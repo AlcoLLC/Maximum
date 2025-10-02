@@ -64,3 +64,4 @@ class ContactInfo(models.Model):
         verbose_name = _('Contact Information')
         verbose_name_plural = _('Contact Information Entries')
         ordering = ['title']
+        
