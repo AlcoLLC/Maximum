@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% load static %} {% load i18n %} 
 
-{% block title%}{{ news.title }}{% endblock %} 
-{% block description %}{{ news.content|safe|truncatechars:155 }}{%endblock %} 
-{% block keywords %}{%trans "meta_keywords_news" %}{%endblock %}
+{% block title %} {{ news.meta_title|safe }} {% endblock %}
+{% block description %} {{ news.meta_description|safe }} {% endblock %}
+{% block keywords %} {{ news.meta_keywords|safe }} {% endblock %}
 
 
 {%block page_css %}
