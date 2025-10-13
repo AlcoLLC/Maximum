@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% load i18n %} 
 
 {% block title%}{{ news.title }}{% endblock %} 
-{% block description %}{{ news.content|truncatechars:155 }}{%endblock %} 
+{% block description %}{{ news.content|safe|truncatechars:155 }}{%endblock %} 
 {% block keywords %}{%trans "meta_keywords_news" %}{%endblock %}
 
 
