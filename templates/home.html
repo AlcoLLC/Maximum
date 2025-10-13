@@ -239,7 +239,7 @@
         <div class="top-content">
             <h2 class="section-title">{% blocktrans %}  NEWS & INSIGHT {% endblocktrans %} </h2>
              {% if general.news_description %}
-            <p class="section-desc">{{  general.news_description|linebreaksbr }}</p>
+            <p class="section-desc">{{  general.news_description|safe }}</p>
              {% else %}
             <p class="section-desc">{% blocktrans %} Explore our blog expert advice, industry trends, and indepth articles to keep you ahead of the curve. {% endblocktrans %}</p>
             {% endif %}
