@@ -27,7 +27,7 @@ class NewsAdmin(TranslationAdmin):
             'fields': ('image', 'image_preview')
         }),
         ('Meta Information', {
-            'fields': ('published_date',),
+            'fields': ('published_date', 'meta_title', 'meta_description', 'meta_keywords'),
             'classes': ('collapse',)
         }),
     )

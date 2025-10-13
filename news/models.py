@@ -12,6 +12,9 @@ class News(models.Model):
     is_active = models.BooleanField(default=True)
     is_top = models.BooleanField(default=False, verbose_name="Top of news page")
     in_home = models.BooleanField(default=False)
+    meta_title = models.CharField(max_length=255, blank=True, null=True)
+    meta_description = models.TextField(blank=True, null=True)
+    meta_keywords = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         ordering = ['-published_date']
