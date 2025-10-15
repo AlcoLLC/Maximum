@@ -22,12 +22,19 @@ def create_search_queries(query):
     return list(set(queries))
 
 def build_search_q(query, fields):
-    q_objects = Q()
-    search_queries = create_search_queries(query)
+    search_words = [word.strip() for word in query.split() if len(word.strip()) >= 2]
+
+    if not search_words:
+        return Q()
+
+    final_q = Q()
+
     for field in fields:
-        for search_term in search_queries:
-            q_objects |= Q(**{f"{field}__icontains": search_term})
-    return q_objects
+        field_q = Q()
+        for word in search_words:
+            field_q &= Q(**{f"{field}__icontains": word})
+        
+        final_q |= field_q
 
 def search_view(request):
     query = request.GET.get('search', '').strip()
