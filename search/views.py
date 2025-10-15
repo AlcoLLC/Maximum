@@ -36,6 +36,8 @@ def build_search_q(query, fields):
         
         final_q |= field_q
 
+    return final_q
+
 def search_view(request):
     query = request.GET.get('search', '').strip()
     results = []
