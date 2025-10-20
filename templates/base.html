@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TQC8NQLL0"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-5TQC8NQLL0'); </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token }}" />
@@ -132,32 +133,5 @@
 
 
     {%block page_js %} {% endblock %}
-
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="........." async></script>
-
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-
-})(window,document,'script','dataLayer','GTM-M9PC5JSC');</script>
-     
-    <script>
-      var ahrefs_analytics_script = document.createElement('script');
-      ahrefs_analytics_script.async = true;
-      ahrefs_analytics_script.src = 'https://analytics.ahrefs.com/analytics.js';
-      ahrefs_analytics_script.setAttribute('data-key', '........');
-      document.getElementsByTagName('head')[0].appendChild(ahrefs_analytics_script);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', '............', { send_page_view: false });
-    </script>
   </body>
 </html>
