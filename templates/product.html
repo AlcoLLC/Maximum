@@ -4,7 +4,7 @@
     {% if meta_title %}
         {{ meta_title }}
     {% else %}
-        {% trans "products_meta_title" %}
+        {% trans "meta_title_products" %}
     {% endif %}
 {% endblock %}
 
@@ -12,10 +12,10 @@
     {% if meta_description %}
         {{ meta_description }}
     {% else %}
-        {% trans "products_meta_description" %}
+        {% trans "meta_description_products" %}
     {% endif %}
 {% endblock %}
-{% block keywords %}{% trans "products_keywords" %}{% endblock %}
+{% block keywords %}{% trans "meta_keywords_products" %}{% endblock %}
 
 {%block page_css %}
 <link rel="stylesheet" href="{% static 'assets/css/product.css' %}" />
