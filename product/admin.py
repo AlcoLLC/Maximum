@@ -141,6 +141,10 @@ class ProductAdmin(TranslationAdmin):
             'fields': ('pds_url', 'sds_url'),
             'classes': ('collapse',),
         }),
+        ('SEO Metadata', {
+            'fields': ('meta_title', 'meta_description', 'meta_keywords'),
+            'classes': ('collapse',),
+        }),
     )
     
     def has_pds(self, obj):
