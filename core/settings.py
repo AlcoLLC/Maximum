@@ -92,7 +92,7 @@ INSTALLED_APPS = [
     'contact',
     'faq',
     'news.apps.NewsConfig', 
-    'product.apps.ProductsConfig', 
+    'product.apps.ProductConfig', 
     'brands',
     'partnership',
     'search',
