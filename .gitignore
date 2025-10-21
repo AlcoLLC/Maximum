@@ -8,6 +8,8 @@ __pycache__/
 # Ignore all files in migrations folders
 */migrations/*
 
+maximu-475808-deb81cf7805e.json
+
 # Except for the __init__.py file
 !*/migrations/__init__.py
 # Distribution / packaging
