@@ -91,11 +91,12 @@ INSTALLED_APPS = [
     'services',
     'contact',
     'faq',
-    'news',
+    'news.apps.NewsConfig', 
+    'product.apps.ProductsConfig', 
     'brands',
-    'product',
     'partnership',
     'search',
+
 ]
 
 SITE_ID = 1
@@ -176,6 +177,8 @@ else:
         }
     }
 
+GOOGLE_INDEXING_KEY_FILE = BASE_DIR / 'maximu-475808-deb81cf7805e.json'
+SITE_DOMAIN = 'https://maximumlube.com/'
 
 
 
