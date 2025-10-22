@@ -11,8 +11,8 @@ class StaticViewSitemap(Sitemap):
         return [
             'home:home',
             'about:about',
-            'products:product',
-            'services: services', 
+            'product:products',
+            'services:services', 
             'contact:contact',
             'partnership:partnership',
             'news:news',
