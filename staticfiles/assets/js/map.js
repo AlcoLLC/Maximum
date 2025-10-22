@@ -8494,7 +8494,7 @@ FlaMap = (function () {
       r_z.h1r(51);
       var p7t = r_z.q5z(393, 15, 12, 25, 7);
       this[E7W][M8f] =
-        '<div class="fm-tooltip"><div class="fm-tooltip-name"></div><table class="fm-tooltip-frame"><tr class="fm-tooltip-frame" valign="top"><td class="fm-tooltip-image"></td><td class="fm-tooltip-comment"><a href="javascript:void(0)" class="fm-tooltip-x"><img src="' +
+        '<div class="fm-tooltip"><div class="fm-tooltip-name"></div><table class="fm-tooltip-frame"><tr class="fm-tooltip-frame" valign="top"><td class="fm-tooltip-image"></td><td class="fm-tooltip-comment"><a href="#" class="fm-tooltip-x"><img src="' +
         q1 +
         r_z.H4t(n6h) +
         r_z.H4t(j$h) +
