@@ -8,13 +8,16 @@ from django.contrib.sitemaps.views import sitemap
 from .sitemaps import sitemaps
 
 def robots_txt(request):
+    sitemap_url = "https://maximumlube.com/sitemap.xml"
+
     lines = [
         "User-agent: *",
         "Disallow: /admin/",
         "Disallow: /api/",
         "Disallow: /media/private/",
+        "Allow: /",
         "",
-        "Sitemap: https://maximumlube.com/sitemap.xml"
+        f"Sitemap: {sitemap_url}"
     ]
     return HttpResponse('\n'.join(lines), content_type="text/plain")
 
