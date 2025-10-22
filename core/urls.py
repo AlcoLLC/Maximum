@@ -14,7 +14,7 @@ def robots_txt(request):
         "Disallow: /api/",
         "Disallow: /media/private/",
         "",
-        "Sitemap: https://maximum.de/sitemap.xml"
+        "Sitemap: https://maximumlube.com//sitemap.xml"
     ]
     return HttpResponse('\n'.join(lines), content_type="text/plain")
 
