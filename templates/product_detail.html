@@ -4,6 +4,84 @@
 {% block description %} {{ product.meta_description|safe }} {% endblock %}
 {% block keywords %} {{ product.meta_keywords|safe }} {% endblock %}
 
+{% block extra_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.title|striptags|escapejs }}",
+  "description": "{{ product.meta_description|safe|striptags|escapejs }}",
+  "url": "{{ request.build_absolute_uri }}",
+  "image": "{{ product.image.url }}",
+  {% if product.product_id %}
+  "sku": "{{ product.product_id }}",
+  "productID": "{{ product.product_id }}",
+  {% endif %}
+  
+  "brand": {
+    "@type": "Brand",
+    "name": "Maximum Lubricants"
+  },
+  
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "Maximum",
+    "url": "https://maximumlube.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://maximumlube.com/static/images/max-logo.webp"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/maximumlube/",
+      "https://www.instagram.com/maximumlube/",
+      "https://www.youtube.com/@MAXIMUMLubricants",
+      "https://www.facebook.com/people/Maximum-Lubricants/61576957612166/"
+    ]
+  },
+  
+  {% if available_liters %}
+  "offers": {
+    "@type": "AggregateOffer",
+    "availability": "https://schema.org/InStock",
+    "lowPrice": "0",
+    "priceCurrency": "EUR",
+    "offerCount": "{{ available_liters|length }}"
+  },
+  {% else %}
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  {% endif %}
+  
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{% trans 'Home page' %}",
+        "item": "{% url 'home:home' %}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{% trans 'Products' %}",
+        "item": "{% url 'product:products' %}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ product.title|striptags|escapejs }}",
+        "item": "{{ request.build_absolute_uri }}"
+      }
+    ]
+  }
+}
+</script>
+{% endblock %}
 
 {%block page_css %}
 <link rel="stylesheet" href="{% static 'assets/css/product.min.css' %}" />

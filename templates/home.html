@@ -4,6 +4,61 @@
 {% block description %} {% trans "meta_description_home" %} {% endblock %} 
 {% block keywords %} {% trans "meta_keywords_home" %} {% endblock %}
 
+{% block extra_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "{% trans 'meta_title_home' %}",
+  "description": "{% trans 'meta_description_home' %}",
+  "url": "{% url 'home:home' %}",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{% trans 'Home page' %}",
+        "item": "{% url 'home:home' %}"
+      }
+    ]
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "url": "{% url 'home:home' %}",
+    "name": "Maximum Lubricants",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://maximumlube.com{% url 'product:products' %}?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Maximum",
+    "url": "https://maximumlube.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://maximumlube.com/static/images/max-logo.webp"
+    },
+    "description": "{% trans 'meta_description_home' %}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "DE"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/maximumlube/",
+      "https://www.instagram.com/maximumlube/",
+      "https://www.youtube.com/@MAXIMUMLubricants",
+      "https://www.facebook.com/people/Maximum-Lubricants/61576957612166/"
+    ]
+  }
+}
+</script>
+{% endblock %}
 
 {% block page_css %}
     <link rel="stylesheet" href="{% static 'assets/css/home.min.css' %}" />

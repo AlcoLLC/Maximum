@@ -1,9 +1,10 @@
 {% load static %} {% load i18n %}
 
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}">
   <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TQC8NQLL0"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-5TQC8NQLL0'); </script>
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token }}" />
@@ -11,11 +12,11 @@
     <title>{% block title %}{% trans "Maximum - High-quality oil products" %}{% endblock %}</title>
     <meta
       name="description"
-      content="{% block description %}Maximum - High-quality oil products{% endblock %}"
+      content="{% block description %}{% trans 'Maximum - High-quality oil products' %}{% endblock %}"
     />
     <meta
       name="keywords"
-      content="{% block keywords %}oil, maximum, automotive oil, industrial oil{% endblock %}"
+      content="{% block keywords %}{% trans 'oil, maximum, automotive oil, industrial oil' %}{% endblock %}"
     />
     <meta name="robots" content="index, follow" />
 
@@ -35,7 +36,7 @@
     <link rel="alternate" hreflang="es" href="https://maximumlube.com/es/" />
     <link rel="alternate" hreflang="zh-hans" href="https://maximumlube.com/zh-hans/" />
     <meta property="og:title" content="Maximum" />
-    <meta property="og:description" content="Maximum - High-quality oil products" />
+    <meta property="og:description" content="{% trans 'Maximum - High-quality oil products' %}" />
     <meta property="og:image" content="https://maximumlube.com/static/images/max-logo.webp" />
     <meta property="og:url" content="https://maximumlube.com{{ request.path }}" />
     <meta property="og:type" content="website" />
@@ -108,7 +109,7 @@
           "https://www.linkedin.com/company/maximumlube/",
           "https://www.instagram.com/maximumlube/",
           "https://www.youtube.com/@MAXIMUMLubricants",
-          "https://www.facebook.com/people/Maximum-Lubricants/61576957612166/c"
+          "https://www.facebook.com/people/Maximum-Lubricants/61576957612166/"
         ],
         "contactPoint": {
           "@type": "ContactPoint",

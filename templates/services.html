@@ -4,6 +4,87 @@
 {% block description %}{%trans "meta_description_services" %}{%endblock %} 
 {% block keywords %}{%trans "meta_keywords_services" %}{%endblock %}
 
+{% block extra_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ServicesPage",
+  "name": "{% trans 'meta_title_services' %}",
+  "description": "{% trans 'meta_description_services' %}",
+  "url": "{{ request.build_absolute_uri }}",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{% trans 'Home page' %}",
+        "item": "{% url 'home:home' %}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{% trans 'Services' %}",
+        "item": "{{ request.build_absolute_uri }}"
+      }
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Maximum",
+    "url": "https://maximumlube.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://maximumlube.com/static/images/max-logo.webp"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/maximumlube/",
+      "https://www.instagram.com/maximumlube/",
+      "https://www.youtube.com/@MAXIMUMLubricants",
+      "https://www.facebook.com/people/Maximum-Lubricants/61576957612166/"
+    ]
+  },
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {% for service in services %}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.counter }},
+        "item": {
+          "@type": "Service",
+          "name": "{{ service.title|striptags|escapejs }}",
+          "description": "{{ service.description|striptags|escapejs }}",
+          "image": "{{ service.image.url }}",
+          "provider": {
+            "@type": "Organization",
+            "name": "Maximum"
+          }
+        }
+      }{% if not forloop.last or service_contents %},{% endif %}
+      {% endfor %}
+      
+      {% for service in service_contents %}
+      {
+        "@type": "ListItem",
+        "position": {{ services|length|add:forloop.counter }},
+        "item": {
+          "@type": "Service",
+          "name": "{{ service.title|striptags|escapejs }}",
+          "description": "{{ service.description|striptags|escapejs }}",
+          "image": "{{ service.image.url }}",
+          "provider": {
+            "@type": "Organization",
+            "name": "Maximum"
+          }
+        }
+      }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% endblock %}
 
 {%block page_css %}
     <link rel="stylesheet" href="{% static 'assets/css/service.min.css' %}" />

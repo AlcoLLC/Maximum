@@ -4,6 +4,54 @@
 {% block description %}{%trans "meta_description_brands" %}{%endblock %} 
 {% block keywords %}{%trans "meta_keywords_brands" %}{%endblock %}
 
+{% block extra_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{% trans 'meta_title_brands' %}",
+  "description": "{% trans 'meta_description_brands' %}",
+  "url": "{{ request.build_absolute_uri }}",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{% trans 'Home page' %}",
+        "item": "{% url 'home:home' %}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{% trans 'Brand portal' %}",
+        "item": "{{ request.build_absolute_uri }}"
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Maximum",
+    "url": "https://maximumlube.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://maximumlube.com/static/images/max-logo.webp"
+    },
+    "description": "{% trans 'meta_description_brands' %}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "DE"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/maximumlube/",
+      "https://www.instagram.com/maximumlube/",
+      "https://www.youtube.com/@MAXIMUMLubricants",
+      "https://www.facebook.com/people/Maximum-Lubricants/61576957612166/"
+    ]
+  }
+}
+</script>
+{% endblock %}
 
 {%block page_css %}
 <link rel="stylesheet" href="{% static 'assets/css/brand.min.css' %}" />

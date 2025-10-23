@@ -4,6 +4,72 @@
 {% block description %} {{ news.meta_description|safe }} {% endblock %}
 {% block keywords %} {{ news.meta_keywords|safe }} {% endblock %}
 
+{% block extra_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ request.build_absolute_uri }}"
+  },
+  "name": "{{ news.meta_title|safe|striptags|escapejs }}",
+  "headline": "{{ news.title|striptags|escapejs }}",
+  "description": "{{ news.meta_description|safe|striptags|escapejs }}",
+  "image": {
+    "@type": "ImageObject",
+    "url": "{{ news.image.url }}"
+  },
+  "datePublished": "{{ news.published_date|date:"c" }}",
+  {% if news.updated_at %}
+  "dateModified": "{{ news.updated_at|date:"c" }}",
+  {% endif %}
+  "author": {
+    "@type": "Organization",
+    "name": "Maximum"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Maximum",
+    "url": "https://maximumlube.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://maximumlube.com/static/images/max-logo.webp"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/maximumlube/",
+      "https://www.instagram.com/maximumlube/",
+      "https://www.youtube.com/@MAXIMUMLubricants",
+      "https://www.facebook.com/people/Maximum-Lubricants/61576957612166/"
+    ]
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "{% trans 'Home page' %}",
+        "item": "{% url 'home:home' %}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{% trans 'News' %}",
+        "item": "{% url 'news:news' %}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ news.title|striptags|escapejs }}",
+        "item": "{{ request.build_absolute_uri }}"
+      }
+    ]
+  }
+}
+</script>
+{% endblock %}
+
 
 {%block page_css %}
 <link rel="stylesheet" href="{% static 'assets/css/news.min.css' %}" />
