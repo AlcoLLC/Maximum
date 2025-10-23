@@ -4,20 +4,48 @@ document.addEventListener("DOMContentLoaded", function () {
   let hasAttemptedSubmit = false;
 
   let isRecaptchaLoaded = false;
+  let isRecaptchaRendered = false; // reCAPTCHA'nın oluşturulup oluşturulmadığını takip et
 
   function loadRecaptcha() {
+    // Script zaten yüklenmişse veya yükleniyorsa tekrar çalıştırma
     if (isRecaptchaLoaded) {
       return;
     }
     isRecaptchaLoaded = true;
 
     const script = document.createElement('script');
-    script.src = 'https://www.google.com/recaptcha/api.js';
+    
+    // 1. Değişiklik: Google'a 'render=explicit' ekleyerek otomatik başlamamasını,
+    // bizim komutumuzu beklemesini söylüyoruz.
+    script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
     script.async = true;
     script.defer = true;
+
+    // 2. Değişiklik: Script'in yüklenmesi bittiğinde (onload) ne yapacağını söylüyoruz.
+    script.onload = function() {
+      // 'grecaptcha' objesi artık mevcut ve render fonksiyonunu çağırabiliriz.
+      // Henüz render edilmemişse ve element varsa render et.
+      if (!isRecaptchaRendered) {
+        const recaptchaElement = document.getElementById('recaptcha-widget');
+        
+        if (recaptchaElement && typeof grecaptcha !== 'undefined') {
+          const siteKey = recaptchaElement.getAttribute('data-sitekey');
+          
+          if (siteKey) {
+            grecaptcha.render(recaptchaElement, {
+              'sitekey': siteKey
+            });
+            isRecaptchaRendered = true; // Oluşturuldu olarak işaretle
+          }
+        }
+      }
+    };
+    
+    // Script'i sayfaya ekle
     document.head.appendChild(script);
   }
 
+  // Bu tetikleyiciler aynı kalıyor
   form.addEventListener('focusin', loadRecaptcha, { once: true });
   form.addEventListener('mouseenter', loadRecaptcha, { once: true });
 
