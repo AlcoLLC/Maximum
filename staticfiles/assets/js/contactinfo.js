@@ -187,7 +187,6 @@ document.addEventListener("DOMContentLoaded", function () {
           emailField.style.backgroundImage = "";
           emailField.style.paddingRight = "";
           if (data.warning) {
-            console.warn("Email validation warning:", data.message);
             const warningDiv = document.createElement("div");
             warningDiv.className = "field-warning-message";
             warningDiv.textContent = data.message;
@@ -210,7 +209,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         })
         .catch((error) => {
-          console.error("Email validation error:", error);
           emailField.style.backgroundImage = "";
           emailField.style.paddingRight = "";
         });
@@ -395,14 +393,12 @@ form.addEventListener("submit", async function (e) {
   
   // Check if reCAPTCHA is loaded
   if (typeof grecaptcha === 'undefined') {
-    console.error("reCAPTCHA not loaded");
     showErrorMessage("reCAPTCHA is not loaded. Please refresh the page and try again.");
     return;
   }
   
   try {
     recaptchaResponse = grecaptcha.getResponse();
-    console.log("reCAPTCHA response length:", recaptchaResponse ? recaptchaResponse.length : 0);
     
     if (!recaptchaResponse || recaptchaResponse.length === 0) {
       showErrorMessage("Please complete the reCAPTCHA verification before submitting.");
@@ -424,7 +420,6 @@ form.addEventListener("submit", async function (e) {
       return;
     }
   } catch (error) {
-    console.error("Error getting reCAPTCHA response:", error);
     showErrorMessage("reCAPTCHA verification failed. Please refresh the page and try again.");
     return;
   }
@@ -457,8 +452,6 @@ form.addEventListener("submit", async function (e) {
     // Add CSRF token
     formData.append('csrfmiddlewaretoken', getCSRFToken());
     
-    console.log("Submitting form with reCAPTCHA response:", recaptchaResponse.substring(0, 20) + "...");
-    
     const response = await fetch(window.location.href, {
       method: "POST",
       body: formData,
@@ -473,7 +466,6 @@ form.addEventListener("submit", async function (e) {
     
     if (contentType && contentType.includes("application/json")) {
       result = await response.json();
-      console.log("Server response:", result);
       
       if (response.ok && result.success) {
         showSuccessMessage(
@@ -486,7 +478,6 @@ form.addEventListener("submit", async function (e) {
         try {
           grecaptcha.reset();
         } catch (e) {
-          console.warn("Could not reset reCAPTCHA:", e);
         }
         
         hasAttemptedSubmit = false;
@@ -523,7 +514,6 @@ form.addEventListener("submit", async function (e) {
           try {
             grecaptcha.reset();
           } catch (e) {
-            console.warn("Could not reset reCAPTCHA:", e);
           }
           
           const recaptchaElement = document.querySelector('.g-recaptcha');
@@ -571,7 +561,6 @@ form.addEventListener("submit", async function (e) {
           try {
             grecaptcha.reset();
           } catch (e) {
-            console.warn("Could not reset reCAPTCHA:", e);
           }
           
           const errorMessage =
@@ -590,7 +579,6 @@ form.addEventListener("submit", async function (e) {
           try {
             grecaptcha.reset();
           } catch (e) {
-            console.warn("Could not reset reCAPTCHA:", e);
           }
           
           hasAttemptedSubmit = false;
@@ -623,23 +611,19 @@ form.addEventListener("submit", async function (e) {
           try {
             grecaptcha.reset();
           } catch (e) {
-            console.warn("Could not reset reCAPTCHA:", e);
           }
         }
       } else {
-        console.error("HTTP Error:", response.status, response.statusText);
         showErrorMessage(`Server error (${response.status}). Please try again.`);
         
         // Reset reCAPTCHA on error
         try {
           grecaptcha.reset();
         } catch (e) {
-          console.warn("Could not reset reCAPTCHA:", e);
         }
       }
     }
   } catch (error) {
-    console.error("Form submission error:", error);
     showErrorMessage(
       "A network error occurred. Please check your connection and try again."
     );
@@ -648,7 +632,6 @@ form.addEventListener("submit", async function (e) {
     try {
       grecaptcha.reset();
     } catch (e) {
-      console.warn("Could not reset reCAPTCHA:", e);
     }
   } finally {
     hideLoadingState();
@@ -682,6 +665,4 @@ form.addEventListener("submit", async function (e) {
 
   addStyles();
   initializeForm();
-
-  console.log("Contact Step 2 form initialized successfully");
 });
