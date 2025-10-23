@@ -22,7 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {% with request.path as clean_path %}
-  <link rel="canonical" href="https://maximumlube.com/{{ clean_path }}" />
+  <link rel="canonical" href="https://maximumlube.com{{ clean_path }}" />
   {% endwith %}
 
   {% block canonical %}
