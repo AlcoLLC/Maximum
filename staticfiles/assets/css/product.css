@@ -939,9 +939,8 @@
 }
 
 .product-details .detail-content .product-image img {
-  width: 30rem;
+  width: 100%;
   height: auto;
-    max-width: 100%;
 }
 
 .product-details .detail-content .detail-info {
