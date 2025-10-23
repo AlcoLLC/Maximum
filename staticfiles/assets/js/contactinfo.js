@@ -3,6 +3,24 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitButton = form.querySelector(".submit-btn");
   let hasAttemptedSubmit = false;
 
+  let isRecaptchaLoaded = false;
+
+  function loadRecaptcha() {
+    if (isRecaptchaLoaded) {
+      return;
+    }
+    isRecaptchaLoaded = true;
+
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js';
+    script.async = true;
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+
+  form.addEventListener('focusin', loadRecaptcha, { once: true });
+  form.addEventListener('mouseenter', loadRecaptcha, { once: true });
+
   const validationRules = {
     firstName: {
       required: true,
