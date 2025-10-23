@@ -20,12 +20,10 @@
     />
     <meta name="robots" content="index, follow" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     {% with request.path as clean_path %}
   <link rel="canonical" href="https://maximumlube.com{{ clean_path }}" />
   {% endwith %}
-
+          
   {% block canonical %}
   {% endblock %}
     <link rel="alternate" hreflang="x-default" href="https://maximumlube.com/" />
@@ -56,11 +54,18 @@
     <meta http-equiv="Expires" content="0" />
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <linkrel="preload"as="font"href="{% static 'assets/fonts/fa-solid-900.woff2' %}"
+    <link rel="preload"as="font"href="{% static 'assets/fonts/fa-solid-900.woff2' %}"
       type="font/woff2"crossorigin="anonymous"/>
     
-     <linkrel="preload"as="font"href="{% static 'assets/fonts/TuskerGrotesk-4500Medium.ttf' %}"
+     <link rel="preload"as="font"href="{% static 'assets/fonts/TuskerGrotesk-4500Medium.ttf' %}"
       type="font/ttf"crossorigin="anonymous"/>
+
+      <link rel="preload"as="font"href="{% static 'assets/fonts/roboto-v49-latin-500.woff2' %}"
+      type="font/woff2"crossorigin="anonymous"/>
+      <link rel="preload"as="font"href="{% static 'assets/fonts/roboto-v49-latin-600.woff2' %}"
+      type="font/woff2"crossorigin="anonymous"/>
+      <link rel="preload"as="font"href="{% static 'assets/fonts/roboto-v49-latin-regular.woff2' %}"
+      type="font/woff2"crossorigin="anonymous"/>
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
      
