@@ -53,7 +53,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <linkrel="preload"as="font"href="{% static 'assets/fonts/fa-solid-900.woff2' %}"
       type="font/woff2"crossorigin="anonymous"/>
@@ -133,9 +133,9 @@
 
     {% include 'components/footer.html' %}
 
-    <script src="{% static 'assets/js/script.js' %}" defer></script>
-    <script src="{% static 'assets/js/locale.js' %}" defer></script>
-    <script src="{% static 'assets/js/search.js' %}" defer></script>
+    <script src="{% static 'assets/js/script.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/locale.min.js' %}" defer></script>
+    <script src="{% static 'assets/js/search.min.js' %}" defer></script>
 
 
     {%block page_js %} {% endblock %}
