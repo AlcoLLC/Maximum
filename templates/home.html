@@ -256,7 +256,7 @@
             <a href="{% url 'news:news_detail' slug=news.slug %}" class="swiper-slide">
                 <div class="slide-image">
                     <img src="{{ news.image.url }}" alt="{{ news.title }}" loading="lazy"/>
-                    <span  class="button-style">{% trans "read more" %}<i class="fa-solid fa-arrow-right-long"></i></span>
+                    <span class="button-style">{% trans "read more" %}<i class="fa-solid fa-arrow-right-long"></i></span>
                 </div>
                 <div class="slide-content">
                     <h3>{{ news.title|truncatechars:100 }}</h3>
@@ -307,7 +307,7 @@
         <div class="review-swiper-button-prev"><i class="fa-solid fa-arrow-left-long"></i></div>
         <div class="review-swiper-button-next"><i class="fa-solid fa-arrow-right-long"></i></div>
 
-         <button class="button-style f" id="openReviewModal">
+         <button class="button-style f" aria-label="{% trans 'Leave a review' %}" id="openReviewModal">
             {% blocktrans %} Leave a review {% endblocktrans %} </button>
 
              {% if messages %}
@@ -315,7 +315,7 @@
                     {% for message in messages %}
                     <div class="alert alert-{{ message.tags }}">
                     {{ message }}
-                    <button type="button" class="close-btn" onclick="this.parentElement.style.display='none'">
+                    <button type="button" class="close-btn" onclick="this.parentElement.style.display='none'" aria-label="{% trans 'Close' %}">
                         &times;
                     </button>
                     </div>
@@ -328,7 +328,7 @@
                 <div class="review-modal">
                 <div class="modal-header">
                     <h2 class="modal-title">{% trans 'Your Review' %}</h2>
-                    <button class="close-btn" id="closeModal">
+                    <button class="close-btn" id="closeModal" aria-label="{% trans 'Close' %}">
                     <i class="fa-solid fa-xmark"></i>
                     </button>
                 </div>

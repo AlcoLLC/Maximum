@@ -41,7 +41,7 @@
 
 <section class="products-section container">
   <h2 class="section-title">{% blocktrans %} Products  {% endblocktrans %} </h2>
-  <button class="filter-mobile" id="filterMobileBtn">Filter</button>
+  <button class="filter-mobile" id="filterMobileBtn" aria-label="{% trans 'Filter' %}">{% trans 'Filter' %}</button>
   <div class="products-container">
     <div class="filter-container">
       <form method="GET" id="filterForm">
@@ -53,7 +53,7 @@
             class="search-input"
             value="{{ search_query }}"
           />
-          <button type="button" class="search-button">
+          <button type="button" class="search-button" aria-label="{% trans 'Search' %}">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </div>
@@ -171,7 +171,7 @@
       </form>
 
       <div class="filter-footer">
-        <button type="button" class="button-style" id="filterResultsBtn">
+        <button type="button" class="button-style" id="filterResultsBtn" aria-label="{% trans 'View Result' %}">
           {% trans "View Result" %}
         </button>
       </div>
@@ -218,7 +218,7 @@
       <div class="product-modal-content">
         <div class="product-modal-header">
           <h2 class="product-modal-title">{% trans "Filtering" %}</h2>
-          <button class="product-modal-close" id="productModalClose">
+          <button class="product-modal-close" id="productModalClose" aria-label="{% trans 'Close' %}">
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
@@ -233,7 +233,7 @@
                 class="modal-search-input"
                 value="{{ search_query }}"
               />
-              <button type="button" class="modal-search-button">
+              <button type="button" class="modal-search-button" aria-label="{% trans 'Search' %}">
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
@@ -349,7 +349,7 @@
         </div>
 
         <div class="product-modal-footer">
-          <button class="product-search-results-button" id="productSearchResultsBtn">
+          <button class="product-search-results-button" id="productSearchResultsBtn" aria-label="{% trans 'View Result' %}">
             {% trans "View Result" %}
           </button>
         </div>
@@ -364,7 +364,7 @@
         {% trans 'results' %}
     </p>
     <div class="pagination">
-        <button class="pagination-arrow prev" id="prevPage"
+        <button class="pagination-arrow prev" aria-label="{% trans 'Left' %}" id="prevPage"
           {% if not page_obj.has_previous %}disabled{% endif %}>
           <i class="fa-solid fa-chevron-left"></i>
         </button>
@@ -383,7 +383,7 @@
           {% endfor %}
         </div>
 
-        <button
+        <button aria-label="{% trans 'Right' %}"
           class="pagination-arrow next" id="nextPage"
           {% if not page_obj.has_next %}disabled{% endif %} >
           <i class="fa-solid fa-chevron-right"></i>

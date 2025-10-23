@@ -53,7 +53,7 @@
       </div>
     </div>
     <div class="search-result-btn">
-    <button class="result-btn">
+    <button class="result-btn" aria-label="{% trans 'Right' %}">
       <a href="{{ result.url }}"><i class="fa-solid fa-arrow-right"></i></a>
     </button>
     </div>
@@ -69,7 +69,7 @@
   </p>
   
   <div class="pagination">
-    <button class="pagination-arrow prev" id="prevPage" {% if not results.has_previous %}disabled{% endif %}>
+    <button aria-label="{% trans 'Left' %}" class="pagination-arrow prev" id="prevPage" {% if not results.has_previous %}disabled{% endif %}>
       <i class="fa-solid fa-chevron-left"></i>
     </button>
 
@@ -83,7 +83,7 @@
       {% endfor %}
     </div>
 
-    <button class="pagination-arrow next" id="nextPage" {% if not results.has_next %}disabled{% endif %}>
+    <button aria-label="{% trans 'Right' %}" class="pagination-arrow next" id="nextPage" {% if not results.has_next %}disabled{% endif %}>
       <i class="fa-solid fa-chevron-right"></i>
     </button>
   </div>

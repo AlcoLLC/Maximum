@@ -13,7 +13,7 @@
           <div class="search">
               <form method="GET" class="search-form" action="{% url 'search:search' %}">
                   <input type="text" name="search" value="{{ query }}" placeholder="{% trans 'Search...' %}" />
-                  <button type="button" class="search-button">
+                  <button type="button" class="search-button" aria-label="{% trans 'Search' %}">
                       <i class="fa-solid fa-magnifying-glass"></i>
                   </button>
               </form>
@@ -25,7 +25,7 @@
               <li><a href="{% url 'news:news' %}" aria-label="News Page">{% trans "News" %}</a></li>
             </ul>
             <div class="language-dropdown">
-              <button class="lang-dropdown-btn">
+              <button class="lang-dropdown-btn" aria-label="{% trans 'Select Language' %}">
                 {% get_current_language as CURRENT_LANGUAGE %}
                 {% if CURRENT_LANGUAGE == 'en' %}EN 
                 {% elif CURRENT_LANGUAGE == 'de' %}DE 
@@ -41,7 +41,7 @@
                 {% get_available_languages as LANGUAGES %} 
                 {% get_current_language as CURRENT_LANGUAGE %} 
                 {% for lang_code, lang_name in LANGUAGES %}
-                <button class="lang-option {% if lang_code == CURRENT_LANGUAGE %}active{% endif %}" data-lang="{{ lang_code }}">
+                <button class="lang-option {% if lang_code == CURRENT_LANGUAGE %}active{% endif %}" data-lang="{{ lang_code }}" aria-label="{% trans 'Switch to other language' %}">
                   {% if lang_code == 'en' %}EN 
                   {% elif lang_code == 'de' %}DE 
                   {% elif lang_code == 'es'%}ES 
@@ -90,7 +90,7 @@
                 <img loading="lazy" class="icon" src="{% static '/images/location.svg' %}" alt="Location icon" />
             </a>
         </div>
-        <button class="hamburger" aria-label="Menu" id="hamburger">
+        <button class="hamburger" aria-label="{% trans 'Menu' %}" id="hamburger">
           <i class="fas fa-bars"></i>
         </button>
       </div>
@@ -103,7 +103,7 @@
             <ul>
                 <li>
                         <a href="{% url 'product:products' %}">{% trans "Products" %}</a>
-                        <button class="panel-trigger" data-target="segments-panel">
+                        <button class="panel-trigger" data-target="segments-panel" aria-label="{% trans 'Open segments panel' %}">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
                 </li>
@@ -120,7 +120,7 @@
             <div class="panel-content">
                 <ul>
                     <li>
-                         <button class="panel-back-button"><i class="fa-solid fa-arrow-left-long"></i> BACK</button>
+                         <button class="panel-back-button" aria-label="{% trans 'BACK' %}"><i class="fa-solid fa-arrow-left-long"></i> BACK</button>
                     </li>
                 </ul>
                 <ul>
