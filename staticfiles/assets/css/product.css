@@ -941,6 +941,7 @@
 .product-details .detail-content .product-image img {
   width: 100%;
   height: auto;
+  aspect-ratio: 430/430;
 }
 
 .product-details .detail-content .detail-info {
