@@ -7,7 +7,7 @@
       <div class="container">
         <div class="nav-top">
           <a href="{% url 'home:home' %}" class="maximum-logo">
-            <img loading="lazy" src="{% static '/images/max-logo.webp' %}" alt="Maximum logo"/>
+            <img loading="lazy" width="200" height="42" src="{% static '/images/max-logo.webp' %}" alt="{% trans 'Maximum logo' %}"/>
           </a>
 
           <div class="search">
@@ -87,7 +87,7 @@
                 <li><a href="{% url 'contact:contact' %}" aria-label="Contact Page">{% trans "Contact" %}</a></li>
             </ul>
             <a href="https://maps.app.goo.gl/5ga9MLGcFydCcnx6A" class="location-icon">
-                <img loading="lazy" class="icon" src="{% static '/images/location.svg' %}" alt="Location icon" />
+                <img loading="lazy" class="icon" src="{% static '/images/location.svg' %}" width="30" height="30" alt="{% trans 'Location icon' %}" />
             </a>
         </div>
         <button class="hamburger" aria-label="{% trans 'Menu' %}" id="hamburger">
@@ -164,7 +164,7 @@
 
      <div class="mobile-menu-bottom">
         <a href="" class="location-icon">
-            <img loading="lazy" src="{% static '/images/location.svg' %}" alt="Location icon"/>
+            <img loading="lazy" src="{% static '/images/location.svg' %}" width="30" height="30" alt="{% trans 'Location icon' %}"/>
         </a>
         <a class="whatsapp" href="https://wa.me/4915207776502">
             <p>{% blocktrans %} Have a question? <br> Let's chat on WhatsApp!{% endblocktrans %}</p>

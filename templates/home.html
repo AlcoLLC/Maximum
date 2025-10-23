@@ -97,7 +97,7 @@
         <a href="{% url 'product:products' %}" class="button-style">{% trans "Discover more" %}</a>
    </div>
    <div class="home-services">
-    <img loading="lazy" class="bg-image" src="{% static 'images/shutterstock1.webp' %}" alt="Coorperation background image"/>
+    <img loading="lazy" class="bg-image" src="{% static 'images/shutterstock1.webp' %}" width="2000" height="600" alt="{% trans 'Coorperation background image' %}"/>
         <div class="container">   
             <div class="service-flex">
                 {% for service  in services  %}
@@ -457,7 +457,7 @@
 </section>
 
 <section class="maximum-dedicated">
-    <img loading="lazy" class="bg-image" src="{% static 'images/background-end.webp' %}" alt="Coorperation background image"/>
+    <img loading="lazy" class="bg-image" src="{% static 'images/background-end.webp' %}" alt="{% trans 'Coorperation background image' %}" width="2000" height="600"/>
 
         <div class="maximum-content ">
             <h3>{% blocktrans %}  Maximum is dedicated to manufacturing and delivering lubricants and autochemicals on par or exceeding international standards. {% endblocktrans %} </h3>

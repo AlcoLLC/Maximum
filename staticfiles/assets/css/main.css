@@ -432,6 +432,7 @@ nav ul li a:hover {
 
 .location-icon img {
   width: 30px;
+  height: auto;
   transition: all 0.4s ease;
 }
 
@@ -990,6 +991,7 @@ footer .alco-privacy p {
 
 .fixed-whatsapp .whatsapp-icon {
   width: 100%;
+  height: auto;
 }
 .fixed-whatsapp:hover {
   transform: scale(1.1);

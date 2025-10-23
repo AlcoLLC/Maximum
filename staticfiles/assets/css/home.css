@@ -393,6 +393,7 @@
 .home-services .bg-image {
   position: absolute;
   width: 100%;
+  height: auto;
   max-height: 100%;
   z-index: -1;
   left: 0;
