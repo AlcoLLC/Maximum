@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const submitButton = form.querySelector(".submit-btn");
   let hasAttemptedSubmit = false;
 
+  // --- reCAPTCHA YÜKLEME BÖLÜMÜ ---
   let isRecaptchaLoaded = false;
   let isRecaptchaRendered = false; // reCAPTCHA'nın oluşturulup oluşturulmadığını takip et
 
@@ -15,13 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const script = document.createElement('script');
     
-    // 1. Değişiklik: Google'a 'render=explicit' ekleyerek otomatik başlamamasını,
+    // Google'a 'render=explicit' ekleyerek otomatik başlamamasını,
     // bizim komutumuzu beklemesini söylüyoruz.
     script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
     script.async = true;
     script.defer = true;
 
-    // 2. Değişiklik: Script'in yüklenmesi bittiğinde (onload) ne yapacağını söylüyoruz.
+    // Script'in yüklenmesi bittiğinde (onload) ne yapacağını söylüyoruz.
     script.onload = function() {
       // 'grecaptcha' objesi artık mevcut ve render fonksiyonunu çağırabiliriz.
       // Henüz render edilmemişse ve element varsa render et.
@@ -45,9 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.head.appendChild(script);
   }
 
-  // Bu tetikleyiciler aynı kalıyor
+  // Kullanıcı formla etkileşime geçtiğinde reCAPTCHA'yı yükle
   form.addEventListener('focusin', loadRecaptcha, { once: true });
   form.addEventListener('mouseenter', loadRecaptcha, { once: true });
+  // --- reCAPTCHA YÜKLEME BÖLÜMÜ SONU ---
+
 
   const validationRules = {
     firstName: {
@@ -217,8 +220,6 @@ document.addEventListener("DOMContentLoaded", function () {
       emailField.style.backgroundPosition = "right 12px center";
       emailField.style.backgroundSize = "16px";
       emailField.style.paddingRight = "40px";
-      
-
       
       fetch("/validate-email/", {
         method: "POST",
@@ -420,205 +421,103 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
- // Replace the form submission section in your JavaScript with this improved version:
-form.addEventListener("submit", async function (e) {
-  e.preventDefault();
-  
-  if (!validateForm(true)) {
-    showErrorMessage("Please correct the errors above before submitting.");
-    const firstErrorField = form.querySelector(".error");
-    if (firstErrorField) {
-      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-      firstErrorField.focus();
-    }
-    return;
-  }
-  
-  // Get reCAPTCHA response with better error handling
-  let recaptchaResponse = '';
-  
-  // Check if reCAPTCHA is loaded
-  if (typeof grecaptcha === 'undefined') {
-    showErrorMessage("reCAPTCHA is not loaded. Please refresh the page and try again.");
-    return;
-  }
-  
-  try {
-    recaptchaResponse = grecaptcha.getResponse();
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
     
-    if (!recaptchaResponse || recaptchaResponse.length === 0) {
-      showErrorMessage("Please complete the reCAPTCHA verification before submitting.");
-      
-      // Scroll to reCAPTCHA
-      const recaptchaElement = document.querySelector('.g-recaptcha');
-      if (recaptchaElement) {
-        recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
-        
-        // Add visual indication
-        recaptchaElement.style.border = "2px solid #e74c3c";
-        recaptchaElement.style.borderRadius = "4px";
-        setTimeout(() => {
-          recaptchaElement.style.border = "";
-          recaptchaElement.style.borderRadius = "";
-        }, 3000);
+    if (!validateForm(true)) {
+      showErrorMessage("Please correct the errors above before submitting.");
+      const firstErrorField = form.querySelector(".error");
+      if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+        firstErrorField.focus();
       }
-      
       return;
     }
-  } catch (error) {
-    showErrorMessage("reCAPTCHA verification failed. Please refresh the page and try again.");
-    return;
-  }
-  
-  showLoadingState();
-  
-  try {
-    // Prepare form data for backend - make sure field names match exactly
-    const formData = new FormData();
     
-    // Add form fields
-    formData.append('firstName', document.getElementById("firstName")?.value?.trim() || "");
-    formData.append('lastName', document.getElementById("lastName")?.value?.trim() || "");
-    formData.append('email', document.getElementById("email")?.value?.trim() || "");
-    formData.append('phone', document.getElementById("phone")?.value?.trim() || "");
-    formData.append('company', document.getElementById("company")?.value?.trim() || "");
-    formData.append('region', document.getElementById("region")?.value?.trim() || "");
-    formData.append('country', document.getElementById("country")?.value?.trim() || "");
-    formData.append('role', document.getElementById("role")?.value?.trim() || "");
-    formData.append('annualVolume', document.getElementById("volume")?.value?.trim() || "");
-    formData.append('questionType', document.getElementById("questionType")?.value?.trim() || "");
-    formData.append('message', document.getElementById("message")?.value?.trim() || "");
-    formData.append('privacyConsent', document.getElementById("privacy")?.checked ? 'on' : '');
+    // Get reCAPTCHA response with better error handling
+    let recaptchaResponse = '';
     
-    // Add reCAPTCHA response - try multiple field names to be safe
-    formData.append('g-recaptcha-response', recaptchaResponse);
-    formData.append('g_recaptcha_response', recaptchaResponse);
-    formData.append('recaptcha_response', recaptchaResponse);
+    // Check if reCAPTCHA is loaded
+    if (typeof grecaptcha === 'undefined') {
+      showErrorMessage("reCAPTCHA is not loaded. Please refresh the page and try again.");
+      return;
+    }
     
-    // Add CSRF token
-    formData.append('csrfmiddlewaretoken', getCSRFToken());
-    
-    const response = await fetch(window.location.href, {
-      method: "POST",
-      body: formData,
-      headers: {
-        "X-Requested-With": "XMLHttpRequest",
-      },
-    });
-
-    // Handle response
-    let result;
-    const contentType = response.headers.get("content-type");
-    
-    if (contentType && contentType.includes("application/json")) {
-      result = await response.json();
+    try {
+      recaptchaResponse = grecaptcha.getResponse();
       
-      if (response.ok && result.success) {
-        showSuccessMessage(
-          result.message ||
-            "Thank you for contacting us! We will get back to you soon."
-        );
-        form.reset();
+      if (!recaptchaResponse || recaptchaResponse.length === 0) {
+        showErrorMessage("Please complete the reCAPTCHA verification before submitting.");
         
-        // Reset reCAPTCHA
-        try {
-          grecaptcha.reset();
-        } catch (e) {
+        // Scroll to reCAPTCHA
+        const recaptchaElement = document.querySelector('.g-recaptcha');
+        if (recaptchaElement) {
+          recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
+          
+          // Add visual indication
+          recaptchaElement.style.border = "2px solid #e74c3c";
+          recaptchaElement.style.borderRadius = "4px";
+          setTimeout(() => {
+            recaptchaElement.style.border = "";
+            recaptchaElement.style.borderRadius = "";
+          }, 3000);
         }
         
-        hasAttemptedSubmit = false;
-        Object.keys(validationRules).forEach((fieldId) => {
-          const field = document.getElementById(fieldId);
-          if (field) {
-            clearFieldError(field);
-          }
-        });
-        validateForm(false);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        
-      } else {
-        // Handle specific error types
-        if (result.recaptcha_missing) {
-          showErrorMessage("reCAPTCHA verification is missing. Please complete the reCAPTCHA.");
-          
-          // Highlight reCAPTCHA
-          const recaptchaElement = document.querySelector('.g-recaptcha');
-          if (recaptchaElement) {
-            recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
-            recaptchaElement.style.border = "2px solid #e74c3c";
-            recaptchaElement.style.borderRadius = "4px";
-            setTimeout(() => {
-              recaptchaElement.style.border = "";
-              recaptchaElement.style.borderRadius = "";
-            }, 5000);
-          }
-          
-        } else if (result.recaptcha_failed) {
-          showErrorMessage("reCAPTCHA verification failed. Please try again.");
-          
-          // Reset and highlight reCAPTCHA
-          try {
-            grecaptcha.reset();
-          } catch (e) {
-          }
-          
-          const recaptchaElement = document.querySelector('.g-recaptcha');
-          if (recaptchaElement) {
-            recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
-            recaptchaElement.style.border = "2px solid #e74c3c";
-            recaptchaElement.style.borderRadius = "4px";
-            setTimeout(() => {
-              recaptchaElement.style.border = "";
-              recaptchaElement.style.borderRadius = "";
-            }, 5000);
-          }
-          
-        } else {
-          // Handle field-specific errors
-          if (result.errors && typeof result.errors === "object") {
-            Object.keys(result.errors).forEach((fieldKey) => {
-              const fieldMapping = {
-                first_name: "firstName",
-                last_name: "lastName",
-                email: "email",
-                phone: "phone",
-                company: "company",
-                region: "region",
-                country: "country",
-                role: "role",
-                annual_volume: "volume",
-                question_type: "questionType",
-                message: "message",
-                privacy_consent: "privacy",
-              };
-              const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
-              const field = document.getElementById(frontendFieldId);
-              if (
-                field &&
-                result.errors[fieldKey] &&
-                result.errors[fieldKey].length > 0
-              ) {
-                showFieldError(field, result.errors[fieldKey][0]);
-              }
-            });
-          }
-          
-          // Reset reCAPTCHA on any error
-          try {
-            grecaptcha.reset();
-          } catch (e) {
-          }
-          
-          const errorMessage =
-            result.message || "An error occurred. Please try again.";
-          showErrorMessage(errorMessage);
-        }
+        return;
       }
-    } else {
-      // Handle HTML response (fallback)
-      if (response.ok) {
-        if (response.redirected || response.url !== window.location.href) {
-          showSuccessMessage("Thank you for contacting us! We will get back to you soon.");
+    } catch (error) {
+      showErrorMessage("reCAPTCHA verification failed. Please refresh the page and try again.");
+      return;
+    }
+    
+    showLoadingState();
+    
+    try {
+      // Prepare form data for backend - make sure field names match exactly
+      const formData = new FormData();
+      
+      // Add form fields
+      formData.append('firstName', document.getElementById("firstName")?.value?.trim() || "");
+      formData.append('lastName', document.getElementById("lastName")?.value?.trim() || "");
+      formData.append('email', document.getElementById("email")?.value?.trim() || "");
+      formData.append('phone', document.getElementById("phone")?.value?.trim() || "");
+      formData.append('company', document.getElementById("company")?.value?.trim() || "");
+      formData.append('region', document.getElementById("region")?.value?.trim() || "");
+      formData.append('country', document.getElementById("country")?.value?.trim() || "");
+      formData.append('role', document.getElementById("role")?.value?.trim() || "");
+      formData.append('annualVolume', document.getElementById("volume")?.value?.trim() || "");
+      formData.append('questionType', document.getElementById("questionType")?.value?.trim() || "");
+      formData.append('message', document.getElementById("message")?.value?.trim() || "");
+      formData.append('privacyConsent', document.getElementById("privacy")?.checked ? 'on' : '');
+      
+      // Add reCAPTCHA response - try multiple field names to be safe
+      formData.append('g-recaptcha-response', recaptchaResponse);
+      formData.append('g_recaptcha_response', recaptchaResponse);
+      formData.append('recaptcha_response', recaptchaResponse);
+      
+      // Add CSRF token
+      formData.append('csrfmiddlewaretoken', getCSRFToken());
+      
+      const response = await fetch(window.location.href, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest",
+        },
+      });
+
+      // Handle response
+      let result;
+      const contentType = response.headers.get("content-type");
+      
+      if (contentType && contentType.includes("application/json")) {
+        result = await response.json();
+        
+        if (response.ok && result.success) {
+          showSuccessMessage(
+            result.message ||
+              "Thank you for contacting us! We will get back to you soon."
+          );
           form.reset();
           
           // Reset reCAPTCHA
@@ -636,22 +535,132 @@ form.addEventListener("submit", async function (e) {
           });
           validateForm(false);
           window.scrollTo({ top: 0, behavior: "smooth" });
-        } else {
-          // Parse HTML for Django messages
-          const text = await response.text();
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(text, 'text/html');
-          const messages = doc.querySelectorAll('.messages .error, .messages .warning');
           
-          if (messages.length > 0) {
-            let errorMessage = '';
-            messages.forEach(msg => {
-              errorMessage += msg.textContent.trim() + ' ';
-            });
-            showErrorMessage(errorMessage.trim());
+        } else {
+          // Handle specific error types
+          if (result.recaptcha_missing) {
+            showErrorMessage("reCAPTCHA verification is missing. Please complete the reCAPTCHA.");
+            
+            // Highlight reCAPTCHA
+            const recaptchaElement = document.querySelector('.g-recaptcha');
+            if (recaptchaElement) {
+              recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
+              recaptchaElement.style.border = "2px solid #e74c3c";
+              recaptchaElement.style.borderRadius = "4px";
+              setTimeout(() => {
+                recaptchaElement.style.border = "";
+                recaptchaElement.style.borderRadius = "";
+              }, 5000);
+            }
+            
+          } else if (result.recaptcha_failed) {
+            showErrorMessage("reCAPTCHA verification failed. Please try again.");
+            
+            // Reset and highlight reCAPTCHA
+            try {
+              grecaptcha.reset();
+            } catch (e) {
+            }
+            
+            const recaptchaElement = document.querySelector('.g-recaptcha');
+            if (recaptchaElement) {
+              recaptchaElement.scrollIntoView({ behavior: "smooth", block: "center" });
+              recaptchaElement.style.border = "2px solid #e74c3c";
+              recaptchaElement.style.borderRadius = "4px";
+              setTimeout(() => {
+                recaptchaElement.style.border = "";
+                recaptchaElement.style.borderRadius = "";
+              }, 5000);
+            }
+            
           } else {
-            showErrorMessage("An error occurred. Please try again.");
+            // Handle field-specific errors
+            if (result.errors && typeof result.errors === "object") {
+              Object.keys(result.errors).forEach((fieldKey) => {
+                const fieldMapping = {
+                  first_name: "firstName",
+                  last_name: "lastName",
+                  email: "email",
+                  phone: "phone",
+                  company: "company",
+                  region: "region",
+                  country: "country",
+                  role: "role",
+                  annual_volume: "volume",
+                  question_type: "questionType",
+                  message: "message",
+                  privacy_consent: "privacy",
+                };
+                const frontendFieldId = fieldMapping[fieldKey] || fieldKey;
+                const field = document.getElementById(frontendFieldId);
+                if (
+                  field &&
+                  result.errors[fieldKey] &&
+                  result.errors[fieldKey].length > 0
+                ) {
+                  showFieldError(field, result.errors[fieldKey][0]);
+                }
+              });
+            }
+            
+            // Reset reCAPTCHA on any error
+            try {
+              grecaptcha.reset();
+            } catch (e) {
+            }
+            
+            const errorMessage =
+              result.message || "An error occurred. Please try again.";
+            showErrorMessage(errorMessage);
           }
+        }
+      } else {
+        // Handle HTML response (fallback)
+        if (response.ok) {
+          if (response.redirected || response.url !== window.location.href) {
+            showSuccessMessage("Thank you for contacting us! We will get back to you soon.");
+            form.reset();
+            
+            // Reset reCAPTCHA
+            try {
+              grecaptcha.reset();
+            } catch (e) {
+            }
+            
+            hasAttemptedSubmit = false;
+            Object.keys(validationRules).forEach((fieldId) => {
+              const field = document.getElementById(fieldId);
+              if (field) {
+                clearFieldError(field);
+              }
+            });
+            validateForm(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            // Parse HTML for Django messages
+            const text = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
+            const messages = doc.querySelectorAll('.messages .error, .messages .warning');
+            
+            if (messages.length > 0) {
+              let errorMessage = '';
+              messages.forEach(msg => {
+                errorMessage += msg.textContent.trim() + ' ';
+              });
+              showErrorMessage(errorMessage.trim());
+            } else {
+              showErrorMessage("An error occurred. Please try again.");
+            }
+            
+            // Reset reCAPTCHA on error
+            try {
+              grecaptcha.reset();
+            } catch (e) {
+            }
+          }
+        } else {
+          showErrorMessage(`Server error (${response.status}). Please try again.`);
           
           // Reset reCAPTCHA on error
           try {
@@ -659,30 +668,21 @@ form.addEventListener("submit", async function (e) {
           } catch (e) {
           }
         }
-      } else {
-        showErrorMessage(`Server error (${response.status}). Please try again.`);
-        
-        // Reset reCAPTCHA on error
-        try {
-          grecaptcha.reset();
-        } catch (e) {
-        }
       }
+    } catch (error) {
+      showErrorMessage(
+        "A network error occurred. Please check your connection and try again."
+      );
+      
+      // Reset reCAPTCHA on error
+      try {
+        grecaptcha.reset();
+      } catch (e) {
+      }
+    } finally {
+      hideLoadingState();
     }
-  } catch (error) {
-    showErrorMessage(
-      "A network error occurred. Please check your connection and try again."
-    );
-    
-    // Reset reCAPTCHA on error
-    try {
-      grecaptcha.reset();
-    } catch (e) {
-    }
-  } finally {
-    hideLoadingState();
-  }
-});
+  });
 
   function initializeForm() {
     setupFieldListeners();
@@ -705,7 +705,7 @@ form.addEventListener("submit", async function (e) {
           .submit-btn.loading { position: relative; color: transparent !important; }
           .submit-btn.loading::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top: 2px solid white; animation: spin 1s linear infinite; }
           @media (prefers-reduced-motion: reduce) { * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
-      `;
+        `;
     document.head.appendChild(style);
   }
 
