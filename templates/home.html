@@ -112,7 +112,7 @@
     <div class="catalog-grid">
         {% for segment in segments %}
         <a href="{% url 'product:products' %}?search=&segments={{ segment.slug }}" aria-label="{{ segment.title }}" class="catalog-element">
-            <img src="{{ segment.image.url }}" alt="{{ segment.title }}" loading="lazy"/> 
+            <img src="{{ segment.image.url }}" alt="{{ segment.title }}" loading="lazy" width="590" height="287"/> 
             <div>
                 <h2>{{ segment.title }}</h2>
                 <span>
