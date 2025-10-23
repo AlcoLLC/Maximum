@@ -121,14 +121,25 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
   const playButton = document.getElementById('playButton');
   const videoContainer = document.getElementById('videoContainer');
-  const youtubeVideo = document.getElementById('youtubeVideo');
 
   if (playButton) {
     playButton.addEventListener('click', function () {
       playButton.style.display = 'none';
+      
       videoContainer.style.display = 'block';
-      const videoSrc = youtubeVideo.src;
-      youtubeVideo.src = videoSrc + '&autoplay=1';
+
+      videoContainer.innerHTML = `
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube-nocookie.com/embed/rh0kjV3tEK8?rel=0&showinfo=0&modestbranding=1&autoplay=1"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      `;
     });
   }
 });

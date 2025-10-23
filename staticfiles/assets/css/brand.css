@@ -247,14 +247,6 @@
   height: 0;
   overflow: hidden;
 }
-#videoContainer {
-    display: none;
-}
-
-#playButton {
-    cursor: pointer;
-    z-index: 10; 
-}
 .video-container iframe {
   position: absolute;
   top: 0;
