@@ -133,7 +133,7 @@
                     <li class="has-submenu">
                         <div class="menu-item-content">
                             <a href="{% url 'product:products' %}?segments={{ segment.slug }}">{{ segment.title }}</a>
-                            <button class="panel-trigger" data-target="groups-panel" data-segment="{{ segment.slug }}">
+                            <button class="panel-trigger" data-target="groups-panel" data-segment="{{ segment.slug }}" aria-label="{% trans 'Open groups panel' %}">
                                 <i class="fa-solid fa-chevron-right"></i>
                             </button>
                         </div>
