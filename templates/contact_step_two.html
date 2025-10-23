@@ -167,7 +167,7 @@
         </div>
       </div>
       <div class="form-group">
-          <div id="recaptcha-widget" class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
+            <div class="g-recaptcha" data-sitekey="{{ recaptcha_site_key }}"></div>
       </div>
 
       <button type="submit" class="submit-btn" aria-label="{% trans 'Submit' %}">Submit</button>
@@ -180,6 +180,8 @@
 </div>
 
 {% endblock %} {%block page_js %}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <script src="{% static 'assets/js/contactinfo.min.js' %}"></script>
 
 
