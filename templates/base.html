@@ -10,6 +10,9 @@
     <meta name="csrf-token" content="{{ csrf_token }}" />
     <link rel="icon" type="image/svg+xml" href="{% static 'images/max-logo-icon.png' %}" />
     <title>{% block title %}{% trans "Maximum - High-quality oil products" %}{% endblock %}</title>
+
+    <link rel="preconnect" href="https://code.jquery.com">
+    
     <meta
       name="description"
       content="{% block description %}{% trans 'Maximum - High-quality oil products' %}{% endblock %}"
