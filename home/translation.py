@@ -3,7 +3,7 @@ from .models import HomeSwiper, Review, General
 
 @register(HomeSwiper)
 class HomeSwiperTranslationOptions(TranslationOptions):
-    fields = ('title',)
+    fields = ('title', 'link')
 
 @register(Review)
 class ReviewTranslationOptions(TranslationOptions):
