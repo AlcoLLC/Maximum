@@ -149,7 +149,9 @@
     <script src="{% static 'assets/js/locale.min.js' %}" defer></script>
     <script src="{% static 'assets/js/search.min.js' %}" defer></script>
 
-    <script>
+    {%block page_js %} 
+    
+        <script>
   function loadGoogleAnalytics() {
     var script = document.createElement('script');
     script.src = "https://www.googletagmanager.com/gtag/js?id=G-5TQC8NQLL0";
@@ -177,6 +179,6 @@
   setTimeout(triggerLoad, 3000); 
 </script>
 
-    {%block page_js %} {% endblock %}
+{% endblock %}
   </body>
 </html>
