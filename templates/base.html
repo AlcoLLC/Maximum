@@ -2,9 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="{% get_current_language as LANGUAGE_CODE %}{{ LANGUAGE_CODE }}">
-  <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TQC8NQLL0"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-5TQC8NQLL0'); </script>
-    
+  <head>    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token }}" />
@@ -12,7 +10,7 @@
     <title>{% block title %}{% trans "Maximum - High-quality oil products" %}{% endblock %}</title>
 
     <link rel="preconnect" href="https://code.jquery.com">
-    
+
     <meta
       name="description"
       content="{% block description %}{% trans 'Maximum - High-quality oil products' %}{% endblock %}"
@@ -151,6 +149,33 @@
     <script src="{% static 'assets/js/locale.min.js' %}" defer></script>
     <script src="{% static 'assets/js/search.min.js' %}" defer></script>
 
+    <script>
+  function loadGoogleAnalytics() {
+    var script = document.createElement('script');
+    script.src = "https://www.googletagmanager.com/gtag/js?id=G-5TQC8NQLL0";
+    script.async = true;
+    document.head.appendChild(script);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5TQC8NQLL0');
+  }
+
+  var hasInteracted = false;
+  
+  function triggerLoad() {
+    if (hasInteracted) return;
+    hasInteracted = true;
+    loadGoogleAnalytics();
+    window.removeEventListener('scroll', triggerLoad);
+    window.removeEventListener('mousemove', triggerLoad);
+  }
+
+  window.addEventListener('scroll', triggerLoad, { passive: true });
+  window.addEventListener('mousemove', triggerLoad, { passive: true });
+  setTimeout(triggerLoad, 3000); 
+</script>
 
     {%block page_js %} {% endblock %}
   </body>
