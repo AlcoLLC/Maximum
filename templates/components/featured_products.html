@@ -18,7 +18,7 @@
 
   <div class="products-container">
     <div class="main-product">
-      <img src="{{ products_background }}" alt="NOVALUBE PRO 0W-30" />
+      <img src="{{ products_background }}" width="480" height="540" alt="NOVALUBE PRO 0W-30" />
       <a href="{% url 'product:products' %}" class="button-style">
         Go to catalog
         <i class="fa-solid fa-arrow-right"></i>
@@ -31,7 +31,7 @@
          {% for product in featured_products %}
             <a href="{% url 'product:product_detail' slug=product.slug %}" class="swiper-slide">
                 <div class="product-image">
-                <img src="{{ product.image.url }}" alt="{{ product.title|linebreaksbr  }}" />
+                <img src="{{ product.image.url }}" width="333" height="150" alt="{{ product.title|linebreaksbr  }}" />
                 </div>
                 <div class="product-content">
                 <h3 class="product-name">{{ product.title|linebreaksbr }}</h3>
