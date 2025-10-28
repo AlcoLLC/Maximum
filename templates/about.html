@@ -264,17 +264,18 @@
 
 {% include 'components/partners.html' %} 
 
+{% endblock %} 
 
+{% block page_js %}
 
-{% endblock %} {% block page_js %}
- <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}" defer></script>
-
-   <script src="{% static 'assets/js/home.min.js' %}" defer></script>
+  <script src="{% static 'assets/js/jquery-3.7.1.min.js' %}" defer></script>
+  <script src="{% static 'assets/js/home.min.js' %}" defer></script>
   <script src="{% static 'assets/js/swiper-bundle.min.js' %}" defer></script>
   <script src="{% static 'assets/js/raphael.min.js' %}" defer></script>
   <script src="{% static 'assets/js/settings.min.js' %}" defer></script>
   <script src="{% static 'assets/js/paths.min.js' %}" defer></script>
   <script src="{% static 'assets/js/map.min.js' %}" defer></script>
   <script src="{% static 'assets/js/map-init.min.js' %}" defer></script>
+
 {% endblock %}
  

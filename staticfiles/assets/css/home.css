@@ -254,6 +254,7 @@
   object-fit: cover;
   transition: transform 0.5s ease;
 }
+
 .home-catalog .catalog-element:hover img {
   transform: scale(1.05);
 }
