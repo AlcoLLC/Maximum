@@ -157,6 +157,11 @@
     height: 30vh;
   }
 }
+@media (max-width: 900px) {
+  .home-header .swiper-slide {
+    padding-top: 11%;
+  }
+}
 @media (max-width: 700px) {
   .home-header .whatsapp {
     display: none !important;
@@ -325,11 +330,6 @@
   }
 }
 
-@media (max-width: 900px) {
-  .home-header .swiper-slide {
-    padding-top: 11%;
-  }
-}
 
 @media (max-width: 700px) {
   .home-catalog .catalog-element {
