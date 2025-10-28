@@ -170,8 +170,8 @@
     margin: 20px auto;
   }
   .home-header .swiper-slide {
-    padding-top: 10%;
-    padding-left: 8%;
+    padding-top: 12%;
+    padding-left: 9%;
   }
   .home-header .slide-content {
     max-width: 60%;
@@ -216,6 +216,10 @@
   .home-header .slide-content a {
     gap: 15px;
   }
+      .home-header .swiper-slide {
+        padding-top: 14%;
+        padding-left: 10%;
+    }
 }
 
 .home-catalog {
@@ -320,6 +324,13 @@
     font-size: 14px;
   }
 }
+
+@media (max-width: 900px) {
+  .home-header .swiper-slide {
+    padding-top: 11%;
+  }
+}
+
 @media (max-width: 700px) {
   .home-catalog .catalog-element {
     height: 280px;
