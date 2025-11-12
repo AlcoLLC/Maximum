@@ -16,6 +16,8 @@ def robots_txt(request):
         "Disallow: /api/",
         "Disallow: /media/private/",
         "Allow: /",
+        "Disallow: /index.html",
+        "Disallow: /-",
         "",
         f"Sitemap: {sitemap_url}"
     ]
