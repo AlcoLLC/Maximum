@@ -240,7 +240,7 @@ LOCALE_PATHS = [
 ]
 
 
-SESSION_COOKIE_AGE = 60 * 60 * 24 * 30 
+SESSION_COOKIE_AGE = 86400
 SESSION_SAVE_EVERY_REQUEST = True
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_COOKIE_SECURE = True # https edəndə not DEBUG ilə dəyişdirilməlidir
@@ -307,7 +307,7 @@ LOGGING = {
     },
     'handlers': {
         'file': {
-            'level': 'DEBUG',  # Changed to DEBUG for better troubleshooting
+            'level': 'DEBUG', 
             'class': 'logging.FileHandler',
             'filename': BASE_DIR / 'debug.log',
             'formatter': 'verbose',
@@ -328,12 +328,12 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
         },
-        'contact.views': {  # Your contact app logger
+        'contact.views': {  
             'handlers': ['console', 'file'],
-            'level': 'DEBUG',  # Detailed logging for contact views
+            'level': 'DEBUG', 
             'propagate': True,
         },
-        'requests': {  # For reCAPTCHA API calls
+        'requests': { 
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
