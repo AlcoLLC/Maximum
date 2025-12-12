@@ -25,7 +25,7 @@ class ViscosityTranslationOptions(TranslationOptions):
 class ProductTranslationOptions(TranslationOptions):
     fields = (
         'title', 'description', 'features_benefits', 'application',
-        'recommendations',  'meta_title', 'meta_description', 'meta_keyword'
+        'recommendations',  'meta_title', 'meta_description', 'meta_keywords'
     )
 
 @register(ProductProperty)
